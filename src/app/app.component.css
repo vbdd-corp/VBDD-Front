@@ -1,3 +1,9 @@
 #mainContainer {
   margin-top: 11%;
+  margin-bottom: 11%;
+
+}
+
+body{
+  margin-bottom: 60px; /* Margin bottom by footer height */
 }
