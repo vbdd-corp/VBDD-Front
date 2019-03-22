@@ -1,23 +1,14 @@
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <app-header></app-header>
-    </div>
-  </div>
-</div>
+<app-header *ngIf="!router.url.startsWith('/login')">
+  <!--Affiche le header si on est pas dans la page de login --> </app-header>
+
 <div class="container" id="mainContainer">
   <div class="row">
     <div class="col-lg-12">
+
       <router-outlet></router-outlet>
-      
+
     </div>
   </div>
 </div>
-<div class="container">
-   <div class="row">
-     <div class="col-lg-12">
-         <app-footer></app-footer>
-    </div>
-   </div>
-</div>
 
+<app-footer></app-footer>
