@@ -3,8 +3,12 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login';
 import {AppRoutingModule} from './app-routing.module';
-import { FooterComponent } from './footer/footer.component';
-import { HeaderComponent } from './header/header.component';
+import {FooterComponent} from './footer/footer.component';
+import {HeaderComponent} from './header/header.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {AlertService} from '../services/alert.service';
+import {HttpClientModule} from '@angular/common/http';
+import {AuthentificationService} from '../services/authentification.service';
 
 @NgModule({
   declarations: [
@@ -15,9 +19,13 @@ import { HeaderComponent } from './header/header.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AlertService,
+    AuthentificationService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

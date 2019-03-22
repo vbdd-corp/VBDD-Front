@@ -17,6 +17,11 @@ a {
   font-weight: 400;
 }
 
+#loadingGif {
+  margin-left: 50%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
 h2 {
   text-align: center;
   font-size: 16px;
@@ -54,6 +59,14 @@ h2 {
   text-align: center;
 }
 
+#authH1 {
+  margin-left: 10%;
+}
+
+#polytechLogo {
+  margin-left: 12%;
+}
+
 #formFooter {
   background-color: #f6f6f6;
   border-top: 1px solid #dce8f1;
@@ -62,9 +75,6 @@ h2 {
   -webkit-border-radius: 0 0 10px 10px;
   border-radius: 0 0 10px 10px;
 }
-
-
-/* TABS */
 
 h2.inactive {
   color: #cccccc;
