@@ -2,10 +2,11 @@ import {Component, NgModule, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
-import {AuthentificationService} from '../../services/authentification.service';
-import {AlertService} from '../../services/alert.service';
+import {LoginService} from '../../services/login/login.service';
+import {AlertService} from '../../services/alert/alert.service';
 import {AppComponent} from '../app.component';
 import {BrowserModule} from '@angular/platform-browser';
+import { User } from '../../models/user';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthentificationService,
+    private loginService: LoginService,
     private alertService: AlertService) {
   }
 
@@ -52,7 +53,7 @@ export class LoginComponent implements OnInit {
     });
 
     // reset login status
-    this.authenticationService.logout();
+    // this.loginService.logout();
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
@@ -67,15 +68,19 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    this.authenticationService.login(this.f.mail.value, this.f.password.value)
-      .pipe(first())
+    const userTryingLog: User = this.loginForm.getRawValue() as User;
+    if (this.loginService.login(userTryingLog)) {
+      console.log('Sign in successful!');
+      this.router.navigate(['homeBri']);
+    }
+  }
+      /*.pipe(first())
       .subscribe(
         data => {
           this.router.navigate([this.returnUrl]);
         },
         error => {
-          this.alertService.error(error);
+          this.alertService.error();
           this.loading = false;
-        });
-  }
+        });*/
 }

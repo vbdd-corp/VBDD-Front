@@ -6,16 +6,20 @@ import {AppRoutingModule} from './app-routing.module';
 import {FooterComponent} from './footer/footer.component';
 import {HeaderComponent} from './header/header.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {AlertService} from '../services/alert.service';
+import {AlertService} from '../services/alert/alert.service';
 import {HttpClientModule} from '@angular/common/http';
-import {AuthentificationService} from '../services/authentification.service';
+import {LoginService} from '../services/login/login.service';
+import {AlertComponent} from '../directives';
+import { HomeBriComponent } from './bris/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    AlertComponent,
+    HomeBriComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +28,7 @@ import {AuthentificationService} from '../services/authentification.service';
     ReactiveFormsModule
   ],
   providers: [AlertService,
-    AuthentificationService,
+              LoginService
   ],
   bootstrap: [AppComponent]
 })
