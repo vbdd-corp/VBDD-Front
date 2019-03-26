@@ -11,6 +11,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {LoginService} from '../services/login.service';
 import {AlertComponent} from '../directives';
 import {HomeBriComponent} from './bris/home/home.component';
+import {HomeStdComponent} from './students/home';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {HomeBriComponent} from './bris/home/home.component';
     FooterComponent,
     HeaderComponent,
     AlertComponent,
-    HomeBriComponent
+    HomeBriComponent,
+    HomeStdComponent
   ],
   imports: [
     BrowserModule,
