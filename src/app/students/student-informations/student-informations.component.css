@@ -1,0 +1,12 @@
+#tableInformation {
+  width: 60%;
+}
+th{
+  text-align: center;
+}
+td{
+  text-align: center;
+}
+caption{
+  text-align: center;
+}
