@@ -1,23 +1,22 @@
-import { Student } from '../models/student';
+import {Student} from '../models/student';
 
 
 export const STUDENT_MOCKED: Student[] = [
   {
-    mailAddress: 'sd@gmail.com',
+    mail: 'sd@gmail.com',
     password: 'sd',
 
   },
   {
-    mailAddress: 'jd@gmail.com',
+    mail: 'jd@gmail.com',
     password: 'jd',
   },
-  ,
   {
-    mailAddress: 'kv@gmail.com',
+    mail: 'kv@gmail.com',
     password: 'kv',
   },
   {
-    mailAddress: 'cb@gmail.com',
+    mail: 'cb@gmail.com',
     password: 'cb',
   }
 ];

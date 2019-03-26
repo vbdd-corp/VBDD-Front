@@ -9,8 +9,9 @@
   <br>
   <h1 class="h3 mb-3 font-weight-normal" id="authH1">Veuillez vous authentifier</h1>
   <br>
-  <label class="sr-only" for="inputEmail">Email address</label>
-  <input autofocus class="form-control" formControlName="mail" id="inputEmail" placeholder="Adresse mail" required
+  <label class="sr-only " for="inputEmail">Email address</label>
+  <input autofocus class="form-control form-check-input" formControlName="mail" id="inputEmail"
+         placeholder="Adresse mail" required
          type="email">
   <br>
   <label class="sr-only" for="inputPassword">Mot de passe</label>
@@ -20,7 +21,8 @@
        id="loadingGif"
        src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==">
   <br>
-  <button [disabled]="loading" class="btn btn-lg btn-primary btn-block"  type="submit" (click)="onSubmit()">S'authentifier</button>
+  <button (click)="onSubmit()" [disabled]="loading" class="btn btn-lg btn-primary btn-block" type="submit">
+    S'authentifier
+  </button>
 
 </form>
-

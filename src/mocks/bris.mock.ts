@@ -1,14 +1,14 @@
-import { Bri } from '../models/bri';
+import {Bri} from '../models/bri';
 
 
 export const BRI_MOCKED: Bri[] = [
   {
-    mailAddress: 'sd@gmail.com',
+    mail: 'sd@gmail.com',
     password: 'sd',
 
   },
   {
-    mailAddress: 'am@gmail.com',
+    mail: 'am@gmail.com',
     password: 'am',
   }
 ];

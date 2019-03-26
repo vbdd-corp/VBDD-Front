@@ -1,9 +1,14 @@
 #mainContainer {
   margin-top: 11%;
   margin-bottom: 11%;
-
 }
 
-body{
+
+body {
   margin-bottom: 60px; /* Margin bottom by footer height */
+}
+
+#mainAlert div {
+  width: 67% !important;
+  margin-left: 20% !important;;
 }

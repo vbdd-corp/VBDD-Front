@@ -1,4 +1,4 @@
 export interface Bri {
-  mailAddress: string;
+  mail: string;
   password: string;
 }

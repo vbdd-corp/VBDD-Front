@@ -6,11 +6,11 @@ import {AppRoutingModule} from './app-routing.module';
 import {FooterComponent} from './footer/footer.component';
 import {HeaderComponent} from './header/header.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {AlertService} from '../services/alert/alert.service';
+import {AlertService} from '../services/alert.service';
 import {HttpClientModule} from '@angular/common/http';
-import {LoginService} from '../services/login/login.service';
+import {LoginService} from '../services/login.service';
 import {AlertComponent} from '../directives';
-import { HomeBriComponent } from './bris/home/home.component';
+import {HomeBriComponent} from './bris/home/home.component';
 
 @NgModule({
   declarations: [

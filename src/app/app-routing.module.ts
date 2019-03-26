@@ -5,7 +5,7 @@ import {HomeBriComponent} from './bris/home';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  { path: 'homeBri', component: HomeBriComponent},
+  {path: 'homeBri', component: HomeBriComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 

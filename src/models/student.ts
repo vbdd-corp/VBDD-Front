@@ -1,4 +1,4 @@
 export interface Student {
-  mailAddress: string;
+  mail: string;
   password: string;
 }

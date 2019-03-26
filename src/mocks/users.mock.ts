@@ -1,14 +1,16 @@
-import { User } from '../models/user';
+import {User} from '../models/user';
 
 
 export const USERS_MOCKED: User[] = [
   {
-    mailAddress: 'sd@gmail.com',
+    id: 1,
+    mail: 'sd@gmail.com',
     password: 'sd',
 
   },
   {
-    mailAddress: 'am@gmail.com',
+    id: 2,
+    mail: 'am@gmail.com',
     password: 'am',
   }
 ];
