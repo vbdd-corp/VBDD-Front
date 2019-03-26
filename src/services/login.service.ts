@@ -11,7 +11,7 @@ export class LoginService {
     return this.http.post<any>('/api/login', {mail, password})
       .pipe(map(user => {
         if (user && user.token) {
-          localStorage.setItem('currentUser', JSON.stringify(user));
+          localStorage.setItem('User', JSON.stringify(user));
         }
         return user;
       }));

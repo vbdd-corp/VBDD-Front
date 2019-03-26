@@ -38,9 +38,18 @@ export class LoginComponent implements OnInit {
 
 
     this.authenticationService.logout();
+    this.redirect();
 
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+  }
 
+  private redirect() {
+    if (localStorage.getItem('User') != null) {
+      if (JSON.parse(localStorage.getItem('User')).isStudent()) {
+        this.returnUrl = '/homeStudent';
+      } else {
+        this.returnUrl = '/homeStd';
+      }
+    }
   }
 
   onSubmit() {

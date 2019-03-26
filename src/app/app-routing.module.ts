@@ -8,7 +8,10 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'homeBri', component: HomeBriComponent},
   {path: 'homeStd', component: HomeStdComponent},
-  {path: '', redirectTo: '/login', pathMatch: 'full'}
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
+
+  {path: '404', redirectTo: '/login'},
+  {path: '*', redirectTo: '/login'}
 ];
 
 @NgModule({

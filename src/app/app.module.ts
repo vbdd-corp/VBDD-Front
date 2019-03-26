@@ -12,6 +12,9 @@ import {LoginService} from '../services/login.service';
 import {AlertComponent} from '../directives';
 import {HomeBriComponent} from './bris/home/home.component';
 import {HomeStdComponent} from './students/home';
+import {ReportComponent} from './students/report/report.component';
+import {StudentInformationsComponent} from './students/student-informations/student-informations.component';
+import {RendezvousComponent} from './students/rendezvous/rendezvous.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import {HomeStdComponent} from './students/home';
     HeaderComponent,
     AlertComponent,
     HomeBriComponent,
-    HomeStdComponent
+    HomeStdComponent,
+    ReportComponent,
+    StudentInformationsComponent,
+    RendezvousComponent
   ],
   imports: [
     BrowserModule,
