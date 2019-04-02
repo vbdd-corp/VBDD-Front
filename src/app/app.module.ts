@@ -15,6 +15,7 @@ import {HomeStdComponent} from './students/home';
 import {ReportComponent} from './students/report/report.component';
 import {StudentInformationsComponent} from './students/student-informations/student-informations.component';
 import {RendezvousComponent} from './students/rendezvous/rendezvous.component';
+import { PriseRdvComponent } from './students/prise-rdv/prise-rdv.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {RendezvousComponent} from './students/rendezvous/rendezvous.component';
     HomeStdComponent,
     ReportComponent,
     StudentInformationsComponent,
-    RendezvousComponent
+    RendezvousComponent,
+    PriseRdvComponent
   ],
   imports: [
     BrowserModule,
