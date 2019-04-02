@@ -36,20 +36,9 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-
     LoginService.logout();
     this.redirect();
 
-  }
-
-  private redirect() {
-    if (localStorage.getItem('User') != null) {
-      if (JSON.parse(localStorage.getItem('User')).isStudent()) {
-        this.returnUrl = '/homeStudent';
-      } else {
-        this.returnUrl = '/homeStd';
-      }
-    }
   }
 
   onSubmit() {
@@ -64,15 +53,22 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          this.redirect();
           this.router.navigate([this.returnUrl]);
         },
         error => {
-          if (error.toString().includes('Object')) {
-            this.alertService.error(error.message);
-          } else {
-            this.alertService.error(error);
-          }
+          this.alertService.error(error.error.error);
           this.loading = false;
         });
+  }
+
+  private redirect() {
+    if (localStorage.getItem('User') != null) {
+      if (JSON.parse(localStorage.getItem('User')).studentNumber !== '') {
+        this.returnUrl = '/homeStd';
+      } else {
+        this.returnUrl = '/homeBri';
+      }
+    }
   }
 }

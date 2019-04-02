@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
+
 import {httpOptionsBase, serverUrl} from '../config/server.config';
 
 @Injectable({
@@ -17,14 +18,15 @@ export class LoginService {
   private httpOptions = httpOptionsBase;
 
   static logout() {
-    console.log('Log-out');
+    localStorage.clear();
   }
 
   login(mail: string, password: string) {
     return this.http.post<any>(this.url, {mail, password}, this.httpOptions)
       .pipe(map(user => {
-        if (user && user.token) {
+        if (user) {
           localStorage.setItem('User', JSON.stringify(user));
+          // User.setUser(user);
         }
         return user;
       }));

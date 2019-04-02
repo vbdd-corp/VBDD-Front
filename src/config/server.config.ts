@@ -6,4 +6,4 @@ export const httpOptionsBase = {
   })
 };
 
-export const serverUrl = 'http://localhost:9428/';
+export const serverUrl = 'http://localhost:9428';
