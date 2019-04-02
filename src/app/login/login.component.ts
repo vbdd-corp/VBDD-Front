@@ -37,7 +37,9 @@ export class LoginComponent implements OnInit {
     });
 
     this.redirect();
-    this.router.navigate([this.returnUrl]);
+    if (this.returnUrl !== undefined) {
+      this.router.navigate([this.returnUrl]);
+    }
   }
 
   onSubmit() {
@@ -53,7 +55,9 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           this.redirect();
+
           this.router.navigate([this.returnUrl]);
+
         },
         error => {
           this.alertService.error(error.error.error);
@@ -62,8 +66,11 @@ export class LoginComponent implements OnInit {
   }
 
   private redirect() {
-    if (localStorage.getItem('User') != null) {
-      if (JSON.parse(localStorage.getItem('User')).studentNumber !== '') {
+    const item = localStorage.getItem('User');
+    if (item != null) {
+      const parsedUser = JSON.parse(item);
+      delete parsedUser.error;
+      if (parsedUser.isStudent) {
         this.returnUrl = '/homeStd';
       } else {
         this.returnUrl = '/homeBri';
