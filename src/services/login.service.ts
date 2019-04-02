@@ -17,16 +17,12 @@ export class LoginService {
 
   private httpOptions = httpOptionsBase;
 
-  static logout() {
-    localStorage.clear();
-  }
 
   login(mail: string, password: string) {
     return this.http.post<any>(this.url, {mail, password}, this.httpOptions)
       .pipe(map(user => {
         if (user) {
           localStorage.setItem('User', JSON.stringify(user));
-          // User.setUser(user);
         }
         return user;
       }));

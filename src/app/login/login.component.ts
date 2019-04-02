@@ -36,9 +36,8 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-    LoginService.logout();
     this.redirect();
-
+    this.router.navigate([this.returnUrl]);
   }
 
   onSubmit() {
