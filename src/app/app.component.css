@@ -1,14 +1,15 @@
+
 #mainContainer {
   margin-top: 1%;
   margin-bottom: 11%;
 }
 
+#alert {
+  margin-left: 50%;
+  float: left;
+}
 
 body {
-  margin-bottom: 60px; /* Margin bottom by footer height */
+  margin-bottom: 60px;
 }
 
-#mainAlert div {
-  width: 67% !important;
-  margin-left: 20% !important;;
-}

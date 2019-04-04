@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './login';
 import {HomeBriComponent} from './bris/home';
 import {HomeStdComponent} from './students/home';
-import {PriseRdvComponent} from './students/prise-rdv';
+import {PriseRdvComponent} from './students/prise-rdv/prise-rdv.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},

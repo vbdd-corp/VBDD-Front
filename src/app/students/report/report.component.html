@@ -1,12 +1,15 @@
 <table class="table table-bordered" id="tableDossiers">
   <caption>Créez et modifiez vos dossiers</caption>
   <tbody>
-  <tr>
-    <td align="center" scope="row">Dossier n°1</td>
+  <tr *ngFor="let dossier of dossiers; let i=index">
+    <td align="center" scope="row">
+      <a href="ICI_NUMERO_DOSSIER">{{ dossiers[i].value }}</a>
+      <!--TODO-->
+    </td>
   </tr>
   <tr>
     <td align="center" scope="row">
-      <button class="btn btn-success" type="button">Ajouter</button>
+      <button (click)="addInput()" class="btn btn-success" type="button">Ajouter</button>
     </td>
   </tr>
   </tbody>

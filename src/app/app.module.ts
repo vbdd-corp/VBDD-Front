@@ -15,7 +15,7 @@ import {HomeStdComponent} from './students/home';
 import {ReportComponent} from './students/report/report.component';
 import {StudentInformationsComponent} from './students/student-informations/student-informations.component';
 import {RendezvousComponent} from './students/rendezvous/rendezvous.component';
-import { PriseRdvComponent } from './students/prise-rdv/prise-rdv.component';
+import {PriseRdvComponent} from './students/prise-rdv/prise-rdv.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ import { PriseRdvComponent } from './students/prise-rdv/prise-rdv.component';
     ReactiveFormsModule
   ],
   providers: [AlertService,
-              LoginService
+    LoginService
   ],
   bootstrap: [AppComponent]
 })
