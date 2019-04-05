@@ -3,7 +3,6 @@ import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 
 import {httpOptionsBase, serverUrl} from '../config/server.config';
-import {StudentSingleton} from '../models/studentSingleton';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +22,8 @@ export class LoginService {
     return this.http.post<any>(this.url, {mail, password}, this.httpOptions)
       .pipe(map(user => {
         if (user) {
-          StudentSingleton.getInstance().feedUserFromJson(JSON.stringify(user));
+          localStorage.setItem('User', JSON.stringify(user));
+
         }
         return user;
       }));

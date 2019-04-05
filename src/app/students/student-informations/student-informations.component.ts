@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {StudentSingleton} from '../../../models/studentSingleton';
+import {Student} from '../../../models/student';
+import {Utils} from '../../../models/utils';
 
 @Component({
   selector: 'app-student-informations',
@@ -8,10 +9,11 @@ import {StudentSingleton} from '../../../models/studentSingleton';
 })
 export class StudentInformationsComponent implements OnInit {
   @Input()
-  student: StudentSingleton;
+  student: Student;
 
   constructor() {
-    this.student = StudentSingleton.getInstance();
+    this.student = Utils.getStudent();
+
   }
 
   ngOnInit() {

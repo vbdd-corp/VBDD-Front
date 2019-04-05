@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {first} from 'rxjs/operators';
+import {AlertService} from '../../../services';
+import {DossierService} from '../../../services/dossier.service';
 
 @Component({
   selector: 'app-report',
@@ -9,11 +12,31 @@ export class ReportComponent implements OnInit {
 
   dossiers = [];
 
-  constructor() {
+  constructor(private dossierService: DossierService, private alertService: AlertService) {
   }
 
+
   ngOnInit() {
-    this.feedDossiers();
+    this.putReportsInDom();
+  }
+
+  putReportsInDom() {
+    this.dossierService.getDossiers()
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.addEachReportsToDom(JSON.stringify(data));
+        },
+        error => {
+          this.alertService.error(error.error.error);
+        });
+  }
+
+  private addEachReportsToDom(data: string) {
+    let parsedReports = JSON.parse(data);
+    for (let i in parsedReports) {
+      this.dossiers.push({value: parsedReports[i].name});
+    }
   }
 
   addInput() {
@@ -21,8 +44,4 @@ export class ReportComponent implements OnInit {
     this.dossiers.push({value: dossierName});
   }
 
-  private feedDossiers() {
-    // TODO : GET une liste de dossiers d'un user par son ID, et remplii this.dossiers en conséquence;
-    this.dossiers.push({value: 'xx'});
-  }
 }

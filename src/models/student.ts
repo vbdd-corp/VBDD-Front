@@ -1,13 +1,9 @@
-export class StudentSingleton {
-
-  private static _instance: StudentSingleton = new StudentSingleton();
+export class Student {
 
   constructor() {
-    if (StudentSingleton._instance) {
-      throw new Error('Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.');
-    }
-    StudentSingleton._instance = this;
+
   }
+
 
   private _isStudent: boolean;
 
@@ -179,9 +175,6 @@ export class StudentSingleton {
     this._studentNumber = value;
   }
 
-  public static getInstance(): StudentSingleton {
-    return StudentSingleton._instance;
-  }
 
   public feedUserFromJson(json: string) {
     let parse = JSON.parse(json);

@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {StudentSingleton} from '../../models/studentSingleton';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +14,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logOff() {
-    StudentSingleton.getInstance().id = null;
+
+    localStorage.clear();
   }
 }

@@ -4,7 +4,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {LoginService} from '../../services/login.service';
 import {AlertService} from '../../services/alert.service';
-import {StudentSingleton} from '../../models/studentSingleton';
 
 
 @Component({
@@ -59,15 +58,14 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         error => {
-          this.alertService.error(error.error.error);
+          this.alertService.error(error.error);
           this.loading = false;
         });
   }
 
   private redirect() {
-    let instance = StudentSingleton.getInstance();
-    if (instance.id !== undefined) {
-      if (instance.isStudent) {
+    if (localStorage.getItem('User') != null) {
+      if (JSON.parse(localStorage.getItem('User')).studentNumber !== '') {
         this.returnUrl = '/homeStd';
       } else {
         this.returnUrl = '/homeBri';
