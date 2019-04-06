@@ -6,13 +6,11 @@
 
       <!-- La pop-up en cas de nouveau dossier-->
       <div *ngIf="dossier.kind == 'new'">
-        <app-modal></app-modal>
-        <p>ss</p>
+        <app-modal toPrint="{{ dossier.name }}"></app-modal>
       </div>
 
       <!-- Pour edit le dossier -->
       <a *ngIf="dossier.kind == 'edit'" href="/reports/{{dossier.kind}}/{{dossier.id }}">{{ dossier.name }}</a>
-
 
     </td>
   </tr>

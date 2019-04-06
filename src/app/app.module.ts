@@ -17,6 +17,8 @@ import {RendezvousComponent} from './students/rendezvous/rendezvous.component';
 import {PriseRdvComponent} from './students/prise-rdv';
 import {EditComponent} from './reports/edit/edit.component';
 import {ModalComponent} from './students/report/modal/modal.component';
+import {ModalModule} from 'ngx-bootstrap/modal';
+import {NewReportComponent} from './reports/new/new.component';
 
 @NgModule({
   declarations: [
@@ -33,12 +35,14 @@ import {ModalComponent} from './students/report/modal/modal.component';
     PriseRdvComponent,
     EditComponent,
     ModalComponent,
+    NewReportComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalModule.forRoot()
   ],
   providers: [AlertService,
     LoginService

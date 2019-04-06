@@ -15,7 +15,6 @@ export class ReportComponent implements OnInit {
   constructor(private dossierService: DossierService, private alertService: AlertService) {
   }
 
-
   ngOnInit() {
     this.putReportsInDom();
   }
@@ -33,7 +32,7 @@ export class ReportComponent implements OnInit {
   }
 
   addInput() {
-    const dossierName = prompt('Quel est le nom du dossier ?', 'Dossier N');
+    const dossierName = prompt('Quel est le nom du dossier ?', 'Mon dossier');
     this.dossiers.push({name: dossierName, id: dossierName, kind: 'new'});
 
   }

@@ -5,6 +5,7 @@ import {HomeBriComponent} from './bris/home';
 import {HomeStdComponent} from './students/home';
 import {PriseRdvComponent} from './students/prise-rdv';
 import {EditComponent} from './reports/edit/edit.component';
+import {NewReportComponent} from './reports/new/new.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'homeStd', component: HomeStdComponent},
   {path: 'priseRdvStd', component: PriseRdvComponent},
   {path: 'reports/edit/:id', component: EditComponent},
+  {path: 'reports/new/:id', component: NewReportComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'},
 
   {path: '404', redirectTo: '/login'},

@@ -1,0 +1,54 @@
+<a (click)="openModal(referenceOrScratchModal)"> {{ toPrint }}</a>
+
+
+<ng-template #referenceOrScratchModal>
+  <div class="modal-body text-center">
+    <div style="text-align: center;">
+      <button type="button" class="btn btn-primary"
+              popover="Un dossier type vous sera donné" (click)="openModal(referenceList); closeModal()">
+        Partir d'un dossier déjà référencé ?
+      </button>
+      <br>
+      <br>
+      <br>
+      <button type="button" class="btn btn-default"
+              popover="Vous partirez d'un dossier entierement vierge, et ajouterez les modules au fûr et à mesure"
+              onClick="alert('Pas encore implémenté');">Partir d'un dossier vierge ?
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #referenceList>
+  <div class="modal-body text-center">
+    <div style="text-align: center;">
+
+
+      <br>
+      <button type="button" (click)="redirect('/reports/new/' + toPrint)" class="btn btn-info">Dossier hors Europe
+      </button>
+      <br>
+      <br>
+      <button type="button" (click)="redirect('/reports/new/' + toPrint)" class="btn btn-info">Dossier Asie</button>
+      <br>
+      <br>
+      <button type="button" (click)="redirect('/reports/new/' + toPrint)" class="btn btn-info">Dossier UNS (Université
+        Nice Sophia-Antipolis)
+      </button>
+      <br>
+      <br>
+      <button type="button" (click)="redirect('/reports/new/' + toPrint)" class="btn btn-info">Dossier ERASMUS
+        (Europe)
+      </button>
+      <br>
+      <br>
+      <button type="button" (click)="redirect('/reports/new/' + toPrint)" class="btn btn-info">Dossier hors Europe
+      </button>
+      <br>
+      <br>
+
+    </div>
+
+  </div>
+</ng-template>
