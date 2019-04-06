@@ -32,16 +32,17 @@ export class ReportComponent implements OnInit {
         });
   }
 
+  addInput() {
+    const dossierName = prompt('Quel est le nom du dossier ?', 'Dossier N');
+    this.dossiers.push({name: dossierName, id: dossierName, kind: 'new'});
+
+  }
+
   private addEachReportsToDom(data: string) {
     let parsedReports = JSON.parse(data);
     for (let i in parsedReports) {
-      this.dossiers.push({value: parsedReports[i].name});
+      this.dossiers.push({dossier: parsedReports[i], kind: 'edit', name: parsedReports[i].name, id: parsedReports[i].id});
     }
-  }
-
-  addInput() {
-    const dossierName = prompt('Quel est le nom du dossier ?', 'Dossier N');
-    this.dossiers.push({value: dossierName});
   }
 
 }

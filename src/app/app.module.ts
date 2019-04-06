@@ -6,16 +6,17 @@ import {AppRoutingModule} from './app-routing.module';
 import {FooterComponent} from './footer/footer.component';
 import {HeaderComponent} from './header/header.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {AlertService} from '../services/alert.service';
+import {AlertService, LoginService} from '../services';
 import {HttpClientModule} from '@angular/common/http';
-import {LoginService} from '../services/login.service';
 import {AlertComponent} from '../directives';
-import {HomeBriComponent} from './bris/home/home.component';
+import {HomeBriComponent} from './bris/home';
 import {HomeStdComponent} from './students/home';
 import {ReportComponent} from './students/report/report.component';
 import {StudentInformationsComponent} from './students/student-informations/student-informations.component';
 import {RendezvousComponent} from './students/rendezvous/rendezvous.component';
-import {PriseRdvComponent} from './students/prise-rdv/prise-rdv.component';
+import {PriseRdvComponent} from './students/prise-rdv';
+import {EditComponent} from './reports/edit/edit.component';
+import {ModalComponent} from './students/report/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import {PriseRdvComponent} from './students/prise-rdv/prise-rdv.component';
     ReportComponent,
     StudentInformationsComponent,
     RendezvousComponent,
-    PriseRdvComponent
+    PriseRdvComponent,
+    EditComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,12 +1,22 @@
 <table class="table table-bordered" id="tableDossiers">
   <caption>Créez et modifiez vos dossiers</caption>
   <tbody>
-  <tr *ngFor="let dossier of dossiers; let i=index">
+  <tr *ngFor="let dossier of dossiers;">
     <td align="center" scope="row">
-      <a href="ICI_NUMERO_DOSSIER">{{ dossiers[i].value }}</a>
-      <!--TODO-->
+
+      <!-- La pop-up en cas de nouveau dossier-->
+      <div *ngIf="dossier.kind == 'new'">
+        <app-modal></app-modal>
+        <p>ss</p>
+      </div>
+
+      <!-- Pour edit le dossier -->
+      <a *ngIf="dossier.kind == 'edit'" href="/reports/{{dossier.kind}}/{{dossier.id }}">{{ dossier.name }}</a>
+
+
     </td>
   </tr>
+
   <tr>
     <td align="center" scope="row">
       <button (click)="addInput()" class="btn btn-success" type="button">Ajouter</button>
@@ -14,3 +24,4 @@
   </tr>
   </tbody>
 </table>
+
