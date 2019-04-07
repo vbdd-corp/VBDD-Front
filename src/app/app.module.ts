@@ -19,6 +19,8 @@ import {EditComponent} from './reports/edit/edit.component';
 import {ModalComponent} from './students/report/modal/modal.component';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {NewReportComponent} from './reports/new/new.component';
+import {ModulesManagerComponent} from './modules/modules-manager/modules-manager.component';
+import {ReportEditorComponent} from './modules/report-editor/report-editor.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import {NewReportComponent} from './reports/new/new.component';
     EditComponent,
     ModalComponent,
     NewReportComponent,
+    ModulesManagerComponent,
+    ReportEditorComponent,
   ],
   imports: [
     BrowserModule,

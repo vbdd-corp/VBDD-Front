@@ -6,7 +6,7 @@
 
       <!-- La pop-up en cas de nouveau dossier-->
       <div *ngIf="dossier.kind == 'new'">
-        <app-modal toPrint="{{ dossier.name }}"></app-modal>
+        <app-modal reportName="{{ dossier.name }}"></app-modal>
       </div>
 
       <!-- Pour edit le dossier -->

@@ -1,4 +1,4 @@
-<a (click)="openModal(referenceOrScratchModal)"> {{ toPrint }}</a>
+<a (click)="openModal(referenceOrScratchModal)"> {{ reportName }}</a>
 
 
 <ng-template #referenceOrScratchModal>
@@ -26,24 +26,22 @@
 
 
       <br>
-      <button type="button" (click)="redirect('/reports/new/' + toPrint)" class="btn btn-info">Dossier hors Europe
+      <button type="button" [routerLink]="['/reports/new/no-europe/', reportName]" class="btn btn-info">Dossier hors
+        Europe
       </button>
       <br>
       <br>
-      <button type="button" (click)="redirect('/reports/new/' + toPrint)" class="btn btn-info">Dossier Asie</button>
+      <button type="button" [routerLink]="['/reports/new/asia/', reportName]" class="btn btn-info">Dossier Asie</button>
       <br>
       <br>
-      <button type="button" (click)="redirect('/reports/new/' + toPrint)" class="btn btn-info">Dossier UNS (Université
+      <button type="button" [routerLink]="['/reports/new/uns/', reportName]" class="btn btn-info">Dossier UNS
+        (Université
         Nice Sophia-Antipolis)
       </button>
       <br>
       <br>
-      <button type="button" (click)="redirect('/reports/new/' + toPrint)" class="btn btn-info">Dossier ERASMUS
+      <button type="button" [routerLink]="['/reports/new/erasmus/', reportName]" class="btn btn-info">Dossier ERASMUS
         (Europe)
-      </button>
-      <br>
-      <br>
-      <button type="button" (click)="redirect('/reports/new/' + toPrint)" class="btn btn-info">Dossier hors Europe
       </button>
       <br>
       <br>

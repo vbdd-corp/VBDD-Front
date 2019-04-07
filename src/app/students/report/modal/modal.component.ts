@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 
 export class ModalComponent implements OnInit {
 
-  @Input() toPrint: string;
+  @Input() reportName: string;
   modalRef: BsModalRef;
 
   constructor(private modalService: BsModalService, public router: Router) {
@@ -26,9 +26,5 @@ export class ModalComponent implements OnInit {
     this.modalRef.hide();
   }
 
-  redirect(s: string) {
-    this.router.navigate([s]);
-
-  }
 }
 

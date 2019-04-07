@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'homeStd', component: HomeStdComponent},
   {path: 'priseRdvStd', component: PriseRdvComponent},
   {path: 'reports/edit/:id', component: EditComponent},
-  {path: 'reports/new/:id', component: NewReportComponent},
+  {path: 'reports/new/:type/:id', component: NewReportComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'},
 
   {path: '404', redirectTo: '/login'},
