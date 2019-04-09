@@ -26,6 +26,7 @@ import { CniComponent } from './modules/list-modules/cni/cni.component';
 import { PassportComponent } from './modules/list-modules/passport/passport.component';
 import { InfosGeneralesComponent } from './modules/list-modules/infos-generales/infos-generales.component';
 import { ContratEtudiantComponent } from './modules/list-modules/contrat-etudiant/contrat-etudiant.component';
+import { LettreMotivationComponent } from './modules/list-modules/lettre-motivation/lettre-motivation.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ContratEtudiantComponent } from './modules/list-modules/contrat-etudian
     PassportComponent,
     InfosGeneralesComponent,
     ContratEtudiantComponent,
+    LettreMotivationComponent,
   ],
   imports: [
     BrowserModule,
