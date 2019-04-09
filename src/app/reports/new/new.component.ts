@@ -26,7 +26,7 @@ export class NewReportComponent implements OnInit {
   }
 
   private saveReport() {
-    this.creatorService.create(this.reportCategory, this.reportName)
+    this.creatorService.create(+this.reportCategory, this.reportName)
       .pipe(first())
       .subscribe(
         data => {
