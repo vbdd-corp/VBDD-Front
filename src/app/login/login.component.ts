@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
 
   private redirect() {
     if (localStorage.getItem('User') != null) {
-      if (JSON.parse(localStorage.getItem('User')).studentNumber !== '') {
+      if (JSON.parse(localStorage.getItem('User')).id !== '') {
         this.returnUrl = '/homeStd';
       } else {
         this.returnUrl = '/homeBri';

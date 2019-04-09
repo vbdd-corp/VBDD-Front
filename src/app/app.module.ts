@@ -21,6 +21,7 @@ import {ModalModule} from 'ngx-bootstrap/modal';
 import {NewReportComponent} from './reports/new/new.component';
 import {ModulesManagerComponent} from './modules/modules-manager/modules-manager.component';
 import {ReportEditorComponent} from './modules/report-editor/report-editor.component';
+import {ReportCreatorService} from '../services/report-creator.service';
 
 @NgModule({
   declarations: [
@@ -48,8 +49,10 @@ import {ReportEditorComponent} from './modules/report-editor/report-editor.compo
     ReactiveFormsModule,
     ModalModule.forRoot()
   ],
-  providers: [AlertService,
-    LoginService
+  providers: [
+    AlertService,
+    LoginService,
+    ReportCreatorService
   ],
   bootstrap: [AppComponent]
 })
