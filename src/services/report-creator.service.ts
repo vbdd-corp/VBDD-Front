@@ -18,8 +18,8 @@ export class ReportCreatorService {
   constructor(private http: HttpClient) {
   }
 
-  create(fileTypeID: number, reportName: string) {
-    return this.http.post<any>(this.url + this.user.id, {fileTypeID, reportName}, this.httpOptions)
+  create(fileTypeId: number, reportName: string) {
+    return this.http.post<any>(this.url + this.user.id, {fileTypeId, reportName}, this.httpOptions)
       .pipe(map(user => {
         return user;
       }));
