@@ -1,11 +1,11 @@
 <table class="table table-bordered" id="tableDossiers">
-  <div><p id="pLabel"><i>Ajoutez</i>/<i>modifiez</i> vos modules</p></div>
+  <div><h4 id="pLabel"><i>Ajoutez</i>/<i>modifiez</i> vos modules</h4></div>
   <tbody>
   <tr *ngFor="let module of modules;">
     <td align="center" scope="row">
 
       <div>
-        <p> {{ module.name }}</p>
+        <p> {{ module.module.typeName }}</p>
       </div>
 
 

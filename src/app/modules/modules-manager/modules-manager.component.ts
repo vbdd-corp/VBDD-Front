@@ -8,14 +8,14 @@ import {ModuleService} from '../../../services/module.service';
   styleUrls: ['./modules-manager.component.css']
 })
 export class ModulesManagerComponent implements OnInit {
-  modules: any;
+  modules = [];
   @Input() reportType: number;
 
   constructor(private moduleService: ModuleService) {
   }
 
-
   ngOnInit() {
+    this.putModulesInDom();
   }
 
   putModulesInDom() {
@@ -33,7 +33,7 @@ export class ModulesManagerComponent implements OnInit {
   private addEachModuleToDom(data: string) {
     let parsedModule = JSON.parse(data);
     for (let i in parsedModule) {
-      this.modules.push({dossier: parsedModule[i], name: parsedModule[i].name});
+      this.modules.push({module: parsedModule[i]});
     }
   }
 

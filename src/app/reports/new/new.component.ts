@@ -33,7 +33,7 @@ export class NewReportComponent implements OnInit {
           alert('Votre dossier a bien été crée !');
         },
         error => {
-          alert(error.error.error.toString());
+          alert(error.error.error);
         });
   }
 
