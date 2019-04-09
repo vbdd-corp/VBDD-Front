@@ -3,17 +3,17 @@ import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 
 import {httpOptionsBase, serverUrl} from '../config/server.config';
+import {Utils} from '../models/utils';
 
 @Injectable({
   providedIn: 'root'
 })
 
-
 export class ReportCreatorService {
 
   private url = serverUrl + '/api/file/';
   private httpOptions = httpOptionsBase;
-  private user = JSON.parse(localStorage.getItem('User')).student[0];
+  private user = Utils.getStudent();// JSON.parse(localStorage.getItem('User')).student[0];
 
   constructor(private http: HttpClient) {
   }

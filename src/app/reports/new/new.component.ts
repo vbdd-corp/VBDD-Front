@@ -12,6 +12,7 @@ export class NewReportComponent implements OnInit {
   private sub: any;
   private reportCategory: string;
   private reportName: string;
+  isCreated: boolean = false;
 
   constructor(private route: ActivatedRoute, private creatorService: ReportCreatorService) {
   }
@@ -21,15 +22,15 @@ export class NewReportComponent implements OnInit {
       this.reportCategory = params['type'];
       this.reportName = params['id'];
     });
-
-    this.saveReport();
   }
 
-  private saveReport() {
+  public saveReport() {
     this.creatorService.create(+this.reportCategory, this.reportName)
       .pipe(first())
       .subscribe(
         data => {
+          this.isCreated = true;
+          alert('Votre dossier a bien été crée !');
         },
         error => {
           alert(error.error.error.toString());

@@ -1,27 +1,24 @@
 <table class="table table-bordered" id="tableDossiers">
-  <div><p><i>Ajoutez</i>/<i>modifiez</i> vos modules</p></div>
+  <div><p id="pLabel"><i>Ajoutez</i>/<i>modifiez</i> vos modules</p></div>
   <tbody>
-  <tr *ngFor="let dossier of dossiers;">
+  <tr *ngFor="let module of modules;">
     <td align="center" scope="row">
 
-      <!-- La pop-up en cas de nouveau dossier-->
-      <div *ngIf="dossier.kind == 'new'">
-        <app-modal reportName="{{ dossier.name }}"></app-modal>
+      <div>
+        <p> {{ module.name }}</p>
       </div>
 
-      <!-- Pour edit le dossier -->
-      <a *ngIf="dossier.kind == 'edit'" href="/reports/{{dossier.kind}}/{{dossier.id }}">{{ dossier.name }}</a>
 
     </td>
   </tr>
 
   <tr>
-    <td align="center" scope="row">
-      <button (click)="addInput()" class="btn btn-success" type="button">Ajouter</button>
-    </td>
+    <!--<td align="center" scope="row">-->
+    <!--<button (click)="addInput()" class="btn btn-success" type="button">Ajouter</button>-->
+    <!--</td>-->
   </tr>
   <tr>
-    <button class="btn  btn-danger btn-block" type="submit">
+    <button class="btn  btn-danger btn-block" id="deleteBtn" type="submit">
       Supprimer le dossier
     </button>
 
