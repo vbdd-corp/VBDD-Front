@@ -44,4 +44,15 @@ export class ReportComponent implements OnInit {
     }
   }
 
+  private deleteReport(id: number) {
+    this.dossierService.removeDossier(id)
+      .pipe(first())
+      .subscribe(
+        data => {
+
+        },
+        error => {
+          this.alertService.error(error.error.error);
+        });
+  }
 }

@@ -1,5 +1,5 @@
 <table class="table table-bordered" id="tableDossiers">
-  <div><h4 id="pLabel"><i>Ajoutez</i>/<i>modifiez</i> vos modules</h4></div>
+  <h4 id="pLabel"><i>Ajoutez</i>/<i>modifiez</i> vos modules</h4>
   <tbody>
   <tr *ngFor="let module of modules;">
     <td align="center" scope="row">
@@ -18,7 +18,7 @@
     <!--</td>-->
   </tr>
   <tr>
-    <button class="btn  btn-danger btn-block" id="deleteBtn" type="submit">
+    <button (click)="deleteReport(module.module.id)" class="btn  btn-danger btn-block" id="deleteBtn" type="submit">
       Supprimer le dossier
     </button>
 

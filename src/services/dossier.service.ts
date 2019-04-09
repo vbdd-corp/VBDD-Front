@@ -10,7 +10,7 @@ import {Utils} from '../models/utils';
 })
 export class DossierService {
 
-  private url = serverUrl + '/api/file/by-studentId/';
+  private url = serverUrl + '/api/file/';
   private httpOptions = httpOptionsBase;
 
   constructor(private http: HttpClient) {
@@ -18,7 +18,14 @@ export class DossierService {
 
   getDossiers() {
     let student1 = Utils.getStudent();
-    return this.http.get(this.url + student1.id, this.httpOptions)
+    return this.http.get(this.url + 'by-studentId/' + student1.id, this.httpOptions)
+      .pipe(map(dossier => {
+        return dossier;
+      }));
+  }
+
+  removeDossier(id: number) {
+    return this.http.delete(this.url + id, this.httpOptions)
       .pipe(map(dossier => {
         return dossier;
       }));
