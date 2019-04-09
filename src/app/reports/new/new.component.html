@@ -2,15 +2,22 @@
   <div class="row">
     <div align="center" class="col-lg-12">
       <alert id="dashboardAlert"></alert>
-      <h1>ESPACE PERSONNEL</h1>
+      <h1>Créez votre dossier</h1>
     </div>
   </div>
-  <div class="row">
+  <div class="row" style="margin-top: 5%">
     <div align="center" class="col-lg-4">
-      <app-modules-manager></app-modules-manager>
+      <app-modules-manager reportType="{{reportCategory}}"></app-modules-manager>
+
+      <button (click)="saveReport()" [disabled]="isCreated" class="btn btn-lg btn-success btn-block" id="createButton"
+              type="submit">
+        Créer le dossier
+      </button>
     </div>
     <div align="center" class="col-lg-8">
       <app-report-editor></app-report-editor>
     </div>
+
   </div>
+
 </div>
