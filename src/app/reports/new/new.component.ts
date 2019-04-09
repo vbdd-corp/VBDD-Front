@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ReportCreatorService} from '../../../services/report-creator.service';
 import {first} from 'rxjs/operators';
+import {ReportCreatorService} from '../../../services/report-creator.service';
 
 @Component({
   selector: 'app-new-report',
