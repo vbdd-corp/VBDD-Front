@@ -22,6 +22,10 @@ import {NewReportComponent} from './reports/new/new.component';
 import {ModulesManagerComponent} from './modules/modules-manager/modules-manager.component';
 import {ReportEditorComponent} from './modules/report-editor/report-editor.component';
 import {ReportCreatorService} from '../services/report-creator.service';
+import { CniComponent } from './modules/list-modules/cni/cni.component';
+import { PassportComponent } from './modules/list-modules/passport/passport.component';
+import { InfosGeneralesComponent } from './modules/list-modules/infos-generales/infos-generales.component';
+import { ContratEtudiantComponent } from './modules/list-modules/contrat-etudiant/contrat-etudiant.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +45,10 @@ import {ReportCreatorService} from '../services/report-creator.service';
     NewReportComponent,
     ModulesManagerComponent,
     ReportEditorComponent,
+    CniComponent,
+    PassportComponent,
+    InfosGeneralesComponent,
+    ContratEtudiantComponent,
   ],
   imports: [
     BrowserModule,
