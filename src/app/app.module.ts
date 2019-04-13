@@ -22,11 +22,14 @@ import {NewReportComponent} from './reports/new/new.component';
 import {ModulesManagerComponent} from './modules/modules-manager/modules-manager.component';
 import {ReportEditorComponent} from './modules/report-editor/report-editor.component';
 import {ReportCreatorService} from '../services/report-creator.service';
-import { CniComponent } from './modules/list-modules/cni/cni.component';
-import { PassportComponent } from './modules/list-modules/passport/passport.component';
-import { InfosGeneralesComponent } from './modules/list-modules/infos-generales/infos-generales.component';
-import { ContratEtudiantComponent } from './modules/list-modules/contrat-etudiant/contrat-etudiant.component';
-import { LettreMotivationComponent } from './modules/list-modules/lettre-motivation/lettre-motivation.component';
+import {CniComponent} from './modules/list-modules/cni/cni.component';
+import {PassportComponent} from './modules/list-modules/passport/passport.component';
+import {InfosGeneralesComponent} from './modules/list-modules/infos-generales/infos-generales.component';
+import {ContratEtudiantComponent} from './modules/list-modules/contrat-etudiant/contrat-etudiant.component';
+import {LettreMotivationComponent} from './modules/list-modules/lettre-motivation/lettre-motivation.component';
+import {EuropassComponent} from './modules/list-modules/europass-component/europass.component';
+import {ReleveNoteComponent} from './modules/list-modules/releve-note-component/releve-note.component';
+import {BudgetPrevisionnelComponent} from './modules/list-modules/budget-previsionnel-component/budget-previsionnel.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,9 @@ import { LettreMotivationComponent } from './modules/list-modules/lettre-motivat
     InfosGeneralesComponent,
     ContratEtudiantComponent,
     LettreMotivationComponent,
+    EuropassComponent,
+    ReleveNoteComponent,
+    BudgetPrevisionnelComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +64,11 @@ import { LettreMotivationComponent } from './modules/list-modules/lettre-motivat
     HttpClientModule,
     ReactiveFormsModule,
     ModalModule.forRoot()
+  ],
+  exports: [
+    ReportComponent,
+    ReportEditorComponent,
+    EuropassComponent
   ],
   providers: [
     AlertService,

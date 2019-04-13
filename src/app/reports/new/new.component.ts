@@ -10,22 +10,26 @@ import {ReportCreatorService} from '../../../services/report-creator.service';
 })
 export class NewReportComponent implements OnInit {
   private sub: any;
-  private reportCategory: string;
+  private _reportCategory: string;
   private reportName: string;
   isCreated: boolean = false;
 
   constructor(private route: ActivatedRoute, private creatorService: ReportCreatorService) {
   }
 
+  get reportCategory(): number {
+    return parseInt(this._reportCategory);
+  }
+
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      this.reportCategory = params['type'];
+      this._reportCategory = params['type'];
       this.reportName = params['id'];
     });
   }
 
   public saveReport() {
-    this.creatorService.create(+this.reportCategory, this.reportName)
+    this.creatorService.create(+this._reportCategory, this.reportName)
       .pipe(first())
       .subscribe(
         data => {

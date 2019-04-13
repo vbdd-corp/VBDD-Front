@@ -11,11 +11,11 @@
 
       <button (click)="saveReport()" [disabled]="isCreated" class="btn btn-lg btn-success btn-block" id="createButton"
               type="submit">
-        Créer le dossier
+        <b>Créer le dossier</b>
       </button>
     </div>
     <div align="center" class="col-lg-8">
-      <app-report-editor></app-report-editor>
+      <app-report-editor [reportType]="reportCategory"></app-report-editor>
     </div>
 
   </div>

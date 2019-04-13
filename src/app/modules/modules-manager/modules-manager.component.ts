@@ -17,10 +17,10 @@ export class ModulesManagerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.putModulesInDom();
+    this.putModulesNameInDom();
   }
 
-  putModulesInDom() {
+  putModulesNameInDom() {
     this.moduleService.getModules(this.reportType)
       .pipe(first())
       .subscribe(
