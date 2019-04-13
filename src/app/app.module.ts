@@ -25,7 +25,7 @@ import {ReportCreatorService} from '../services/report-creator.service';
 import {CniComponent} from './modules/list-modules/cni/cni.component';
 import {PassportComponent} from './modules/list-modules/passport/passport.component';
 import {InfosGeneralesComponent} from './modules/list-modules/infos-generales/infos-generales.component';
-import {ContratEtudiantComponent} from './modules/list-modules/contrat-etudiant/contrat-etudiant.component';
+import {ContratEtudiantAsieComponent} from './modules/list-modules/contrat-etudiant-asie/contrat-etudiant-asie.component';
 import {LettreMotivationComponent} from './modules/list-modules/lettre-motivation/lettre-motivation.component';
 import {EuropassComponent} from './modules/list-modules/europass-component/europass.component';
 import {ReleveNoteComponent} from './modules/list-modules/releve-note-component/releve-note.component';
@@ -52,7 +52,7 @@ import {BudgetPrevisionnelComponent} from './modules/list-modules/budget-previsi
     CniComponent,
     PassportComponent,
     InfosGeneralesComponent,
-    ContratEtudiantComponent,
+    ContratEtudiantAsieComponent,
     LettreMotivationComponent,
     EuropassComponent,
     ReleveNoteComponent,

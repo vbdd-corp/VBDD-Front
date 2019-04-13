@@ -1,16 +1,53 @@
 <div>
-  <!--  <hr>-->
-  <!--  <app-student-informations></app-student-informations>-->
-  <!--  <hr>-->
-  <!--  <app-cni></app-cni>-->
-  <!--  <hr>-->
-  <!--  <app-passport></app-passport>-->
-  <!--  <hr>-->
-  <!--  <app-contrat-etudiant></app-contrat-etudiant>-->
-  <!--  <hr>-->
-  <!--  <app-lettre-motivation></app-lettre-motivation>-->
-  <!--  <hr>-->
 
-  {{ putModulesInDom() }}
+  <div *ngIf="componentNameWithClass.indexOf(1) !== -1">
+    <hr>
+    <app-student-informations></app-student-informations>
+    <hr>
+  </div>
+
+  <div *ngIf="componentNameWithClass.indexOf(2) !== -1">
+    <hr>
+    <app-cni></app-cni>
+    <hr>
+  </div>
+
+  <div *ngIf="componentNameWithClass.indexOf(3) !== -1">
+    <hr>
+    <app-passport></app-passport>
+    <hr>
+  </div>
+
+  <div *ngIf="componentNameWithClass.indexOf(4) !== -1">
+    <hr>
+    <app-europass-component></app-europass-component>
+    <hr>
+  </div>
+
+  <div *ngIf="componentNameWithClass.indexOf(5) !== -1">
+    <hr>
+    <app-releve-note-component></app-releve-note-component>
+    <hr>
+  </div>
+
+  <div *ngIf="componentNameWithClass.indexOf(6) !== -1">
+    <hr>
+    <app-lettre-motivation></app-lettre-motivation>
+    <hr>
+  </div>
+
+
+  <div *ngIf="componentNameWithClass.indexOf(7) !== -1">
+    <hr>
+    <app-budget-previsionnel-component></app-budget-previsionnel-component>
+    <hr>
+  </div>
+
+  <div *ngIf="componentNameWithClass.indexOf(8) !== -1">
+    <hr>
+    <app-contrat-etudiant-asie></app-contrat-etudiant-asie>
+    <hr>
+
+  </div>
 
 </div>
