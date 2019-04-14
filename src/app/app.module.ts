@@ -30,6 +30,7 @@ import {LettreMotivationComponent} from './modules/list-modules/lettre-motivatio
 import {EuropassComponent} from './modules/list-modules/europass-component/europass.component';
 import {ReleveNoteComponent} from './modules/list-modules/releve-note-component/releve-note.component';
 import {BudgetPrevisionnelComponent} from './modules/list-modules/budget-previsionnel-component/budget-previsionnel.component';
+import {ProgrammeEtudeComponent} from './modules/list-modules/programme-etude/programme-etude.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import {BudgetPrevisionnelComponent} from './modules/list-modules/budget-previsi
     EuropassComponent,
     ReleveNoteComponent,
     BudgetPrevisionnelComponent,
+    ProgrammeEtudeComponent,
   ],
   imports: [
     BrowserModule,

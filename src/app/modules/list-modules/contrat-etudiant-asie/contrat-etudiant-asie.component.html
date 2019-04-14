@@ -1,22 +1,260 @@
 <div align="center" id="mainDiv">
-  <h3>Budget prévisionnel</h3>
+  <h3>Contrat étudiant - Asie</h3>
   <br>
-  <h5>Vous apporterez ici les élements qui établiront votre budget pour la durée de votre séjour</h5>
+  <h5>Veuillez rempliir tous les champs nécéssaires à la constitution de votre dossier</h5>
   <br>
 
   <label>
-    <input aria-describedby="basic-addon1" class="form-control" placeholder="Pays envisagés envisagées" type="text">
+    <input aria-describedby="basic-addon1" class="form-control" placeholder="Nom et prénom" type="text"
+           value="{{ getFullName() }}">
   </label>
-  <label>
-    <input aria-describedby="basic-addon1" class="form-control" placeholder="Villes envisagées" type="text">
-  </label>
-
-  <label>
-    <input aria-describedby="basic-addon1" class="form-control" placeholder="Durée prévue" type="text">
-  </label>
-  <br>
   <br>
   <br>
 
+  <label>
+    <input aria-describedby="basic-addon1" class="form-control" placeholder="Date de naissance (e.g 02/08/1998"
+           type="text" value="{{getBirthday()}}">
+  </label>
+  <br>
+  <br>
+
+  <label>
+    <input aria-describedby="basic-addon1" class="form-control" placeholder="Nationalité" type="text"
+           value="{{getNationalite()}}">
+  </label>
+  <br>
+  <br>
+
+  <input [checked]="!isMan()" class="form-check-input" id="femme" name="exampleRadios" type="radio" value="option1">
+  <label class="form-check-label" for="femme">
+    Femme
+  </label>
+
+  <input [checked]="isMan()" class="form-check-input" id="homme" name="exampleRadios" style="margin-left:30px;"
+         type="radio"
+         value="option1">
+  <label class="form-check-label" for="homme">
+    Homme
+  </label>
+  <br>
+  <br>
+
+  <label>
+    <input aria-describedby="basic-addon1" class="form-control" placeholder="Adresse" type="text"
+           value="{{getAddress()}}">
+  </label>
+  <br>
+  <br>
+
+  <label>
+    <input aria-describedby="basic-addon1" class="form-control" placeholder="Ville" type="text" value="{{getCity()}}">
+  </label>
+  <br>
+  <br>
+
+  <label>
+    <input aria-describedby="basic-addon1" class="form-control" placeholder="Code postal" type="text"
+           value="{{getCodePostal()}}">
+  </label>
+  <br>
+  <br>
+
+  <label>
+    <input aria-describedby="basic-addon1" class="form-control" placeholder="Numéro de téléphone" type="text"
+           value="{{getPhone()}}">
+  </label>
+  <br>
+  <br>
+
+  <label>
+    <input aria-describedby="basic-addon1" class="form-control" placeholder="Adresse mail" type="text"
+           value="{{getMail()}}">
+  </label>
+  <br>
+  <br>
+
+  <label>
+    <input aria-describedby="basic-addon1" class="form-control" placeholder="N° Etudiant" type="text"
+           value="{{getStudentNumber()}}">
+  </label>
+  <br>
+  <br>
+
+  <label>
+    <input aria-describedby="basic-addon1" class="form-control" placeholder="Fillière" type="text"
+           value="{{getMajor()}}">
+  </label>
+  <br>
+  <br>
+
+  <div class="form-check">
+    <input checked class="form-check-input" id="exampleCheck1" style="height: 84px;" type="checkbox">
+    <label class="form-check-label" for="exampleCheck1" style="width: 400px;">J’accepte que mes coordonnées soient
+      transmises à d’autres
+      personnes ou organismes pour toute question en lien avec mon séjour d’études à l’étranger.</label>
+  </div>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Année</th>
+      <th scope="col">Niveau d'études</th>
+      <th scope="col">Etablissement</th>
+      <th scope="col">Moyenne</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        <input aria-describedby="basic-addon1" class="form-control" placeholder="2016"
+               type="text">
+      </td>
+
+      <td>
+        <input aria-describedby="basic-addon1" class="form-control" placeholder="DUT (Bac+1)"
+               type="text">
+      </td>
+
+
+      <td>
+        <input aria-describedby="basic-addon1" class="form-control" placeholder="IUT d'Aix-en-Provence"
+               type="text">
+      </td>
+
+
+      <td>
+        <input aria-describedby="basic-addon1" class="form-control" placeholder="14/20"
+               type="text">
+      </td>
+
+    </tr>
+
+
+    <tr>
+      <td>
+        <input aria-describedby="basic-addon1" class="form-control" placeholder="2017"
+               type="text">
+      </td>
+
+      <td>
+        <input aria-describedby="basic-addon1" class="form-control" placeholder="DUT (Bac+2)"
+               type="text">
+      </td>
+
+
+      <td>
+        <input aria-describedby="basic-addon1" class="form-control" placeholder="IUT d'Aix-en-Provence"
+               type="text">
+      </td>
+
+
+      <td>
+        <input aria-describedby="basic-addon1" class="form-control" placeholder="11/20"
+               type="text">
+      </td>
+
+    </tr>
+    <tr>
+
+
+    <tr>
+      <td>
+        <input aria-describedby="basic-addon1" class="form-control" placeholder="2018"
+               type="text">
+      </td>
+
+      <td>
+        <input aria-describedby="basic-addon1" class="form-control" placeholder="DUT (Bac+2)"
+               type="text">
+      </td>
+
+
+      <td>
+        <input aria-describedby="basic-addon1" class="form-control" placeholder="IUT d'Aix-en-Provence"
+               type="text">
+      </td>
+
+
+      <td>
+        <input aria-describedby="basic-addon1" class="form-control" placeholder="15/20"
+               type="text">
+      </td>
+
+    </tr>
+    <tr>
+    </tbody>
+  </table>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col"><b>Choix</b></th>
+      <th scope="col">Université</th>
+      <th scope="col">Pays</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        <b>1</b>
+      </td>
+
+      <td>
+        <input aria-describedby="basic-addon1" class="form-control" placeholder="Incheon National University"
+               type="text">
+      </td>
+      <td>
+        <input aria-describedby="basic-addon1" class="form-control" placeholder="Corée du Sud"
+               type="text">
+      </td>
+
+    </tr>
+    <tr>
+      <td>
+        <b>2</b>
+      </td>
+
+      <td>
+        <input aria-describedby="basic-addon1" class="form-control" placeholder="Asian Institute of Technology"
+               type="text">
+      </td>
+      <td>
+        <input aria-describedby="basic-addon1" class="form-control" placeholder="Thailande"
+               type="text">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>3</b>
+      </td>
+
+      <td>
+        <input aria-describedby="basic-addon1" class="form-control" placeholder="City University of Hong Kong"
+               type="text">
+      </td>
+      <td>
+        <input aria-describedby="basic-addon1" class="form-control" placeholder="Chine"
+               type="text">
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="form-check">
+
+    <p>Période souhaitée pour votre séjour <i>(plusieurs choix possibles) :</i></p>
+    <input class="form-check-input" id="annee" style="margin-right: 10px;" type="checkbox">
+    <label class="form-check-label" for="exampleCheck1" style="margin-right: 10px;">Année complète</label>
+
+    <input class="form-check-input" id="1eSemestre" style="margin-right: 10px;" type="checkbox">
+    <label class="form-check-label" for="exampleCheck1" style="margin-right: 10px;">1er semestre</label>
+
+    <input class="form-check-input" id="2eSemestre" style="margin-right: 10px;" type="checkbox">
+    <label class="form-check-label" for="exampleCheck1" style="margin-right: 10px;">2e semestre</label>
+  </div>
+
+  <hr>
+
+  <app-programme-etude></app-programme-etude>
 
 </div>
