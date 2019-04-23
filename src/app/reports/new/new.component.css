@@ -1,3 +1,7 @@
 #createButton {
   margin-top: 20%;
 }
+
+app-report-editor {
+  margin-left: -150px;
+}

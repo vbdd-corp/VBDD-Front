@@ -1,18 +1,30 @@
 <table class="table table-bordered" id="tableDossiers">
   <caption>Créez et modifiez vos dossiers</caption>
   <tbody>
+
   <tr *ngFor="let dossier of dossiers;">
+
+
     <td align="center" scope="row">
 
       <!-- La pop-up en cas de nouveau dossier-->
       <div *ngIf="dossier.kind == 'new'">
         <app-modal reportName="{{ dossier.name }}"></app-modal>
+
       </div>
 
       <!-- Pour edit le dossier -->
       <a *ngIf="dossier.kind == 'edit'" href="/reports/{{dossier.kind}}/{{dossier.id }}">{{ dossier.name }}</a>
 
+
+      <button (click)="deleteReport(dossier.id)" aria-label="Close" class="close" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+
     </td>
+
+
   </tr>
 
   <tr>

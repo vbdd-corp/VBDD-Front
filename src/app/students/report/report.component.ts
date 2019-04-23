@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {first} from 'rxjs/operators';
 import {AlertService} from '../../../services';
 import {DossierService} from '../../../services/dossier.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-report',
@@ -12,7 +13,7 @@ export class ReportComponent implements OnInit {
 
   dossiers = [];
 
-  constructor(private dossierService: DossierService, private alertService: AlertService) {
+  constructor(private dossierService: DossierService, private alertService: AlertService, private router: Router) {
   }
 
   ngOnInit() {
@@ -43,5 +44,19 @@ export class ReportComponent implements OnInit {
       this.dossiers.push({dossier: parsedReports[i], kind: 'edit', name: parsedReports[i].name, id: parsedReports[i].id});
     }
   }
+
+  private deleteReport(id: number) {
+    this.dossierService.removeDossier(id)
+      .pipe(first())
+      .subscribe(
+        data => {
+
+        },
+        error => {
+          this.alertService.error(error.error.error);
+        });
+    window.location.reload();
+  }
+
 
 }

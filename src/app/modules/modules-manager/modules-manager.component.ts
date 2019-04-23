@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {first} from 'rxjs/operators';
 import {ModuleService} from '../../../services/module.service';
+import {DossierService} from '../../../services/dossier.service';
+import {AlertService} from '../../../services';
 
 @Component({
   selector: 'app-modules-manager',
@@ -11,14 +13,14 @@ export class ModulesManagerComponent implements OnInit {
   modules = [];
   @Input() reportType: number;
 
-  constructor(private moduleService: ModuleService) {
+  constructor(private moduleService: ModuleService, private dossierService: DossierService, private alertService: AlertService) {
   }
 
   ngOnInit() {
-    this.putModulesInDom();
+    this.putModulesNameInDom();
   }
 
-  putModulesInDom() {
+  putModulesNameInDom() {
     this.moduleService.getModules(this.reportType)
       .pipe(first())
       .subscribe(
@@ -37,4 +39,16 @@ export class ModulesManagerComponent implements OnInit {
     }
   }
 
+
+  deleteReport(id: number) {
+    this.dossierService.removeDossier(id)
+      .pipe(first())
+      .subscribe(
+        data => {
+
+        },
+        error => {
+          this.alertService.error(error.error.error);
+        });
+  }
 }
