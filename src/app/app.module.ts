@@ -31,6 +31,9 @@ import {EuropassComponent} from './modules/list-modules/europass-component/europ
 import {ReleveNoteComponent} from './modules/list-modules/releve-note-component/releve-note.component';
 import {BudgetPrevisionnelComponent} from './modules/list-modules/budget-previsionnel-component/budget-previsionnel.component';
 import {ProgrammeEtudeComponent} from './modules/list-modules/programme-etude/programme-etude.component';
+import { CniEditComponent } from './modules/list-modules/cni-edit/cni-edit.component';
+import { PassportEditComponent } from './modules/list-modules/passport-edit/passport-edit.component';
+import { LettreMotivationEditComponent } from './modules/list-modules/lettre-motivation-edit/lettre-motivation-edit.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +62,9 @@ import {ProgrammeEtudeComponent} from './modules/list-modules/programme-etude/pr
     ReleveNoteComponent,
     BudgetPrevisionnelComponent,
     ProgrammeEtudeComponent,
+    CniEditComponent,
+    PassportEditComponent,
+    LettreMotivationEditComponent,
   ],
   imports: [
     BrowserModule,

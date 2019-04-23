@@ -1,0 +1,27 @@
+table{
+  text-align: center;
+}
+td{
+  margin-right: 5%;
+  margin-left: 5%;
+  text-align: center;
+}
+
+th{
+  text-align: center;
+}
+
+img{
+  width: 400px;
+  height: 100px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+button {
+  margin-left: 50px;
+}
+
+#cn1 {
+  margin-right: 20px;
+}
