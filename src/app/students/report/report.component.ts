@@ -34,8 +34,9 @@ export class ReportComponent implements OnInit {
 
   addInput() {
     const dossierName = prompt('Quel est le nom du dossier ?', 'Mon dossier');
-    this.dossiers.push({name: dossierName, id: dossierName, kind: 'new'});
-
+    if (dossierName !== null) {
+      this.dossiers.push({name: dossierName, id: dossierName, kind: 'new'});
+    }
   }
 
   private addEachReportsToDom(data: string) {

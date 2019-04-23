@@ -13,15 +13,22 @@ export class ReportCreatorService {
 
   private url = serverUrl + '/api/file/';
   private httpOptions = httpOptionsBase;
-  private user = Utils.getStudent();// JSON.parse(localStorage.getItem('User')).student[0];
+  private user = Utils.getStudent();
 
   constructor(private http: HttpClient) {
   }
 
-  create(fileTypeId: number, reportName: string) {
-    return this.http.post<any>(this.url + this.user.id, {fileTypeId, reportName}, this.httpOptions)
-      .pipe(map(user => {
-        return user;
+  create(fileTypeId: number, name: string) {
+    return this.http.post<any>(this.url, {studentId: this.user.id, fileTypeId, name: name}, this.httpOptions)
+      .pipe(map(values => {
+        return values;
+      }));
+  }
+
+  updateModule(moduleId: number, infos: string) {
+    return this.http.put('/module/' + moduleId, {infos}, this.httpOptions)
+      .pipe(map(values => {
+        return values;
       }));
   }
 }

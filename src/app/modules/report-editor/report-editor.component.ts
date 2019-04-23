@@ -1,11 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {first} from 'rxjs/operators';
 import {ModuleService} from '../../../services/module.service';
 
 @Component({
   selector: 'app-report-editor',
   templateUrl: './report-editor.component.html',
-  styleUrls: ['./report-editor.component.css']
+  styleUrls: ['./report-editor.component.css'],
 })
 
 
@@ -13,7 +13,7 @@ export class ReportEditorComponent implements OnInit {
 
   @Input() reportType: number;
   componentNameWithClass = [];
-
+  @Output() componentsIdEmitter = new EventEmitter();
   constructor(private moduleService: ModuleService) {
   }
 
