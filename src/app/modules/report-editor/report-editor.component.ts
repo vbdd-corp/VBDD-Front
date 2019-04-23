@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {first} from 'rxjs/operators';
 import {ModuleService} from '../../../services/module.service';
 
@@ -12,8 +12,8 @@ import {ModuleService} from '../../../services/module.service';
 export class ReportEditorComponent implements OnInit {
 
   @Input() reportType: number;
-  componentNameWithClass = [];
-  @Output() componentsIdEmitter = new EventEmitter();
+  public componentNameWithClass = [];
+
   constructor(private moduleService: ModuleService) {
   }
 
@@ -42,7 +42,7 @@ export class ReportEditorComponent implements OnInit {
     }
   }
 
-  /*
+  /* ID => COMPOSANT
   [1]   = StudentInformationsComponent;
   [2]   = CniComponent;
   [3]   = PassportComponent;
@@ -51,7 +51,7 @@ export class ReportEditorComponent implements OnInit {
   [6]   = LettreMotivationComponent;
   [7]   = BudgetPrevisionnelComponent;
   [8]   = ContratEtudiantAsieComponent;
-  [9]   = MoveOnlineComponent;
+  [9]   = EuropassComponent;
   [10]  = AutorisisationProfesseurComponent;
   [11]  = ErasmusLearningComponent;
   [12]  = EvaluationLinguistiqueComponent;

@@ -9,10 +9,11 @@
     <div align="center" class="col-lg-4" id="saver">
       <app-modules-manager reportType="{{reportCategory}}"></app-modules-manager>
 
-      <button (click)="saveReport()" [disabled]="isCreated" class="btn btn-lg btn-success btn-block" id="createButton"
-              type="submit">
+      <button (click)="saveReport()" [disabled]="isCreated"
+              class="btn btn-lg btn-success btn-block" id="createButton" type="submit">
         <b>Créer le dossier</b>
       </button>
+
     </div>
     <div align="center" class="col-lg-8">
       <app-report-editor [reportType]="reportCategory"></app-report-editor>

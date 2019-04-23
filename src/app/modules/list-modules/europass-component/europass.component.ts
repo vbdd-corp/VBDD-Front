@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {first} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
+import {ReportCreatorService} from '../../../../services/report-creator.service';
 
 @Component({
   selector: 'app-europass-component',
@@ -7,10 +10,16 @@ import {Component, OnInit} from '@angular/core';
 })
 export class EuropassComponent implements OnInit {
 
-  constructor() {
+  constructor(private route: ActivatedRoute, private creatorService: ReportCreatorService) {
   }
 
   ngOnInit() {
+  }
+
+  public onSubmit() {
+    this.creatorService.updateModule(4, '') //TODO c'est du file Upload... ):
+      .pipe(first())
+      .subscribe();
   }
 
 }

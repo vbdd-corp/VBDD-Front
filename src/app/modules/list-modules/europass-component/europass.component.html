@@ -1,12 +1,18 @@
 <div align="center">
+  <!--<form>-->
   <h3>Europass</h3>
   <br>
   <h5>Vous devez créer un CV européen en allant sur le site<br><br>
     <a href="https://europass.cedefop.europa.eu/fr">https://europass.cedefop.europa.eu/fr</a></h5>
-  Suite à cela, vous obtiendrez un code. Mettez le ci-dessous :
+  Suite à cela, vous obtiendrez un PDF. Mettez-le en ligne :
   <br>
 
-  <input aria-describedby="basic-addon1" aria-label="Username" class="form-control" id="europassTxt"
-         placeholder="Code Europass" type="text">
+  <button class="btn btn-info"><b>Importer </b><span class="glyphicon glyphicon-edit"></span></button>
+  <button class="btn btn-info">Supprimer <span class="glyphicon glyphicon-remove-sign"></span></button>
 
+  <button (click)="onSubmit()" class="btn btn-lg btn-default btn-block" id="submit" type="submit">
+    Valider
+  </button>
+
+  <!--</form>-->
 </div>
