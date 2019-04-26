@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {first} from 'rxjs/operators';
 import {ReportCreatorService} from '../../../services/report-creator.service';
@@ -14,11 +14,18 @@ export class NewReportComponent implements OnInit {
   private reportName: string;
   isCreated: boolean = false;
 
+  @Input()
+  public _reportBeingCreated: any;
+
   constructor(private route: ActivatedRoute, private creatorService: ReportCreatorService) {
   }
 
   get reportCategory(): number {
     return parseInt(this._reportCategory);
+  }
+
+  get reportBeingCreated(): any {
+    return this._reportBeingCreated;
   }
 
   ngOnInit() {
@@ -27,6 +34,8 @@ export class NewReportComponent implements OnInit {
       this.reportName = params['id'];
     });
 
+    this.saveReport();
+
   }
 
   public saveReport() {
@@ -34,8 +43,8 @@ export class NewReportComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.isCreated = true;
-          alert('Votre dossier a bien été crée !');
+          // this.isCreated = true;
+          this._reportBeingCreated = data;
         },
         error => {
           alert(error.error.error);

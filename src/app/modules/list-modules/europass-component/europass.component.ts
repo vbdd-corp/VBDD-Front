@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {first} from 'rxjs/operators';
 import {ActivatedRoute} from '@angular/router';
 import {ReportCreatorService} from '../../../../services/report-creator.service';
@@ -9,6 +9,7 @@ import {ReportCreatorService} from '../../../../services/report-creator.service'
   styleUrls: ['./europass.component.css']
 })
 export class EuropassComponent implements OnInit {
+  @Input() report: any;
 
   constructor(private route: ActivatedRoute, private creatorService: ReportCreatorService) {
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-passport',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./passport.component.css']
 })
 export class PassportComponent implements OnInit {
+  @Input() report: any;
 
   constructor() { }
 

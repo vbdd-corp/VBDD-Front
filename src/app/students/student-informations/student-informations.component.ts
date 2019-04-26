@@ -10,6 +10,7 @@ import {Utils} from '../../../models/utils';
 export class StudentInformationsComponent implements OnInit {
   @Input()
   student: Student;
+  @Input() report: any;
 
   constructor() {
     this.student = Utils.getStudent();

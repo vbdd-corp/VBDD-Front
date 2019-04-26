@@ -12,9 +12,15 @@ import {ModuleService} from '../../../services/module.service';
 export class ReportEditorComponent implements OnInit {
 
   @Input() reportType: number;
+  @Input() report: any;
+
   public componentNameWithClass = [];
 
   constructor(private moduleService: ModuleService) {
+  }
+
+  get getReport(): any {
+    return this.report;
   }
 
 

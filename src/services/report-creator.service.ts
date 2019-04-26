@@ -20,8 +20,8 @@ export class ReportCreatorService {
 
   create(fileTypeId: number, name: string) {
     return this.http.post<any>(this.url + 'file/', {studentId: this.user.id, fileTypeId, name: name}, this.httpOptions)
-      .pipe(map(values => {
-        return values;
+      .pipe(map(reportWithModule => {
+        return reportWithModule;
       }));
   }
 

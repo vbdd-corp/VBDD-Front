@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-lettre-motivation',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lettre-motivation.component.css']
 })
 export class LettreMotivationComponent implements OnInit {
+  @Input() report: any;
 
   constructor() { }
 

@@ -3,13 +3,15 @@ import {httpOptionsBase, serverUrl} from '../config/server.config';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 
+let API = '/api/';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ModuleService {
 
 
-  private url = serverUrl + '/api/fileType/';
+  private url = serverUrl + API;
   private httpOptions = httpOptionsBase;
 
   constructor(private http: HttpClient) {
@@ -17,9 +19,10 @@ export class ModuleService {
 
   getModules(reportType: number) {
 
-    return this.http.get(this.url + reportType, this.httpOptions)
+    return this.http.get(this.url + 'fileType/' + reportType, this.httpOptions)
       .pipe(map(dossier => {
         return dossier;
       }));
   }
+
 }

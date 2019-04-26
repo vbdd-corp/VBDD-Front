@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {ReportCreatorService} from '../../../../services/report-creator.service';
+
 
 @Component({
   selector: 'app-budget-previsionnel-component',
@@ -11,7 +12,7 @@ import {ReportCreatorService} from '../../../../services/report-creator.service'
 export class BudgetPrevisionnelComponent implements OnInit {
 
   budgetForm: FormGroup;
-  moduleId: number;
+  @Input() report: any;
 
   constructor(private formBuilder: FormBuilder, private creatorSerive: ReportCreatorService) {
   }
@@ -42,9 +43,8 @@ export class BudgetPrevisionnelComponent implements OnInit {
 
   onSubmit() {
 
+    this.creatorSerive.updateModule(ModuleComponent.getModuleId(this.report.moduleIds, 7), ({
 
-    //TODO : REMPLACER 7 PAR moduleId (bonne chance lel)
-    this.creatorSerive.updateModule(7, ({
       country: this.f.paysEnvisage.value,
       city: this.f.villesEnvisagees.value,
       stayDuration: this.f.dureeEnvisagee.value,
@@ -61,10 +61,10 @@ export class BudgetPrevisionnelComponent implements OnInit {
       personalResources: this.f.prixEconomies.value,
       familyResources: this.f.aideFamiliale.value,
       othersResources: this.f.prixAutre.value,
-      notes: '' //defek is dis ?
+      notes: ''
+
     }))
       .pipe(first())
       .subscribe();
-
   }
 }

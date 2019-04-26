@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-releve-note-component',
@@ -6,6 +6,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./releve-note.component.css']
 })
 export class ReleveNoteComponent implements OnInit {
+  @Input() report: any;
 
   constructor() {
   }
