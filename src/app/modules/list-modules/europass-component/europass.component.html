@@ -1,18 +1,20 @@
 <div align="center">
-  <!--<form>-->
+
   <h3>Europass</h3>
   <br>
   <h5>Vous devez créer un CV européen en allant sur le site<br><br>
     <a href="https://europass.cedefop.europa.eu/fr">https://europass.cedefop.europa.eu/fr</a></h5>
-  Suite à cela, vous obtiendrez un PDF. Mettez-le en ligne :
+  Suite à cela, vous obtiendrez un <b>PDF</b>. Mettez-le en ligne :
+  <br>
   <br>
 
-  <button class="btn btn-info"><b>Importer </b><span class="glyphicon glyphicon-edit"></span></button>
+  <input [uploader]="uploader" class="input-group-addon alert-info" name="photo" ng2FileSelect style="width: 300px"
+         type="file"/>
+
   <button class="btn btn-info">Supprimer <span class="glyphicon glyphicon-remove-sign"></span></button>
 
   <button (click)="onSubmit()" class="btn btn-lg btn-default btn-block" id="submit" type="submit">
-    Valider
+    Enregister
   </button>
 
-  <!--</form>-->
 </div>

@@ -1,3 +1,13 @@
-button {
+.importdelete {
   margin-left: 50px;
+}
+
+#submit {
+  margin-top: 25px;
+  width: 300px;
+  margin-left: 50px;
+
+  align-content: center;
+  align-self: center;
+  alignment: center;
 }

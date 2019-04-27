@@ -30,6 +30,7 @@ import {LettreMotivationComponent} from './modules/list-modules/lettre-motivatio
 import {EuropassComponent} from './modules/list-modules/europass-component/europass.component';
 import {ReleveNoteComponent} from './modules/list-modules/releve-note-component/releve-note.component';
 import {BudgetPrevisionnelComponent} from './modules/list-modules/budget-previsionnel-component/budget-previsionnel.component';
+import {FileUploadModule} from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import {BudgetPrevisionnelComponent} from './modules/list-modules/budget-previsi
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    FileUploadModule
   ],
   exports: [
     ReportComponent,
