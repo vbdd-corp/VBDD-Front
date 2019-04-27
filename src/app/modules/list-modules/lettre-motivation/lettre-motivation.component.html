@@ -4,11 +4,18 @@
   <h5>Montrez votre motivation !<br> Ecrivez une lettre où vous expliquez vos motivations à effectuer cet échange à
     l'étranger, et enregistrez-le en <b>PDF</b></h5>
   <br>
-  <button class="btn btn-info"><b>Importer </b><span class="glyphicon glyphicon-edit"></span></button>
-  <button class="btn btn-info">Supprimer <span class="glyphicon glyphicon-remove-sign"></span></button>
 
-  <button (click)="onSubmit()" class="btn btn-lg btn-default btn-block" id="submit" type="submit">
-    Enregister
+  <input #file [uploader]="uploader" class="input-group-addon alert-info" name="photo" ng2FileSelect
+         style="width: 300px"
+         type="file"/>
+
+  <button (click)="deleteFile()" class="btn btn-info">Supprimer <span class="glyphicon glyphicon-remove-sign"></span>
+  </button>
+
+  <button (click)="onSubmit()" [ngClass]="{'btn-success': isFileUploaded===true}"
+          class="btn btn-lg btn-default btn-block" id="submit" type="submit">
+    <span [ngClass]="{'glyphicon-check': isFileUploaded===true}" class="glyphicon"></span>
+    Enregistrer
   </button>
 
 </div>

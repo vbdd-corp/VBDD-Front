@@ -487,7 +487,8 @@
 
     <!--    FIN DU PROGRAMME D'ETUDE-->
 
-    <button (click)="onSubmit()" class="btn btn-lg btn-default btn-block" id="submit" type="submit">
+    <button (click)="onSubmit()" [ngClass]="{'btn-success': isValidated===true}"
+            class="btn btn-lg btn-default btn-block" id="submit" type="submit">
       Enregister
     </button>
   </div>

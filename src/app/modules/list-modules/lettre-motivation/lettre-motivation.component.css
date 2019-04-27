@@ -12,10 +12,16 @@ input {
 
 button {
   margin-left: 50px;
+  margin-top: 20px;
 }
 
 .importdelete {
+  margin-top: 20px;
   margin-left: 50px;
+}
+
+.btn .btn-info {
+  margin-top: 10px;
 }
 
 #submit {
