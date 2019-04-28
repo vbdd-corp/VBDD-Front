@@ -15,6 +15,7 @@ export class ContratEtudiantAsieComponent implements OnInit {
 
   contratForm: FormGroup;
   @Input() report: any;
+  isValidated: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private creatorSerive: ReportCreatorService) {
   }
@@ -144,6 +145,8 @@ export class ContratEtudiantAsieComponent implements OnInit {
     )
       .pipe(first())
       .subscribe();
+
+    this.isValidated = true;
   }
 
   private getContratValues() {

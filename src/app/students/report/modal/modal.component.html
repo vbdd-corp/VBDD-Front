@@ -11,7 +11,7 @@
       <br>
       <br>
       <br>
-      <button type="button" class="btn btn-default"
+      <button class="btn btn-default" disabled type="button"
               popover="Vous partirez d'un dossier entierement vierge, et ajouterez les modules au fûr et à mesure"
               onClick="alert('Pas encore implémenté');">Partir d'un dossier vierge ?
       </button>
@@ -26,21 +26,21 @@
 
 
       <br>
-      <button type="button" [routerLink]="['/reports/new/2/', reportName]" class="btn btn-info">Dossier hors
+      <button [routerLink]="['/reports/new/2/', reportName]" class="btn btn-info" disabled type="button">Dossier hors
         Europe
       </button>
       <br>
       <br>
-      <button type="button" [routerLink]="['/reports/new/1/', reportName]" class="btn btn-info">Dossier Asie</button>
+      <button [routerLink]="['/reports/new/1/', reportName]" class="btn btn-info" type="button">Dossier Asie</button>
       <br>
       <br>
-      <button type="button" [routerLink]="['/reports/new/3/', reportName]" class="btn btn-info">Dossier UNS
+      <button [routerLink]="['/reports/new/3/', reportName]" class="btn btn-info" disabled type="button">Dossier UNS
         (Université
         Nice Sophia-Antipolis)
       </button>
       <br>
       <br>
-      <button type="button" [routerLink]="['/reports/new/0/', reportName]" class="btn btn-info">Dossier ERASMUS
+      <button [routerLink]="['/reports/new/0/', reportName]" class="btn btn-info" disabled type="button">Dossier ERASMUS
         (Europe)
       </button>
       <br>

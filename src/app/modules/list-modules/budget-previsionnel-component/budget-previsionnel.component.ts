@@ -14,6 +14,7 @@ export class BudgetPrevisionnelComponent implements OnInit {
 
   budgetForm: FormGroup;
   @Input() report: any;
+  isValidated: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private creatorSerive: ReportCreatorService) {
   }
@@ -67,5 +68,6 @@ export class BudgetPrevisionnelComponent implements OnInit {
     }))
       .pipe(first())
       .subscribe();
+    this.isValidated = true;
   }
 }
