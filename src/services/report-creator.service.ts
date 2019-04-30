@@ -13,7 +13,7 @@ export class ReportCreatorService {
 
   private url = serverUrl + '/api/';
   private httpOptions = httpOptionsBase;
-  private user = Utils.getStudent();
+  private user = Utils.getUser();
 
   constructor(private http: HttpClient) {
   }
@@ -26,7 +26,7 @@ export class ReportCreatorService {
   }
 
   updateModule(moduleId: number, infos: any) {
-    return this.http.put(this.url + 'module/' + moduleId, {infos}, this.httpOptions)
+    return this.http.put(this.url + 'module/' + moduleId, {infos: infos}, this.httpOptions)
       .pipe(map(values => {
         return values;
       }));

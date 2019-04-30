@@ -9,33 +9,17 @@ import {ModuleService} from '../../../services/module.service';
 })
 export class ModulesManagerComponent implements OnInit {
   modules = [];
-  @Input() reportType: number;
   @Input() report: any;
 
   constructor(private moduleService: ModuleService) {
+
   }
 
   ngOnInit() {
-    this.putModulesNameInDom();
+    this.modules = this.report.modules;
   }
 
-  putModulesNameInDom() {
-    this.moduleService.getModules(this.reportType)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.addEachModuleToDom(JSON.stringify(data));
-        },
-        error => {
-          alert(error.error.error);
-        });
+  selectModule(module: any) {
+    this.moduleService.setSelectedModule(module);
   }
-
-  private addEachModuleToDom(data: string) {
-    let parsedModule = JSON.parse(data);
-    for (let i in parsedModule) {
-      this.modules.push({module: parsedModule[i]});
-    }
-  }
-
 }

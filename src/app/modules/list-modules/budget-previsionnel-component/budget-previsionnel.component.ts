@@ -13,7 +13,7 @@ import {ModuleComponent} from '../../module-component';
 export class BudgetPrevisionnelComponent implements OnInit {
 
   budgetForm: FormGroup;
-  @Input() report: any;
+  @Input() module: any;
   isValidated: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private creatorSerive: ReportCreatorService) {
@@ -45,7 +45,7 @@ export class BudgetPrevisionnelComponent implements OnInit {
 
   onSubmit() {
 
-    this.creatorSerive.updateModule(ModuleComponent.getModuleId(this.report.modules, 7), ({
+    this.creatorSerive.updateModule(this.module.id, ({
 
       country: this.f.paysEnvisage.value,
       city: this.f.villesEnvisagees.value,

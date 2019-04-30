@@ -1,1 +1,0 @@
-export { HomeBriComponent } from './home';

@@ -9,7 +9,6 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {AlertService, LoginService} from '../services';
 import {HttpClientModule} from '@angular/common/http';
 import {AlertComponent} from '../directives';
-import {HomeBriComponent} from './bris/home';
 import {HomeStdComponent} from './students/home';
 import {ReportComponent} from './students/report/report.component';
 import {StudentInformationsComponent} from './students/student-informations/student-informations.component';
@@ -31,6 +30,8 @@ import {EuropassComponent} from './modules/list-modules/europass-component/europ
 import {ReleveNoteComponent} from './modules/list-modules/releve-note-component/releve-note.component';
 import {BudgetPrevisionnelComponent} from './modules/list-modules/budget-previsionnel-component/budget-previsionnel.component';
 import {FileUploadModule} from 'ng2-file-upload';
+import {EspaceBriComponent} from './bri/espace-bri/espace-bri.component';
+import {ReportCheckerComponent} from './bri/report-checker/report-checker.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,6 @@ import {FileUploadModule} from 'ng2-file-upload';
     FooterComponent,
     HeaderComponent,
     AlertComponent,
-    HomeBriComponent,
     HomeStdComponent,
     ReportComponent,
     StudentInformationsComponent,
@@ -57,7 +57,9 @@ import {FileUploadModule} from 'ng2-file-upload';
     LettreMotivationComponent,
     EuropassComponent,
     ReleveNoteComponent,
-    BudgetPrevisionnelComponent
+    BudgetPrevisionnelComponent,
+    EspaceBriComponent,
+    ReportCheckerComponent
 
   ],
   imports: [

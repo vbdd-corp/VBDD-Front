@@ -14,7 +14,7 @@ export class ContratEtudiantAsieComponent implements OnInit {
 
 
   contratForm: FormGroup;
-  @Input() report: any;
+  @Input() module: any;
   isValidated: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private creatorSerive: ReportCreatorService) {
@@ -94,55 +94,52 @@ export class ContratEtudiantAsieComponent implements OnInit {
   }
 
   getFullName() {
-    return Utils.getStudent().firstName + ' ' + Utils.getStudent().lastName;
+    return Utils.getUser().firstName + ' ' + Utils.getUser().lastName;
   }
 
   isMan() {
-    return Utils.getStudent().gender === 'M';
+    return Utils.getUser().gender === 'M';
   }
 
   getBirthday() {
-    return Utils.getStudent().birthDate;
+    return Utils.getUser().birthDate;
   }
 
   getNationalite() {
-    return Utils.getStudent().nationality;
+    return Utils.getUser().nationality;
   }
 
   getCodePostal() {
-    return Utils.getStudent().postalCode;
+    return Utils.getUser().postalCode;
   }
 
   getCity() {
-    return Utils.getStudent().city;
+    return Utils.getUser().city;
   }
 
   getAddress() {
-    return Utils.getStudent().address;
+    return Utils.getUser().address;
   }
 
   getMajor() {
-    return Utils.getStudent().major;
+    return Utils.getUser().major;
   }
 
   getStudentNumber() {
-    return Utils.getStudent().studentNumber;
+    return Utils.getUser().studentNumber;
   }
 
   getMail() {
-    return Utils.getStudent().mail;
+    return Utils.getUser().mail;
   }
 
   getPhone() {
-    return Utils.getStudent().phoneNumber;
+    return Utils.getUser().phoneNumber;
   }
 
   onSubmit() {
 
-    this.creatorSerive.updateModule
-    (
-      ModuleComponent.getModuleId(this.report.modules, 8), this.getContratValues()
-    )
+    this.creatorSerive.updateModule(this.module.id, this.getContratValues())
       .pipe(first())
       .subscribe();
 

@@ -6,7 +6,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./cni.component.css']
 })
 export class CniComponent implements OnInit {
-  @Input() report: any;
+  @Input() module: any;
 
   constructor() { }
 

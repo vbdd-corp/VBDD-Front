@@ -1,0 +1,24 @@
+#studentName {
+  width: 350px;
+}
+
+#searchDiv {
+  margin-top: 20px;
+  display: inline-flex;
+}
+
+#searchBtn {
+  margin-left: 10px;
+  height: 35px;
+  display: inline;
+}
+
+#dossierDrop {
+  margin-left: 70px;
+  width: 300px;
+}
+
+#dossierSpan {
+
+  display: inline-flex;
+}

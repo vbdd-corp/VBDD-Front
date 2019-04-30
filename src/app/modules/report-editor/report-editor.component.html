@@ -1,53 +1,52 @@
-<div>
+<div *ngIf="module">
 
-  <div *ngIf="componentNameWithClass.indexOf(1) !== -1">
+  <div *ngIf="module.typeModule.id === 0">
     <hr>
     <app-student-informations></app-student-informations>
     <hr>
   </div>
 
-  <div *ngIf="componentNameWithClass.indexOf(2) !== -1">
+  <div *ngIf="module.typeModule.id === 1">
     <hr>
-    <app-cni [report]="getReport"></app-cni>
-    <hr>
-  </div>
-
-  <div *ngIf="componentNameWithClass.indexOf(3) !== -1">
-    <hr>
-    <app-passport [report]="getReport"></app-passport>
+    <app-cni [module]="this.module"></app-cni>
     <hr>
   </div>
 
-  <div *ngIf="componentNameWithClass.indexOf(4) !== -1">
+  <div *ngIf="module.typeModule.id === 2">
     <hr>
-    <app-europass-component [report]="getReport"></app-europass-component>
-    <hr>
-  </div>
-
-  <div *ngIf="componentNameWithClass.indexOf(5) !== -1">
-    <hr>
-    <app-releve-note-component [report]="getReport"></app-releve-note-component>
+    <app-passport [module]="this.module"></app-passport>
     <hr>
   </div>
 
-  <div *ngIf="componentNameWithClass.indexOf(6) !== -1">
+  <div *ngIf="module.typeModule.id === 4">
     <hr>
-    <app-lettre-motivation [report]="getReport"></app-lettre-motivation>
+    <app-europass-component [report]="this.report" [module]="this.module"></app-europass-component>
+    <hr>
+  </div>
+
+  <div *ngIf="module.typeModule.id === 5">
+    <hr>
+    <app-releve-note-component [report]="this.report" [module]="this.module"></app-releve-note-component>
+    <hr>
+  </div>
+
+  <div *ngIf="module.typeModule.id === 6">
+    <hr>
+    <app-lettre-motivation [report]="this.report" [module]="this.module"></app-lettre-motivation>
     <hr>
   </div>
 
 
-  <div *ngIf="componentNameWithClass.indexOf(7) !== -1">
+  <div *ngIf="module.typeModule.id === 7">
     <hr>
-    <app-budget-previsionnel-component [report]="getReport"></app-budget-previsionnel-component>
+    <app-budget-previsionnel-component [module]="this.module"></app-budget-previsionnel-component>
     <hr>
   </div>
 
-  <div *ngIf="componentNameWithClass.indexOf(8) !== -1">
+  <div *ngIf="module.typeModule.id === 8">
     <hr>
-    <app-contrat-etudiant-asie [report]="getReport"></app-contrat-etudiant-asie>
+    <app-contrat-etudiant-asie [module]="this.module"></app-contrat-etudiant-asie>
     <hr>
-
   </div>
 
 </div>

@@ -1,0 +1,29 @@
+<form
+  (ngSubmit)="onSubmit()"
+  [formGroup]="studentCheckForm"
+  class="form-signin">
+
+<span id="searchDiv">
+
+  <input aria-describedby="basic-addon1" class="form-control" formControlName="studentName" id="studentName"
+         placeholder="Prénom et nom de l'étudiant"
+         type="text">
+
+  <button (click)="onSubmit()" class="btn btn-info"><span
+    class="glyphicon glyphicon-search"></span>  </button>
+
+  <div id="dossierDrop">
+    <span id="dossierSpan">
+       <label for="dossierDrop">Dossiers</label>
+    <select [hidden]="reports.lenght() > 0" class="form-control" formControlName="selectDrop" multiple
+            style="margin-left:20px; width:100px;">
+     <option *ngFor="let report of reports" [ngValue]="reportName" id="{{report.id}}">{{report.name}}</option>
+    </select>
+    </span>
+
+  </div>
+
+
+</span>
+</form>
+<!--<app-new-report></app-new-report>-->

@@ -13,11 +13,12 @@ export class DossierService {
   private url = serverUrl + '/api/file/';
   private httpOptions = httpOptionsBase;
 
+
   constructor(private http: HttpClient) {
   }
 
   getDossiers() {
-    let student1 = Utils.getStudent();
+    let student1 = Utils.getUser();
     return this.http.get(this.url + 'by-studentId/' + student1.id, this.httpOptions)
       .pipe(map(dossier => {
         return dossier;
@@ -29,5 +30,9 @@ export class DossierService {
       .pipe(map(dossier => {
         return dossier;
       }));
+  }
+
+  getDossier(id: number) {
+    return this.http.get(this.url+id, this.httpOptions);
   }
 }
