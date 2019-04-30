@@ -9,15 +9,11 @@
   <!--STUDENT CASE-->
   <div *ngIf="isStudent">
     <div class="row">
-      <div align="center" class="col-lg-6">
+      <div align="center" class="col-lg-3" id="div_app_report">
         <app-report></app-report>
       </div>
-      <div align="center" class="col-lg-6">
-        <app-student-informations [student]="student"></app-student-informations>
-      </div>
-    </div>
-    <div class="row">
-      <div align="center" class="col-lg-12">
+      <div align="center" class="col-lg-9">
+        <app-student-informations></app-student-informations>
         <app-rendezvous></app-rendezvous>
       </div>
     </div>
