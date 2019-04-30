@@ -1,0 +1,20 @@
+#rdvGestion {
+  float: right;
+
+}
+
+#rdvGestion button {
+  margin-right: 20px !important;
+}
+
+#reportGestion {
+  float: left;
+
+}
+
+.vl {
+  border-left: 6px solid #050505;
+  height: 500px;
+  margin-left: 50%;
+  margin-top: 2%;
+}

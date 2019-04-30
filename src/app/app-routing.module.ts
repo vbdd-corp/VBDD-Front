@@ -1,16 +1,16 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './login';
-import {HomeBriComponent} from './bris/home';
 import {HomeStdComponent} from './students/home';
 import {PriseRdvComponent} from './students/prise-rdv';
 import {EditComponent} from './reports/edit/edit.component';
 import {NewReportComponent} from './reports/new/new.component';
+import {ReportCheckerComponent} from './bri/report-checker/report-checker.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'homeBri', component: HomeBriComponent},
   {path: 'homeStd', component: HomeStdComponent},
+  {path: 'reportChecker', component: ReportCheckerComponent},
   {path: 'priseRdvStd', component: PriseRdvComponent},
   {path: 'reports/edit/:id', component: EditComponent},
   {path: 'reports/new/:type/:id', component: NewReportComponent},

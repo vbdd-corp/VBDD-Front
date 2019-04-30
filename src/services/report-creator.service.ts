@@ -13,7 +13,7 @@ export class ReportCreatorService {
 
   private url = serverUrl + '/api/';
   private httpOptions = httpOptionsBase;
-  private user = Utils.getStudent();
+  private user = Utils.getUser();
 
   constructor(private http: HttpClient) {
   }

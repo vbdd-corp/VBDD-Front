@@ -18,7 +18,7 @@ export class DossierService {
   }
 
   getDossiers() {
-    let student1 = Utils.getStudent();
+    let student1 = Utils.getUser();
     return this.http.get(this.url + 'by-studentId/' + student1.id, this.httpOptions)
       .pipe(map(dossier => {
         return dossier;

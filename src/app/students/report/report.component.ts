@@ -58,5 +58,4 @@ export class ReportComponent implements OnInit {
         });
     window.location.reload();
   }
-
 }
