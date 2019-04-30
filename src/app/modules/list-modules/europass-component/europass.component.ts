@@ -29,7 +29,7 @@ export class EuropassComponent implements OnInit {
   }
 
   ngOnInit() {
-    const completeURL = URL + Utils.getStudent().id + '/' + this.report.id + '/' + this.module.id;
+    const completeURL = URL + Utils.getUser().id + '/' + this.report.id + '/' + this.module.id;
 
     this.uploader = new FileUploader({
       url:
