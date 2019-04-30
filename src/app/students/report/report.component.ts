@@ -1,61 +1,63 @@
-import {Component, OnInit} from '@angular/core';
-import {first} from 'rxjs/operators';
+import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {AlertService} from '../../../services';
 import {DossierService} from '../../../services/dossier.service';
 import {Router} from '@angular/router';
+import {Subscription} from 'rxjs';
+import {File} from '../../../models/file';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-report',
   templateUrl: './report.component.html',
   styleUrls: ['./report.component.css']
 })
-export class ReportComponent implements OnInit {
+export class ReportComponent implements OnInit, OnDestroy {
 
-  dossiers = [];
 
-  constructor(private dossierService: DossierService, private alertService: AlertService, private router: Router) {
+  files: Array<File>;
+  sub: Subscription;
+  modalRef: BsModalRef;
+
+  @ViewChild('referenceOrScratchModal') public referenceOrScratchModal: TemplateRef<any>;
+  @ViewChild('referenceList') public referenceList: TemplateRef<any>;
+
+  constructor(private modalService: BsModalService, private dossierService: DossierService, private alertService: AlertService, private router: Router) {
+    this.dossierService.getDossiers();
+    this.sub = this.dossierService.files$.subscribe( files => this.files = files);
   }
 
   ngOnInit() {
-    this.putReportsInDom();
+
   }
 
-  putReportsInDom() {
-    this.dossierService.getDossiers()
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.addEachReportsToDom(JSON.stringify(data));
-        },
-        error => {
-          this.alertService.error(error.error.error);
-        });
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
-  addInput() {
-    const dossierName = prompt('Quel est le nom du dossier ?', 'Mon dossier');
-    if (dossierName !== null) {
-      this.dossiers.push({name: dossierName, id: dossierName, kind: 'new'});
+  openModal(template: TemplateRef<any>) {
+    if(this.modalRef){ // close last modal if there was one
+      this.closeModal();
     }
+    this.modalRef = this.modalService.show(template);
   }
 
-  private addEachReportsToDom(data: string) {
-    let parsedReports = JSON.parse(data);
-    for (let i in parsedReports) {
-      this.dossiers.push({dossier: parsedReports[i], kind: 'edit', name: parsedReports[i].name, id: parsedReports[i].id});
-    }
+  closeModal() {
+    this.modalRef.hide();
+  }
+
+  openModalCreateFile() {
+    this.openModal(this.referenceOrScratchModal);
+  }
+
+  createFile(fileTypeId: number) {
+    this.dossierService.create(fileTypeId,"nouveau dossier").then( file => {
+      console.log("file created !");
+      this.closeModal();
+      this.router.navigate(['reports/edit/', file.id]);
+    });
   }
 
   private deleteReport(id: number) {
-    this.dossierService.removeDossier(id)
-      .pipe(first())
-      .subscribe(
-        data => {
-
-        },
-        error => {
-          this.alertService.error(error.error.error);
-        });
-    window.location.reload();
+    this.dossierService.removeDossier(id);
   }
 }

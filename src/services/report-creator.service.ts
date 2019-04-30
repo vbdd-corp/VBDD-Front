@@ -18,12 +18,6 @@ export class ReportCreatorService {
   constructor(private http: HttpClient) {
   }
 
-  create(fileTypeId: number, name: string) {
-    return this.http.post<any>(this.url + 'file/', {studentId: this.user.id, fileTypeId, name: name}, this.httpOptions)
-      .pipe(map(reportWithModule => {
-        return reportWithModule;
-      }));
-  }
 
   updateModule(moduleId: number, infos: any) {
     return this.http.put(this.url + 'module/' + moduleId, {infos: infos}, this.httpOptions)

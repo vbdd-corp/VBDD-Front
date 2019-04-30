@@ -15,7 +15,6 @@ import {StudentInformationsComponent} from './students/student-informations/stud
 import {RendezvousComponent} from './students/rendezvous/rendezvous.component';
 import {PriseRdvComponent} from './students/prise-rdv';
 import {EditComponent} from './reports/edit/edit.component';
-import {ModalComponent} from './students/report/modal/modal.component';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {NewReportComponent} from './reports/new/new.component';
 import {ModulesManagerComponent} from './modules/modules-manager/modules-manager.component';
@@ -46,7 +45,6 @@ import {ReportCheckerComponent} from './bri/report-checker/report-checker.compon
     RendezvousComponent,
     PriseRdvComponent,
     EditComponent,
-    ModalComponent,
     NewReportComponent,
     ModulesManagerComponent,
     ReportEditorComponent,

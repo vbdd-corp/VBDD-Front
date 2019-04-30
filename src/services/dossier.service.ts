@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {httpOptionsBase, serverUrl} from '../config/server.config';
-import {map} from 'rxjs/operators';
+import {File} from '../models/file';
 import {HttpClient} from '@angular/common/http';
 import {Utils} from '../models/utils';
+import {BehaviorSubject} from 'rxjs';
 
 
 @Injectable({
@@ -14,25 +15,52 @@ export class DossierService {
   private httpOptions = httpOptionsBase;
 
 
+  private fileList: any[] = [];
+
+  public files$: BehaviorSubject<any[]> = new BehaviorSubject(this.fileList);
+
+
   constructor(private http: HttpClient) {
   }
 
   getDossiers() {
-    let student1 = Utils.getUser();
-    return this.http.get(this.url + 'by-studentId/' + student1.id, this.httpOptions)
-      .pipe(map(dossier => {
-        return dossier;
-      }));
+    this.http.get<any>(this.url + 'by-studentId/' + Utils.getUser().id, this.httpOptions)
+      .subscribe(files => {
+        this.files$.next(files);
+        this.fileList = files;
+      }, err => {
+        console.log(err);
+      });
   }
 
   removeDossier(id: number) {
     return this.http.delete(this.url + id, this.httpOptions)
-      .pipe(map(dossier => {
-        return dossier;
-      }));
+      .subscribe( file => {
+        this.getDossiers();
+      }, err => {
+        console.log(err);
+      });
   }
 
   getDossier(id: number) {
-    return this.http.get(this.url+id, this.httpOptions);
+    return new Promise<any>(resolve => {
+      this.http.get(this.url+id, this.httpOptions).subscribe(data => {
+          resolve(data);},
+        err => {
+          console.log(err);
+        });
+    });
+  }
+
+  create(fileTypeId: number, name: string) {
+    return new Promise<File>(resolve => {
+      this.http.post<File>(this.url, {studentId: Utils.getUser().id, fileTypeId: fileTypeId, name: name}, this.httpOptions)
+        .subscribe(file => {
+          this.getDossiers();
+          resolve(file);
+        }, err => {
+          console.log(err);
+        })
+    });
   }
 }
