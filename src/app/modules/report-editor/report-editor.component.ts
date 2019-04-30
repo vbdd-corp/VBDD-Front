@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {first} from 'rxjs/operators';
 import {ModuleService} from '../../../services/module.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-report-editor',
@@ -9,44 +10,25 @@ import {ModuleService} from '../../../services/module.service';
 })
 
 
-export class ReportEditorComponent implements OnInit {
+export class ReportEditorComponent implements OnInit, OnDestroy {
 
-  @Input() reportType: number;
-  @Input() report: any;
+  @Input() report:any;
 
-  public componentNameWithClass = [];
+  module :any;
+  subscription: Subscription;
 
   constructor(private moduleService: ModuleService) {
+    this.subscription = this.moduleService.getSelectedModule().subscribe(module => this.module=module);
   }
 
-  get getReport(): any {
-    return this.report;
+  ngOnDestroy() {
+    //no memory leak
+    this.subscription.unsubscribe();
   }
-
 
   ngOnInit() {
-    this.putModulesInDom();
   }
 
-  putModulesInDom() {
-    this.moduleService.getModules(this.reportType)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.addEachModuleToDom(JSON.stringify(data));
-        },
-        error => {
-          alert(error.error.error);
-        });
-  }
-
-
-  private addEachModuleToDom(data: string) {
-    let parsedModule = JSON.parse(data);
-    for (const element of parsedModule) {
-      this.componentNameWithClass.push(element.id);
-    }
-  }
 
   /* ID => COMPOSANT
   [1]   = StudentInformationsComponent;

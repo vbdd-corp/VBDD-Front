@@ -1,4 +1,4 @@
-<div>
-  <app-student-informations></app-student-informations>
-
+<div *ngIf="report">
+  <app-modules-manager [report]="report"></app-modules-manager>
+  <app-report-editor [report]="report"></app-report-editor>
 </div>

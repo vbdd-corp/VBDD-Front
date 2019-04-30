@@ -13,6 +13,7 @@ export class DossierService {
   private url = serverUrl + '/api/file/';
   private httpOptions = httpOptionsBase;
 
+
   constructor(private http: HttpClient) {
   }
 
@@ -29,5 +30,9 @@ export class DossierService {
       .pipe(map(dossier => {
         return dossier;
       }));
+  }
+
+  getDossier(id: number) {
+    return this.http.get(this.url+id, this.httpOptions);
   }
 }

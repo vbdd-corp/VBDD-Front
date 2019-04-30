@@ -14,7 +14,7 @@ export class ContratEtudiantAsieComponent implements OnInit {
 
 
   contratForm: FormGroup;
-  @Input() report: any;
+  @Input() module: any;
   isValidated: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private creatorSerive: ReportCreatorService) {
@@ -139,10 +139,7 @@ export class ContratEtudiantAsieComponent implements OnInit {
 
   onSubmit() {
 
-    this.creatorSerive.updateModule
-    (
-      ModuleComponent.getModuleId(this.report.modules, 8), this.getContratValues()
-    )
+    this.creatorSerive.updateModule(this.module.id, this.getContratValues())
       .pipe(first())
       .subscribe();
 

@@ -12,6 +12,7 @@ const URL = 'http://localhost:9428/api/module/upload/';
 })
 export class LettreMotivationComponent implements OnInit {
   @Input() report: any;
+  @Input() module: any;
   isFileUploaded: boolean = false;
 
 
@@ -23,7 +24,7 @@ export class LettreMotivationComponent implements OnInit {
   }
 
   ngOnInit() {
-    const completeURL = URL + Utils.getStudent().id + '/' + this.report.id + '/' + ModuleComponent.getModuleId(this.report.modules, 6);
+    const completeURL = URL + Utils.getStudent().id + '/' + this.report.id + '/' + this.module.id;
 
     this.uploader = new FileUploader({
       url:

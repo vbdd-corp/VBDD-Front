@@ -14,7 +14,7 @@
       </div>
 
       <!-- Pour edit le dossier -->
-      <a *ngIf="dossier.kind == 'edit'" href="/reports/{{dossier.kind}}/{{dossier.id }}">{{ dossier.name }}</a>
+      <a *ngIf="dossier.kind == 'edit'" [routerLink]="['/reports/edit/', dossier.id]">{{ dossier.name }}</a>
 
 
       <button (click)="deleteReport(dossier.id)" aria-label="Close" class="close" type="button">
