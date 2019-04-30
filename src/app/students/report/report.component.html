@@ -2,22 +2,21 @@
   <caption>Créez et modifiez vos dossiers</caption>
   <tbody>
 
-  <tr *ngFor="let dossier of dossiers;">
+  <tr *ngFor="let file of files;">
 
 
     <td align="center" scope="row">
 
-      <!-- La pop-up en cas de nouveau dossier-->
-      <div *ngIf="dossier.kind == 'new'">
-        <app-modal reportName="{{ dossier.name }}"></app-modal>
-
-      </div>
+      <!--&lt;!&ndash; La pop-up en cas de nouveau dossier&ndash;&gt;-->
+      <!--<div *ngIf="!file.fileType">-->
+        <!--<app-modal reportName="{{ file.name }}"></app-modal>-->
+      <!--</div>-->
 
       <!-- Pour edit le dossier -->
-      <a *ngIf="dossier.kind == 'edit'" [routerLink]="['/reports/edit/', dossier.id]">{{ dossier.name }}</a>
+      <a [routerLink]="['/reports/edit/', file.id]">{{ file.name }}</a>
 
 
-      <button (click)="deleteReport(dossier.id)" aria-label="Close" class="close" type="button">
+      <button (click)="deleteReport(file.id)" aria-label="Close" class="close" type="button">
         <span aria-hidden="true">&times;</span>
       </button>
 
@@ -29,9 +28,61 @@
 
   <tr>
     <td align="center" scope="row">
-      <button (click)="addInput()" class="btn btn-success" type="button">Ajouter</button>
+      <button (click)="openModalCreateFile()" class="btn btn-success" type="button">Ajouter</button>
     </td>
   </tr>
   </tbody>
 </table>
+
+
+
+<ng-template #referenceOrScratchModal>
+  <div class="modal-body text-center">
+    <div style="text-align: center;">
+      <button type="button" class="btn btn-primary"
+              popover="Un dossier type vous sera donné" (click)="openModal(referenceList); closeModal()">
+        Partir d'un dossier déjà référencé ?
+      </button>
+      <br>
+      <br>
+      <br>
+      <button class="btn btn-default" type="button"
+              popover="Vous partirez d'un dossier entierement vierge, et ajouterez les modules au fûr et à mesure"
+              (click)="createFile(null)">Partir d'un dossier vierge ?
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #referenceList>
+  <div class="modal-body text-center">
+    <div style="text-align: center;">
+
+
+      <br>
+      <button (click)="createFile(2)" class="btn btn-info" type="button">Dossier hors
+        Europe
+      </button>
+      <br>
+      <br>
+      <button (click)="createFile(1)" class="btn btn-info" type="button">Dossier Asie</button>
+      <br>
+      <br>
+      <button (click)="createFile(3)" class="btn btn-info" type="button">Dossier UNS
+        (Université
+        Nice Sophia-Antipolis)
+      </button>
+      <br>
+      <br>
+      <button (click)="createFile(0) "class="btn btn-info" type="button">Dossier ERASMUS
+        (Europe)
+      </button>
+      <br>
+      <br>
+
+    </div>
+
+  </div>
+</ng-template>
 

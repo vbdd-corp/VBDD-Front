@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {first} from 'rxjs/operators';
-import {ReportCreatorService} from '../../../services/report-creator.service';
+import {DossierService} from '../../../services/dossier.service';
 
 @Component({
   selector: 'app-new-report',
@@ -17,7 +17,7 @@ export class NewReportComponent implements OnInit {
   @Input()
   public _reportBeingCreated: any;
 
-  constructor(private route: ActivatedRoute, private creatorService: ReportCreatorService) {
+  constructor(private route: ActivatedRoute, private dossierService: DossierService) {
   }
 
   get reportCategory(): number {
@@ -39,16 +39,6 @@ export class NewReportComponent implements OnInit {
   }
 
   public saveReport() {
-    this.creatorService.create(+this._reportCategory, this.reportName)
-      .pipe(first())
-      .subscribe(
-        data => {
-          // this.isCreated = true;
-          this._reportBeingCreated = data;
-        },
-        error => {
-          alert(error.error.error);
-        });
-
+    this.dossierService.create(+this._reportCategory, this.reportName);
   }
 }

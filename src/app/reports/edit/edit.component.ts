@@ -18,7 +18,7 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      this.dossierService.getDossier(params['id']).subscribe( report => {
+      this.dossierService.getDossier(params['id']).then( report => {
         this.report = report;
       });
     });
