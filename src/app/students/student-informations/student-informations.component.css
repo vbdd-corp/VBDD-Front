@@ -15,3 +15,10 @@ caption{
 .table {
   text-align: center;
 }
+
+#div_modify_or_save {
+  margin-top: 20px;
+}
+#modify, #save {
+  display: inline-block;
+}
