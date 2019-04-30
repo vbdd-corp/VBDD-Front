@@ -1,6 +1,7 @@
 import {Component, ElementRef, Inject, OnInit} from '@angular/core';
 import {Student} from '../../../models/student';
 import {Utils} from '../../../models/utils';
+import {StudentService} from '../../../services/student.service';
 import {element} from 'protractor';
 
 
@@ -15,7 +16,7 @@ export class StudentInformationsComponent implements OnInit {
   onEditedMode: boolean = false;
   elementRef: ElementRef;
 
-  constructor(@Inject(ElementRef) elementRef: ElementRef) {
+  constructor(@Inject(ElementRef) elementRef: ElementRef, private studentService: StudentService) {
     this.elementRef = elementRef;
     this.student = Utils.getUser();
     this.isStudent = Utils.isStudent();
@@ -43,4 +44,26 @@ export class StudentInformationsComponent implements OnInit {
     }
   }
 
+  saveModifications() {
+    this.toggle();
+    let mail = this.elementRef.nativeElement.get
+    /*let stud = {
+      "mail": null,
+      "firstName": "Coco",
+      "lastName": "Martin",
+      "major": "SI3",
+      "gender": "M",
+      "nationality": "FR",
+      "birthDate": "22/08/1997",
+      "INE": "2379263974T",
+      "studentNumber": "21560703",
+      "address": "1 Avenue G.Pompidou, Residence des Dolines, APP 256",
+      "city": "Valbonne",
+      "postalCode": "06560",
+      "mobilePhoneNumber": "0605468955",
+      "phoneNumber": "0455637198",
+    };
+
+    this.studentService.updateStudent()*/
+  }
 }
