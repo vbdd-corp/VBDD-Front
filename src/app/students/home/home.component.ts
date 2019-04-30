@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Utils} from '../../../models/utils';
 import {Student} from '../../../models/student';
 
@@ -9,9 +9,10 @@ import {Student} from '../../../models/student';
 })
 export class HomeStdComponent implements OnInit {
   student: Student;
+  isStudent: boolean = Utils.isStudent();
 
   constructor() {
-    this.student = Utils.getStudent();
+    this.student = Utils.getUser();
   }
 
   ngOnInit() {

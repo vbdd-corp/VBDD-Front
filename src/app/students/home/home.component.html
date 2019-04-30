@@ -2,20 +2,29 @@
   <div class="row">
     <div class="col-lg-12" align="center">
       <alert id="dashboardAlert"></alert>
-      <h1>ESPACE PERSONNEL</h1>
+      <h1 *ngIf="isStudent">Espace personnel</h1>
     </div>
   </div>
-  <div class="row">
-    <div class="col-lg-6" align="center">
-      <app-report></app-report>
+
+  <!--STUDENT CASE-->
+  <div *ngIf="isStudent">
+    <div class="row">
+      <div align="center" class="col-lg-6">
+        <app-report></app-report>
+      </div>
+      <div align="center" class="col-lg-6">
+        <app-student-informations [student]="student"></app-student-informations>
+      </div>
     </div>
-    <div class="col-lg-6" align="center">
-      <app-student-informations [student]="student"></app-student-informations>
+    <div class="row">
+      <div align="center" class="col-lg-12">
+        <app-rendezvous></app-rendezvous>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-lg-12" align="center">
-      <app-rendezvous></app-rendezvous>
-    </div>
+
+  <!--BRI CASE-->
+  <div *ngIf="!isStudent">
+    <app-espace-bri></app-espace-bri>
   </div>
 </div>

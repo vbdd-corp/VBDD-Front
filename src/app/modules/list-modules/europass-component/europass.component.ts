@@ -25,7 +25,7 @@ export class EuropassComponent implements OnInit {
   }
 
   ngOnInit() {
-    const completeURL = URL + Utils.getStudent().id + '/' + this.report.id + '/' + ModuleComponent.getModuleId(this.report.modules, 4);
+    const completeURL = URL + Utils.getUser().id + '/' + this.report.id + '/' + ModuleComponent.getModuleId(this.report.modules, 4);
 
     this.uploader = new FileUploader({
       url:

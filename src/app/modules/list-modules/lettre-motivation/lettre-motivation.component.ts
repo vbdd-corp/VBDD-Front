@@ -23,7 +23,7 @@ export class LettreMotivationComponent implements OnInit {
   }
 
   ngOnInit() {
-    const completeURL = URL + Utils.getStudent().id + '/' + this.report.id + '/' + ModuleComponent.getModuleId(this.report.modules, 6);
+    const completeURL = URL + Utils.getUser().id + '/' + this.report.id + '/' + ModuleComponent.getModuleId(this.report.modules, 6);
 
     this.uploader = new FileUploader({
       url:
