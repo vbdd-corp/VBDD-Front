@@ -2,8 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Utils} from '../../../../models/utils';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ReportCreatorService} from '../../../../services/report-creator.service';
+import {SchoolService} from "../../../../services/school.service";
 import {first} from 'rxjs/operators';
 import {ModuleComponent} from '../../module-component';
+import {School} from "../../../../models/school";
 
 @Component({
   selector: 'app-contrat-etude',
@@ -19,8 +21,11 @@ export class ContratEtudeComponent implements OnInit {
   contratForm: FormGroup;
   @Input() module: any;
   isValidated: boolean = false;
+  public schoolList: School[];
 
-  constructor(private formBuilder: FormBuilder, private creatorService: ReportCreatorService) {
+  constructor(private formBuilder: FormBuilder, private creatorService: ReportCreatorService, public schoolService: SchoolService) {
+    this.schoolService.schools$.subscribe((schools) => this.schoolList = schools);
+    this.schoolService.getSchool();
   }
 
   get f() {

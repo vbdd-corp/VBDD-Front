@@ -209,13 +209,18 @@
         </td>
 
         <td>
-          <input aria-describedby="basic-addon1" class="form-control" formControlName="university1"
+          <!--input aria-describedby="basic-addon1" class="form-control" formControlName="university1"
                  placeholder="Incheon National University"
-                 type="text">
+                 type="text"-->
+          <select class="h2 form-control" formControlName="university1">
+            <option *ngFor="let school of schoolList" [value]="school.id" class="alert-info">
+              {{school.name}}  -  {{school.city}}, {{school.country}}
+            </option>
+          </select>
         </td>
         <td>
-          <input aria-describedby="basic-addon1" class="form-control" formControlName="pays1" placeholder="Corée du Sud"
-                 type="text">
+          <!--input aria-describedby="basic-addon1" class="form-control" formControlName="pays1" placeholder="Corée du Sud"
+                 type="text"-->
         </td>
 
       </tr>
