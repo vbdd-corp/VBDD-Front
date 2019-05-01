@@ -25,4 +25,9 @@ export class ModulesManagerComponent implements OnInit {
     event.target.classList.add('selected');
     this.moduleService.setSelectedModule(module);
   }
+
+  deleteModule(moduleId: number) {
+    this.moduleService.deleteModule(moduleId);
+    this.modules = this.modules.filter( module => module.id != moduleId);
+  }
 }

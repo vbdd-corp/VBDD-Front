@@ -34,7 +34,7 @@ export class DossierService {
   }
 
   removeDossier(id: number) {
-    return this.http.delete(this.url + id, this.httpOptions)
+    this.http.delete(this.url + id, this.httpOptions)
       .subscribe( file => {
         this.getDossiers();
       }, err => {
