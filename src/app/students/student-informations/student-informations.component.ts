@@ -39,7 +39,6 @@ export class StudentInformationsComponent implements OnInit {
       for (let i = 0; i < tdList.length; ++i) {
         tdList[i].setAttribute('contentEditable', 'false');
         tdList[i].style.border = '1px solid #ddd';
-        // tdList[i].setAttribute(   'border', '1px solid #ddd');
       }
     }
   }
@@ -78,7 +77,12 @@ export class StudentInformationsComponent implements OnInit {
       'phoneNumber': phoneNumber
     };
 
-    console.log('stud ==> ', stud);
-    /* this.studentService.updateStudent()*/
+    console.log('student before => ', this.student);
+    this.student = Object.assign({}, this.student, stud);
+    console.log('student after => ', this.student);
+
+    // console.log('stud ==> ', stud);
+    this.studentService.updateStudent(this.student);
+    Utils.setStudent(this.student);
   }
 }

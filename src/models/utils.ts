@@ -11,6 +11,13 @@ export class Utils {
     }
   }
 
+  static setStudent(user){
+    var x = JSON.parse(localStorage.getItem("User"));
+    x.student = [];
+    x.student.push(user);
+    localStorage.setItem("User", JSON.stringify(x));
+  }
+
   static isStudent() {
     return JSON.parse(localStorage.getItem('User')).isStudent;
   }

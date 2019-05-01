@@ -24,7 +24,7 @@ export class StudentService {
   }
 
   updateStudent(student: Student) {
-    const urlWithId = this.url + '/students/' + student.id;
+    const urlWithId = this.url + 'students/' + student.id;
     this.http.put<Student>(urlWithId, student, this.httpOptions)
       .subscribe((_student) => console.log('updated => ', _student), (error) => console.log(error));
   }
