@@ -1,31 +1,17 @@
 <table class="table table-bordered" id="tableDossiers">
-  <caption>Créez et modifiez vos dossiers</caption>
+  <caption>Créer/Modifier dossiers</caption>
   <tbody>
 
   <tr *ngFor="let file of files;">
-
-
-    <td align="center" scope="row">
-
-      <!--&lt;!&ndash; La pop-up en cas de nouveau dossier&ndash;&gt;-->
-      <!--<div *ngIf="!file.fileType">-->
-        <!--<app-modal reportName="{{ file.name }}"></app-modal>-->
-      <!--</div>-->
-
+    <td scope="row">
       <!-- Pour edit le dossier -->
       <a [routerLink]="['/reports/edit/', file.id]">{{ file.name }}</a>
-
 
       <button (click)="deleteReport(file.id)" aria-label="Close" class="close" type="button">
         <span aria-hidden="true">&times;</span>
       </button>
-
-
     </td>
-
-
   </tr>
-
   <tr>
     <td align="center" scope="row">
       <button (click)="openModalCreateFile()" class="btn btn-success" type="button">Ajouter</button>

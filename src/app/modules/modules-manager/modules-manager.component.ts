@@ -19,7 +19,10 @@ export class ModulesManagerComponent implements OnInit {
     this.modules = this.report.modules;
   }
 
-  selectModule(module: any) {
+  selectModule(event, module: any) {
+    const tdOfSelectedModule = document.querySelectorAll('.selected');
+    tdOfSelectedModule.forEach( td => td.classList.remove('selected'));
+    event.target.classList.add('selected');
     this.moduleService.setSelectedModule(module);
   }
 }

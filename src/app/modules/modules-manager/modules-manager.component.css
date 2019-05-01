@@ -1,3 +1,15 @@
+.module {
+  cursor: pointer;
+}
+
+.module-name {
+  pointer-events: none;
+}
+
+.module:hover, .selected {
+  background-color: #5bc0de;
+}
+
 #mainSpan {
   border-width: 1px;
   border-color: black;
@@ -11,7 +23,7 @@
 }
 
 #pLabel {
-  margin-left: 25%;
+  text-align: center;
 }
 
 .bs-callout {
