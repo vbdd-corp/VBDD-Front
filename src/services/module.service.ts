@@ -12,25 +12,32 @@ let API = '/api/';
 export class ModuleService {
 
 
-  private url = serverUrl + API;
+  private url = serverUrl + API + '/module';
   private httpOptions = httpOptionsBase;
 
   private selectedModule$ = new Subject<any>();
+  private selectedModule;
 
   constructor(private http: HttpClient) {
   }
 
-  getModules(reportId: number) {
-
-    return this.http.get<any>(this.url +'file/'+reportId, this.httpOptions);
-  }
-
   setSelectedModule(module: any) {
     this.selectedModule$.next(module);
+    this.selectedModule = module;
   }
 
   getSelectedModule() {
     return this.selectedModule$.asObservable();
   }
 
+  deleteModule(moduleId: number) {
+    this.http.delete<any>(this.url + '/' + moduleId, this.httpOptions)
+      .subscribe( () => {
+        if (this.selectedModule.id === moduleId){
+          this.setSelectedModule(null);
+        }
+      }, err => {
+        console.log(err);
+      });
+  }
 }

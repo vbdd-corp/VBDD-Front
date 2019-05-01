@@ -51,7 +51,6 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   createFile(fileTypeId: number) {
     this.dossierService.create(fileTypeId,"nouveau dossier").then( file => {
-      console.log("file created !");
       this.closeModal();
       this.router.navigate(['reports/edit/', file.id]);
     });
