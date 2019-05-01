@@ -7,7 +7,7 @@
     <button (click)="saveModifications()" *ngIf="this.onEditedMode" class="btn btn-info" id="save">Enregistrer</button>
   </div>
 </div>
-<div class="col-lg-4">
+<div class="col-lg-4 info-container">
   <table *ngIf="isStudent" class="table table-bordered" id="tableInformation1">
     <tr>
       <th>Prenom</th>
@@ -28,7 +28,7 @@
   </table>
 </div>
 
-<div class="col-lg-4">
+<div class="col-lg-4 info-container">
   <table *ngIf="isStudent" class="table table-bordered" id="tableInformation2">
     <tr>
       <th>Téléphone Fixe</th>
@@ -46,10 +46,10 @@
       <th>Ville</th>
       <td id="city" contenteditable="false"> {{student.city  }}</td>
     </tr>
-
   </table>
 </div>
-<div class="col-lg-4">
+
+<div class="col-lg-4 info-container">
   <table *ngIf="isStudent" class="table table-bordered" id="tableInformation3">
     <tr>
       <th>Nationalité</th>
@@ -70,11 +70,11 @@
   </table>
 </div>
 
-<div class="col-lg-12">
+<div class="col-lg-12 info-container">
   <table *ngIf="isStudent" class="table table-bordered" id="tableInformation4">
     <tr>
-      <th id="mail">Mail</th>
-      <td contenteditable="false"> {{student.mail  }}</td>
+      <th>Mail</th>
+      <td id="mail" contenteditable="false"> {{student.mail  }}</td>
     </tr>
     <tr>
       <th>Adresse</th>
