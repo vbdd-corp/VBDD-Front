@@ -1,0 +1,43 @@
+#tableInformation {
+  width: 90%;
+  text-align: center;
+}
+th{
+  text-align: center;
+}
+td{
+  text-align: center;
+}
+caption{
+  text-align: center;
+}
+
+.table {
+  text-align: center;
+}
+
+table.table-bordered input {
+  width: 100px;
+    /*107; 17px*/
+  height: 20px;
+  /*vertical-align: middle;*/
+}
+
+div.col-lg-4.info-container, div.col-lg-12.info-container {
+  padding: 10px;
+}
+
+table.table-bordered input.long {
+  width: 100%;
+}
+
+th {
+  width: 170px;
+}
+
+#div_modify_or_save {
+  margin-top: 20px;
+}
+#modify, #save {
+  display: inline-block;
+}
