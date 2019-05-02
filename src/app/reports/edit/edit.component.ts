@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DossierService} from '../../../services/dossier.service';
+import { File } from '../../../models/file';
 
 @Component({
   selector: 'app-edit',
@@ -10,7 +11,7 @@ import {DossierService} from '../../../services/dossier.service';
 export class EditComponent implements OnInit {
 
   sub: any;
-  report: any;
+  file: File;
 
   constructor(private route: ActivatedRoute, private dossierService: DossierService) {
 
@@ -18,8 +19,8 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      this.dossierService.getDossier(params['id']).then( report => {
-        this.report = report;
+      this.dossierService.getDossier(params['id']).then( file => {
+        this.file = file;
       });
     });
   }
