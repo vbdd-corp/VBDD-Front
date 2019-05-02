@@ -18,8 +18,8 @@ export class ReportComponent implements OnInit, OnDestroy {
   sub: Subscription;
   modalRef: BsModalRef;
 
-  @ViewChild('referenceOrScratchModal') public referenceOrScratchModal: TemplateRef<any>;
-  @ViewChild('referenceList') public referenceList: TemplateRef<any>;
+  // @ViewChild('referenceOrScratchModal') public referenceOrScratchModal: TemplateRef<any>;
+  // @ViewChild('referenceList') public referenceList: TemplateRef<any>;
 
   constructor(private modalService: BsModalService, private dossierService: DossierService, private alertService: AlertService, private router: Router) {
     this.dossierService.getDossiers();
@@ -43,10 +43,6 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   closeModal() {
     this.modalRef.hide();
-  }
-
-  openModalCreateFile() {
-    this.openModal(this.referenceOrScratchModal);
   }
 
   createFile(fileTypeId: number) {

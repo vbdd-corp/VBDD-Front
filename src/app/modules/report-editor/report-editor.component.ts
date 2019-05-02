@@ -2,6 +2,8 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {first} from 'rxjs/operators';
 import {ModuleService} from '../../../services/module.service';
 import {Subscription} from 'rxjs';
+import { File} from '../../../models/file';
+import {Module} from '../../../models/module';
 
 @Component({
   selector: 'app-report-editor',
@@ -12,9 +14,9 @@ import {Subscription} from 'rxjs';
 
 export class ReportEditorComponent implements OnInit, OnDestroy {
 
-  @Input() report:any;
+  @Input() file :File;
 
-  module :any;
+  module :Module;
   subscription: Subscription;
 
   constructor(private moduleService: ModuleService) {

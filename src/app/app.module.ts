@@ -31,6 +31,7 @@ import {FileUploadModule} from 'ng2-file-upload';
 import {EspaceBriComponent} from './bri/espace-bri/espace-bri.component';
 import {ReportCheckerComponent} from './bri/report-checker/report-checker.component';
 import { ContratEtudeComponent } from './modules/list-modules/contrat-etude/contrat-etude.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { ContratEtudeComponent } from './modules/list-modules/contrat-etude/cont
     HttpClientModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
-    FileUploadModule
+    FileUploadModule,
+    BsDropdownModule.forRoot()
   ],
   exports: [
     ReportComponent,

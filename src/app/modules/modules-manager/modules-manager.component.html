@@ -2,14 +2,18 @@
   <h4 id="pLabel"><i>Ajoutez</i>/<i>modifiez</i> vos modules</h4>
   <tbody>
   <tr *ngFor="let module of modules;">
-    <td scope="row" (click)="selectModule($event,module)" class="module">
-        <span class="module-name"> {{ module.typeModule.typeName }}</span>
-        <button (click)="deleteModule(module.id)" aria-label="Close" class="close" type="button">
-          <span aria-hidden="true">&times;</span>
-        </button>
+    <td scope="row" (click)="selectModule($event,module)" class="module pointer">
+      <span class="module-name"> {{ module.typeModule.typeName }}</span>
+      <button (click)="deleteModule(module.id)" aria-label="Close" class="close" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </td>
   </tr>
-
+  <tr>
+    <td align="center" scope="row">
+      <button (click)="openModal(moduleCreateModal)" class="btn btn-success" type="button">Ajouter</button>
+    </td>
+  </tr>
   <tr>
   </tr>
   </tbody>
@@ -20,3 +24,25 @@
   A chaque module remplis, n'oubliez pas de cliquer sur <i>Enregistrer</i>. <br> <br>Une fois ceci fait, vous pouvez
   quitter la page !
 </div>
+
+<ng-template #moduleCreateModal>
+  <div class="modal-body text-center">
+    <h3>Que voulez-vous ajouter ?</h3>
+    <br>
+    <div class="btn-group" dropdown>
+      <button *ngIf="moduleTypeSelected" id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+              aria-controls="dropdown-basic">
+        {{ moduleTypeSelected.typeName }} <span class="caret"></span>
+      </button>
+      <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+          role="menu" aria-labelledby="button-basic">
+        <li *ngFor="let moduleType of moduleTypes" (click)="selectModuleType(moduleType)" class="pointer" role="menuitem"><a class="dropdown-item">{{moduleType.typeName}}</a></li>
+      </ul>
+    </div>
+    <br>
+    <br>
+    <button (click)="createModule(moduleTypeSelected.id, moduleTypeSelected.typeName); closeModal();" class="btn btn-success" type="button">Ajouter</button>
+
+
+  </div>
+</ng-template>
