@@ -49,8 +49,11 @@ export class ModulesManagerComponent implements OnInit, OnDestroy {
   }
 
   deleteModule(moduleId: number) {
-    this.moduleService.deleteModule(moduleId);
-    this.modules = this.modules.filter( module => module.id != moduleId);
+    // TODO: replace confirm by a beautiful modal
+    if (confirm("Supprimer le module ?")){
+      this.moduleService.deleteModule(moduleId);
+      this.modules = this.modules.filter( module => module.id != moduleId);
+    }
   }
 
   openModal(template: TemplateRef<any>) {

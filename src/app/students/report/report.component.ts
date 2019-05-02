@@ -53,6 +53,9 @@ export class ReportComponent implements OnInit, OnDestroy {
   }
 
   private deleteReport(id: number) {
-    this.dossierService.removeDossier(id);
+    // TODO: replace confirm by a beautiful modal
+    if (confirm("Supprimer le dossier ?")){
+      this.dossierService.removeDossier(id);
+    }
   }
 }
