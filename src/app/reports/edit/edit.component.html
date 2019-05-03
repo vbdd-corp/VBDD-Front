@@ -1,4 +1,16 @@
 <div *ngIf="file">
   <app-modules-manager [file]="file" class="col-lg-3"></app-modules-manager>
+  <div class="col-lg-9">
+    <p class="file-name">
+      <span>
+        <span *ngIf="!onEditedMode" id="fileName" contenteditable="false">Dossier : {{file.name}}</span>
+        <input  id="inputFileNameNode" aria-describedby="basic-addon1" class="form-control input-file-name no-display"
+               [(ngModel)]="inputFileName" type="text">
+        <a *ngIf="!onEditedMode" class="btn link" (click)="editFileName()"><i class="fas fa-edit pull-right"></i></a>
+        <a *ngIf="onEditedMode" class="btn link" (click)="saveFileName($event)"><i class="fas fa-save pull-right"></i></a>
+      </span>
+    </p>
+    <p class="file-ref">Référence : <span>{{file.fileType.typeName}}</span></p>
+  </div>
   <app-report-editor [file]="file" class="col-lg-9"></app-report-editor>
 </div>

@@ -32,6 +32,7 @@ import {EspaceBriComponent} from './bri/espace-bri/espace-bri.component';
 import {ReportCheckerComponent} from './bri/report-checker/report-checker.component';
 import { ContratEtudeComponent } from './modules/list-modules/contrat-etude/contrat-etude.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     ReactiveFormsModule,
     ModalModule.forRoot(),
     FileUploadModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    FormsModule
   ],
   exports: [
     ReportComponent,
