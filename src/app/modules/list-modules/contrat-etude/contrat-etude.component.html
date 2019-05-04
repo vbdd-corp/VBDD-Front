@@ -7,7 +7,7 @@
     <h5>Veuillez remplir tous les champs nécéssaires à la constitution de votre dossier</h5>
     <br>
 
-    <label>
+    <!--label>
       <input aria-describedby="basic-addon1" class="form-control" placeholder="Nom et prénom" type="text"
              value="{{ getFullName() }}">
     </label>
@@ -86,88 +86,7 @@
     <label>
       <input aria-describedby="basic-addon1" class="form-control" placeholder="Fillière" type="text"
              value="{{getMajor()}}">
-    </label>
-    <br>
-    <br>
-
-    <table class="table">
-      <thead>
-      <tr>
-        <th scope="col"><b>Choix</b></th>
-        <th scope="col">Université</th>
-        <th scope="col">Pays</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td>
-          <b>1</b>
-        </td>
-
-        <td>
-          <!--input aria-describedby="basic-addon1" class="form-control" formControlName="university1"
-                 placeholder="Incheon National University"
-                 type="text"-->
-          <select class="h2 form-control" formControlName="university1">
-            <option *ngFor="let school of schoolList" [value]="school.id" class="alert-info">
-              {{school.name}}  -  {{school.city}}, {{school.country}}
-            </option>
-          </select>
-        </td>
-        <td>
-          <!--input aria-describedby="basic-addon1" class="form-control" formControlName="pays1" placeholder="Corée du Sud"
-                 type="text"-->
-        </td>
-
-      </tr>
-      <tr>
-        <td>
-          <b>2</b>
-        </td>
-
-        <td>
-          <input aria-describedby="basic-addon1" class="form-control" formControlName="university2"
-                 placeholder="Asian Institute of Technology"
-                 type="text">
-        </td>
-        <td>
-          <input aria-describedby="basic-addon1" class="form-control" formControlName="pays2" placeholder="Thailande"
-                 type="text">
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>3</b>
-        </td>
-
-        <td>
-          <input aria-describedby="basic-addon1" class="form-control" formControlName="university3"
-                 placeholder="City University of Hong Kong"
-                 type="text">
-        </td>
-        <td>
-          <input aria-describedby="basic-addon1" class="form-control" formControlName="pays3" placeholder="Chine"
-                 type="text">
-        </td>
-      </tr>
-      </tbody>
-    </table>
-
-    <div class="form-check">
-
-      <p>Période souhaitée pour votre séjour <i>(plusieurs choix possibles) :</i></p>
-      <input class="form-check-input" formControlName="isFullYear" id="annee" style="margin-right: 10px;"
-             type="checkbox">
-      <label class="form-check-label" for="exampleCheck1" style="margin-right: 10px;">Année complète</label>
-
-      <input class="form-check-input" formControlName="isFirstSemester" id="1eSemestre" style="margin-right: 10px;"
-             type="checkbox">
-      <label class="form-check-label" for="exampleCheck1" style="margin-right: 10px;">1er semestre</label>
-
-      <input class="form-check-input" formControlName="isSecondSemester" id="2eSemestre" style="margin-right: 10px;"
-             type="checkbox">
-      <label class="form-check-label" for="exampleCheck1" style="margin-right: 10px;">2e semestre</label>
-    </div>
+    </label-->
 
     <hr>
 

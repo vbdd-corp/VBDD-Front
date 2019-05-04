@@ -1,0 +1,143 @@
+<div class="row col-lg-12" align="center">
+  <h3>Voeux Universités</h3>
+</div>
+
+<div class="row col-lg-12">
+  <form (ngSubmit)="onSubmit()" [formGroup]="wishesForm">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th scope="col"><b>Choix</b></th>
+        <th scope="col">Université</th>
+        <th scope="col">Pays</th>
+        <th scope="col">Période</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <div align="center">
+            <label>1</label>
+          </div>
+        </td>
+
+        <td>
+          <select id="select_1" class="h2 form-control" formControlName="university1" (change)="onChange($event)"
+                  align="center">
+            <option value="" selected disabled hidden>Sélectionnez une Université</option>
+            <option *ngFor="let school of schoolList" [value]="school.id" class="alert-info">
+              {{school.name}}  -  {{school.city}}, {{school.country}}
+            </option>
+          </select>
+        </td>
+        <td>
+          <div align="center">
+            <label id="label_select_1" class="" align="center"> </label>
+          </div>
+        </td>
+        <td>
+          <div>
+            <input type="radio" id="choice1_1" name="semester" value="fall">
+            <label class="normal-margin" for="choice1_1">Automne</label><br>
+
+            <input type="radio" id="choice1_2" name="semester" value="spring">
+            <label class="normal-margin" for="choice1_2">Printemps</label><br>
+
+            <input type="radio" id="choice1_3" name="semester" value="full">
+            <label class="normal-margin" for="choice1_3">Année Entière</label><br>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div align="center">
+            <label>2</label>
+          </div>
+        </td>
+        <td>
+          <select id="select_2" class="h2 form-control" formControlName="university1" (change)="onChange($event)"
+                  align="center">
+            <option value="" selected disabled hidden>Sélectionnez une Université</option>
+            <option *ngFor="let school of schoolList" [value]="school.id" class="alert-info">
+              {{school.name}}  -  {{school.city}}, {{school.country}}
+            </option>
+          </select>
+        </td>
+        <td>
+          <div align="center">
+            <label id="label_select_2" class="" align="center"> </label>
+          </div>
+        </td>
+        <td>
+          <div>
+            <input type="radio" id="choice2_1" name="semester" value="fall">
+            <label class="normal-margin" for="choice1_1">Automne</label><br>
+
+            <input type="radio" id="choice2_2" name="semester" value="spring">
+            <label class="normal-margin" for="choice1_2">Printemps</label><br>
+
+            <input type="radio" id="choice2_3" name="semester" value="full">
+            <label class="normal-margin" for="choice1_3">Année Entière</label><br>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div align="center">
+            <label>3</label>
+          </div>
+        </td>
+
+        <td>
+          <select id="select_3" class="h2 form-control" formControlName="university1" (change)="onChange($event)"
+                  align="center">
+            <option value="" selected disabled hidden>Sélectionnez une Université</option>
+            <option *ngFor="let school of schoolList" [value]="school.id" class="alert-info">
+              {{school.name}}  -  {{school.city}}, {{school.country}}
+            </option>
+          </select>
+        </td>
+        <td>
+          <div align="center">
+            <label id="label_select_3" class="" align="center"> </label>
+          </div>
+        </td>
+        <td>
+          <div>
+            <input type="radio" id="choice3_1" name="semester" value="fall">
+            <label class="normal-margin" for="choice1_1">Automne</label><br>
+
+            <input type="radio" id="choice3_2" name="semester" value="spring">
+            <label class="normal-margin" for="choice1_2">Printemps</label><br>
+
+            <input type="radio" id="choice3_3" name="semester" value="full">
+            <label class="normal-margin" for="choice1_3">Année Entière</label><br>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <!--div-- class="form-check">
+
+      <p>Période souhaitée pour votre séjour <i>(plusieurs choix possibles) :</i></p>
+      <input class="form-check-input" formControlName="isFullYear" id="annee" style="margin-right: 10px;"
+             type="checkbox">
+      <label class="form-check-label" for="exampleCheck1" style="margin-right: 10px;">Année complète</label>
+
+      <input class="form-check-input" formControlName="isFirstSemester" id="1eSemestre" style="margin-right: 10px;"
+             type="checkbox">
+      <label class="form-check-label" for="exampleCheck1" style="margin-right: 10px;">1er semestre</label>
+
+      <input class="form-check-input" formControlName="isSecondSemester" id="2eSemestre" style="margin-right: 10px;"
+             type="checkbox">
+      <label class="form-check-label" for="exampleCheck1" style="margin-right: 10px;">2e semestre</label>
+    </div-->
+    <button (click)="onSubmit()" [ngClass]="{'btn-success': isValidated===true}"
+            class="btn btn-lg btn-default btn-block" id="submit" type="submit">
+      Enregister
+    </button>
+  </form>
+</div>

@@ -30,8 +30,9 @@ import {BudgetPrevisionnelComponent} from './modules/list-modules/budget-previsi
 import {FileUploadModule} from 'ng2-file-upload';
 import {EspaceBriComponent} from './bri/espace-bri/espace-bri.component';
 import {ReportCheckerComponent} from './bri/report-checker/report-checker.component';
-import { ContratEtudeComponent } from './modules/list-modules/contrat-etude/contrat-etude.component';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import {ContratEtudeComponent} from './modules/list-modules/contrat-etude/contrat-etude.component';
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import { VoeuxUniversitesComponent } from './modules/list-modules/voeux-universites/voeux-universites.component';
 import { FormsModule } from '@angular/forms';
 import { AvailabilityBriComponent } from './bri/availability-bri/availability-bri.component';
 import { CalendarPlageComponent } from './bri/calendar-plage/calendar-plage.component';
@@ -68,7 +69,9 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     ReportCheckerComponent,
     ContratEtudeComponent,
     AvailabilityBriComponent,
-    CalendarPlageComponent
+    CalendarPlageComponent,
+    ContratEtudeComponent,
+    VoeuxUniversitesComponent
 
   ],
   imports: [
@@ -84,7 +87,9 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
-    })
+    }),
+    FormsModule,
+    BsDropdownModule.forRoot()
   ],
   exports: [
     ReportComponent,
