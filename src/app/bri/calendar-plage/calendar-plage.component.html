@@ -1,3 +1,38 @@
+<div class="row text-center">
+  <div class="col-md-4">
+    <div class="btn-group">
+      <div
+        class="btn btn-primary"
+        mwlCalendarPreviousView
+        [view]="view"
+        [(viewDate)]="viewDate"
+      >
+        Previous
+      </div>
+      <div
+        class="btn btn-outline-secondary"
+        mwlCalendarToday
+        [(viewDate)]="viewDate"
+      >
+        Today
+      </div>
+      <div
+        class="btn btn-primary"
+        mwlCalendarNextView
+        [view]="view"
+        [(viewDate)]="viewDate"
+      >
+        Next
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <h3>
+      {{ viewDate | calendarDate:(view + 'ViewTitle'):locale:weekStartsOn }}
+    </h3>
+  </div>
+</div>
+<br />
 
 <mwl-calendar-week-view
   precision="minutes"
@@ -5,6 +40,10 @@
   [events]="events"
   [dayStartHour]="8"
   [dayEndHour]="18"
+  [locale]="locale"
+  [weekStartsOn]="weekStartsOn"
+  [weekendDays]="weekendDays"
+  [excludeDays]="weekendDays"
 >
 </mwl-calendar-week-view>
 
