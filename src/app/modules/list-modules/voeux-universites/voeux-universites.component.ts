@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ModuleService} from "../../../../services/module.service";
 import {SchoolService} from "../../../../services/school.service";
 import {School} from "../../../../models/school";
+import {sequence} from "@angular/animations";
 
 @Component({
   selector: 'app-voeux-universites',
@@ -14,7 +15,9 @@ export class VoeuxUniversitesComponent implements OnInit {
   @Input() module: any;
   isValidated: boolean = false;
   public schoolList: School[];
-  option_select_1: number; option_select_2: number; option_select_3: number;
+  option_select_1: number = 0;
+  option_select_2: number = 0;
+  option_select_3: number = 0;
 
   constructor(private formBuilder: FormBuilder, private moduleService: ModuleService, public schoolService: SchoolService) {
     this.schoolService.schools$.subscribe((schools) => this.schoolList = schools);
@@ -36,15 +39,16 @@ export class VoeuxUniversitesComponent implements OnInit {
       isFullYear: ['', Validators.required],
       isFirstSemester: ['', Validators.required],
       isSecondSemester: ['', Validators.required],
-      semester_choice_1: ['', Validators.required]
+      semester_choice_1: ['', Validators.required],
+      semester_choice_2: ['', Validators.required],
+      semester_choice_3: ['', Validators.required]
+
     });
   }
 
   onChange(event) {
-    // console.log(event.target.value);
     let selectedOptionText = event.target.options[event.target.selectedIndex].text;
     let array1 = selectedOptionText.split(',');
-    // console.log(array1);
     const countryName = array1[array1.length - 1].trim();
     document.getElementById("label_" + event.target.id).innerText = countryName;
     if (event.target.id === 'select_1')
@@ -62,14 +66,38 @@ export class VoeuxUniversitesComponent implements OnInit {
   onSubmit() {
 
 
-    console.log(this.schoolList);
+    // console.log(this.schoolList);
+    /* console.log(this.option_select_1);
     console.log(this.schoolList[this.option_select_1 - 1]);
     console.log(typeof this.schoolList[this.option_select_1 - 1].id);
     let choice1 = {
       "schoolID": this.schoolList[this.option_select_1 - 1].id,
       "semester": this.wishesForm.controls['semester_choice_1'].value
-    };
+    }; */
 
-    console.log(choice1);
+    function sequenceFn(elt, index, schoolList, wishesFormControls)
+    {
+      console.log('index ', index, ' == ', elt);
+      let tempChoice = {};
+      if (elt !== 0) {
+        console.log(schoolList[elt-1]);
+        tempChoice["schoolID"] = schoolList[elt - 1].id;
+        // console.log(wishesFormControls["semester_choice_" + (index + 1)].value);
+        if (wishesFormControls["semester_choice_" + (index + 1)].value)
+          tempChoice["semester"] = wishesFormControls["semester_choice_" + (index + 1)].value;
+        else
+          tempChoice["semester"] = null;
+      } else {
+        tempChoice["schoolID"] = null;
+        tempChoice["semester"] = null;
+      }
+      infos["choice" + (index + 1)] = tempChoice;
+    }
+
+    let infos = {};
+    [this.option_select_1, this.option_select_2, this.option_select_3]
+      .forEach((elt, index) => sequenceFn(elt, index, this.schoolList, this.wishesForm.controls));
+
+    console.log(infos);
   }
 }
