@@ -1,0 +1,34 @@
+.file-name {
+  text-align: center;
+  width: 66%;
+  font-size: 300%;
+  font-weight: bolder;
+  display: inline-block;
+}
+
+.file-ref {
+  text-align: right;
+  width: 33%;
+  font-style: italic;
+  color: grey;
+  display: inline-block;
+}
+
+.file-ref span {
+  text-transform: uppercase;
+}
+
+.link {
+  color: #5bc0de;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.input-file-name {
+  display: inline;
+  width: 90%;
+}
+
+.no-display {
+  display: none;
+}

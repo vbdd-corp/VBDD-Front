@@ -63,4 +63,13 @@ export class DossierService {
         })
     });
   }
+
+  updateFileName(id: number, name: string) {
+    this.http.put(this.url + id, {name: name}, this.httpOptions)
+      .subscribe( file => {
+        this.getDossiers();
+      }, err => {
+        console.log(err);
+      });
+  }
 }

@@ -1,5 +1,5 @@
 <table class="table table-bordered" id="tableDossiers">
-  <caption>Créer/Modifier dossiers</caption>
+  <h4 id="pLabel"><i>Créer</i>/<i>Modifier</i> vos dossiers</h4>
   <tbody>
 
   <tr *ngFor="let file of files;">
@@ -14,7 +14,7 @@
   </tr>
   <tr>
     <td align="center" scope="row">
-      <button (click)="openModal(referenceOrScratchModal)" class="btn btn-success" type="button">Ajouter</button>
+      <button (click)="openModal(referenceOrScratchModal)" class="btn btn-success" type="button">Créer Nouveau Dossier</button>
     </td>
   </tr>
   </tbody>
