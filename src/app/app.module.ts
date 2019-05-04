@@ -5,7 +5,7 @@ import {LoginComponent} from './login';
 import {AppRoutingModule} from './app-routing.module';
 import {FooterComponent} from './footer/footer.component';
 import {HeaderComponent} from './header/header.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AlertService, LoginService} from '../services';
 import {HttpClientModule} from '@angular/common/http';
 import {AlertComponent} from '../directives';
@@ -30,10 +30,8 @@ import {BudgetPrevisionnelComponent} from './modules/list-modules/budget-previsi
 import {FileUploadModule} from 'ng2-file-upload';
 import {EspaceBriComponent} from './bri/espace-bri/espace-bri.component';
 import {ReportCheckerComponent} from './bri/report-checker/report-checker.component';
-import { ContratEtudeComponent } from './modules/list-modules/contrat-etude/contrat-etude.component';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { VoeuxUniversitesComponent } from './modules/list-modules/voeux-universites/voeux-universites.component';
-import { FormsModule } from '@angular/forms';
+import {ContratEtudeComponent} from './modules/list-modules/contrat-etude/contrat-etude.component';
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -71,7 +69,8 @@ import { FormsModule } from '@angular/forms';
     ReactiveFormsModule,
     ModalModule.forRoot(),
     FileUploadModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    FormsModule
   ],
   exports: [
     ReportComponent,
