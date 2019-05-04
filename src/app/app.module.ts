@@ -61,7 +61,8 @@ import { FormsModule } from '@angular/forms';
     BudgetPrevisionnelComponent,
     EspaceBriComponent,
     ReportCheckerComponent,
-    ContratEtudeComponent
+    ContratEtudeComponent,
+    VoeuxUniversitesComponent
 
   ],
   imports: [
@@ -71,6 +72,7 @@ import { FormsModule } from '@angular/forms';
     ReactiveFormsModule,
     ModalModule.forRoot(),
     FileUploadModule,
+    FormsModule,
     BsDropdownModule.forRoot()
   ],
   exports: [
