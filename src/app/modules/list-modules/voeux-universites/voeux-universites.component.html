@@ -37,14 +37,14 @@
         </td>
         <td>
           <div>
-            <input type="radio" id="choice1_1" name="semester" value="fall">
+            <input type="radio" id="choice1_1" formControlName="semester_choice_1"  value="fall" (change)="onSelectionChange($event)">
             <label class="normal-margin" for="choice1_1">Automne</label><br>
 
-            <input type="radio" id="choice1_2" name="semester" value="spring">
+            <input type="radio" id="choice1_2" formControlName="semester_choice_1" value="spring" (change)="onSelectionChange($event)">
             <label class="normal-margin" for="choice1_2">Printemps</label><br>
 
-            <input type="radio" id="choice1_3" name="semester" value="full">
-            <label class="normal-margin" for="choice1_3">Année Entière</label><br>
+            <input type="radio" id="choice1_3" formControlName="semester_choice_1" value="full" (change)="onSelectionChange($event)">
+            <label class="normal-margin" for="choice1_3" >Année Entière</label><br>
           </div>
         </td>
       </tr>
@@ -71,13 +71,13 @@
         </td>
         <td>
           <div>
-            <input type="radio" id="choice2_1" name="semester" value="fall">
+            <input type="radio" id="choice2_1" name="semester_choice_2" value="fall">
             <label class="normal-margin" for="choice1_1">Automne</label><br>
 
-            <input type="radio" id="choice2_2" name="semester" value="spring">
+            <input type="radio" id="choice2_2" name="semester_choice_2" value="spring">
             <label class="normal-margin" for="choice1_2">Printemps</label><br>
 
-            <input type="radio" id="choice2_3" name="semester" value="full">
+            <input type="radio" id="choice2_3" name="semester_choice_2" value="full">
             <label class="normal-margin" for="choice1_3">Année Entière</label><br>
           </div>
         </td>
@@ -106,13 +106,13 @@
         </td>
         <td>
           <div>
-            <input type="radio" id="choice3_1" name="semester" value="fall">
+            <input type="radio" id="choice3_1" name="semester_choice_3" value="fall">
             <label class="normal-margin" for="choice1_1">Automne</label><br>
 
-            <input type="radio" id="choice3_2" name="semester" value="spring">
+            <input type="radio" id="choice3_2" name="semester_choice_3" value="spring">
             <label class="normal-margin" for="choice1_2">Printemps</label><br>
 
-            <input type="radio" id="choice3_3" name="semester" value="full">
+            <input type="radio" id="choice3_3" name="semester_choice_3" value="full">
             <label class="normal-margin" for="choice1_3">Année Entière</label><br>
           </div>
         </td>
@@ -135,7 +135,8 @@
              type="checkbox">
       <label class="form-check-label" for="exampleCheck1" style="margin-right: 10px;">2e semestre</label>
     </div-->
-    <button (click)="onSubmit()" [ngClass]="{'btn-success': isValidated===true}"
+    <!-- (click)="onSubmit"-->
+    <button  [ngClass]="{'btn-success': isValidated===true}"
             class="btn btn-lg btn-default btn-block" id="submit" type="submit">
       Enregister
     </button>

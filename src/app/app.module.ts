@@ -21,7 +21,7 @@ import {ModalModule} from 'ngx-bootstrap/modal';
 import {NewReportComponent} from './reports/new/new.component';
 import {ModulesManagerComponent} from './modules/modules-manager/modules-manager.component';
 import {ReportEditorComponent} from './modules/report-editor/report-editor.component';
-import {ReportCreatorService} from '../services/report-creator.service';
+import {ModuleService} from '../services/module.service';
 import {CniComponent} from './modules/list-modules/cni/cni.component';
 import {PassportComponent} from './modules/list-modules/passport/passport.component';
 import {InfosGeneralesComponent} from './modules/list-modules/infos-generales/infos-generales.component';
@@ -104,7 +104,7 @@ registerLocaleData(localeFr);
   providers: [
     AlertService,
     LoginService,
-    ReportCreatorService
+    ModuleService
   ],
   bootstrap: [AppComponent]
 })

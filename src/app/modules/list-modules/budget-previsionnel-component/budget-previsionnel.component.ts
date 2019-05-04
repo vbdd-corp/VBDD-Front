@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
-import {ReportCreatorService} from '../../../../services/report-creator.service';
+import {ModuleService} from '../../../../services/module.service';
 import {ModuleComponent} from '../../module-component';
 
 
@@ -16,7 +16,7 @@ export class BudgetPrevisionnelComponent implements OnInit {
   @Input() module: any;
   isValidated: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private creatorSerive: ReportCreatorService) {
+  constructor(private formBuilder: FormBuilder, private moduleService: ModuleService) {
   }
 
   get f() {
@@ -45,7 +45,7 @@ export class BudgetPrevisionnelComponent implements OnInit {
 
   onSubmit() {
 
-    this.creatorSerive.updateModule(this.module.id, ({
+    this.moduleService.updateModule(this.module.id, ({
 
       country: this.f.paysEnvisage.value,
       city: this.f.villesEnvisagees.value,

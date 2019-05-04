@@ -15,10 +15,27 @@
 
 #dossierDrop {
   margin-left: 70px;
-  width: 300px;
+  width: 400px;
+  height: 52px;
+  margin-top: -11px;
 }
 
 #dossierSpan {
-
   display: inline-flex;
+}
+
+.btn-info {
+  margin-left: 30px;
+  height: 35px;
+}
+
+#searchStudentTxt {
+  margin-top: 25%;
+  margin-left: 25%;
+  color: #a3999b61;
+  transform: rotate(7deg);
+  -ms-transform: rotate(27deg); /* IE 9 */
+  -moz-transform: rotate(27deg); /* Firefox */
+  -webkit-transform: rotate(27deg); /* Safari and Chrome */
+  -o-transform: rotate(27deg); /* Opera */
 }

@@ -3,7 +3,7 @@ import {Utils} from '../../../../models/utils';
 import {StudentService} from '../../../../services/student.service';
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ReportCreatorService} from "../../../../services/report-creator.service";
+import {ModuleService} from "../../../../services/module.service";
 
 @Component({
   selector: 'app-infos-generales',
@@ -18,7 +18,7 @@ export class InfosGeneralesComponent implements OnInit {
   @Input() module: any;
   isValidated: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private creatorSerive: ReportCreatorService, private studentService: StudentService) {
+  constructor(private formBuilder: FormBuilder, private moduleService: ModuleService, private studentService: StudentService) {
     this.student = Utils.getUser();
     this.isStudent = Utils.isStudent();
     console.log('this.student == ', this.student);

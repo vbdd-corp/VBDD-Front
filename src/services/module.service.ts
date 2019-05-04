@@ -38,6 +38,13 @@ export class ModuleService {
     return this.selectedModule$.asObservable();
   }
 
+  updateModule(moduleId: number, infos: any) {
+    return this.http.put(this.url + 'module/' + moduleId, {infos: infos}, this.httpOptions)
+      .pipe(map(values => {
+        return values;
+      }));
+  }
+
   deleteModule(moduleId: number) {
     this.http.delete(this.url + '/' + moduleId, this.httpOptions)
       .subscribe( () => {

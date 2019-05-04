@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {map} from 'rxjs/operators';
 import {httpOptionsBase, serverUrl} from '../config/server.config';
 import {HttpClient} from '@angular/common/http';
-import { Student } from '../models/student';
-import {BehaviorSubject} from "rxjs";
+import {Student} from '../models/student';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class StudentService {
 
   getReportsByName(studentName: string) {
 
-    return this.http.get(this.url + 'file/by-name/' + studentName, this.httpOptions)
+    return this.http.get(this.url + 'file/by-name/?name=' + studentName, this.httpOptions)
       .pipe(map(dossiers => {
         return dossiers;
       }));
