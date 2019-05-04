@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DossierService} from '../../../services/dossier.service';
-import { File } from '../../../models/file';
+import {File} from '../../../models/file';
 
 @Component({
   selector: 'app-edit',
