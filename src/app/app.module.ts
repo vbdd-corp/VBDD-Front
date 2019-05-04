@@ -32,6 +32,7 @@ import {EspaceBriComponent} from './bri/espace-bri/espace-bri.component';
 import {ReportCheckerComponent} from './bri/report-checker/report-checker.component';
 import { ContratEtudeComponent } from './modules/list-modules/contrat-etude/contrat-etude.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { VoeuxUniversitesComponent } from './modules/list-modules/voeux-universites/voeux-universites.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     BudgetPrevisionnelComponent,
     EspaceBriComponent,
     ReportCheckerComponent,
-    ContratEtudeComponent
+    ContratEtudeComponent,
+    VoeuxUniversitesComponent
 
   ],
   imports: [
