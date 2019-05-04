@@ -2,10 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Utils} from '../../../../models/utils';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ReportCreatorService} from '../../../../services/report-creator.service';
-import {SchoolService} from "../../../../services/school.service";
 import {first} from 'rxjs/operators';
 import {ModuleComponent} from '../../module-component';
-import {School} from "../../../../models/school";
 
 @Component({
   selector: 'app-contrat-etude',
@@ -21,11 +19,8 @@ export class ContratEtudeComponent implements OnInit {
   contratForm: FormGroup;
   @Input() module: any;
   isValidated: boolean = false;
-  public schoolList: School[];
 
-  constructor(private formBuilder: FormBuilder, private creatorService: ReportCreatorService, public schoolService: SchoolService) {
-    this.schoolService.schools$.subscribe((schools) => this.schoolList = schools);
-    this.schoolService.getSchool();
+  constructor(private formBuilder: FormBuilder, private creatorService: ReportCreatorService) {
   }
 
   get f() {
@@ -47,15 +42,7 @@ export class ContratEtudeComponent implements OnInit {
       school1: ['', Validators.required],
       school2: ['', Validators.required],
       school3: ['', Validators.required],
-      university1: ['', Validators.required],
-      university2: ['', Validators.required],
-      university3: ['', Validators.required],
-      pays1: ['', Validators.required],
-      pays2: ['', Validators.required],
-      pays3: ['', Validators.required],
-      isFullYear: ['', Validators.required],
-      isFirstSemester: ['', Validators.required],
-      isSecondSemester: ['', Validators.required],
+
       codeCours1: ['', Validators.required],
       codeCours2: ['', Validators.required],
       codeCours3: ['', Validators.required],

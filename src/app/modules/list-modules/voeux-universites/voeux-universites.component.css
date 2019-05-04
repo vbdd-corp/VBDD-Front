@@ -1,0 +1,18 @@
+input {
+  margin: .4rem;
+}
+
+td {
+  vertical-align: middle;
+}
+
+label {
+  margin-top: 25px;
+  /*padding-left: 10px;*/
+  font: 1em 'Fira Sans', sans-serif;
+}
+
+label.normal-margin {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
