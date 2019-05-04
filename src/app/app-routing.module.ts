@@ -6,11 +6,13 @@ import {PriseRdvComponent} from './students/prise-rdv';
 import {EditComponent} from './reports/edit/edit.component';
 import {NewReportComponent} from './reports/new/new.component';
 import {ReportCheckerComponent} from './bri/report-checker/report-checker.component';
+import {AvailabilityBriComponent} from './bri/availability-bri/availability-bri.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'homeStd', component: HomeStdComponent},
   {path: 'reportChecker', component: ReportCheckerComponent},
+  {path: 'availability', component: AvailabilityBriComponent},
   {path: 'priseRdvStd', component: PriseRdvComponent},
   {path: 'reports/edit/:id', component: EditComponent},
   {path: 'reports/new/:type/:id', component: NewReportComponent},

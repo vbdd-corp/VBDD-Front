@@ -33,6 +33,12 @@ import {ReportCheckerComponent} from './bri/report-checker/report-checker.compon
 import { ContratEtudeComponent } from './modules/list-modules/contrat-etude/contrat-etude.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FormsModule } from '@angular/forms';
+import { AvailabilityBriComponent } from './bri/availability-bri/availability-bri.component';
+import { CalendarPlageComponent } from './bri/calendar-plage/calendar-plage.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 
 @NgModule({
   declarations: [
@@ -60,7 +66,9 @@ import { FormsModule } from '@angular/forms';
     BudgetPrevisionnelComponent,
     EspaceBriComponent,
     ReportCheckerComponent,
-    ContratEtudeComponent
+    ContratEtudeComponent,
+    AvailabilityBriComponent,
+    CalendarPlageComponent
 
   ],
   imports: [
@@ -71,7 +79,12 @@ import { FormsModule } from '@angular/forms';
     ModalModule.forRoot(),
     FileUploadModule,
     BsDropdownModule.forRoot(),
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   exports: [
     ReportComponent,
