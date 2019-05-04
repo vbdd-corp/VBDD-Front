@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Utils} from '../../../../models/utils';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ReportCreatorService} from '../../../../services/report-creator.service';
+import {ModuleService} from '../../../../services/module.service';
 import {first} from 'rxjs/operators';
 import {ModuleComponent} from '../../module-component';
 
@@ -20,7 +20,7 @@ export class ContratEtudeComponent implements OnInit {
   @Input() module: any;
   isValidated: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private creatorService: ReportCreatorService) {
+  constructor(private formBuilder: FormBuilder, private moduleService: ModuleService) {
   }
 
   get f() {
@@ -134,7 +134,7 @@ export class ContratEtudeComponent implements OnInit {
 
   onSubmit() {
 
-    this.creatorService.updateModule(this.module.id, this.getContratValues())
+    this.moduleService.updateModule(this.module.id, this.getContratValues())
       .pipe(first())
       .subscribe();
 
