@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CalendarEvent, CalendarDateFormatter, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
+import {subDays , addDays, addHours, startOfDay } from 'date-fns';
 
 @Component({
   selector: 'app-availability-bri',
@@ -11,5 +13,4 @@ export class AvailabilityBriComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

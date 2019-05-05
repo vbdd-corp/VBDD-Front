@@ -1,3 +1,5 @@
+import {Time} from './time';
+
 export class Utils {
 
   constructor() {
@@ -20,5 +22,22 @@ export class Utils {
 
   static isStudent() {
     return JSON.parse(localStorage.getItem('User')).isStudent;
+  }
+
+  static getDateFromTime(time :Time) :Date {
+    const date = new Date();
+    date.setFullYear(time.year, time.month-1, time.day);
+    date.setHours(time.hour, time.minute);
+    return date;
+  }
+
+  static getTimeFromDate(date :Date) :Time {
+    return {
+      minute: date.getMinutes(),
+      hour: date.getHours(),
+      day: date.getDate(),
+      month: date.getMonth()+1,
+      year: date.getFullYear()
+    }
   }
 }
