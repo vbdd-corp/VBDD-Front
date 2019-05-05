@@ -42,6 +42,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { PlageEditComponent } from './bri/plage-edit/plage-edit.component';
+import { PlageAddComponent } from './bri/plage-add/plage-add.component';
 
 registerLocaleData(localeFr);
 
@@ -76,7 +77,8 @@ registerLocaleData(localeFr);
     CalendarPlageComponent,
     ContratEtudeComponent,
     VoeuxUniversitesComponent,
-    PlageEditComponent
+    PlageEditComponent,
+    PlageAddComponent
 
   ],
   imports: [

@@ -46,6 +46,8 @@
   [excludeDays]="weekendDays"
 
   [refresh]="refresh"
+
+  (eventClicked)="select($event.event)"
 >
 </mwl-calendar-week-view>
 

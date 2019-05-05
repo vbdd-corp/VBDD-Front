@@ -15,9 +15,9 @@ export class DossierService {
   private httpOptions = httpOptionsBase;
 
 
-  private fileList: any[] = [];
+  private fileList: File[] = [];
 
-  public files$: BehaviorSubject<any[]> = new BehaviorSubject(this.fileList);
+  public files$: BehaviorSubject<File[]> = new BehaviorSubject(this.fileList);
 
 
   constructor(private http: HttpClient) {

@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import {httpOptionsBase, serverUrl} from '../config/server.config';
 import {HttpClient} from '@angular/common/http';
 
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {Plage} from '../models/plage';
 import {Time} from '../models/time'
 import {Module} from '../models/module';
 import {File} from '../models/file';
+import {Utils} from '../models/utils';
 
 let API = '/api/';
 
@@ -21,6 +22,9 @@ export class PlageService {
 
   private url = serverUrl + API + 'plage';
   private httpOptions = httpOptionsBase;
+
+  private plageList: Plage[] = [];
+  public plages$: BehaviorSubject<Plage[]> = new BehaviorSubject(this.plageList);
 
   constructor(private http: HttpClient) { }
 
@@ -44,13 +48,32 @@ export class PlageService {
     }
 
     // TODO: get for only the briId of current user
-    return new Promise<Array<Plage>>(resolve => {
-      this.http.get<Array<Plage>>(this.url + '/between-times?'+makeQuerryStartTime(startTime)+'&'+makeQuerryEndTime(endTime), this.httpOptions)
-        .subscribe(plages => {
-          resolve(plages);
-        }, err => {
-          console.log(err);
-        })
-    });
+    this.http.get<Array<Plage>>(this.url + '/between-times?'+makeQuerryStartTime(startTime)+'&'+makeQuerryEndTime(endTime), this.httpOptions)
+      .subscribe(plages => {
+        this.plageList = plages;
+        this.plages$.next(plages);
+      }, err => {
+        console.log(err);
+      });
   }
+
+  getPlages() {
+    this.http.get<Plage[]>(this.url + '/by-bri/' + Utils.getUser().id, this.httpOptions)
+      .subscribe(plages => {
+        this.plages$.next(plages);
+        this.plageList = plages;
+      }, err => {
+        console.log(err);
+      });
+  }
+
+  removePlage(id: number) {
+    this.http.delete(this.url + '/' + id, this.httpOptions)
+      .subscribe( () => {
+        this.getPlages();
+      }, err => {
+        console.log(err);
+      });
+  }
+
 }

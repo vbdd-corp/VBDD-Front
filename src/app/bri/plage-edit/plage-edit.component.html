@@ -1,11 +1,19 @@
 <h3>Selection :</h3>
 <div class="border-rectangle">
-  <p>textexttxexuezgfuiezgumehmghevmn</p>
+  <div *ngIf="!selectedPlage">
+    <h4 *ngIf="!selectedPlage">Aucune plage selectionée !</h4>
+  </div>
+  <div *ngIf="selectedPlage">
+    <h4>{{getDayString(selectedPlage)}}</h4>
+    <p>start : {{selectedPlage.start.hour}} - {{selectedPlage.start.minute}}</p>
+    <p>end : {{selectedPlage.end.hour}} - {{selectedPlage.end.minute}}</p>
+  </div>
   <hr>
   <p> hezhgimhqimzehigmhqi</p>
   <hr>
   <p>textexttxetetxuezgfuiezgumeevmn</p>
   <hr>
   <p> hezhgimhqimzehigmhqi</p>
+
 
 </div>
