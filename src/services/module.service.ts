@@ -38,8 +38,16 @@ export class ModuleService {
     return this.selectedModule$.asObservable();
   }
 
+  getModuleById(id: number) {
+    const urlWithId = this.url + '/' + id;
+    this.http.get<Module>(urlWithId)
+      .subscribe((module: Module) => {
+        this.setSelectedModule(module);
+      });
+  }
+
   updateModule(moduleId: number, infos: any) {
-    return this.http.put(this.url + 'module/' + moduleId, {infos: infos}, this.httpOptions)
+    return this.http.put(this.url + '/' + moduleId, {infos: infos}, this.httpOptions)
       .pipe(map(values => {
         return values;
       }));

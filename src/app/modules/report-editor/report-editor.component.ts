@@ -20,15 +20,17 @@ export class ReportEditorComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(private moduleService: ModuleService) {
-    this.subscription = this.moduleService.getSelectedModule().subscribe(module => this.module=module);
+    this.subscription = this.moduleService.getSelectedModule().subscribe(module => this.module = module);
   }
 
   ngOnDestroy() {
     //no memory leak
     this.subscription.unsubscribe();
+
   }
 
   ngOnInit() {
+    console.log('file => ', this.file);
   }
 
 

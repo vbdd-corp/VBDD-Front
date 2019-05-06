@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ModuleService} from "../../../../services/module.service";
 import {SchoolService} from "../../../../services/school.service";
 import {School} from "../../../../models/school";
+import {Module} from "../../../../models/module";
 import {sequence} from "@angular/animations";
 
 @Component({
@@ -12,7 +13,7 @@ import {sequence} from "@angular/animations";
 })
 export class VoeuxUniversitesComponent implements OnInit {
   wishesForm: FormGroup;
-  @Input() module: any;
+  @Input() module: Module;
   isValidated: boolean = false;
   public schoolList: School[];
   option_select_1: number = 0;
@@ -22,6 +23,8 @@ export class VoeuxUniversitesComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private moduleService: ModuleService, public schoolService: SchoolService) {
     this.schoolService.schools$.subscribe((schools) => this.schoolList = schools);
     this.schoolService.getSchool();
+    this.moduleService.getSelectedModule().subscribe((module) => this.module = module);
+
   }
 
   get f() {
@@ -29,6 +32,8 @@ export class VoeuxUniversitesComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('module=> ', this.module);
+    //this.moduleService.getSelectedModule().subscribe((module) => this.module = module);
     this.wishesForm = this.formBuilder.group({
       university1: ['', Validators.required],
       university2: ['', Validators.required],
@@ -99,5 +104,10 @@ export class VoeuxUniversitesComponent implements OnInit {
       .forEach((elt, index) => sequenceFn(elt, index, this.schoolList, this.wishesForm.controls));
 
     console.log(infos);
+    this.moduleService.updateModule(this.module.id, infos).subscribe((moduleUpdated) => {
+      this.module = moduleUpdated;
+      console.log('module after == ', this.module);
+    });
+
   }
 }
