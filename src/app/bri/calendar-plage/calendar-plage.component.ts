@@ -1,6 +1,5 @@
 import {Component, ChangeDetectionStrategy, Input, OnInit, OnDestroy} from '@angular/core';
 import {CalendarEvent, CalendarDateFormatter, CalendarView, DAYS_OF_WEEK, CalendarEventAction} from 'angular-calendar';
-import {subDays , addDays, addHours, startOfDay, startOfWeek, endOfWeek} from 'date-fns';
 import { CustomDateFormatter} from '../../../services/custom-date-formatter.service';
 import { PlageService } from '../../../services/plage.service';
 import {Subject, Subscription} from 'rxjs';
@@ -23,6 +22,25 @@ export class CalendarPlageComponent implements OnInit, OnDestroy{
 
   events: CalendarEvent<Plage>[] = [];
 
+  colors: any = {
+    red: {
+      primary: '#ad2121',
+      secondary: '#FAE3E3'
+    },
+    blue: {
+      primary: '#1e90ff',
+      secondary: '#D1E8FF'
+    },
+    yellow: {
+      primary: '#e3bc08',
+      secondary: '#FDF1BA'
+    },
+    green: {
+      primary: '#1ca70d',
+      secondary: '#FDF1BA'
+    }
+  };
+
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fas fa-times pull-right"></i>',
@@ -40,6 +58,7 @@ export class CalendarPlageComponent implements OnInit, OnDestroy{
 
   sub :Subscription;
   plages :Plage[];
+  selectedEvent :CalendarEvent;
 
   refresh: Subject<any> = new Subject();
 
@@ -48,6 +67,7 @@ export class CalendarPlageComponent implements OnInit, OnDestroy{
       start: Utils.getDateFromTime(plage.start),
       end: Utils.getDateFromTime(plage.end),
       title: '',
+      color: this.colors.blue,
       actions: this.actions,
       meta: plage
     }
@@ -76,7 +96,13 @@ export class CalendarPlageComponent implements OnInit, OnDestroy{
   }
 
   select(event: CalendarEvent<Plage>) {
+
     this.plageService.setSelectedPlage(event.meta);
+    event.color = this.colors.green;
+    if(this.selectedEvent){
+      this.selectedEvent.color = this.colors.blue;
+    }
+    this.selectedEvent = event;
   }
 
   private deletePlage(plage: Plage) {

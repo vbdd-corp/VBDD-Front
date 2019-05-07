@@ -1,3 +1,11 @@
 .border-rectangle {
   border: 2px solid lightgrey ;
 }
+
+.date::first-letter{
+  text-transform: capitalize;
+}
+
+timepicker {
+  display: inline-block;
+}
