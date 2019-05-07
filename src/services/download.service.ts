@@ -15,7 +15,8 @@ export class DownloadService {
   getFile(link): any {
 
     return this.http.post(serverUrl + '/api/module/download', {filePath: link}, this.httpOptions)
-      .map((response: Response) => response.json());
+     // TODO: ne compile pas !!!
+    //  .map((response: Response) => response.json());
   }
 
   public downloadFile(response) {
