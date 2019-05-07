@@ -2,10 +2,8 @@ import {Injectable} from '@angular/core';
 import {httpOptionsBase, serverUrl} from '../config/server.config';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {File} from '../models/file';
-import {Utils} from '../models/utils';
-import {School} from '../models/school';
 import {Module} from '../models/module';
 import {ModuleType} from '../models/moduleType';
 
@@ -73,6 +71,17 @@ export class ModuleService {
           console.log(err);
         })
     });
+  }
+
+  downloadModule(moduleId: number) {
+    this.http.post(this.url + '/' + moduleId, this.httpOptions)
+      .subscribe(() => {
+        if (this.selectedModule && this.selectedModule.id === moduleId) {
+          this.setSelectedModule(null);
+        }
+      }, err => {
+        console.log(err);
+      });
   }
 
   getModuleTypes() {
