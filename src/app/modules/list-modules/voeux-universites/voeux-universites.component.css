@@ -12,6 +12,11 @@ label {
   font: 1em 'Fira Sans', sans-serif;
 }
 
+.btn-group {
+  margin-top: 16px;
+  horiz-align: center;
+}
+
 label.normal-margin {
   margin-top: 4px;
   margin-bottom: 4px;

@@ -47,10 +47,16 @@ export class ModuleService {
   }
 
   updateModule(moduleId: number, infos: any) {
-    return this.http.put(this.url + '/' + moduleId, {infos: infos}, this.httpOptions)
-      .pipe(map(values => {
-        return values;
-      }));
+    return new Promise<Module>(resolve => {
+      this.http.put(this.url + '/' + moduleId, {infos: infos}, this.httpOptions)
+        .subscribe(module => {
+          console.log('BIG DEBUG Module => ', module);
+          this.selectedModule$.next(module);
+          resolve(module);
+        }, err => {
+          console.log(err);
+        })
+    });
   }
 
   deleteModule(moduleId: number) {
