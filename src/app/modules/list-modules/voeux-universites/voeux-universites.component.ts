@@ -21,9 +21,6 @@ export class VoeuxUniversitesComponent implements OnInit {
   public schoolSelected2: School;
   public schoolSelected3: School;
 
-  option_select_1: number = 0;
-  option_select_2: number = 0;
-  option_select_3: number = 0;
   sub: Subscription;
 
   constructor(
@@ -37,7 +34,6 @@ export class VoeuxUniversitesComponent implements OnInit {
 
   ngOnInit() {
     console.log('module=> ', this.module);
-    //this.moduleService.getSelectedModule().subscribe((module) => this.module = module);
 
     this.sub = this.schoolService.schools$.subscribe(schools => {
       this.schoolList = schools;
@@ -68,7 +64,8 @@ export class VoeuxUniversitesComponent implements OnInit {
   selectSchool(school: School, id: number) {
     let str = 'schoolSelected' + id.toString();
     this[str]= school;
-    //unselect the module
+
+    /* unselect the module */
     const tdOfSelectedModule = document.querySelectorAll('.selected');
     tdOfSelectedModule.forEach(td => td.classList.remove('selected'));
     //TODO: select the new module in the list

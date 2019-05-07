@@ -11,57 +11,41 @@
         <tr>
           <th>Prenom</th>
           <td id="firstName">
-            <input type="text" formControlName="firstName" value="{{ student.firstName }}">
+            <input
+              type="text" aria-describedby="basic-addon1"
+              class="form-control"
+              formControlName="firstName"
+              value="{{ student.firstName }}">
           </td>
         </tr>
         <tr>
           <th>Nom</th>
           <td id="lastName">
-            <input type="text" formControlName="lastName" value="{{student.lastName  }}">
+            <input
+              type="text" aria-describedby="basic-addon1"
+              class="form-control"
+              formControlName="lastName" value="{{student.lastName  }}">
           </td>
         </tr>
         <tr>
           <th>N°Étudiant</th>
           <td id="studentNumber">
-            <input type="text" formControlName="lastName" value="{{student.studentNumber }}">
+            <input
+              type="text" aria-describedby="basic-addon1"
+              class="form-control"
+              formControlName="lastName" value="{{student.studentNumber }}">
           </td>
         </tr>
         <tr>
           <th>N°INE</th>
           <td id="INE">
-            <input type="text" formControlName="INE" value="{{ student.INE }}">
+            <input
+              type="text" aria-describedby="basic-addon1"
+              class="form-control"
+              formControlName="INE" value="{{ student.INE }}">
           </td>
         </tr>
         </tbody>
-      </table>
-    </div>
-
-    <div class="col-lg-4 info-container">
-      <table *ngIf="isStudent" class="table table-bordered" id="tableInformation2">
-        <tr>
-          <th>Téléphone Fixe</th>
-          <td id="phoneNumber">
-            <input type="text" formControlName="phoneNumber" value="{{ student.phoneNumber }} ">
-          </td>
-        </tr>
-        <tr>
-          <th>Mobile</th>
-          <td id="mobilePhoneNumber">
-            <input type="text" formControlName="mobilePhoneNumber" value="{{ student.mobilePhoneNumber }} ">
-          </td>
-        </tr>
-        <tr>
-          <th>Code Postal</th>
-          <td id="postalCode">
-            <input type="text" formControlName="postalCode" value="{{ student.postalCode }} ">
-          </td>
-        </tr>
-        <tr>
-          <th>Ville</th>
-          <td id="city">
-            <input type="text" formControlName="city" value="{{ student.city }} ">
-          </td>
-        </tr>
       </table>
     </div>
 
@@ -70,45 +54,121 @@
         <tr>
           <th>Nationalité</th>
           <td id="nationality">
-            <input type="text" formControlName="nationality" value="{{ student.nationality }} ">
+            <input
+              type="text" aria-describedby="basic-addon1"
+              class="form-control"
+              formControlName="nationality" value="{{ student.nationality }} ">
           </td>
         </tr>
         <tr>
           <th>Spécialité</th>
           <td id="major">
-            <input type="text" formControlName="major" value="{{ student.major }} ">
+            <input type="text" aria-describedby="basic-addon1"
+                   class="form-control"
+                   formControlName="major" value="{{ student.major }} ">
           </td>
         </tr>
         <tr>
           <th>Sexe</th>
           <td id="gender">
-            <input type="text" formControlName="gender" value="{{ student.gender }} ">
+            <input type="text" aria-describedby="basic-addon1"
+                   class="form-control"
+                   formControlName="gender" value="{{ student.gender }} ">
           </td>
         </tr>
         <tr>
           <th>Date de Naissance</th>
           <td id="birthDate">
-            <input type="text" formControlName="birthDate" value="{{ student.birthDate }} ">
+            <input type="text" aria-describedby="basic-addon1"
+                   class="form-control"
+                   formControlName="birthDate" value="{{ student.birthDate }} ">
           </td>
         </tr>
       </table>
     </div>
 
+    <div class="col-lg-4 info-container">
+      <table *ngIf="isStudent" class="table table-bordered" id="tableInformation2">
+        <tr>
+          <th>Téléphone Fixe</th>
+          <td id="phoneNumber">
+            <input
+              type="text" aria-describedby="basic-addon1"
+              class="form-control"
+              formControlName="phoneNumber"
+              value="{{ student.phoneNumber }} ">
+          </td>
+        </tr>
+        <tr>
+          <th>Mobile</th>
+          <td id="mobilePhoneNumber">
+            <input
+              type="text" aria-describedby="basic-addon1"
+              class="form-control"
+              formControlName="mobilePhoneNumber"
+              value="{{ student.mobilePhoneNumber }} ">
+          </td>
+        </tr>
+        <tr>
+
+        </tr>
+        <tr>
+
+        </tr>
+      </table>
+    </div>
+
+
     <div class="col-lg-12 info-container">
       <table *ngIf="isStudent" class="table table-bordered" id="tableInformation4">
         <tr>
-          <th>Mail</th>
-          <td id="mail">
-            <input class="long" type="text" formControlName="mail" value="{{ student.mail }} ">
+          <th class="col-lg-4">Mail</th>
+          <td id="mail" class="col-lg-8">
+            <input
+              class="long form-control" aria-describedby="basic-addon1"
+              type="text" formControlName="mail" value="{{ student.mail }} ">
           </td>
         </tr>
         <tr>
-          <th>Adresse</th>
-          <td id="address">
-            <input class="long" type="text" formControlName="address" value="{{ student.address }} ">
+          <th class="col-lg-4">Adresse</th>
+          <td id="address" class="col-lg-8">
+            <input
+              class="long form-control" aria-describedby="basic-addon1"
+              type="text" formControlName="address" value="{{ student.address }} ">
           </td>
         </tr>
       </table>
+
+      <div class="row">
+        <div class="col-lg-4" id="container5">
+          <table class=" table table table-bordered" id="tableInformation5">
+            <tr>
+              <th id="headpostalCode">Code Postal</th>
+              <td id="postalCode">
+                <input
+                  type="text" aria-describedby="basic-addon1"
+                  class="form-control"
+                  formControlName="postalCode"
+                  value="{{ student.postalCode }} ">
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-lg-8" id="container6">
+          <table class="table table table-bordered" id="tableInformation6">
+            <tr>
+              <th>Ville</th>
+              <td id="city">
+                <input
+                  type="text" aria-describedby="basic-addon1"
+                  class="form-control long"
+                  formControlName="city"
+                  value="{{ student.city }} ">
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
 
       <table class="table">
         <thead>

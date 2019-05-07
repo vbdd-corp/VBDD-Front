@@ -48,7 +48,7 @@ export class ModuleService {
     return new Promise<Module>(resolve => {
       this.http.put(this.url + '/' + moduleId, {infos: infos}, this.httpOptions)
         .subscribe(module => {
-          console.log('BIG DEBUG Module => ', module);
+          console.log('SUCCESS updateModule => ', module);
           this.selectedModule$.next(module);
           resolve(module);
         }, err => {
