@@ -1,4 +1,4 @@
-<table *ngIf="modules" class="table table-bordered" id="tableDossiers">
+<table *ngIf="modules" class="table table-striped" id="tableDossiers">
   <h4 id="pLabel"><i>Ajoutez</i>/<i>modifiez</i> vos modules</h4>
   <tbody>
   <tr *ngFor="let module of modules;">
@@ -30,13 +30,17 @@
     <h3>Que voulez-vous ajouter ?</h3>
     <br>
     <div class="btn-group" dropdown>
-      <button *ngIf="moduleTypeSelected" id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+      <button *ngIf="moduleTypeSelected" id="button-basic" dropdownToggle type="button"
+              class="btn btn-primary dropdown-toggle"
               aria-controls="dropdown-basic">
         {{ moduleTypeSelected.typeName }} <span class="caret"></span>
       </button>
       <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
           role="menu" aria-labelledby="button-basic">
-        <li *ngFor="let moduleType of moduleTypes" (click)="selectModuleType(moduleType)" class="pointer" role="menuitem"><a class="dropdown-item">{{moduleType.typeName}}</a></li>
+        <li *ngFor="let moduleType of moduleTypes" (click)="selectModuleType(moduleType)"
+            class="pointer" role="menuitem">
+          <a class="dropdown-item">{{moduleType.typeName}}</a>
+        </li>
       </ul>
     </div>
     <br>

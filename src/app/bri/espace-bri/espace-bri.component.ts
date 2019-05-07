@@ -6,8 +6,16 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./espace-bri.component.css']
 })
 export class EspaceBriComponent implements OnInit {
-
+  activeTab = 'search';
   constructor() {
+  }
+
+  search(activeTab){
+    this.activeTab = activeTab;
+  }
+
+  result(activeTab){
+    this.activeTab = activeTab;
   }
 
   ngOnInit() {

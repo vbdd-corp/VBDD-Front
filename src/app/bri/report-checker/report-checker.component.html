@@ -28,10 +28,14 @@
 
   <div *ngIf="shouldBeDisplayed">
 
-    <button (click)="downloadReport()" class="btn btn-success" style="margin-bottom: 5px;"><span
+    <button (click)="downloadReport()" class="btn btn-success" disabled style="margin-bottom: 5px;"><span
       class="glyphicon glyphicon-download"></span> Télécharger le dossier</button>
+    <br>
     <button (click)="validateReport()" class="btn btn-success" style="margin-top:5px;"><span
       class="glyphicon glyphicon-check"></span> <b>Valider le dossier</b></button>
+
+   <span *ngIf="reportValidated" class="badge badge-success"
+         style="margin-left:20px; background-color:#28a745">Validé !</span>
 
   </div>
 

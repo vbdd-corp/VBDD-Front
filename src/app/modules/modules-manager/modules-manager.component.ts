@@ -18,6 +18,7 @@ export class ModulesManagerComponent implements OnInit, OnDestroy {
   @Input() file: File;
 
   sub: Subscription;
+  sub1: Subscription;
 
   modules :Module[] = [];
   modalRef: BsModalRef;
@@ -26,6 +27,13 @@ export class ModulesManagerComponent implements OnInit, OnDestroy {
   moduleTypeSelected: ModuleType;
 
   constructor(private moduleService: ModuleService, private modalService: BsModalService) {
+    this.sub1 = this.moduleService.getSelectedModule().subscribe( selectedModule => {
+      this.modules.forEach( (module, index) => {
+        if(module.id === selectedModule.id){
+          this.modules[index] = selectedModule;
+        }
+      })
+    })
   }
 
   ngOnInit() {
@@ -39,6 +47,7 @@ export class ModulesManagerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+    this.sub1.unsubscribe();
   }
 
   selectModule(event, module: Module) {

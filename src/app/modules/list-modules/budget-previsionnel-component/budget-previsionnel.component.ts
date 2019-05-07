@@ -65,9 +65,7 @@ export class BudgetPrevisionnelComponent implements OnInit {
       othersResources: this.f.prixAutre.value,
       notes: ''
 
-    }))
-      .pipe(first())
-      .subscribe();
+    }));
     this.isValidated = true;
   }
 }

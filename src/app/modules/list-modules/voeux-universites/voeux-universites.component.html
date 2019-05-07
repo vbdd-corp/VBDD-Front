@@ -22,29 +22,52 @@
         </td>
 
         <td>
-          <select id="select_1" class="h2 form-control" formControlName="university1" (change)="onChange($event)"
-                  align="center">
-            <option value="" selected disabled hidden>Sélectionnez une Université</option>
-            <option *ngFor="let school of schoolList" [value]="school.id" class="alert-info">
-              {{school.name}}  -  {{school.city}}, {{school.country}}
-            </option>
-          </select>
+          <div class="text-center">
+            <div class="btn-group text-center" dropdown>
+              <button *ngIf="schoolSelected1"
+                      id="button-basic-1" dropdownToggle type="button"
+                      class="btn btn-primary dropdown-toggle"
+                      aria-controls="dropdown-basic">
+                {{ schoolSelected1.name }} -  {{schoolSelected1.city}}, {{schoolSelected1.country}}
+                <span class="caret" ></span>
+              </button>
+              <button *ngIf="!schoolSelected1" id="button-basic-1-empty"
+                      dropdownToggle type="button"
+                      class="btn btn-primary dropdown-toggle text-center"
+                      aria-controls="dropdown-basic">
+                Sélectionnez votre Université d'Accueil
+                <span class="caret"></span>
+              </button>
+
+              <ul id="dropdown-basic-1" *dropdownMenu class="dropdown-menu text-center"
+                  role="menu" aria-labelledby="button-basic" >
+                <li *ngFor="let school of schoolList" class="pointer" role="menuitem"
+                    (click)="selectSchool(school, 1)" >
+                  <a class="dropdown-item">
+                    {{school.name}}  -  {{school.city}}, {{school.country}}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </td>
         <td>
           <div align="center">
-            <label id="label_select_1" class="" align="center"> </label>
+            <label id="label_select_1" class="" align="center">
+              <span *ngIf="schoolSelected1">{{schoolSelected1.country}}</span>
+            </label>
           </div>
         </td>
         <td>
           <div>
-            <input type="radio" id="choice1_1" formControlName="semester_choice_1"  value="fall">
+            <input type="radio" id="choice1_1" name="semester_choice_1" formControlName="semester_choice_1" value="fall">
             <label class="normal-margin" for="choice1_1">Automne</label><br>
 
-            <input type="radio" id="choice1_2" formControlName="semester_choice_1" value="spring">
+            <input type="radio" id="choice1_2" name="semester_choice_1" formControlName="semester_choice_1" value="spring">
             <label class="normal-margin" for="choice1_2">Printemps</label><br>
 
-            <input type="radio" id="choice1_3" formControlName="semester_choice_1" value="full">
-            <label class="normal-margin" for="choice1_3" >Année Entière</label><br>
+            <input type="radio" id="choice1_3" name="semester_choice_1" formControlName="semester_choice_1" value="full">
+            <label class="normal-margin" for="choice1_3">Année Entière</label><br>
           </div>
         </td>
       </tr>
@@ -56,17 +79,40 @@
           </div>
         </td>
         <td>
-          <select id="select_2" class="h2 form-control" formControlName="university2" (change)="onChange($event)"
-                  align="center">
-            <option value="" selected disabled hidden>Sélectionnez une Université</option>
-            <option *ngFor="let school of schoolList" [value]="school.id" class="alert-info">
-              {{school.name}}  -  {{school.city}}, {{school.country}}
-            </option>
-          </select>
+          <div class="text-center">
+            <div class="btn-group text-center" dropdown>
+              <button *ngIf="schoolSelected2"
+                      id="button-basic-2" dropdownToggle type="button"
+                      class="btn btn-primary dropdown-toggle text-center"
+                      aria-controls="dropdown-basic">
+                {{ schoolSelected2.name }} -  {{schoolSelected2.city}}, {{schoolSelected2.country}}
+                <span class="caret"></span>
+              </button>
+
+              <button *ngIf="!schoolSelected2" id="button-basic-2-empty" dropdownToggle type="button"
+                      class="btn btn-primary dropdown-toggle text-center"
+                      aria-controls="dropdown-basic">
+                Sélectionnez votre Université d'Accueil
+                <span class="caret"></span>
+              </button>
+              <ul id="dropdown-basic-2" *dropdownMenu class="dropdown-menu text-center"
+                  role="menu"
+                  aria-labelledby="button-basic">
+                <li *ngFor="let school of schoolList" class="pointer" role="menuitem"
+                    (click)="selectSchool(school, 2)">
+                  <a class="dropdown-item">
+                    {{school.name}}  -  {{school.city}}, {{school.country}}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </td>
         <td>
           <div align="center">
-            <label id="label_select_2" class="" align="center"> </label>
+            <label id="label_select_2" class="" align="center">
+              <span *ngIf="schoolSelected2">{{schoolSelected2.country}}</span>
+            </label>
           </div>
         </td>
         <td>
@@ -91,17 +137,41 @@
         </td>
 
         <td>
-          <select id="select_3" class="h2 form-control" formControlName="university3" (change)="onChange($event)"
-                  align="center">
-            <option value="" selected disabled hidden>Sélectionnez une Université</option>
-            <option *ngFor="let school of schoolList" [value]="school.id" class="alert-info">
-              {{school.name}}  -  {{school.city}}, {{school.country}}
-            </option>
-          </select>
+          <div class="text-center">
+            <div class="btn-group text-center" dropdown>
+              <button *ngIf="schoolSelected3"
+                      id="button-basic-3" dropdownToggle type="button"
+                      class="btn btn-primary dropdown-toggle text-center"
+                      aria-controls="dropdown-basic">
+                {{ schoolSelected3.name }} -  {{schoolSelected3.city}}, {{schoolSelected3.country}}
+                <span class="caret"></span>
+              </button>
+
+              <button *ngIf="!schoolSelected3" id="button-basic-3-empty"
+                      dropdownToggle type="button"
+                      class="btn btn-primary dropdown-toggle text-center"
+                      aria-controls="dropdown-basic">
+                Sélectionnez votre Université d'Accueil
+                <span class="caret"></span>
+              </button>
+              <ul id="dropdown-basic-3" *dropdownMenu
+                  class="dropdown-menu text-center"
+                  role="menu"
+                  aria-labelledby="button-basic">
+                <li *ngFor="let school of schoolList" class="pointer" role="menuitem" (click)="selectSchool(school, 3)">
+                  <a class="dropdown-item">
+                    {{school.name}}  -  {{school.city}}, {{school.country}}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </td>
         <td>
           <div align="center">
-            <label id="label_select_3" class="" align="center"> </label>
+            <label id="label_select_3" class="" align="center">
+              <span *ngIf="schoolSelected3">{{schoolSelected3.country}}</span>
+            </label>
           </div>
         </td>
         <td>
@@ -120,23 +190,7 @@
       </tbody>
     </table>
 
-    <!--div-- class="form-check">
-
-      <p>Période souhaitée pour votre séjour <i>(plusieurs choix possibles) :</i></p>
-      <input class="form-check-input" formControlName="isFullYear" id="annee" style="margin-right: 10px;"
-             type="checkbox">
-      <label class="form-check-label" for="exampleCheck1" style="margin-right: 10px;">Année complète</label>
-
-      <input class="form-check-input" formControlName="isFirstSemester" id="1eSemestre" style="margin-right: 10px;"
-             type="checkbox">
-      <label class="form-check-label" for="exampleCheck1" style="margin-right: 10px;">1er semestre</label>
-
-      <input class="form-check-input" formControlName="isSecondSemester" id="2eSemestre" style="margin-right: 10px;"
-             type="checkbox">
-      <label class="form-check-label" for="exampleCheck1" style="margin-right: 10px;">2e semestre</label>
-    </div-->
-    <!-- (click)="onSubmit"-->
-    <button  [ngClass]="{'btn-success': isValidated===true}"
+    <button [ngClass]="{'btn-success': isValidated===true}"
             class="btn btn-lg btn-default btn-block" id="submit" type="submit">
       Enregister
     </button>

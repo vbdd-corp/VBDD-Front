@@ -25,15 +25,54 @@ table.table-bordered input {
 
 div.col-lg-4.info-container, div.col-lg-12.info-container {
   padding: 10px;
+  padding-left: 2px;
+  padding-right: 2px;
 }
 
 table.table-bordered input.long {
   width: 100%;
 }
 
+input {
+  width: auto;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+
+
+td#postalCode {
+  width: 200px;
+}
+
 th {
   width: 170px;
 }
+
+table#tableInformation4.table.table-bordered th {
+  width: 250px;
+
+}
+
+table#tableInformation4.table.table-bordered {
+  margin-bottom: 0px;
+}
+
+table#tableInformation5.table.table-bordered th {
+  width: 250px;
+}
+
+#container5 {
+  padding-right: 0px;
+  width: 280px;
+}
+
+#container6 {
+  padding-left: 0px;
+  width: 541px;
+}
+
+
 
 #div_modify_or_save {
   margin-top: 20px;

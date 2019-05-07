@@ -134,9 +134,7 @@ export class ContratEtudeComponent implements OnInit {
 
   onSubmit() {
 
-    this.moduleService.updateModule(this.module.id, this.getContratValues())
-      .pipe(first())
-      .subscribe();
+    this.moduleService.updateModule(this.module.id, this.getContratValues());
 
     this.isValidated = true;
   }
