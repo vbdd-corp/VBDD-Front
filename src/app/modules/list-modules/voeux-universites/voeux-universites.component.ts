@@ -4,7 +4,6 @@ import {ModuleService} from "../../../../services/module.service";
 import {SchoolService} from "../../../../services/school.service";
 import {School} from "../../../../models/school";
 import {Module} from "../../../../models/module";
-import {sequence} from "@angular/animations";
 import {Subscription} from "rxjs";
 import {ModuleType} from "../../../../models/moduleType";
 
@@ -76,22 +75,6 @@ export class VoeuxUniversitesComponent implements OnInit {
     document.getElementById("label_select_" + id).innerText = school.country;
   }
 
-  /*onChange(event) {
-    let selectedOptionText = event.target.options[event.target.selectedIndex].text;
-    console.log('selecteOptionText == ', selectedOptionText);
-
-    let array1 = selectedOptionText.split(',');
-    const countryName = array1[array1.length - 1].trim();
-    document.getElementById("label_" + event.target.id).innerText = countryName;
-    if (event.target.id === 'select_1')
-      this.option_select_1 = parseInt(event.target.selectedIndex, 10);
-    if (event.target.id === 'select_2')
-      this.option_select_2 = parseInt(event.target.selectedIndex, 10);
-    if (event.target.id === 'select_3')
-      this.option_select_3 = parseInt(event.target.selectedIndex, 10);
-  }
-  */
-
   onSubmit() {
     let infos = {};
 
@@ -115,10 +98,10 @@ export class VoeuxUniversitesComponent implements OnInit {
 
     console.log(infos);
 
-    /*this.moduleService.updateModule(this.module.id, infos).then((moduleUpdated) => {
+    this.moduleService.updateModule(this.module.id, infos).then((moduleUpdated) => {
       this.module = moduleUpdated;
       console.log('module after == ', this.module);
-    });*/
+    });
 
   }
 }
