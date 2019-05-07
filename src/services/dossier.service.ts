@@ -35,7 +35,7 @@ export class DossierService {
 
   removeDossier(id: number) {
     this.http.delete(this.url + id, this.httpOptions)
-      .subscribe( file => {
+      .subscribe(file => {
         this.getDossiers();
       }, err => {
         console.log(err);
@@ -44,8 +44,9 @@ export class DossierService {
 
   getDossier(id: number) {
     return new Promise<any>(resolve => {
-      this.http.get(this.url+id, this.httpOptions).subscribe(data => {
-          resolve(data);},
+      this.http.get(this.url + id, this.httpOptions).subscribe(data => {
+          resolve(data);
+        },
         err => {
           console.log(err);
         });
@@ -60,16 +61,29 @@ export class DossierService {
           resolve(file);
         }, err => {
           console.log(err);
-        })
+        });
     });
   }
 
   updateFileName(id: number, name: string) {
     this.http.put(this.url + id, {name: name}, this.httpOptions)
-      .subscribe( file => {
+      .subscribe(() => {
         this.getDossiers();
       }, err => {
         console.log(err);
       });
+  }
+
+  validateReport(actualReportId: number) {
+
+    let notValidated: boolean = false;
+    this.http.put(this.url + actualReportId, {isValidated: true}, this.httpOptions)
+      .subscribe(() => {
+        notValidated = true;
+      }, err => {
+        console.log(err);
+        notValidated = false;
+      });
+    return notValidated;
   }
 }

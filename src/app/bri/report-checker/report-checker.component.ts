@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {StudentService} from '../../../services/student.service';
 import {Observable} from 'rxjs';
+import {DossierService} from '../../../services/dossier.service';
 
 @Component({
   selector: 'app-report-checker',
@@ -16,8 +17,9 @@ export class ReportCheckerComponent implements OnInit {
   shouldSelectBeVisible = true;
   shouldBeDisplayed = false;
   actualReportId: number;
+  reportValidated: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private studentService: StudentService) {
+  constructor(private formBuilder: FormBuilder, private studentService: StudentService, private reportService: DossierService) {
   }
 
   get f() {
@@ -65,9 +67,9 @@ export class ReportCheckerComponent implements OnInit {
   downloadReport() {
   }
 
-  //TODO
   validateReport() {
-
+    (this.reportService.validateReport(this.actualReportId));
+    this.reportValidated = true;
   }
 
   private exploitReports(data) {
