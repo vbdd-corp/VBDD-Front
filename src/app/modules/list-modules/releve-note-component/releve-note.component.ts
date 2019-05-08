@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FileUploader} from 'ng2-file-upload';
 import {Utils} from '../../../../models/utils';
-import {ModuleComponent} from '../../module-component';
+import {DownloadService} from '../../../../services/download.service';
 
 const URL = 'http://localhost:9428/api/module/upload/';
 
@@ -14,17 +14,19 @@ export class ReleveNoteComponent implements OnInit {
   @Input() report: any;
   @Input() module: any;
   isFileUploaded: boolean = false;
+  shouldDisplayDownload: boolean = false;
 
   public uploader: FileUploader;
   @ViewChild('file') selectedPicture: any;
 
-  constructor() {
-
+  constructor(private downloadService: DownloadService) {
   }
 
   ngOnInit() {
     const completeURL = URL + Utils.getUser().id + '/' + this.report.id + '/' + this.module.id;
-
+    if (this.getLink() == null) {
+      this.shouldDisplayDownload = true;
+    }
     this.uploader = new FileUploader({
       url:
       completeURL,
@@ -35,6 +37,13 @@ export class ReleveNoteComponent implements OnInit {
     };
   }
 
+  public getLink() {
+    return this.module.infos.filePath;
+  }
+
+  downloadFile() {
+    this.downloadService.downloadFile(this.getLink());
+  }
   public onSubmit() {
 
     this.uploader.uploadAll();
