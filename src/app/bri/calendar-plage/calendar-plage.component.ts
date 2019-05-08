@@ -37,7 +37,7 @@ export class CalendarPlageComponent implements OnInit, OnDestroy{
     },
     green: {
       primary: '#1ca70d',
-      secondary: '#FDF1BA'
+      secondary: '#e0fd72'
     }
   };
 
@@ -77,7 +77,11 @@ export class CalendarPlageComponent implements OnInit, OnDestroy{
     this.sub = plageService.plages$.subscribe( plages => {
       this.events = [];
       plages.forEach( plage => {
-        this.events.push(this.plageToCalendarEvent(plage));
+        const event = this.plageToCalendarEvent(plage);
+        this.events.push(event);
+        if(this.selectedEvent && (this.selectedEvent.meta.id === plage.id)){
+          this.select(event);
+        }
       });
       this.refresh.next();
     })
@@ -99,9 +103,12 @@ export class CalendarPlageComponent implements OnInit, OnDestroy{
 
     this.plageService.setSelectedPlage(event.meta);
     event.color = this.colors.green;
-    if(this.selectedEvent){
+
+    //if the event selected is not the former selected event.
+    if(this.selectedEvent && this.selectedEvent !== event){
       this.selectedEvent.color = this.colors.blue;
     }
+
     this.selectedEvent = event;
   }
 

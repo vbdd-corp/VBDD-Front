@@ -11,22 +11,29 @@
 
     <hr>
     <h4>Plage horraire</h4>
-    <p>
-      <span>Début : </span>
-      <timepicker [(ngModel)]="startTime"
-                  [min]="minTime"
-                  [max]="maxTime">
-      </timepicker>
-    </p>
-    <p>
-      <span>Fin : </span>
-      <timepicker [(ngModel)]="endTime"
-                         [min]="minTime"
-                         [max]="maxTime">
-      </timepicker>
-    </p>
+    <div class="text-center">
+      <div>Début : </div>
+      <div>
+        <timepicker [(ngModel)]="startTime"
+                    [min]="minTime"
+                    [max]="maxTime">
+        </timepicker>
+      </div>
+
+    </div>
+    <div class="text-center">
+      <div>Fin : </div>
+      <div>
+        <timepicker [(ngModel)]="endTime"
+                    [min]="minTime"
+                    [max]="maxTime">
+        </timepicker>
+      </div>
+
+    </div>
     <hr>
     <h4>Type de rendez-vous</h4>
+    <div class="text-center">
       <div *ngIf="appointmentTypes" class="btn-group" dropdown>
         <button *ngIf="appointmentTypeSelected" id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
                 aria-controls="dropdown-basic">
@@ -37,8 +44,20 @@
           <li *ngFor="let appointmentType of appointmentTypes" (click)="selectAppointmentType(appointmentType)" class="pointer" role="menuitem"><a class="dropdown-item">{{appointmentType.name}}</a></li>
         </ul>
       </div>
+    </div>
     <hr>
-    <h4>Voir la liste des rendez-vous</h4>
+    <div class="text-center">
+      <button class=" btn btn-primary" type="button">
+        Voir la liste des rendez-vous
+      </button>
+    </div>
+    <hr>
+    <div class="text-center">
+      <button (click)="submit()" class="btn btn-success" type="button">
+        Enregistrer les modifications
+      </button>
+    </div>
+    <br>
   </div>
 
 </div>

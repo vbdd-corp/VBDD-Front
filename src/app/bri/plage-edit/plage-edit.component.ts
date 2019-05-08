@@ -39,7 +39,7 @@ export class PlageEditComponent implements OnInit, OnDestroy {
   appointmentTypeSelected: AppointmentType;
 
 
-  constructor(plageService: PlageService, appointmentService: AppointmentService) {
+  constructor(private plageService: PlageService,private appointmentService: AppointmentService) {
     this.subPlageService = plageService.getSelectedPlage().subscribe( plage => {
       this.selectedPlage = plage;
       this.startTime = Utils.getDateFromTime(this.selectedPlage.start);
@@ -96,5 +96,13 @@ export class PlageEditComponent implements OnInit, OnDestroy {
 
   selectAppointmentType(appointmentType: AppointmentType) {
     this.appointmentTypeSelected = appointmentType;
+  }
+
+  submit(){
+    this.plageService.updatePlage(this.selectedPlage.id, {
+      start: Utils.getTimeFromDate(this.startTime),
+      end: Utils.getTimeFromDate(this.endTime),
+      appointmentTypeId: this.appointmentTypeSelected.id
+    });
   }
 }
