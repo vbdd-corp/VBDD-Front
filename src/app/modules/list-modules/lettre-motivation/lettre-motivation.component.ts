@@ -58,5 +58,4 @@ export class LettreMotivationComponent implements OnInit {
   deleteFile() {
     this.selectedPicture.nativeElement.value = '';
   }
-
 }

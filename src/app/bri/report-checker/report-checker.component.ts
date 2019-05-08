@@ -43,19 +43,27 @@ export class ReportCheckerComponent implements OnInit {
 
   onSubmit() {
 
-    this.studentService.getReportsByName(this.f.studentName.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          const reportsObservable = this.getReports();
-          reportsObservable.subscribe((report) => {
-            this.reports = report;
+    if (this.clearSelect()) {
+      this.studentService.getReportsByName(this.f.studentName.value)
+        .pipe(first())
+        .subscribe(
+          data => {
+            const reportsObservable = this.getReports();
+            reportsObservable.subscribe((report) => {
+              this.reports = report;
+            });
+            this.exploitReports(data);
+          },
+          error => {
+            alert(error.error);
           });
-          this.exploitReports(data);
-        },
-        error => {
-          alert(error.error);
-        });
+    }
+
+  }
+
+  private clearSelect(): boolean {
+    this.reports = [];
+    return true;
   }
 
   displayEditReport(id: number) {
@@ -84,4 +92,5 @@ export class ReportCheckerComponent implements OnInit {
       this.reports.push(data[i]);
     }
   }
+
 }
