@@ -32,7 +32,6 @@ export class ReportCheckerComponent implements OnInit {
       studentName: ['', Validators.required]
     });
 
-
   }
 
   public getReports(): any {
@@ -68,6 +67,7 @@ export class ReportCheckerComponent implements OnInit {
 
   displayEditReport(id: number) {
     this.shouldBeDisplayed = true;
+
     this.actualReportId = id;
   }
 
@@ -76,7 +76,7 @@ export class ReportCheckerComponent implements OnInit {
   }
 
   validateReport() {
-    (this.reportService.validateReport(this.actualReportId));
+    this.reportService.validateReport(this.actualReportId);
     this.reportValidated = true;
   }
 

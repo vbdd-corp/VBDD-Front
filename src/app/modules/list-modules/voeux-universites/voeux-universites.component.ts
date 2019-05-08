@@ -1,11 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ModuleService} from "../../../../services/module.service";
-import {SchoolService} from "../../../../services/school.service";
-import {School} from "../../../../models/school";
-import {Module} from "../../../../models/module";
-import {Subscription} from "rxjs";
-import {ModuleType} from "../../../../models/moduleType";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ModuleService} from '../../../../services/module.service';
+import {SchoolService} from '../../../../services/school.service';
+import {School} from '../../../../models/school';
+import {Module} from '../../../../models/module';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-voeux-universites',
@@ -99,6 +98,8 @@ export class VoeuxUniversitesComponent implements OnInit {
       this.module = moduleUpdated;
       console.log('module after == ', this.module);
     });
+
+    this.isValidated = true;
 
   }
 }

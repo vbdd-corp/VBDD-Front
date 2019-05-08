@@ -1,8 +1,7 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {first} from 'rxjs/operators';
+import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {ModuleService} from '../../../services/module.service';
 import {Subscription} from 'rxjs';
-import { File} from '../../../models/file';
+import {File} from '../../../models/file';
 import {Module} from '../../../models/module';
 
 @Component({
@@ -12,7 +11,7 @@ import {Module} from '../../../models/module';
 })
 
 
-export class ReportEditorComponent implements OnInit, OnDestroy {
+export class ReportEditorComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() file :File;
 
@@ -20,7 +19,12 @@ export class ReportEditorComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(private moduleService: ModuleService) {
-    this.subscription = this.moduleService.getSelectedModule().subscribe(module => this.module = module);
+    this.onConstruction();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.file = changes.file.currentValue;
+    this.onConstruction();
   }
 
   ngOnDestroy() {
@@ -31,6 +35,10 @@ export class ReportEditorComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     console.log('file => ', this.file);
+  }
+
+  private onConstruction() {
+    this.subscription = this.moduleService.getSelectedModule().subscribe(module => this.module = module);
   }
 
 
