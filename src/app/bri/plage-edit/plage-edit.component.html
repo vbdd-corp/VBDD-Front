@@ -1,19 +1,63 @@
 <h3>Selection :</h3>
 <div class="border-rectangle">
   <div *ngIf="!selectedPlage">
-    <h4 *ngIf="!selectedPlage">Aucune plage selectionée !</h4>
+    <h4>Aucune plage selectionée !</h4>
   </div>
   <div *ngIf="selectedPlage">
-    <h4>{{getDayString(selectedPlage)}}</h4>
-    <p>start : {{selectedPlage.start.hour}} - {{selectedPlage.start.minute}}</p>
-    <p>end : {{selectedPlage.end.hour}} - {{selectedPlage.end.minute}}</p>
-  </div>
-  <hr>
-  <p> hezhgimhqimzehigmhqi</p>
-  <hr>
-  <p>textexttxetetxuezgfuiezgumeevmn</p>
-  <hr>
-  <p> hezhgimhqimzehigmhqi</p>
+    <div class="text-center">
+      <h3 class="date">{{getDayString()}}</h3>
+      <h4>{{getTimeString()}}</h4>
+    </div>
 
+    <hr>
+    <h4>Plage horraire</h4>
+    <div class="text-center">
+      <div>Début : </div>
+      <div>
+        <timepicker [(ngModel)]="startTime"
+                    [min]="minTime"
+                    [max]="maxTime">
+        </timepicker>
+      </div>
+
+    </div>
+    <div class="text-center">
+      <div>Fin : </div>
+      <div>
+        <timepicker [(ngModel)]="endTime"
+                    [min]="minTime"
+                    [max]="maxTime">
+        </timepicker>
+      </div>
+
+    </div>
+    <hr>
+    <h4>Type de rendez-vous</h4>
+    <div class="text-center">
+      <div *ngIf="appointmentTypes" class="btn-group" dropdown>
+        <button *ngIf="appointmentTypeSelected" id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+                aria-controls="dropdown-basic">
+          {{ appointmentTypeSelected.name }} <span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+            role="menu" aria-labelledby="button-basic">
+          <li *ngFor="let appointmentType of appointmentTypes" (click)="selectAppointmentType(appointmentType)" class="pointer" role="menuitem"><a class="dropdown-item">{{appointmentType.name}}</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <div class="text-center">
+      <button class=" btn btn-primary" type="button">
+        Voir la liste des rendez-vous
+      </button>
+    </div>
+    <hr>
+    <div class="text-center">
+      <button (click)="submit()" class="btn btn-success" type="button">
+        Enregistrer les modifications
+      </button>
+    </div>
+    <br>
+  </div>
 
 </div>

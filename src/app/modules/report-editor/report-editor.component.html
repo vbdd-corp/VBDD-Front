@@ -3,7 +3,7 @@
   <div *ngIf="module.typeModule.id === 0">
     <hr>
     <div>
-    <app-infos-generales></app-infos-generales>
+      <app-infos-generales [module]="this.module"></app-infos-generales>
     </div>
     <hr>
   </div>
@@ -38,7 +38,6 @@
     <hr>
   </div>
 
-
   <div *ngIf="module.typeModule.id === 7">
     <hr>
     <app-budget-previsionnel-component [module]="this.module"></app-budget-previsionnel-component>
@@ -56,6 +55,7 @@
     <app-voeux-universites [module]="this.module"></app-voeux-universites>
     <hr>
   </div>
+
 
 </div>
 

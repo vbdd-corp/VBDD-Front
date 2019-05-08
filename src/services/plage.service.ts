@@ -76,4 +76,16 @@ export class PlageService {
       });
   }
 
+  updatePlage(plageId :number,plage :Plage) {
+    return new Promise<Plage>(resolve => {
+      this.http.put<Plage>(this.url + '/' + plageId, plage, this.httpOptions)
+        .subscribe(plage => {
+          this.getPlages();
+          resolve(plage);
+        }, err => {
+          console.log(err);
+        })
+    });
+  }
+
 }

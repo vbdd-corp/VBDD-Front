@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DossierService} from '../../../services/dossier.service';
 import {File} from '../../../models/file';
@@ -8,7 +8,7 @@ import {File} from '../../../models/file';
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
-export class EditComponent implements OnInit {
+export class EditComponent implements OnInit, OnChanges {
 
   sub: any;
   file: File;
@@ -57,5 +57,10 @@ export class EditComponent implements OnInit {
 
       this.dossierService.updateFileName(this.file.id, this.file.name);
     }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.reportId = changes.reportId.currentValue;
+    this.ngOnInit();
   }
 }

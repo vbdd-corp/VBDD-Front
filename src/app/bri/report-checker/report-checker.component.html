@@ -6,24 +6,36 @@
 
   <input aria-describedby="basic-addon1" class="form-control" formControlName="studentName" id="studentName"
          placeholder="Prénom et nom de l'étudiant (i.e Coco Martin)"
+         value="{{ this.name }}"
          type="text">
 
-  <button (click)="onSubmit()" class="btn btn-info"><span
+  <button (click)="onSubmit();" class="btn btn-info" id="searchBtn"><span
     class="glyphicon glyphicon-search"></span>  </button>
 
   <div [hidden]="shouldSelectBeVisible" id="dossierDrop">
-    <span id="dossierSpan">
-       <label for="dossierDrop">Dossiers</label>
+     <div [hidden]="this.disableSelect">
+        <span id="dossierSpan">
+           <label for="dossierDrop">Dossiers</label>
 
-    <select class="form-control" formControlName="selectDrop" multiple style="margin-left:20px; width:200px;">
 
-     <option (click)="displayEditReport(report.id)" *ngFor="let report of reports" [ngValue]="report"
-             id="{{report.id}}">{{report.name}}</option>
+              <select class="form-control" formControlName="selectDrop" multiple
+                      style="margin-left:20px; width:200px;">
 
-    </select>
-    </span>
+               <option (click)="displayEditReport(report.id); " *ngFor="let report of reports"
+                       [ngValue]="report"
+                       id="{{report.id}}">{{report.name}}</option>
 
+              </select>
+
+        </span>
+    </div>
   </div>
+
+   <div [hidden]="!this.disableSelect" style="margin-right: 15%;">
+       <button (click)="refresh()" class="btn btn-group-xs"><span
+         class="glyphicon glyphicon-refresh"
+         style="margin-right: 3px;"></span> <b>Rechercher un autre dossier</b></button>
+   </div>
 
 
   <div *ngIf="shouldBeDisplayed">

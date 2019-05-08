@@ -86,4 +86,10 @@ export class DossierService {
       });
     return notValidated;
   }
+
+  isAlreadyValidated(actualReportId: number) {
+    let toReturn: boolean = false;
+    this.getDossier(actualReportId).then(report => toReturn = report);
+    return toReturn;
+  }
 }

@@ -43,6 +43,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { PlageEditComponent } from './bri/plage-edit/plage-edit.component';
 import { PlageAddComponent } from './bri/plage-add/plage-add.component';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 registerLocaleData(localeFr);
 
@@ -96,7 +97,8 @@ registerLocaleData(localeFr);
       useFactory: adapterFactory
     }),
     FormsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    TimepickerModule.forRoot()
   ],
   exports: [
     ReportComponent,

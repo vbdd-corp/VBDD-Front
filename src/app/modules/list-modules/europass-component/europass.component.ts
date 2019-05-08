@@ -43,7 +43,7 @@ export class EuropassComponent implements OnInit {
       file.withCredentials = false;
     };
 
-    if (this.getLink() == '') {
+    if (this.getLink() == null) {
       this.shouldDisplayDownload = true;
     }
   }
@@ -55,15 +55,16 @@ export class EuropassComponent implements OnInit {
 
   }
 
-  public getLink() {
-    return this.module.infos.filePath;
-  }
 
   deleteFile() {
     this.selectedPicture.nativeElement.value = '';
   }
 
+  public getLink() {
+    return this.module.infos.filePath;
+  }
+
   downloadFile() {
-    this.downloadService.downloadFile(this.downloadService.getFile(this.getLink()));
+    this.downloadService.downloadFile(this.getLink());
   }
 }

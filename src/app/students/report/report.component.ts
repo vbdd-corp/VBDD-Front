@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {AlertService} from '../../../services';
 import {DossierService} from '../../../services/dossier.service';
 import {Router} from '@angular/router';
@@ -35,7 +35,7 @@ export class ReportComponent implements OnInit, OnDestroy {
   }
 
   openModal(template: TemplateRef<any>) {
-    if(this.modalRef){ // close last modal if there was one
+    if (this.modalRef) {
       this.closeModal();
     }
     this.modalRef = this.modalService.show(template);
@@ -53,7 +53,6 @@ export class ReportComponent implements OnInit, OnDestroy {
   }
 
   private deleteReport(id: number) {
-    // TODO: replace confirm by a beautiful modal
     if (confirm("Supprimer le dossier ?")){
       this.dossierService.removeDossier(id);
     }

@@ -9,16 +9,17 @@
 
     <label>
       <input aria-describedby="basic-addon1" class="form-control" formControlName="paysEnvisage"
-             placeholder="Pays envisagés envisagées" type="text">
+             placeholder="Pays envisagés envisagées" type="text" value="{{this.module.infos.country}}">
     </label>
     <label>
       <input aria-describedby="basic-addon1" class="form-control" formControlName="villesEnvisagees"
+             value="{{this.module.infos.city}}"
              placeholder="Villes envisagées" type="text">
     </label>
 
     <label>
       <input aria-describedby="basic-addon1" class="form-control" formControlName="dureeEnvisagee"
-             placeholder="Durée prévue" type="text">
+             placeholder="Durée prévue" type="text" value="{{this.module.infos.stayDuration}}">
     </label>
     <br>
     <br>
@@ -34,11 +35,13 @@
       <tr>
         <td><label>
           <input aria-describedby="basic-addon1" class="form-control" formControlName="prixVoyage"
+                 value="{{this.module.infos.travelCost}}"
                  placeholder="Prix du voyage aller/retour"
                  type="text">
         </label></td>
         <td><label>
           <input aria-describedby="basic-addon1" class="form-control" formControlName="aideFamiliale"
+                 value="{{this.module.infos.familyResources}}"
                  placeholder="Aide familiale"
                  type="text">
         </label></td>
@@ -47,11 +50,13 @@
       <tr>
         <td><label>
           <input aria-describedby="basic-addon1" class="form-control" formControlName="prixLogement"
+                 value="{{this.module.infos.accommodationCost}}"
                  placeholder="Logement sur place"
                  type="text">
         </label></td>
         <td><label>
-          <input aria-describedby="basic-addon1" class="form-control" formControlName="prixBourse"
+          <input aria-describedby="basic-addon1" class="form-control"
+                 formControlName="prixBourse" value="{{this.module.infos.frenchCROUSScholarship}}"
                  placeholder="Bourse d'enseignement superieur"
                  type="text">
         </label></td>
@@ -61,12 +66,12 @@
       <tr>
         <td><label>
           <input aria-describedby="basic-addon1" class="form-control" formControlName="prixNourriture"
-                 placeholder="Nouriture, etc."
+                 placeholder="Nouriture, etc." value="{{this.module.infos.foodCost}}"
                  type="text">
         </label></td>
         <td><label>
           <input aria-describedby="basic-addon1" class="form-control" formControlName="prixPrame"
-                 placeholder="Bourse mobilité PRAME"
+                 placeholder="Bourse mobilité PRAME" value="{{this.module.infos.mobilityScholarship}}"
                  type="text">
         </label></td>
       </tr>
@@ -74,12 +79,12 @@
       <tr>
         <td><label>
           <input aria-describedby="basic-addon1" class="form-control" formControlName="prixTransports"
-                 placeholder="Transports, loisirs..."
+                 placeholder="Transports, loisirs..." value="{{this.module.infos.transportationHobbiesCost}}"
                  type="text">
         </label></td>
         <td><label>
           <input aria-describedby="basic-addon1" class="form-control" formControlName="prixEte"
-                 placeholder="Travail pendant l'été"
+                 placeholder="Travail pendant l'été" value="{{this.module.infos.summerJobSalaries}}"
                  type="text">
         </label></td>
       </tr>
@@ -87,12 +92,12 @@
       <tr>
         <td><label>
           <input aria-describedby="basic-addon1" class="form-control" formControlName="prixEtudes"
-                 placeholder="Frais relatifs aux études"
+                 placeholder="Frais relatifs aux études" value="{{this.module.infos.studyCost}}"
                  type="text">
         </label></td>
         <td><label>
           <input aria-describedby="basic-addon1" class="form-control" formControlName="prixEconomies"
-                 placeholder="Economies personnelles"
+                 placeholder="Economies personnelles" value="{{this.module.infos.personalResources}}"
                  type="text">
         </label></td>
       </tr>
@@ -101,12 +106,12 @@
         <td><label>
 
           <input aria-describedby="basic-addon1" class="form-control" formControlName="prixDepenses"
-                 placeholder="Autre dépenses"
+                 placeholder="Autre dépenses" value="{{this.module.infos.othersCost}}"
                  type="text">
         </label></td>
         <td><label>
           <input aria-describedby="basic-addon1" class="form-control" formControlName="prixAutre"
-                 placeholder="Autres ressources"
+                 placeholder="Autres ressources" value="{{this.module.infos.othersResources}}"
                  type="text">
         </label></td>
       </tr>

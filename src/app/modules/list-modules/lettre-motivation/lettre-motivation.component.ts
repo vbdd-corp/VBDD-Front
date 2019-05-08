@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FileUploader} from 'ng2-file-upload';
 import {Utils} from '../../../../models/utils';
-import {ModuleComponent} from '../../module-component';
+import {DownloadService} from '../../../../services/download.service';
 
 const URL = 'http://localhost:9428/api/module/upload/';
 
@@ -15,12 +15,21 @@ export class LettreMotivationComponent implements OnInit {
   @Input() module: any;
   isFileUploaded: boolean = false;
 
+  shouldDisplayDownload: boolean = false;
 
   public uploader: FileUploader;
   @ViewChild('file') selectedPicture: any;
 
-  constructor() {
 
+  constructor(private downloadService: DownloadService) {
+  }
+
+  public getLink() {
+    return this.module.infos.filePath;
+  }
+
+  downloadFile() {
+    this.downloadService.downloadFile(this.getLink());
   }
 
   ngOnInit() {
@@ -34,7 +43,9 @@ export class LettreMotivationComponent implements OnInit {
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
     };
-
+    if (this.getLink() == null) {
+      this.shouldDisplayDownload = true;
+    }
   }
 
   public onSubmit() {
@@ -47,5 +58,4 @@ export class LettreMotivationComponent implements OnInit {
   deleteFile() {
     this.selectedPicture.nativeElement.value = '';
   }
-
 }
