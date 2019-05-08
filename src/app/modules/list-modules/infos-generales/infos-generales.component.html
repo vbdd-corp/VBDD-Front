@@ -15,6 +15,7 @@
               type="text" aria-describedby="basic-addon1"
               class="form-control"
               formControlName="firstName"
+              name="firstName"
               value="{{ student.firstName }}">
           </td>
         </tr>
@@ -24,7 +25,8 @@
             <input
               type="text" aria-describedby="basic-addon1"
               class="form-control"
-              formControlName="lastName" value="{{student.lastName  }}">
+              formControlName="lastName" value="{{student.lastName  }}"
+              name="lastName">
           </td>
         </tr>
         <tr>
@@ -33,7 +35,7 @@
             <input
               type="text" aria-describedby="basic-addon1"
               class="form-control"
-              formControlName="lastName" value="{{student.studentNumber }}">
+              formControlName="studentNumber" value="{{student.studentNumber }}">
           </td>
         </tr>
         <tr>
@@ -275,7 +277,7 @@
         personnes ou organismes pour toute question en lien avec mon séjour d’études à l’étranger.</label>
     </div>
 
-    <button (click)="onSubmit()" [ngClass]="{'btn-success': isValidated===true}"
+    <button [ngClass]="{'btn-success': isValidated===true}"
             class="btn btn-lg btn-default btn-block" id="submit" type="submit">
       Enregister
     </button>
