@@ -4,6 +4,7 @@ import {first} from 'rxjs/operators';
 import {StudentService} from '../../../services/student.service';
 import {Observable} from 'rxjs';
 import {DossierService} from '../../../services/dossier.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-report-checker',
@@ -16,10 +17,15 @@ export class ReportCheckerComponent implements OnInit {
   reports = [];
   shouldSelectBeVisible = true;
   shouldBeDisplayed = false;
+  name: string = '';
   actualReportId: number;
   reportValidated: boolean = false;
+  disableSelect: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private studentService: StudentService, private reportService: DossierService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private studentService: StudentService, private reportService: DossierService) {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.name = params['name'];
+    });
   }
 
   get f() {
@@ -27,10 +33,13 @@ export class ReportCheckerComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
     this.studentCheckForm = this.formBuilder.group({
       selectDrop: ['', Validators.required],
       studentName: ['', Validators.required]
     });
+
 
   }
 
@@ -42,8 +51,18 @@ export class ReportCheckerComponent implements OnInit {
 
   onSubmit() {
 
+    //For the guy coming to this part, i'm so sorry, it's a bit dirty and buggy... let's say it's a Alpha 0.0.1_a version right ?
+
+    // @ts-ignore
+
+    const inputValue = document.getElementById('studentName').value;
+
+    if (inputValue !== '') {
+      this.name = inputValue;
+    }
+
     if (this.clearSelect()) {
-      this.studentService.getReportsByName(this.f.studentName.value)
+      this.studentService.getReportsByName(this.name)
         .pipe(first())
         .subscribe(
           data => {
@@ -67,7 +86,7 @@ export class ReportCheckerComponent implements OnInit {
 
   displayEditReport(id: number) {
     this.shouldBeDisplayed = true;
-
+    this.disableSelect = true;
     this.actualReportId = id;
   }
 
@@ -93,4 +112,7 @@ export class ReportCheckerComponent implements OnInit {
     }
   }
 
+  refresh() {
+    document.location.href = '/reportChecker/?name=' + this.f.studentName.value;
+  }
 }
