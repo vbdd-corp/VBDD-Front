@@ -20,7 +20,6 @@ export class LettreMotivationComponent implements OnInit {
   public uploader: FileUploader;
   @ViewChild('file') selectedPicture: any;
 
-
   constructor(private downloadService: DownloadService) {
   }
 

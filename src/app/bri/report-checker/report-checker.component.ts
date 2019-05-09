@@ -5,6 +5,7 @@ import {StudentService} from '../../../services/student.service';
 import {Observable} from 'rxjs';
 import {DossierService} from '../../../services/dossier.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {DownloadService} from '../../../services/download.service';
 
 @Component({
   selector: 'app-report-checker',
@@ -22,7 +23,8 @@ export class ReportCheckerComponent implements OnInit {
   reportValidated: boolean = false;
   disableSelect: boolean = false;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private studentService: StudentService, private reportService: DossierService) {
+
+  constructor(private downloadService: DownloadService, private router: Router, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private studentService: StudentService, private reportService: DossierService) {
     this.activatedRoute.queryParams.subscribe(params => {
       this.name = params['name'];
     });
@@ -33,14 +35,10 @@ export class ReportCheckerComponent implements OnInit {
   }
 
   ngOnInit() {
-
-
     this.studentCheckForm = this.formBuilder.group({
       selectDrop: ['', Validators.required],
       studentName: ['', Validators.required]
     });
-
-
   }
 
   public getReports(): any {
@@ -90,7 +88,7 @@ export class ReportCheckerComponent implements OnInit {
     this.actualReportId = id;
   }
 
-  //TODO
+  ///TODO ? gl...
   downloadReport() {
   }
 

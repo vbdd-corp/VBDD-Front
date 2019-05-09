@@ -5,7 +5,6 @@ import {HttpClient} from '@angular/common/http';
 import {Utils} from '../models/utils';
 import {BehaviorSubject} from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })

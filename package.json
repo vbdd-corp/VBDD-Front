@@ -27,8 +27,12 @@
     "core-js": "^2.5.4",
     "date-fns": "^1.30.1",
     "file-saver": "^2.0.1",
+    "install": "^0.12.2",
+    "jszip": "^3.2.1",
+    "jszip-utils": "0.0.2",
     "ng2-file-upload": "^1.3.0",
     "ngx-bootstrap": "^4.0.0",
+    "npm": "^6.9.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
