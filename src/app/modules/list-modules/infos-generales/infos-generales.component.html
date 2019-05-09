@@ -3,7 +3,7 @@
 </div>
 
 <div class="row col-lg-12">
-  <form (ngSubmit)="onSubmit()"
+  <form
         [formGroup]="generalInformationsForm">
     <div class="col-lg-4 info-container">
       <table *ngIf="isStudent" class="table table-bordered" id="tableInformation1">
@@ -16,7 +16,8 @@
               class="form-control"
               formControlName="firstName"
               name="firstName"
-              value="{{ student.firstName }}">
+              >
+            <!--value="{{ student.firstName }}"-->
           </td>
         </tr>
         <tr>
@@ -25,7 +26,7 @@
             <input
               type="text" aria-describedby="basic-addon1"
               class="form-control"
-              formControlName="lastName" value="{{student.lastName  }}"
+              formControlName="lastName"
               name="lastName">
           </td>
         </tr>
@@ -35,7 +36,7 @@
             <input
               type="text" aria-describedby="basic-addon1"
               class="form-control"
-              formControlName="studentNumber" value="{{student.studentNumber }}">
+              formControlName="studentNumber">
           </td>
         </tr>
         <tr>
@@ -44,7 +45,7 @@
             <input
               type="text" aria-describedby="basic-addon1"
               class="form-control"
-              formControlName="INE" value="{{ student.INE }}">
+              formControlName="INE">
           </td>
         </tr>
         </tbody>
@@ -59,7 +60,7 @@
             <input
               type="text" aria-describedby="basic-addon1"
               class="form-control"
-              formControlName="nationality" value="{{ student.nationality }} ">
+              formControlName="nationality">
           </td>
         </tr>
         <tr>
@@ -67,7 +68,7 @@
           <td id="major">
             <input type="text" aria-describedby="basic-addon1"
                    class="form-control"
-                   formControlName="major" value="{{ student.major }} ">
+                   formControlName="major">
           </td>
         </tr>
         <tr>
@@ -75,7 +76,7 @@
           <td id="gender">
             <input type="text" aria-describedby="basic-addon1"
                    class="form-control"
-                   formControlName="gender" value="{{ student.gender }} ">
+                   formControlName="gender">
           </td>
         </tr>
         <tr>
@@ -83,7 +84,7 @@
           <td id="birthDate">
             <input type="text" aria-describedby="basic-addon1"
                    class="form-control"
-                   formControlName="birthDate" value="{{ student.birthDate }} ">
+                   formControlName="birthDate">
           </td>
         </tr>
       </table>
@@ -97,8 +98,7 @@
             <input
               type="text" aria-describedby="basic-addon1"
               class="form-control"
-              formControlName="phoneNumber"
-              value="{{ student.phoneNumber }} ">
+              formControlName="phoneNumber">
           </td>
         </tr>
         <tr>
@@ -107,8 +107,7 @@
             <input
               type="text" aria-describedby="basic-addon1"
               class="form-control"
-              formControlName="mobilePhoneNumber"
-              value="{{ student.mobilePhoneNumber }} ">
+              formControlName="mobilePhoneNumber">
           </td>
         </tr>
         <tr>
@@ -128,7 +127,7 @@
           <td id="mail" class="col-lg-8">
             <input
               class="long form-control" aria-describedby="basic-addon1"
-              type="text" formControlName="mail" value="{{ student.mail }} ">
+              type="text" formControlName="mail">
           </td>
         </tr>
         <tr>
@@ -136,7 +135,7 @@
           <td id="address" class="col-lg-8">
             <input
               class="long form-control" aria-describedby="basic-addon1"
-              type="text" formControlName="address" value="{{ student.address }} ">
+              type="text" formControlName="address">
           </td>
         </tr>
       </table>
@@ -150,8 +149,7 @@
                 <input
                   type="text" aria-describedby="basic-addon1"
                   class="form-control"
-                  formControlName="postalCode"
-                  value="{{ student.postalCode }} ">
+                  formControlName="postalCode">
               </td>
             </tr>
           </table>
@@ -164,8 +162,7 @@
                 <input
                   type="text" aria-describedby="basic-addon1"
                   class="form-control long"
-                  formControlName="city"
-                  value="{{ student.city }} ">
+                  formControlName="city">
               </td>
             </tr>
           </table>
@@ -185,25 +182,22 @@
         <tr>
           <td>
             <input aria-describedby="basic-addon1" class="form-control" formControlName="datediploma1"
-                   value="{{this.module.infos.datediploma1}}"
                    placeholder="2016"
                    type="text">
           </td>
           <td>
             <input aria-describedby="basic-addon1" class="form-control" formControlName="diploma1"
-                   value="{{this.module.infos.diploma1}}"
                    placeholder="DUT (Bac+1)"
                    type="text">
           </td>
           <td>
             <input aria-describedby="basic-addon1" class="form-control" formControlName="school1"
-                   value="{{this.module.infos.school1}}"
                    placeholder="IUT d'Aix-en-Provence"
                    type="text">
           </td>
           <td>
             <input aria-describedby="basic-addon1" class="form-control" formControlName="note1"
-                   placeholder="14/20" value="{{this.module.infos.note1}}"
+                   placeholder="14/20"
                    type="text">
           </td>
         </tr>
@@ -211,25 +205,22 @@
         <tr>
           <td>
             <input aria-describedby="basic-addon1" class="form-control" formControlName="datediploma2"
-                   value="{{this.module.infos.datediploma2}}"
                    placeholder="2017"
                    type="text">
           </td>
           <td>
             <input aria-describedby="basic-addon1" class="form-control" formControlName="diploma2"
-                   value="{{this.module.infos.diploma2}}"
                    placeholder="DUT (Bac+2)"
                    type="text">
           </td>
           <td>
             <input aria-describedby="basic-addon1" class="form-control" formControlName="school2"
-                   value="{{this.module.infos.school2}}"
                    placeholder="IUT d'Aix-en-Provence"
                    type="text">
           </td>
           <td>
             <input aria-describedby="basic-addon1" class="form-control" formControlName="note2"
-                   placeholder="11/20" value="{{this.module.infos.note2}}"
+                   placeholder="11/20"
                    type="text">
           </td>
         </tr>
@@ -237,25 +228,22 @@
         <tr>
           <td>
             <input aria-describedby="basic-addon1" class="form-control" formControlName="datediploma3"
-                   value="{{this.module.infos.datediploma3}}"
                    placeholder="2018"
                    type="text">
           </td>
           <td>
             <input aria-describedby="basic-addon1" class="form-control" formControlName="diploma3"
-                   value="{{this.module.infos.diploma3}}"
                    placeholder="DUT (Bac+2)"
                    type="text">
           </td>
           <td>
             <input aria-describedby="basic-addon1" class="form-control" formControlName="school3"
-                   value="{{this.module.infos.school3}}"
                    placeholder="IUT d'Aix-en-Provence"
                    type="text">
           </td>
           <td>
             <input aria-describedby="basic-addon1" class="form-control" formControlName="note3"
-                   placeholder="15/20" value="{{this.module.infos.note3}}"
+                   placeholder="15/20"
                    type="text">
           </td>
         </tr>
@@ -266,18 +254,20 @@
     <div class="form-check row">
       <div class="col-lg-1"></div>
       <div class="col-lg-1">
-        <input checked class="form-check-input" formControlName="exampleCheck1" id="exampleCheck1"
-               value="{{this.module.infos.shareMyDetails}}"
+        <input checked class="form-check-input"
+               formControlName="shareMyDetails"
+               id="shareMyDetails"
                type="checkbox">
       </div>
-      <label class="form-check-label col-lg-10" for="exampleCheck1" style="display: inline-block">J’accepte que mes
-        coordonnées
-        soient
-        transmises à d’autres
-        personnes ou organismes pour toute question en lien avec mon séjour d’études à l’étranger.</label>
+      <label class="form-check-label col-lg-10" for="shareMyDetails" style="display: inline-block">
+        J’accepte que mes coordonnées soient transmises à d’autres
+        personnes ou organismes pour toute question en lien avec mon
+        séjour d’études à l’étranger.
+      </label>
     </div>
-
+    <!--(ngSubmit)="onSubmit()"-->
     <button [ngClass]="{'btn-success': isValidated===true}"
+            (click)="onSubmit()"
             class="btn btn-lg btn-default btn-block" id="submit" type="submit">
       Enregister
     </button>

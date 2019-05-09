@@ -19,7 +19,6 @@ export class InfosGeneralesComponent implements OnInit {
   isValidated: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private moduleService: ModuleService) {
-
   }
 
   ngOnInit() {
@@ -42,7 +41,7 @@ export class InfosGeneralesComponent implements OnInit {
       mail: ['', Validators.required],
       address: ['', Validators.required],
 
-      exampleCheck1: ['', Validators.required],
+      shareMyDetails: ['', Validators.required],
       datediploma1: ['', Validators.required],
       datediploma2: ['', Validators.required],
       datediploma3: ['', Validators.required],
@@ -56,6 +55,41 @@ export class InfosGeneralesComponent implements OnInit {
       note2: ['', Validators.required],
       note3: ['', Validators.required],
     });
+
+    this.generalInformationsForm.controls['firstName'].setValue(this.student.firstName);
+    this.generalInformationsForm.controls['lastName'].setValue(this.student.lastName);
+    this.generalInformationsForm.controls['studentNumber'].setValue(this.student.studentNumber);
+    this.generalInformationsForm.controls['INE'].setValue(this.student.INE);
+    this.generalInformationsForm.controls['phoneNumber'].setValue(this.student.phoneNumber);
+
+    this.generalInformationsForm.controls['mobilePhoneNumber'].setValue(this.student.mobilePhoneNumber);
+    this.generalInformationsForm.controls['postalCode'].setValue(this.student.postalCode);
+    this.generalInformationsForm.controls['city'].setValue(this.student.city);
+    this.generalInformationsForm.controls['nationality'].setValue(this.student.nationality);
+    this.generalInformationsForm.controls['major'].setValue(this.student.major);
+    this.generalInformationsForm.controls['gender'].setValue(this.student.gender);
+
+    this.generalInformationsForm.controls['birthDate'].setValue(this.student.birthDate);
+    this.generalInformationsForm.controls['mail'].setValue(this.student.mail);
+    this.generalInformationsForm.controls['address'].setValue(this.student.address);
+
+    this.generalInformationsForm.controls['datediploma1'].setValue(this.module.infos.datediploma1);
+    this.generalInformationsForm.controls['diploma1'].setValue(this.module.infos.diploma1);
+    this.generalInformationsForm.controls['school1'].setValue(this.module.infos.school1);
+    this.generalInformationsForm.controls['note1'].setValue(this.module.infos.note1);
+
+    this.generalInformationsForm.controls['datediploma2'].setValue(this.module.infos.datediploma2);
+    this.generalInformationsForm.controls['diploma2'].setValue(this.module.infos.diploma2);
+    this.generalInformationsForm.controls['school2'].setValue(this.module.infos.school2);
+    this.generalInformationsForm.controls['note2'].setValue(this.module.infos.note2);
+
+    this.generalInformationsForm.controls['datediploma3'].setValue(this.module.infos.datediploma3);
+    this.generalInformationsForm.controls['diploma3'].setValue(this.module.infos.diploma3);
+    this.generalInformationsForm.controls['school3'].setValue(this.module.infos.school3);
+    this.generalInformationsForm.controls['note3'].setValue(this.module.infos.note3);
+
+    this.generalInformationsForm.controls['shareMyDetails'].setValue(this.module.infos.shareMyDetails);
+
   }
 
   get f() {
@@ -66,27 +100,23 @@ export class InfosGeneralesComponent implements OnInit {
 
     //this.moduleService.updateModule(this.module.id, ());
 
-    console.log('Test1 => ', this.generalInformationsForm.controls.firstName.value);
-    console.log('Test2 => ', this.generalInformationsForm.controls['firstName'].value);
-    console.log('Test3 => ', this.generalInformationsForm.value.firstName);
-    console.log('Test4 => ', this.generalInformationsForm.get('firstName').value);
+    
 
     const info1 = {
-      firstName: this.generalInformationsForm.controls.firstName.value,
-      lastName: this.generalInformationsForm.controls['lastName'].value,
-      studentNumber: this.generalInformationsForm.value.studentNumber,
-      INE: this.generalInformationsForm.value.INE,
-      phoneNumber: this.generalInformationsForm.value.phoneNumber,
-      mobilePhoneNumber: this.generalInformationsForm.value.mobilePhoneNumber,
-      postalCode: this.generalInformationsForm.value.postalCode,
-      city: this.generalInformationsForm.value.city
-      /*nationality: this.f.value.nationality,
-      major: this.f.value.major,
-      gender: this.f.value.gender,
-      birthDate: this.f.value.birthDate,
-      mail: this.f.value.mail,
-      address: this.f.value.address,*/
-
+      firstName: this.f.firstName.value,
+      lastName: this.f.lastName.value,
+      studentNumber: this.f.studentNumber.value,
+      INE: this.f.INE.value,
+      phoneNumber: this.f.phoneNumber.value,
+      mobilePhoneNumber: this.f.mobilePhoneNumber.value,
+      postalCode: this.f.postalCode.value,
+      city: this.f.city.value,
+      nationality: this.f.nationality.value,
+      major: this.f.major.value,
+      gender: this.f.gender.value,
+      birthDate: this.f.birthDate.value,
+      mail: this.f.mail.value,
+      address: this.f.address.value
     };
 
     console.log('info1 == ', info1);
@@ -98,7 +128,7 @@ export class InfosGeneralesComponent implements OnInit {
       "currentUNSDiploma": null,
       "nextYearExchangeDiploma": null,
 
-      shareMyDetails: this.f.exampleCheck1.value,
+      shareMyDetails: this.f.shareMyDetails.value,
       datediploma1: this.f.datediploma1.value,
       datediploma2: this.f.datediploma2.value,
       datediploma3: this.f.datediploma3.value,
