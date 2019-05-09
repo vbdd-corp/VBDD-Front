@@ -3,11 +3,12 @@
     <div class="col-xs-12">
       <h2 class="text-center">Espace Bureau des Relations Internationales</h2>
       <ul class="nav nav-tabs">
-        <li class="toggleName" id="firstToggle"><a [ngClass]="{ 'active':activeTab==='search'}" (click)="search('search')"  data-toggle="tab">
+        <li class="toggleName" id="firstToggle"><a (click)="search('search')"
+                                                   [ngClass]="{ 'active':activeTab==='search'}" data-toggle="tab">
           Gestion des rendez-vous</a>
         </li>
         <li class="toggleName" id="secondToggle"><a [ngClass]="{ 'active':activeTab==='result'}" data-toggle="tab"
-               (click)="result('result')">
+                                                    (click)="result('result')">
           Gestion des dossiers</a>
         </li>
       </ul>
@@ -15,6 +16,9 @@
         <div id="search" class="tab-pane active" [ngClass]="{ 'active':activeTab==='search'}">
           <div class="row content" style="text-align: center">
             <div class="col-xs-12">
+              <br>
+              <br>
+              <br>
               <br>
               <button [routerLink]="['/availability']" class="btn btn-lg btn-primary" type="button">
                 Renseigner et modifier mes disponibilités
@@ -33,16 +37,19 @@
         <div id="result" class="tab-pane" [ngClass]="{ 'active':activeTab==='result'}">
           <div class="row content" style="text-align: center">
             <div class="col-xs-12">
-            <br>
-            <button [routerLink]="['/reportChecker']" class=" btn btn-lg btn-primary" type="button">
-              Consulter les dossiers étudiants
-            </button>
+              <br>
+              <br>
+              <br>
+              <br>
+              <button [routerLink]="['/reportChecker']" class=" btn btn-lg btn-primary" type="button">
+                Consulter les dossiers étudiants
+              </button>
 
-            <br> <br> <br> <br> <br> <br>
+              <br> <br> <br> <br> <br> <br>
 
-            <button class="btn btn-lg btn-primary" disabled type="button">
-              Récupérer les listes dossiers / étudiants
-            </button>
+              <button [routerLink]="['/reportsFilterer']" class="btn btn-lg btn-primary" type="button">
+                Récupérer les listes dossiers et/ou étudiants
+              </button>
             </div>
           </div>
         </div>
