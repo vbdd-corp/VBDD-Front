@@ -16,6 +16,19 @@ caption{
   text-align: center;
 }
 
+.bs-calendar-container {
+  background-color: #dedede !important;
+}
+
+.bs-media-container {
+  background-color: #dedede !important;
+}
+
+bs-datepicker-container {
+  background-color: #dedede !important;
+}
+
+
 table.table-bordered,
 table.table-bordered th,
 table.table-bordered tr,
@@ -27,7 +40,7 @@ table.table-bordered td{
 table.table-bordered input {
   width: 100px;
     /*107; 17px*/
-  height: 20px;
+  /*height: 20px;*/
   padding-top: 6px;
   padding-bottom: 6px;
   /*border: 1px solid black;*/

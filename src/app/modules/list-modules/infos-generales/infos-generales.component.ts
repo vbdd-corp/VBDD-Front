@@ -3,8 +3,8 @@ import {Utils} from '../../../../models/utils';
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModuleService} from '../../../../services/module.service';
-import {Module} from "../../../../models/module";
-import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import {Module} from '../../../../models/module';
+import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 
 
 @Component({
@@ -156,9 +156,9 @@ export class InfosGeneralesComponent implements OnInit {
     const info2 = {
       studentId: this.student.id,
 
-      "stayCardEndValidity": null,
-      "currentUNSDiploma": null,
-      "nextYearExchangeDiploma": null,
+      'stayCardEndValidity': null,
+      'currentUNSDiploma': null,
+      'nextYearExchangeDiploma': null,
 
       shareMyDetails: this.f.shareMyDetails.value,
       datediploma1: this.f.datediploma1.value,
@@ -175,14 +175,9 @@ export class InfosGeneralesComponent implements OnInit {
       note3: this.f.note3.value,
     };
 
-    console.log('info2 == ', info2);
-    const temp = new Date(this.f.stayCardEndValidity.value);
-    console.log('temp == ', temp);
-    console.log('myDateValue == ', Utils.getTimeFromDate(temp));
 
     this.isValidated = true;
   }
-
 
 
 }
