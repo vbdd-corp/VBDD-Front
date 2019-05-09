@@ -57,7 +57,7 @@
         <tr>
           <th>Nationalité</th>
           <td id="nationality">
-            <input
+            <input (input)="onNationalityChange($event)"
               type="text" aria-describedby="basic-addon1"
               class="form-control"
               formControlName="nationality">
@@ -192,11 +192,11 @@
         <input
           type="text"
           class="form-control"
-
           bsDatepicker
           formControlName="stayCardEndValidity"
-          id="stayCardEndValidity">
-        <label for="stayCardEndValidity">
+          id="stayCardEndValidity"
+          #myDatePicker>
+        <label for="stayCardEndValidity" #myLabelPicker>
           Fin de Validité de la Carte de Séjour
         </label>
       </div>

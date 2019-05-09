@@ -1,6 +1,6 @@
 import {Student} from '../../../../models/student';
 import {Utils} from '../../../../models/utils';
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModuleService} from '../../../../services/module.service';
 import {Module} from "../../../../models/module";
@@ -18,6 +18,10 @@ export class InfosGeneralesComponent implements OnInit {
   isStudent: boolean;
   generalInformationsForm: FormGroup;
   @Input() module: Module;
+  @ViewChild('myDatePicker')
+  private elDatePicker : ElementRef;
+  @ViewChild('myLabelPicker')
+  private elLabelPicker : ElementRef;
   isValidated: boolean = false;
   locale = 'fr';
 
@@ -111,6 +115,19 @@ export class InfosGeneralesComponent implements OnInit {
 
   get f() {
     return this.generalInformationsForm.controls;
+  }
+
+  onNationalityChange(event) {
+    let value = event.target.value;
+    value = value.toUpperCase();
+    if (value === 'FR') {
+      // console.log('this.elDatePicker == ', this.elDatePicker.nativeElement);
+      this.elDatePicker.nativeElement.style.display = 'none';
+      this.elLabelPicker.nativeElement.style.display = 'none';
+    } else {
+      this.elDatePicker.nativeElement.style.display = 'block';
+      this.elLabelPicker.nativeElement.style.display = 'block';
+    }
   }
 
   onSubmit() {
