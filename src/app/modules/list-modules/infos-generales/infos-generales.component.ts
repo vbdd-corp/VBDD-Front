@@ -20,8 +20,8 @@ export class InfosGeneralesComponent implements OnInit {
   @Input() module: Module;
   @ViewChild('myDatePicker')
   private elDatePicker : ElementRef;
-  @ViewChild('myLabelPicker')
-  private elLabelPicker : ElementRef;
+  /*@ViewChild('myLabelPicker')
+  private elLabelPicker : ElementRef;*/
   isValidated: boolean = false;
   locale = 'fr';
 
@@ -123,10 +123,10 @@ export class InfosGeneralesComponent implements OnInit {
     if (value === 'FR') {
       // console.log('this.elDatePicker == ', this.elDatePicker.nativeElement);
       this.elDatePicker.nativeElement.style.display = 'none';
-      this.elLabelPicker.nativeElement.style.display = 'none';
+      //this.elLabelPicker.nativeElement.style.display = 'none';
     } else {
       this.elDatePicker.nativeElement.style.display = 'block';
-      this.elLabelPicker.nativeElement.style.display = 'block';
+      //this.elLabelPicker.nativeElement.style.display = 'block';
     }
   }
 
