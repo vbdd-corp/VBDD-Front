@@ -110,12 +110,6 @@
               formControlName="mobilePhoneNumber">
           </td>
         </tr>
-        <tr>
-
-        </tr>
-        <tr>
-
-        </tr>
       </table>
     </div>
 
@@ -141,8 +135,8 @@
       </table>
 
       <div class="row">
-        <div class="col-lg-4" id="container5">
-          <table *ngIf="isStudent" class=" table table table-bordered" id="tableInformation5">
+        <div class="col-lg-6" id="container5">
+          <table *ngIf="isStudent" class="table table-bordered" id="tableInformation5">
             <tr>
               <th id="headpostalCode">Code Postal</th>
               <td id="postalCode">
@@ -154,8 +148,8 @@
             </tr>
           </table>
         </div>
-        <div *ngIf="isStudent" class="col-lg-8" id="container6">
-          <table class="table table table-bordered" id="tableInformation6">
+        <div *ngIf="isStudent" class="col-lg-6" id="container6">
+          <table class="table table-bordered" id="tableInformation6">
             <tr>
               <th>Ville</th>
               <td id="city">
@@ -168,6 +162,46 @@
           </table>
         </div>
       </div>
+
+      <div class="row">
+        <table *ngIf="isStudent" class="table table-bordered col-lg-6" id="tableInformation7">
+          <tr>
+            <th>Diplôme actuellement préparé à l'UNS</th>
+            <td id="currentUNSDiploma">
+              <input
+                type="text" aria-describedby="basic-addon1"
+                class="form-control long"
+                formControlName="currentUNSDiploma">
+            </td>
+          </tr>
+        </table>
+        <table *ngIf="isStudent" class="table table-bordered col-lg-6" id="tableInformation8">
+          <tr>
+            <th>Diplôme prévu pour l'année d'Échange</th>
+            <td id="nextYearExchangeDiploma">
+              <input
+                type="text" aria-describedby="basic-addon1"
+                class="form-control long"
+                formControlName="nextYearExchangeDiploma">
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-xs-12 col-12 col-md-4 form-group">
+
+        <input
+          type="text"
+          class="form-control"
+
+          bsDatepicker
+          formControlName="stayCardEndValidity"
+          id="stayCardEndValidity">
+        <label for="stayCardEndValidity">
+          Fin de Validité de la Carte de Séjour
+        </label>
+      </div>
+
+
 
       <table class="table">
         <thead>

@@ -16,10 +16,21 @@ caption{
   text-align: center;
 }
 
+table.table-bordered,
+table.table-bordered th,
+table.table-bordered tr,
+table.table-bordered td{
+  /*border: 1px !important;*/
+  border-collapse: collapse;
+}
+
 table.table-bordered input {
   width: 100px;
     /*107; 17px*/
   height: 20px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  /*border: 1px solid black;*/
   /*vertical-align: middle;*/
 }
 

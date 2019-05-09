@@ -4,6 +4,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModuleService} from '../../../../services/module.service';
 import {Module} from "../../../../models/module";
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+
 
 @Component({
   selector: 'app-infos-generales',
@@ -17,14 +19,20 @@ export class InfosGeneralesComponent implements OnInit {
   generalInformationsForm: FormGroup;
   @Input() module: Module;
   isValidated: boolean = false;
+  locale = 'fr';
 
-  constructor(private formBuilder: FormBuilder, private moduleService: ModuleService) {
+  constructor(private formBuilder: FormBuilder,
+              private moduleService: ModuleService,
+              private localeService: BsLocaleService) {
   }
 
   ngOnInit() {
     this.student = Utils.getUser();
     this.isStudent = Utils.isStudent();
+    this.localeService.use(this.locale);
+
     console.log('this.module.id == ', this.module.id);
+
     this.generalInformationsForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -41,7 +49,12 @@ export class InfosGeneralesComponent implements OnInit {
       mail: ['', Validators.required],
       address: ['', Validators.required],
 
+
+      stayCardEndValidity: [''],
+      currentUNSDiploma: ['', Validators.required],
+      nextYearExchangeDiploma: ['', Validators.required],
       shareMyDetails: ['', Validators.required],
+
       datediploma1: ['', Validators.required],
       datediploma2: ['', Validators.required],
       datediploma3: ['', Validators.required],
@@ -89,6 +102,10 @@ export class InfosGeneralesComponent implements OnInit {
     this.generalInformationsForm.controls['note3'].setValue(this.module.infos.note3);
 
     this.generalInformationsForm.controls['shareMyDetails'].setValue(this.module.infos.shareMyDetails);
+    this.generalInformationsForm.controls['currentUNSDiploma'].setValue(this.module.infos.currentUNSDiploma);
+    this.generalInformationsForm.controls['nextYearExchangeDiploma'].setValue(this.module.infos.nextYearExchangeDiploma);
+
+    this.generalInformationsForm.controls['stayCardEndValidity'].setValue(new Date());
 
   }
 
@@ -98,9 +115,7 @@ export class InfosGeneralesComponent implements OnInit {
 
   onSubmit() {
 
-    //this.moduleService.updateModule(this.module.id, ());
-
-    
+    //this.moduleService.updateModule(this.module.id, ()); #dp="bsDatepicker"
 
     const info1 = {
       firstName: this.f.firstName.value,
@@ -144,8 +159,13 @@ export class InfosGeneralesComponent implements OnInit {
     };
 
     console.log('info2 == ', info2);
+    const temp = new Date(this.f.stayCardEndValidity.value);
+    console.log('temp == ', temp);
+    console.log('myDateValue == ', Utils.getTimeFromDate(temp));
 
     this.isValidated = true;
   }
+
+
 
 }

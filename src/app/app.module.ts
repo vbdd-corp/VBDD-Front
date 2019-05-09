@@ -44,8 +44,13 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { PlageEditComponent } from './bri/plage-edit/plage-edit.component';
 import { PlageAddComponent } from './bri/plage-add/plage-add.component';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { BsDatepickerModule, DatepickerModule } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { frLocale } from 'ngx-bootstrap/locale';
 
 registerLocaleData(localeFr);
+
+defineLocale('fr', frLocale);
 
 @NgModule({
   declarations: [
@@ -98,7 +103,9 @@ registerLocaleData(localeFr);
     }),
     FormsModule,
     BsDropdownModule.forRoot(),
-    TimepickerModule.forRoot()
+    TimepickerModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    DatepickerModule.forRoot()
   ],
   exports: [
     ReportComponent,
