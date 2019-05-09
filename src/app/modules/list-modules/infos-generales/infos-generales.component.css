@@ -37,6 +37,11 @@ table.table-bordered td{
   border-collapse: collapse;
 }
 
+div#some-padding {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
 table.table-bordered input {
   width: 100px;
     /*107; 17px*/
