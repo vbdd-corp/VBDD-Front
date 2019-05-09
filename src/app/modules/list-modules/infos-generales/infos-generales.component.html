@@ -4,9 +4,9 @@
 
 <div class="row col-lg-12">
   <form
-        [formGroup]="generalInformationsForm">
+    [formGroup]="generalInformationsForm">
     <div class="col-lg-4 info-container">
-      <table *ngIf="isStudent" class="table table-bordered" id="tableInformation1">
+      <table class="table table-bordered" id="tableInformation1">
         <tbody>
         <tr>
           <th>Prenom</th>
@@ -16,8 +16,7 @@
               class="form-control"
               formControlName="firstName"
               name="firstName"
-              >
-            <!--value="{{ student.firstName }}"-->
+            >
           </td>
         </tr>
         <tr>
@@ -53,7 +52,7 @@
     </div>
 
     <div class="col-lg-4 info-container">
-      <table *ngIf="isStudent" class="table table-bordered" id="tableInformation3">
+      <table class="table table-bordered" id="tableInformation3">
         <tr>
           <th>Nationalité</th>
           <td id="nationality">
@@ -91,7 +90,7 @@
     </div>
 
     <div class="col-lg-4 info-container">
-      <table *ngIf="isStudent" class="table table-bordered" id="tableInformation2">
+      <table class="table table-bordered" id="tableInformation2">
         <tr>
           <th>Téléphone Fixe</th>
           <td id="phoneNumber">
@@ -115,7 +114,7 @@
 
 
     <div class="col-lg-12 info-container">
-      <table *ngIf="isStudent" class="table table-bordered" id="tableInformation4">
+      <table class="table table-bordered" id="tableInformation4">
         <tr>
           <th class="col-lg-4">Mail</th>
           <td id="mail" class="col-lg-8">
@@ -136,7 +135,7 @@
 
       <div class="row">
         <div class="col-lg-6" id="container5">
-          <table *ngIf="isStudent" class="table table-bordered" id="tableInformation5">
+          <table class="table table-bordered" id="tableInformation5">
             <tr>
               <th id="headpostalCode">Code Postal</th>
               <td id="postalCode">
@@ -148,7 +147,7 @@
             </tr>
           </table>
         </div>
-        <div *ngIf="isStudent" class="col-lg-6" id="container6">
+        <div class="col-lg-6" id="container6">
           <table class="table table-bordered" id="tableInformation6">
             <tr>
               <th>Ville</th>
@@ -164,43 +163,44 @@
       </div>
 
       <div class="row">
-        <table *ngIf="isStudent" class="table table-bordered col-lg-6" id="tableInformation7">
+        <table class="table table-bordered col-lg-6" id="tableInformation7">
           <tr>
             <th>Diplôme actuellement préparé à l'UNS</th>
             <td id="currentUNSDiploma">
               <input
+
+                placeholder="Diplôme d'ingénieur"
                 type="text" aria-describedby="basic-addon1"
                 class="form-control long"
                 formControlName="currentUNSDiploma">
             </td>
           </tr>
         </table>
-        <table *ngIf="isStudent" class="table table-bordered col-lg-6" id="tableInformation8">
+        <table class="table table-bordered col-lg-6" id="tableInformation8">
           <tr>
             <th>Diplôme prévu pour l'année d'Échange</th>
             <td id="nextYearExchangeDiploma">
               <input
+                placeholder="Diplôme d'ingénieur"
                 type="text" aria-describedby="basic-addon1"
                 class="form-control long"
                 formControlName="nextYearExchangeDiploma">
             </td>
           </tr>
         </table>
+
+        <table class="table table-bordered col-lg-6" id="tableInformation9">
+          <tr>
+            <th>Fin de validité de la carte de séjour
+            </th>
+            <td id="stayCardEndValidityTd">
+              <input bsDatepicker class="form-control" formControlName="stayCardEndValidity" id="stayCardEndValidity"
+                     type="text">
+            </td>
+          </tr>
+        </table>
+
       </div>
-      <div class="col-xs-12 col-12 col-md-4 form-group">
-
-        <input
-          type="text"
-          class="form-control"
-
-          bsDatepicker
-          formControlName="stayCardEndValidity"
-          id="stayCardEndValidity">
-        <label for="stayCardEndValidity">
-          Fin de Validité de la Carte de Séjour
-        </label>
-      </div>
-
 
 
       <table class="table">
@@ -285,26 +285,26 @@
       </table>
 
 
-    <div class="form-check row">
-      <div class="col-lg-1"></div>
-      <div class="col-lg-1">
-        <input checked class="form-check-input"
-               formControlName="shareMyDetails"
-               id="shareMyDetails"
-               type="checkbox">
+      <div class="form-check row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-1">
+          <input checked class="form-check-input"
+                 formControlName="shareMyDetails"
+                 id="shareMyDetails"
+                 type="checkbox">
+        </div>
+        <label class="form-check-label col-lg-10" for="shareMyDetails" style="display: inline-block">
+          J’accepte que mes coordonnées soient transmises à d’autres
+          personnes ou organismes pour toute question en lien avec mon
+          séjour d’études à l’étranger.
+        </label>
       </div>
-      <label class="form-check-label col-lg-10" for="shareMyDetails" style="display: inline-block">
-        J’accepte que mes coordonnées soient transmises à d’autres
-        personnes ou organismes pour toute question en lien avec mon
-        séjour d’études à l’étranger.
-      </label>
-    </div>
-    <!--(ngSubmit)="onSubmit()"-->
-    <button [ngClass]="{'btn-success': isValidated===true}"
-            (click)="onSubmit()"
-            class="btn btn-lg btn-default btn-block" id="submit" type="submit">
-      Enregister
-    </button>
+      <!--(ngSubmit)="onSubmit()"-->
+      <button (click)="onSubmit()"
+              [ngClass]="{'btn-success': isValidated===true}"
+              class="btn btn-lg btn-default btn-block" id="submit" type="submit">
+        Enregister
+      </button>
     </div>
   </form>
 </div>

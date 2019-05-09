@@ -4,6 +4,7 @@
   max-width: 66%;
   font-size: 300%;
   font-weight: bolder;
+  margin-left: 25%;
   display: inline-block;
 }
 
@@ -11,6 +12,7 @@
   text-align: right;
   width: 33%;
   max-width: 33%;
+  margin-left: 39%;
   font-style: italic;
   color: grey;
   display: inline-block;
