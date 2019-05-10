@@ -25,7 +25,8 @@ export class VoeuxUniversitesComponent implements OnInit {
   sub: Subscription;
 
   constructor(
-    private formBuilder: FormBuilder, private moduleService: ModuleService,
+    private formBuilder: FormBuilder,
+    private moduleService: ModuleService,
     public schoolService: SchoolService) {
   }
 

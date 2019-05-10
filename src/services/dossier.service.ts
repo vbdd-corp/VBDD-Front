@@ -15,11 +15,19 @@ export class DossierService {
 
 
   private fileList: File[] = [];
-
-  public files$: BehaviorSubject<File[]> = new BehaviorSubject(this.fileList);
+  public files$: BehaviorSubject<any[]> = new BehaviorSubject(this.fileList);
 
 
   constructor(private http: HttpClient) {
+  }
+
+  getAllFiles() {
+    this.http.get<any>(this.url, this.httpOptions)
+      .subscribe(files => {
+        this.files$.next(files);
+      }, err => {
+        console.log(err);
+      });
   }
 
   getDossiers() {

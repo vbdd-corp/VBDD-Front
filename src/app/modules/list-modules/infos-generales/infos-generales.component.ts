@@ -20,9 +20,13 @@ export class InfosGeneralesComponent implements OnInit {
   generalInformationsForm: FormGroup;
   @Input() module: Module;
   @ViewChild('myDatePicker')
-  private elDatePicker : ElementRef;
+  private elDatePicker: ElementRef;
+  @ViewChild('shareMyDetails')
+  private elShareMyDetails: ElementRef;
+
   isValidated: boolean = false;
   locale = 'fr';
+
 
   constructor(private formBuilder: FormBuilder,
               private studentService: StudentService,
@@ -114,11 +118,17 @@ export class InfosGeneralesComponent implements OnInit {
     this.generalInformationsForm.controls['currentUNSDiploma'].setValue(this.module.infos.currentUNSDiploma);
     this.generalInformationsForm.controls['nextYearExchangeDiploma'].setValue(this.module.infos.nextYearExchangeDiploma);
 
-    this.generalInformationsForm.controls['stayCardEndValidity'].setValue(new Date());
-
-    if (this.f.nationality.value.toString().toUpperCase() === 'FR')
-      this.elDatePicker.nativeElement.style.display = 'none';
+    if (this.module.infos.stayCardEndValidity)
+      this.generalInformationsForm.controls['stayCardEndValidity']
+        .setValue(Utils.getDateFromTime(this.module.infos.stayCardEndValidity));
     else
+      this.generalInformationsForm.controls['stayCardEndValidity']
+        .setValue(new Date());
+
+    if (this.f.nationality.value.toString().toUpperCase() === 'FR') {
+      this.elDatePicker.nativeElement.style.display = 'none';
+      this.generalInformationsForm.controls['stayCardEndValidity'].setValue(new Date());
+    } else
       this.elDatePicker.nativeElement.style.display = 'block';
   }
 
@@ -128,6 +138,7 @@ export class InfosGeneralesComponent implements OnInit {
     if (value === 'FR') {
       // console.log('this.elDatePicker == ', this.elDatePicker.nativeElement);
       this.elDatePicker.nativeElement.style.display = 'none';
+      this.generalInformationsForm.controls['stayCardEndValidity'].setValue(new Date());
       //this.elLabelPicker.nativeElement.style.display = 'none';
     } else {
       this.elDatePicker.nativeElement.style.display = 'block';
@@ -155,36 +166,42 @@ export class InfosGeneralesComponent implements OnInit {
     };
     console.log('info1 == ', info1);
 
-    console.log('student before => ', this.student);
+    // console.log('student before => ', this.student);
     this.student = Object.assign({}, this.student, info1);
-    console.log('student after => ', this.student);
+    // console.log('student after => ', this.student);
 
     this.studentService.updateStudent(this.student);
     Utils.setStudent(this.student);
 
-
-    /*stayCardEndValidity: null,*/
     let info2 = {
-      studentId: this.student.id,
-
-
-      currentUNSDiploma: null,
-      nextYearExchangeDiploma: null,
-
-      shareMyDetails: this.f.shareMyDetails.value,
-      datediploma1: this.f.datediploma1.value,
-      datediploma2: this.f.datediploma2.value,
-      datediploma3: this.f.datediploma3.value,
-      diploma1: this.f.diploma1.value,
-      diploma2: this.f.diploma2.value,
-      diploma3: this.f.diploma3.value,
-      school1: this.f.school1.value,
-      school2: this.f.school2.value,
-      school3: this.f.school3.value,
-      note2: this.f.note2.value,
-      note1: this.f.note1.value,
-      note3: this.f.note3.value,
+      studentId: this.student.id
     };
+
+    const arrayList = [
+      'currentUNSDiploma',
+      'nextYearExchangeDiploma',
+      'shareMyDetails',
+      'datediploma1',
+      'datediploma2',
+      'datediploma3',
+      'diploma1',
+      'diploma2',
+      'diploma3',
+      'school1',
+      'school2',
+      'school3',
+      'note1',
+      'note2',
+      'note3'
+    ];
+
+    for (const key in arrayList) {
+      console.log('val == ', arrayList[key]);
+      if (this.f[arrayList[key]].value)
+        info2[arrayList[key]] = this.f[arrayList[key]].value;
+      else
+        info2[arrayList[key]] = null;
+    }
 
     if (this.elDatePicker.nativeElement.style.display === 'block')
       info2 = Object.assign({}, info2, {
@@ -192,13 +209,24 @@ export class InfosGeneralesComponent implements OnInit {
           new Date(this.f.stayCardEndValidity.value)
         ),
       });
+    else
+      info2 = Object.assign({}, info2, {
+        stayCardEndValidity: null
+      });
 
+    info2['shareMyDetails'] = this.elShareMyDetails.nativeElement.checked;
 
-
-    console.log('info2 == ', info2);
+    /*console.log('info2 == ', info2);
     const temp = new Date(this.f.stayCardEndValidity.value);
     console.log('temp == ', temp);
-    console.log('myDateValue == ', Utils.getTimeFromDate(temp));
+    console.log('myDateValue == ', Utils.getTimeFromDate(temp));*/
+
+    this.moduleService.updateModule(this.module.id, info2).then(
+      updatedModule => {
+        this.module = updatedModule;
+        console.log('UPDATED => ', updatedModule);
+      }
+    );
 
 
     this.isValidated = true;
