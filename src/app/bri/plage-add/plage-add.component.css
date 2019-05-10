@@ -1,0 +1,17 @@
+.border-right {
+  border-right: 6px solid #949494;
+  height: max-content;
+}
+
+.border-rectangle {
+  border: 2px solid lightgrey ;
+}
+
+.middle {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+timepicker {
+  display: inline;
+}
