@@ -37,6 +37,11 @@ table.table-bordered td{
   border-collapse: collapse;
 }
 
+table#tableInformation9 {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
 div#some-padding {
   padding-right: 15px;
   padding-left: 15px;

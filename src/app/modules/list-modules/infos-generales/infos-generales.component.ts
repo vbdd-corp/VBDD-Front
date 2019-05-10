@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModuleService} from '../../../../services/module.service';
 import {Module} from '../../../../models/module';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
+import {StudentService} from "../../../../services/student.service";
 
 
 @Component({
@@ -20,14 +21,17 @@ export class InfosGeneralesComponent implements OnInit {
   @Input() module: Module;
   @ViewChild('myDatePicker')
   private elDatePicker : ElementRef;
-  /*@ViewChild('myLabelPicker')
-  private elLabelPicker : ElementRef;*/
   isValidated: boolean = false;
   locale = 'fr';
 
   constructor(private formBuilder: FormBuilder,
+              private studentService: StudentService,
               private moduleService: ModuleService,
               private localeService: BsLocaleService) {
+  }
+
+  get f() {
+    return this.generalInformationsForm.controls;
   }
 
   ngOnInit() {
@@ -36,6 +40,7 @@ export class InfosGeneralesComponent implements OnInit {
     this.localeService.use(this.locale);
 
     console.log('this.module.id == ', this.module.id);
+    console.log('this.module == ', this.module);
 
     this.generalInformationsForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -111,10 +116,10 @@ export class InfosGeneralesComponent implements OnInit {
 
     this.generalInformationsForm.controls['stayCardEndValidity'].setValue(new Date());
 
-  }
-
-  get f() {
-    return this.generalInformationsForm.controls;
+    if (this.f.nationality.value.toString().toUpperCase() === 'FR')
+      this.elDatePicker.nativeElement.style.display = 'none';
+    else
+      this.elDatePicker.nativeElement.style.display = 'block';
   }
 
   onNationalityChange(event) {
@@ -131,9 +136,7 @@ export class InfosGeneralesComponent implements OnInit {
   }
 
   onSubmit() {
-
-    //this.moduleService.updateModule(this.module.id, ()); #dp="bsDatepicker"
-
+    console.log('this.student.id == ', this.student.id);
     const info1 = {
       firstName: this.f.firstName.value,
       lastName: this.f.lastName.value,
@@ -150,15 +153,23 @@ export class InfosGeneralesComponent implements OnInit {
       mail: this.f.mail.value,
       address: this.f.address.value
     };
-
     console.log('info1 == ', info1);
 
-    const info2 = {
+    console.log('student before => ', this.student);
+    this.student = Object.assign({}, this.student, info1);
+    console.log('student after => ', this.student);
+
+    this.studentService.updateStudent(this.student);
+    Utils.setStudent(this.student);
+
+
+    /*stayCardEndValidity: null,*/
+    let info2 = {
       studentId: this.student.id,
 
-      'stayCardEndValidity': null,
-      'currentUNSDiploma': null,
-      'nextYearExchangeDiploma': null,
+
+      currentUNSDiploma: null,
+      nextYearExchangeDiploma: null,
 
       shareMyDetails: this.f.shareMyDetails.value,
       datediploma1: this.f.datediploma1.value,
@@ -174,6 +185,20 @@ export class InfosGeneralesComponent implements OnInit {
       note1: this.f.note1.value,
       note3: this.f.note3.value,
     };
+
+    if (this.elDatePicker.nativeElement.style.display === 'block')
+      info2 = Object.assign({}, info2, {
+        stayCardEndValidity: Utils.getTimeFromDate(
+          new Date(this.f.stayCardEndValidity.value)
+        ),
+      });
+
+
+
+    console.log('info2 == ', info2);
+    const temp = new Date(this.f.stayCardEndValidity.value);
+    console.log('temp == ', temp);
+    console.log('myDateValue == ', Utils.getTimeFromDate(temp));
 
 
     this.isValidated = true;
