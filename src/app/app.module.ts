@@ -51,6 +51,7 @@ import { CalendarCreneauBriComponent } from './calendar/calendar-creneau-bri/cal
 import { PlanningBriComponent } from './bri/planning-bri/planning-bri.component';
 import { CalendarCreneauStudentComponent } from './calendar/calendar-creneau-student/calendar-creneau-student.component';
 import { PriseRdvSideComponent } from './students/prise-rdv-side/prise-rdv-side.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 registerLocaleData(localeFr);
 
@@ -98,6 +99,7 @@ defineLocale('fr', frLocale);
   ],
   imports: [
     BrowserModule,
+    NgbModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
