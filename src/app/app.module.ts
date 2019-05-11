@@ -36,7 +36,7 @@ import {ContratEtudeComponent} from './modules/list-modules/contrat-etude/contra
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {VoeuxUniversitesComponent} from './modules/list-modules/voeux-universites/voeux-universites.component';
 import {AvailabilityBriComponent} from './bri/availability-bri/availability-bri.component';
-import {CalendarPlageComponent} from './plages/calendar-plage/calendar-plage.component';
+import {CalendarPlageComponent} from './calendar/calendar-plage/calendar-plage.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CalendarModule, DateAdapter} from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
@@ -47,8 +47,10 @@ import {BsDatepickerModule, DatepickerModule} from 'ngx-bootstrap/datepicker';
 import {defineLocale} from 'ngx-bootstrap/chronos';
 import {frLocale} from 'ngx-bootstrap/locale';
 import {ReportsFiltererComponent} from './bri/reports-filterer/reports-filterer.component';
-import { CalendarCreneauComponent } from './creneaux/calendar-creneau/calendar-creneau.component';
+import { CalendarCreneauBriComponent } from './calendar/calendar-creneau-bri/calendar-creneau-bri.component';
 import { PlanningBriComponent } from './bri/planning-bri/planning-bri.component';
+import { CalendarCreneauStudentComponent } from './calendar/calendar-creneau-student/calendar-creneau-student.component';
+import { PriseRdvSideComponent } from './students/prise-rdv-side/prise-rdv-side.component';
 
 registerLocaleData(localeFr);
 
@@ -88,8 +90,10 @@ defineLocale('fr', frLocale);
     PlageEditComponent,
     PlageAddComponent,
     ReportsFiltererComponent,
-    CalendarCreneauComponent,
-    PlanningBriComponent
+    CalendarCreneauBriComponent,
+    PlanningBriComponent,
+    CalendarCreneauStudentComponent,
+    PriseRdvSideComponent
 
   ],
   imports: [

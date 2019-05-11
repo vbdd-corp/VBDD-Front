@@ -1,0 +1,25 @@
+<div class="border-rectangle">
+  <h4>Type de rendez-vous</h4>
+  <div class="text-center">
+    <div *ngIf="appointmentTypes" class="btn-group" dropdown>
+      <button *ngIf="appointmentTypeSelected" id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+              aria-controls="dropdown-basic">
+        {{ appointmentTypeSelected.name }} <span class="caret"></span>
+      </button>
+      <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+          role="menu" aria-labelledby="button-basic">
+        <li *ngFor="let appointmentType of appointmentTypes" (click)="selectAppointmentType(appointmentType)" class="pointer" role="menuitem"><a class="dropdown-item">{{appointmentType.name}}</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="bs-callout bs-callout-info">
+  <h4>Informations</h4> <br>
+  A chaque module remplis, n'oubliez pas de cliquer sur <i>Enregistrer</i>. <br> <br>Une fois ceci fait, vous pouvez
+  quitter la page !
+</div>
+<div class="bs-callout bs-callout-info">
+  <h4>Légende</h4> <br>
+  A chaque module remplis, n'oubliez pas de cliquer sur <i>Enregistrer</i>. <br> <br>Une fois ceci fait, vous pouvez
+  quitter la page !
+</div>

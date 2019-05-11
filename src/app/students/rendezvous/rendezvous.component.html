@@ -7,7 +7,7 @@
         </h3>
 
         <div align="center">
-          <button (click)="goToRendezvous()" class="btn btn-lg btn-info" disabled href="/priseRdvStd"><span
+          <button [routerLink]="['/priseRdvStd']" class="btn btn-lg btn-info"><span
             class="glyphicon glyphicon-calendar"></span>
             Prendre un rendez-vous
           </button>

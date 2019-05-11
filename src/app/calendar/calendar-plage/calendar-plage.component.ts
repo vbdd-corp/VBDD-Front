@@ -8,8 +8,8 @@ import {Plage} from '../../../models/plage';
 
 @Component({
   selector: 'app-calendar-plage',
-  templateUrl: './calendar-plage.component.html',
-  styleUrls: ['./calendar-plage.component.css'],
+  templateUrl: '../calendar.component.html',
+  styleUrls: ['../calendar.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {

@@ -9,9 +9,9 @@ import {Creneau} from '../../../models/creneau';
 import {CreneauService} from '../../../services/creneau.service';
 
 @Component({
-  selector: 'app-calendar-creneau',
-  templateUrl: './calendar-creneau.component.html',
-  styleUrls: ['./calendar-creneau.component.css'],
+  selector: 'app-calendar-creneau-bri',
+  templateUrl: '../calendar.component.html',
+  styleUrls: ['../calendar.component.css'],
   providers: [
     {
       provide: CalendarDateFormatter,
@@ -19,7 +19,7 @@ import {CreneauService} from '../../../services/creneau.service';
     }
   ]
 })
-export class CalendarCreneauComponent implements OnInit {
+export class CalendarCreneauBriComponent implements OnInit {
 
   events: CalendarEvent<Creneau>[] = [];
 
@@ -71,7 +71,7 @@ export class CalendarCreneauComponent implements OnInit {
 
   constructor(private creneauService :CreneauService) {
     this.sub = creneauService.creneaux$.subscribe( creneaux => {
-      this.creneaux = [];
+      this.events = [];
       creneaux.forEach( creneau => {
         const event = this.creneauToCalendarEvent(creneau);
         this.events.push(event);
@@ -85,7 +85,7 @@ export class CalendarCreneauComponent implements OnInit {
 
   ngOnInit() {
 
-    this.creneauService.getCreneaux();
+    this.creneauService.getCreneauxByBri(Utils.getUser().id);
   }
 
   ngOnDestroy(): void {

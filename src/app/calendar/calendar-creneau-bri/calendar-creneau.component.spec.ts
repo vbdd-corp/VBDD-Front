@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CalendarCreneauComponent } from './calendar-creneau.component';
+import { CalendarCreneauBriComponent } from './calendar-creneau-bri.component';
 
 describe('CalendarCreneauComponent', () => {
-  let component: CalendarCreneauComponent;
-  let fixture: ComponentFixture<CalendarCreneauComponent>;
+  let component: CalendarCreneauBriComponent;
+  let fixture: ComponentFixture<CalendarCreneauBriComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CalendarCreneauComponent ]
+      declarations: [ CalendarCreneauBriComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CalendarCreneauComponent);
+    fixture = TestBed.createComponent(CalendarCreneauBriComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
