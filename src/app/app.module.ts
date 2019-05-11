@@ -47,8 +47,9 @@ import {BsDatepickerModule, DatepickerModule} from 'ngx-bootstrap/datepicker';
 import {defineLocale} from 'ngx-bootstrap/chronos';
 import {frLocale} from 'ngx-bootstrap/locale';
 import {ReportsFiltererComponent} from './bri/reports-filterer/reports-filterer.component';
-import { CalendarCreneauComponent } from './creneaux/calendar-creneau/calendar-creneau.component';
-import { PlanningBriComponent } from './bri/planning-bri/planning-bri.component';
+import {CalendarCreneauComponent} from './creneaux/calendar-creneau/calendar-creneau.component';
+import {PlanningBriComponent} from './bri/planning-bri/planning-bri.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 registerLocaleData(localeFr);
 
@@ -94,6 +95,7 @@ defineLocale('fr', frLocale);
   ],
   imports: [
     BrowserModule,
+    NgbModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,

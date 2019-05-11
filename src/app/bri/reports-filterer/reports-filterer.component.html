@@ -17,23 +17,39 @@
       <div class="col-sm-12">
 
         <div class="col-lg-3">
-          <button (click)="downloadAsCSV();" class="btn btn-info" id="downloadAsCSV"><span
-            class="glyphicon glyphicon-download"></span>Télécharger au format PDF
-          </button>
+          <div class="col-md-12">
+            <button (click)="downloadAsPDF();" class="btn btn-success" id="downloadAsPDF"><span
+              class="glyphicon glyphicon-download"></span>Télécharger au format PDF
+            </button>
+          </div>
+          <div class="col-md-12" style="margin-top: 15px;">
+            <button (click)="downloadAsCSV();" class="btn btn-primary" id="downloadAsCSV"><span
+              class="glyphicon glyphicon-download"></span>Télécharger au format CSV
+            </button>
+          </div>
         </div>
 
         <div class="col-lg-4">
-          <p>
-            Listres des filtres : <i>ecole</i>, <i>cursus</i>, <i>pays</i>, <i>etudiant (format: 'Nom Prenom')</i>
-          </p>
+          <ul id="filterUl"><b>Filtres utilisables</b><br>
+            <li>ecole: City U</li>
+            <li>cursus: SI3</li>
+            <li>pays: Chine</li>
+            <li>etudiant: Jean Dupont</li>
+          </ul>
         </div>
 
         <div class="col-lg-5">
 
           <div class="col-lg-7">
+
+            <ng-template #rt class="btn btn-error" let-r="result" let-t="term">
+              <ngb-highlight [result]="r.name" [term]="t" id="nbHiliight"></ngb-highlight>
+            </ng-template>
+
             <input (keyup.enter)="filter();" aria-describedby="basic-addon1"
                    class="form-control input-file-name no-display"
-                   formControlName="filter" id="filter" placeholder="cursus:SI3" type="text">
+                   [(ngModel)]="model" [inputFormatter]="formatter" [ngbTypeahead]="search" [resultTemplate]="rt"
+                   formControlName="filter" id="filter" placeholder="etudiant: Jean Dupont" type="text">
           </div>
           <div class="color-lg-5">
             <button (click)="filter();" class="btn btn-success" id="filterBtn" type="submit"><span
@@ -65,15 +81,17 @@
         </thead>
         <tbody>
         <tr *ngFor="let dossier of dossiers">
+
           <td>{{dossier.id}}</td>
+
           <td><a [routerLink]="['/reports/edit/', dossier.id]" data-placement="top" data-toggle="tooltip"
                  title="Cliquez pour visionner le dossier"><b>{{dossier.name}}</b></a></td>
+
           <td>{{dossier.student.firstName + " " + dossier.student.lastName}}</td>
           <td>{{dossier.student.major}}</td>
-          <!--          TODO !-->
-          <td>Will come soon</td>
-          <td>Will come soon</td>
-          <!--          TODO !-->
+          <td> {{ (getPaysAccueil(dossier) == undefined || getPaysAccueil(dossier) == "" || getPaysAccueil(dossier) == null) ? "Non déterminé" : getPaysAccueil(dossier)}} </td>
+          <td> {{ (getSchool(dossier) == undefined || getSchool(dossier) == "" || getSchool(dossier) == null) ? "Non déterminé" : getSchool(dossier)}}  </td>
+
         </tr>
         <tr>
         </tbody>
