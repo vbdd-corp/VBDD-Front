@@ -7,31 +7,25 @@
     <br>
     <div class="text-center">
       <div class="btn-group text-center" dropdown>
-        <button *ngIf="schoolSelected3"
-                id="button-basic-3" dropdownToggle type="button"
-                class="btn btn-primary dropdown-toggle text-center"
-                aria-controls="dropdown-basic">
-          {{ schoolSelected3.name }} -  {{schoolSelected3.city}}, {{schoolSelected3.country}}
-          <span class="caret"></span>
-        </button>
-
-        <button *ngIf="!schoolSelected3" id="button-basic-3-empty"
+        <button *ngIf="this.basicWishes"
+                id="button-basic-3-empty"
                 dropdownToggle type="button"
                 class="btn btn-primary dropdown-toggle text-center"
                 aria-controls="dropdown-basic">
-          Sélectionnez votre Université d'Accueil
+          Sélectionnez un Voeu
           <span class="caret"></span>
         </button>
         <ul id="dropdown-basic-3" *dropdownMenu
             class="dropdown-menu text-center"
             role="menu"
             aria-labelledby="button-basic">
-          <li class="pointer" role="menuitem" (click)="setLineToNull(3)">
+          <li class="pointer" role="menuitem">
             <a class="dropdown-item">Aucune</a>
           </li>
-          <li *ngFor="let school of schoolList" class="pointer" role="menuitem" (click)="selectSchool(school, 3)">
-            <a class="dropdown-item">
-              {{school.name}}  -  {{school.city}}, {{school.country}}
+          <li *ngFor="let choice of this.basicWishesArray"
+              class="pointer" role="menuitem">
+            <a class="dropdown-item" *ngIf="choice.school">
+              {{choice.school.name}}  -  {{choice.school.city}}, {{choice.school.country}}
             </a>
           </li>
         </ul>

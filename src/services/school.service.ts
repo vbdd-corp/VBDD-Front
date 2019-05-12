@@ -12,24 +12,40 @@ import {Module} from "../models/module";
 })
 export class SchoolService {
 
-  private school: School = null;
+  private school1: School = null;
+  private school2: School = null;
+  private school3: School = null;
   private schoolList: School[] = [];
   private url = serverUrl + '/api/';
   private httpOptions = httpOptionsBase;
 
   // pour contrat-etudes
-  public school$: BehaviorSubject<School> = new BehaviorSubject(this.school);
+  public school1$: BehaviorSubject<School> = new BehaviorSubject(this.school1);
+  public school2$: BehaviorSubject<School> = new BehaviorSubject(this.school2);
+  public school3$: BehaviorSubject<School> = new BehaviorSubject(this.school3);
   public schools$: BehaviorSubject<School[]> = new BehaviorSubject(this.schoolList);
 
   constructor(private http: HttpClient) {
   }
 
-  getSchoolById(id: number) {
+  getSchoolById(id: number, schoolNumber: number) {
     const urlWithId = this.url + 'school/' + id;
       this.http.get(urlWithId)
         .subscribe((school: School) => {
-          this.school$.next(school);
-          this.school = school;
+          switch (schoolNumber) {
+            case 1:
+              this.school1$.next(school);
+              this.school1 = school;
+              break;
+            case 2:
+              this.school2$.next(school);
+              this.school2 = school;
+              break;
+            case 3:
+              this.school3$.next(school);
+              this.school3 = school;
+              break;
+          }
         });
   }
 

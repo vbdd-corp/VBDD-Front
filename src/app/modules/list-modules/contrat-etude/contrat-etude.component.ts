@@ -19,54 +19,88 @@ export class ContratEtudeComponent implements OnInit {
   isValidated: boolean = false;
   moduleVoeuxUniversites: Module;
 
+  private basicWishes = undefined;
+  private basicWishesArray = [];
+  private infos;
+  private choice1 = {};
+  private choice2 = {};
+  private choice3 = {};
+
   constructor(
     private formBuilder: FormBuilder,
     private moduleService: ModuleService,
     private schoolService: SchoolService) {
+
+    this.schoolService.school1$.subscribe(school => {
+      if (Object.keys(this.choice1).length > 0) {
+        this.choice1 = Object.assign({}, this.choice1, {
+          school: school
+        });
+        if (school != null) {
+          this.basicWishesArray.push(this.choice1);
+          this.basicWishesArray.sort((a, b) => a.schoolID - b.schoolID);
+        }
+      }
+    });
+
+    this.schoolService.school2$.subscribe(school => {
+      if (Object.keys(this.choice2).length > 0) {
+        this.choice2 = Object.assign({}, this.choice2, {
+          school: school
+        });
+        if (school != null) {
+          this.basicWishesArray.push(this.choice2);
+          this.basicWishesArray.sort((a, b) => a.schoolID - b.schoolID);
+        }
+      }
+    });
+
+    this.schoolService.school3$.subscribe(school => {
+      if (Object.keys(this.choice3).length > 0) {
+        this.choice3 = Object.assign({}, this.choice3, {
+          school: school
+        });
+        if (school != null) {
+          this.basicWishesArray.push(this.choice3);
+          this.basicWishesArray.sort((a, b) => a.schoolID - b.schoolID);
+        }
+      }
+    });
   }
 
   get f() {
     return this.contratForm.controls;
   }
 
-  attachSchool = async (choiceObject) => {
-    //console.log('choice object == ', choiceObject);
-    //console.log('choiceObject.id == ', choiceObject.schoolID);
-
-
-    this.schoolService.school$.subscribe(school => {
-      choiceObject = Object.assign({}, choiceObject, {
-        school: school
-      });
-      console.log('choiceObject == ', choiceObject);
-    });
-    await this.schoolService.getSchoolById(choiceObject.schoolID);
-  };
-
-  async getListVoeux(file: File) {
-    let basicWishes = file.modules.filter(
+  getListVoeux(file: File) {
+    this.basicWishes = file.modules.filter(
       module => module.typeModule.id === 17)[0];
-    basicWishes = Object.assign({}, basicWishes, {});
-    console.log('basicWishes == ', basicWishes);
-    console.log('basicWishes.infos == ', basicWishes.infos);
+    //basicWishes = Object.assign({}, basicWishes, {});
+    //console.log('basicWishes == ', this.basicWishes);
+    console.log('basicWishes.infos == ', this.basicWishes.infos);
 
-    let infos = basicWishes.infos;
-    for (let choice in infos) {
+    this.infos = this.basicWishes.infos;
+    for (let choice in this.infos) {
       //console.log('choice == ', infos[choice]);
-      if (infos[choice].schoolID !== null && infos[choice].schoolID !== undefined) {
-        await this.attachSchool(infos[choice]);
-        console.log('choice  after attach == ', infos[choice]);
+      if (typeof this.infos[choice].schoolID === 'number') {
+        this[choice] = this.infos[choice];
+        console.log('BEFORE CALL schoolID == ', this.infos[choice].schoolID);
+        this.schoolService.getSchoolById(
+          this.infos[choice].schoolID,
+          parseInt(choice.split('choice')[1], 10));
+        //this.infos[choice] = this.choiceObject1;
       }
     }
 
-    return basicWishes;
   }
 
   ngOnInit() {
-    //faire fonction qui retourne tab vide ou tableau de shool a partir d'un argument de type file
-    //this.moduleVoeuxUniversites = this.getListVoeux(this.file);
+    //faire fonction qui retourne tab vide ou tableau de shool a
+    // partir d'un argument de type file
+    this.getListVoeux(this.file);
 
-    console.log('this.moduleVoeuxUniversites == ', this.moduleVoeuxUniversites);
+    console.log('basicWishesArray => ', this.basicWishesArray);
+
 
     this.contratForm = this.formBuilder.group({
       codeCours1: ['', Validators.required],
