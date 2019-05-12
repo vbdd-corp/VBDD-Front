@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModuleService} from '../../../../services/module.service';
 import {SchoolService} from "../../../../services/school.service";
@@ -16,6 +16,10 @@ export class ContratEtudeComponent implements OnInit {
   contratForm: FormGroup;
   @Input() module: Module;
   @Input() file: File;
+  @ViewChild('togglePrintemps')
+  private elTogglePrintemps: ElementRef;
+  @ViewChild('toggleAutomne')
+  private elToggleAutomne: ElementRef;
   isValidated: boolean = false;
   moduleVoeuxUniversites: Module;
 
@@ -25,6 +29,30 @@ export class ContratEtudeComponent implements OnInit {
   private choice1 = {};
   private choice2 = {};
   private choice3 = {};
+  private activeTab = 'search';
+
+  search(activeTab){
+    this.activeTab = activeTab;
+  }
+
+  result(activeTab){
+    this.activeTab = activeTab;
+  }
+
+  selectWish(choice) {
+    let index = this.basicWishesArray.indexOf(choice);
+    console.log('index in basicArray => ', index);
+    if (choice.semester === 'fall') {
+      this.elToggleAutomne.nativeElement.classList.remove('disabled');
+      this.elTogglePrintemps.nativeElement.classList.add('disabled');
+    } else if (choice.semester === 'spring') {
+      this.elToggleAutomne.nativeElement.classList.add('disabled');
+      this.elTogglePrintemps.nativeElement.classList.remove('disabled');
+    } else if (choice.semester === 'full') {
+      this.elToggleAutomne.nativeElement.classList.remove('disabled');
+      this.elTogglePrintemps.nativeElement.classList.remove('disabled');
+    }
+  }
 
   constructor(
     private formBuilder: FormBuilder,
@@ -75,23 +103,19 @@ export class ContratEtudeComponent implements OnInit {
   getListVoeux(file: File) {
     this.basicWishes = file.modules.filter(
       module => module.typeModule.id === 17)[0];
-    //basicWishes = Object.assign({}, basicWishes, {});
-    //console.log('basicWishes == ', this.basicWishes);
     console.log('basicWishes.infos == ', this.basicWishes.infos);
-
     this.infos = this.basicWishes.infos;
+
     for (let choice in this.infos) {
-      //console.log('choice == ', infos[choice]);
       if (typeof this.infos[choice].schoolID === 'number') {
         this[choice] = this.infos[choice];
-        console.log('BEFORE CALL schoolID == ', this.infos[choice].schoolID);
+        //console.log('BEFORE CALL schoolID == ', this.infos[choice].schoolID);
         this.schoolService.getSchoolById(
           this.infos[choice].schoolID,
-          parseInt(choice.split('choice')[1], 10));
-        //this.infos[choice] = this.choiceObject1;
+          parseInt(choice.split('choice')[1], 10)
+        );
       }
     }
-
   }
 
   ngOnInit() {

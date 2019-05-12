@@ -5,3 +5,26 @@
 td input {
   width: 200px;
 }
+
+.vl {
+  border-left: 6px solid #050505;
+  height: 500px;
+  margin-left: 50%;
+  margin-top: 2%;
+}
+
+.toggleName{
+  cursor: pointer;
+}
+
+#firstToggle{
+  font-size: 20px;
+  position: relative;
+  left: 20%;
+}
+
+#secondToggle{
+  font-size: 20px;
+  position: relative;
+  left: 35%;
+}
