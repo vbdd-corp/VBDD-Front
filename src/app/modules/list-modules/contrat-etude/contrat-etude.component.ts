@@ -1,13 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModuleService} from '../../../../services/module.service';
+import {SchoolService} from "../../../../services/school.service";
+import {File} from "../../../../models/file";
 import {Module} from "../../../../models/module";
+
 @Component({
   selector: 'app-contrat-etude',
   templateUrl: './contrat-etude.component.html',
   styleUrls: ['./contrat-etude.component.css']
 })
-
 
 export class ContratEtudeComponent implements OnInit {
 
@@ -27,21 +29,34 @@ export class ContratEtudeComponent implements OnInit {
     return this.contratForm.controls;
   }
 
-  /*attachSchool = (file) => {
-    const resFile = Object.assign({}, file, {
-      student: getStudentSafely(file.studentId),
-    });
-    delete resFile.studentId;
-    return resFile;
-  };*/
+  attachSchool = async (choiceObject) => {
+    //console.log('choice object == ', choiceObject);
+    //console.log('choiceObject.id == ', choiceObject.schoolID);
 
-  getListVoeux(file: File) {
+
+    this.schoolService.school$.subscribe(school => {
+      choiceObject = Object.assign({}, choiceObject, {
+        school: school
+      });
+      console.log('choiceObject == ', choiceObject);
+    });
+    await this.schoolService.getSchoolById(choiceObject.schoolID);
+  };
+
+  async getListVoeux(file: File) {
     let basicWishes = file.modules.filter(
       module => module.typeModule.id === 17)[0];
-    //basicWishes.forEach
-    for (let choice in basicWishes) {
-      if (basicWishes[choice].schoolID != null)
-        basicWishes[choice].school = this.schoolService.getSchoolById(basicWishes[choice].schoolID);
+    basicWishes = Object.assign({}, basicWishes, {});
+    console.log('basicWishes == ', basicWishes);
+    console.log('basicWishes.infos == ', basicWishes.infos);
+
+    let infos = basicWishes.infos;
+    for (let choice in infos) {
+      //console.log('choice == ', infos[choice]);
+      if (infos[choice].schoolID !== null && infos[choice].schoolID !== undefined) {
+        await this.attachSchool(infos[choice]);
+        console.log('choice  after attach == ', infos[choice]);
+      }
     }
 
     return basicWishes;
@@ -49,7 +64,7 @@ export class ContratEtudeComponent implements OnInit {
 
   ngOnInit() {
     //faire fonction qui retourne tab vide ou tableau de shool a partir d'un argument de type file
-    this.moduleVoeuxUniversites = this.getListVoeux(this.file);
+    //this.moduleVoeuxUniversites = this.getListVoeux(this.file);
 
     console.log('this.moduleVoeuxUniversites == ', this.moduleVoeuxUniversites);
 
@@ -144,6 +159,3 @@ export class ContratEtudeComponent implements OnInit {
 
 
 }
-
-import {File} from "../../../../models/file";
-import {SchoolService} from "../../../../services/school.service";

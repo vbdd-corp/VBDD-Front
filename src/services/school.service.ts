@@ -12,10 +12,13 @@ import {Module} from "../models/module";
 })
 export class SchoolService {
 
+  private school: School = null;
   private schoolList: School[] = [];
   private url = serverUrl + '/api/';
   private httpOptions = httpOptionsBase;
 
+  // pour contrat-etudes
+  public school$: BehaviorSubject<School> = new BehaviorSubject(this.school);
   public schools$: BehaviorSubject<School[]> = new BehaviorSubject(this.schoolList);
 
   constructor(private http: HttpClient) {
@@ -23,9 +26,13 @@ export class SchoolService {
 
   getSchoolById(id: number) {
     const urlWithId = this.url + 'school/' + id;
-    this.http.get<School>(urlWithId)
-      .subscribe((school: School) => {});
+      this.http.get(urlWithId)
+        .subscribe((school: School) => {
+          this.school$.next(school);
+          this.school = school;
+        });
   }
+
 
   getSchool() {
     this.http.get<School[]>(this.url + 'school', this.httpOptions)

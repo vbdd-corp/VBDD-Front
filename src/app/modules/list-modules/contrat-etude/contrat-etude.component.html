@@ -3,260 +3,292 @@
 
   <div align="center" id="mainDiv">
 
-      <h3>Programme d'études pendant le séjour à l'étranger</h3>
-      <br>
-      <h4>Veuillez remplir le tableau ci-dessous (laisser blanc si nécéssaire)</h4>
-      <br>
+    <h3>Programme d'études pendant le séjour à l'étranger</h3>
+    <br>
+    <div class="text-center">
+      <div class="btn-group text-center" dropdown>
+        <button *ngIf="schoolSelected3"
+                id="button-basic-3" dropdownToggle type="button"
+                class="btn btn-primary dropdown-toggle text-center"
+                aria-controls="dropdown-basic">
+          {{ schoolSelected3.name }} -  {{schoolSelected3.city}}, {{schoolSelected3.country}}
+          <span class="caret"></span>
+        </button>
 
-
-      <table class="table">
-        <thead>
-        <tr>
-          <th scope="col">Code du cours</th>
-          <th scope="col">Titre du cours</th>
-          <th scope="col">Nombre de crédits</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours1"
-                   value="{{ this.module.infos.codeCours1 }}"
-                   placeholder="21343D"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours1"
-                   value="{{ this.module.infos.titreCours1 }}"
-                   placeholder="Machine learning"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits1"
-                   value="{{ this.module.infos.nombreCredits1 }}"
-                   placeholder="3"
-                   type="text">
-          </td>
-        </tr>
-
-        <tr>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours2"
-                   value="{{ this.module.infos.codeCours2 }}"
-                   placeholder="432455"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours2"
-                   value="{{ this.module.infos.titreCours2 }}"
-                   placeholder="Data Science"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits3" placeholder="2"
-                   value="{{ this.module.infos.nombreCredits2 }}"
-                   type="text">
-          </td>
-        </tr>
-
-        <tr>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours3" placeholder="..."
-                   value="{{ this.module.infos.codeCours3 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours3" placeholder="..."
-                   value="{{ this.module.infos.titreCours3 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits3"
-                   value="{{ this.module.infos.nombreCredits3 }}"
-                   placeholder="..."
-                   type="text">
-          </td>
-        </tr>
-
-        <tr>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours4" placeholder="..."
-                   value="{{ this.module.infos.codeCours4 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours4" placeholder="..."
-                   value="{{ this.module.infos.titreCours4 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits4"
-                   value="{{ this.module.infos.nombreCredits4 }}"
-                   placeholder="..."
-                   type="text">
-          </td>
-        </tr>
-
-        <tr>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours5" placeholder="..."
-                   value="{{ this.module.infos.codeCours5 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours5" placeholder="..."
-                   value="{{ this.module.infos.titreCours5 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits5"
-                   value="{{ this.module.infos.nombreCredits5 }}"
-                   placeholder="..."
-                   type="text">
-          </td>
-        </tr>
-
-        <tr>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours6" placeholder="..."
-                   value="{{ this.module.infos.codeCours6 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours6" placeholder="..."
-                   value="{{ this.module.infos.titreCours6 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits6"
-                   value="{{ this.module.infos.nombreCredits6 }}"
-                   placeholder="..."
-                   type="text">
-          </td>
-        </tr>
-
-        <tr>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours7" placeholder="..."
-                   value="{{ this.module.infos.codeCours7 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours7" placeholder="..."
-                   value="{{ this.module.infos.titreCours7 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits7"
-                   value="{{ this.module.infos.nombreCredits7 }}"
-                   placeholder="..."
-                   type="text">
-          </td>
-        </tr>
-
-        <tr>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours8" placeholder="..."
-                   value="{{ this.module.infos.codeCours8 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours8" placeholder="..."
-                   value="{{ this.module.infos.titreCours8 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits8"
-                   value="{{ this.module.infos.nombreCredits8 }}"
-                   placeholder="..."
-                   type="text">
-          </td>
-        </tr>
-
-        <tr>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours9" placeholder="..."
-                   value="{{ this.module.infos.codeCours9 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours9" placeholder="..."
-                   value="{{ this.module.infos.titreCours9 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits9"
-                   value="{{ this.module.infos.nombreCredits9 }}"
-                   placeholder="..."
-                   type="text">
-          </td>
-        </tr>
-
-        <tr>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours10" placeholder="..."
-                   value="{{ this.module.infos.codeCours10 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours10" placeholder="..."
-                   value="{{ this.module.infos.titreCours10 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits10"
-                   value="{{ this.module.infos.nombreCredits10 }}"
-                   placeholder="..."
-                   type="text">
-          </td>
-        </tr>
-
-        <tr>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours11" placeholder="..."
-                   value="{{ this.module.infos.codeCours11 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours11" placeholder="..."
-                   value="{{ this.module.infos.titreCours11 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits11"
-                   value="{{ this.module.infos.nombreCredits11 }}"
-                   placeholder="..."
-                   type="text">
-          </td>
-        </tr>
-
-        <tr>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours12" placeholder="..."
-                   value="{{ this.module.infos.codeCours12 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours12" placeholder="..."
-                   value="{{ this.module.infos.titreCours12 }}"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits12"
-                   value="{{ this.module.infos.nombreCredits12 }}"
-                   placeholder="..."
-                   type="text">
-          </td>
-        </tr>
-
-        </tbody>
-      </table>
+        <button *ngIf="!schoolSelected3" id="button-basic-3-empty"
+                dropdownToggle type="button"
+                class="btn btn-primary dropdown-toggle text-center"
+                aria-controls="dropdown-basic">
+          Sélectionnez votre Université d'Accueil
+          <span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic-3" *dropdownMenu
+            class="dropdown-menu text-center"
+            role="menu"
+            aria-labelledby="button-basic">
+          <li class="pointer" role="menuitem" (click)="setLineToNull(3)">
+            <a class="dropdown-item">Aucune</a>
+          </li>
+          <li *ngFor="let school of schoolList" class="pointer" role="menuitem" (click)="selectSchool(school, 3)">
+            <a class="dropdown-item">
+              {{school.name}}  -  {{school.city}}, {{school.country}}
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
+    <h4>Veuillez remplir le tableau ci-dessous (laisser blanc si nécéssaire)</h4>
+    <br>
 
-    <!--    FIN DU PROGRAMME D'ETUDE-->
 
-    <button (click)="onSubmit()" [ngClass]="{'btn-success': isValidated===true}"
-            class="btn btn-lg btn-default btn-block" id="submit" type="submit">
-      Enregister
-    </button>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">Code du cours</th>
+        <th scope="col">Titre du cours</th>
+        <th scope="col">Nombre de crédits</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours1"
+                 value="{{ this.module.infos.codeCours1 }}"
+                 placeholder="21343D"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours1"
+                 value="{{ this.module.infos.titreCours1 }}"
+                 placeholder="Machine learning"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits1"
+                 value="{{ this.module.infos.nombreCredits1 }}"
+                 placeholder="3"
+                 type="text">
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours2"
+                 value="{{ this.module.infos.codeCours2 }}"
+                 placeholder="432455"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours2"
+                 value="{{ this.module.infos.titreCours2 }}"
+                 placeholder="Data Science"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits3" placeholder="2"
+                 value="{{ this.module.infos.nombreCredits2 }}"
+                 type="text">
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours3" placeholder="..."
+                 value="{{ this.module.infos.codeCours3 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours3" placeholder="..."
+                 value="{{ this.module.infos.titreCours3 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits3"
+                 value="{{ this.module.infos.nombreCredits3 }}"
+                 placeholder="..."
+                 type="text">
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours4" placeholder="..."
+                 value="{{ this.module.infos.codeCours4 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours4" placeholder="..."
+                 value="{{ this.module.infos.titreCours4 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits4"
+                 value="{{ this.module.infos.nombreCredits4 }}"
+                 placeholder="..."
+                 type="text">
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours5" placeholder="..."
+                 value="{{ this.module.infos.codeCours5 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours5" placeholder="..."
+                 value="{{ this.module.infos.titreCours5 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits5"
+                 value="{{ this.module.infos.nombreCredits5 }}"
+                 placeholder="..."
+                 type="text">
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours6" placeholder="..."
+                 value="{{ this.module.infos.codeCours6 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours6" placeholder="..."
+                 value="{{ this.module.infos.titreCours6 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits6"
+                 value="{{ this.module.infos.nombreCredits6 }}"
+                 placeholder="..."
+                 type="text">
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours7" placeholder="..."
+                 value="{{ this.module.infos.codeCours7 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours7" placeholder="..."
+                 value="{{ this.module.infos.titreCours7 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits7"
+                 value="{{ this.module.infos.nombreCredits7 }}"
+                 placeholder="..."
+                 type="text">
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours8" placeholder="..."
+                 value="{{ this.module.infos.codeCours8 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours8" placeholder="..."
+                 value="{{ this.module.infos.titreCours8 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits8"
+                 value="{{ this.module.infos.nombreCredits8 }}"
+                 placeholder="..."
+                 type="text">
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours9" placeholder="..."
+                 value="{{ this.module.infos.codeCours9 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours9" placeholder="..."
+                 value="{{ this.module.infos.titreCours9 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits9"
+                 value="{{ this.module.infos.nombreCredits9 }}"
+                 placeholder="..."
+                 type="text">
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours10" placeholder="..."
+                 value="{{ this.module.infos.codeCours10 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours10" placeholder="..."
+                 value="{{ this.module.infos.titreCours10 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits10"
+                 value="{{ this.module.infos.nombreCredits10 }}"
+                 placeholder="..."
+                 type="text">
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours11" placeholder="..."
+                 value="{{ this.module.infos.codeCours11 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours11" placeholder="..."
+                 value="{{ this.module.infos.titreCours11 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits11"
+                 value="{{ this.module.infos.nombreCredits11 }}"
+                 placeholder="..."
+                 type="text">
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="codeCours12" placeholder="..."
+                 value="{{ this.module.infos.codeCours12 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="titreCours12" placeholder="..."
+                 value="{{ this.module.infos.titreCours12 }}"
+                 type="text">
+        </td>
+        <td>
+          <input aria-describedby="basic-addon1" class="form-control" formControlName="nombreCredits12"
+                 value="{{ this.module.infos.nombreCredits12 }}"
+                 placeholder="..."
+                 type="text">
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <!--    FIN DU PROGRAMME D'ETUDE-->
+
+  <button (click)="onSubmit()" [ngClass]="{'btn-success': isValidated===true}"
+          class="btn btn-lg btn-default btn-block" id="submit" type="submit">
+    Enregister
+  </button>
 </form>
