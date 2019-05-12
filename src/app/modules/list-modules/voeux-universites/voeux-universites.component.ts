@@ -128,10 +128,10 @@ export class VoeuxUniversitesComponent implements OnInit {
 
     console.log(infos);
 
-    /*this.moduleService.updateModule(this.module.id, infos).then((moduleUpdated) => {
+    this.moduleService.updateModule(this.module.id, infos).then((moduleUpdated) => {
       this.module = moduleUpdated;
       console.log('module after == ', this.module);
-    });*/
+    });
 
     this.isValidated = true;
 
