@@ -1,2 +1,21 @@
 <app-calendar-creneau-student class="col-lg-9"></app-calendar-creneau-student>
-<app-prise-rdv-side class="col-lg-3"></app-prise-rdv-side>
+<app-prise-rdv-side (appointmentTypeSelect)="selectAppointmentType($event)" class="col-lg-3"></app-prise-rdv-side>
+
+<ng-template #reservation>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Réservation</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+
+    <h3 class="date">{{getDayString()}}</h3>
+    <h4>{{getTimeString()}}</h4>
+
+    <p>Pour :</p>
+    <p *ngIf="appointmentTypeSelected">{{appointmentTypeSelected.name}}</p>
+
+    <button class="btn btn-lg btn-success" type="button" (click)="reserve()">Réserver</button>
+  </div>
+</ng-template>

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {AppointmentType} from '../../../models/appointment-type';
 import {AppointmentService} from '../../../services/appointment.service';
 import {Subscription} from 'rxjs';
@@ -11,19 +11,24 @@ import {CreneauService} from '../../../services/creneau.service';
 })
 export class PriseRdvSideComponent implements OnInit, OnDestroy {
 
+  @Output() appointmentTypeSelect = new EventEmitter();
+
   appointmentTypes :AppointmentType[] = [];
   appointmentTypeSelected: AppointmentType;
-
   subAppointmentService :Subscription;
 
   constructor(private appointmentService : AppointmentService,private creneauService: CreneauService) {
     this.subAppointmentService = appointmentService.appointmentTypes$.subscribe( appointmentTypes => {
       this.appointmentTypes = appointmentTypes;
       if(appointmentTypes){
-        this.appointmentTypeSelected = appointmentTypes[0];
+        this.selectAppointmentType(appointmentTypes[0]);
       }
     });
     appointmentService.getAppointmentTypes();
+  }
+
+  onAppointmentTypeSelect(appointmentType: AppointmentType) {
+    this.appointmentTypeSelect.emit(appointmentType);
   }
 
   ngOnInit() {
@@ -36,7 +41,14 @@ export class PriseRdvSideComponent implements OnInit, OnDestroy {
 
   selectAppointmentType(appointmentType: AppointmentType) {
     this.appointmentTypeSelected = appointmentType;
-    this.creneauService.getCreneauxByAppointmentType(appointmentType.id);
+    this.onAppointmentTypeSelect(appointmentType);
+  }
+
+  getAvgTimeString(){
+    if (this.appointmentTypeSelected.avgTime == null){
+      return "inconnu";
+    }
+    return this.appointmentTypeSelected.avgTime+" minutes";
   }
 
 }
