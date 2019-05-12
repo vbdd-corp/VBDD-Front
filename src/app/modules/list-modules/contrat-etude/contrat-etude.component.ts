@@ -27,13 +27,13 @@ export class ContratEtudeComponent implements OnInit {
     return this.contratForm.controls;
   }
 
-  attachSchool = (file) => {
+  /*attachSchool = (file) => {
     const resFile = Object.assign({}, file, {
       student: getStudentSafely(file.studentId),
     });
     delete resFile.studentId;
     return resFile;
-  };
+  };*/
 
   getListVoeux(file: File) {
     let basicWishes = file.modules.filter(
