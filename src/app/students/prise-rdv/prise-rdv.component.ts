@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {AppointmentType} from '../../../models/appointment-type';
 import {Creneau} from '../../../models/creneau';
 import {CreneauService} from '../../../services/creneau.service';
@@ -8,6 +8,8 @@ import {Subscription} from 'rxjs';
 import {format} from "date-fns";
 import {Utils} from '../../../models/utils';
 import { EventEmitter } from '@angular/core';
+import {AppointmentService} from '../../../services/appointment.service';
+import {Appointment} from '../../../models/appointment';
 
 
 @Component({
@@ -15,7 +17,7 @@ import { EventEmitter } from '@angular/core';
   templateUrl: './prise-rdv.component.html',
   styleUrls: ['./prise-rdv.component.css']
 })
-export class PriseRdvComponent implements OnInit {
+export class PriseRdvComponent implements OnInit, OnDestroy {
 
   appointmentTypeSelected : AppointmentType;
   modalRef: BsModalRef;
@@ -25,7 +27,7 @@ export class PriseRdvComponent implements OnInit {
 
   @ViewChild('reservation') reservation: TemplateRef<any>;
 
-  constructor(private creneauService: CreneauService, private modalService: BsModalService) {
+  constructor(private creneauService: CreneauService,private appointmentService: AppointmentService,private modalService: BsModalService) {
     this.creneauServiceSub = creneauService.getSelectedCreneau().subscribe( creneau => {
       if( creneau ) {
         this.creneauSelected = creneau;
@@ -36,6 +38,10 @@ export class PriseRdvComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  ngOnDestroy() {
+    this.creneauServiceSub.unsubscribe();
   }
 
   selectAppointmentType(appointmentTypeSelected: AppointmentType) {
@@ -78,6 +84,15 @@ export class PriseRdvComponent implements OnInit {
   }
 
   reserve() {
+    const appointment :Appointment = {
+      appointmentTypeId: this.appointmentTypeSelected.id,
+      appointmentStatusId: 1,
+      creneauId: this.creneauSelected.id,
+      studentId: Utils.getUser().id,
+      briId: this.creneauSelected.briId
+    };
+    this.appointmentService.createAppointment(appointment);
     alert("vous avez réservé !");
+    this.closeModal();
   }
 }

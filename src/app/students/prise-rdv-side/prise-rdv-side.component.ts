@@ -21,7 +21,8 @@ export class PriseRdvSideComponent implements OnInit, OnDestroy {
     this.subAppointmentService = appointmentService.appointmentTypes$.subscribe( appointmentTypes => {
       this.appointmentTypes = appointmentTypes;
       if(appointmentTypes){
-        this.selectAppointmentType(appointmentTypes[0]);
+        this.appointmentTypes = appointmentTypes.filter( appointmentType => appointmentType.id >= 0);
+        this.selectAppointmentType(this.appointmentTypes[0]);
       }
     });
     appointmentService.getAppointmentTypes();

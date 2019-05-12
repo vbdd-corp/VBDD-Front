@@ -1,0 +1,13 @@
+<h3>Selection :</h3>
+<div class="border-rectangle">
+  <div *ngIf="!selectedCreneau">
+    <h4>Aucune plage selectionée !</h4>
+  </div>
+  <div *ngIf="selectedCreneau">
+    <div class="text-center">
+      <h3 class="date">{{getDayString()}}</h3>
+      <h4>{{getTimeString()}}</h4>
+    </div>
+  </div>
+
+</div>

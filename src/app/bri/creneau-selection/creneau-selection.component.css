@@ -1,0 +1,12 @@
+.border-rectangle {
+  border: 2px solid lightgrey ;
+}
+
+.date::first-letter{
+  text-transform: capitalize;
+}
+
+h4 {
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
