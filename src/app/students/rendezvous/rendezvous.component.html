@@ -1,13 +1,13 @@
 <div class="container-fluid" id="mainContainer">
   <div class="row">
     <div class="col-md-12" id="containerInfo">
-      <div class="jumbotron">
+      <div class="jumbotron jumbotron-fluid">
         <h3>
           Demande de rendez-vous avec le BRI
         </h3>
 
         <div align="center">
-          <button (click)="goToRendezvous()" class="btn btn-lg btn-info" disabled href="/priseRdvStd"><span
+          <button [routerLink]="['/priseRdvStd']" class="btn btn-lg btn-info"><span
             class="glyphicon glyphicon-calendar"></span>
             Prendre un rendez-vous
           </button>

@@ -52,7 +52,7 @@ export class PlageEditComponent implements OnInit, OnDestroy {
       this.minTime.setMinutes(0);
       this.maxTime = new Date(this.startTime.getTime());
       this.maxTime.setHours(18);
-      this.maxTime.setMinutes(0);;
+      this.maxTime.setMinutes(0);
 
       this.appointmentTypeSelected = plage.appointmentType;
     });

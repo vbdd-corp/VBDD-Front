@@ -4,6 +4,7 @@ import {File} from '../models/file';
 import {HttpClient} from '@angular/common/http';
 import {Utils} from '../models/utils';
 import {BehaviorSubject} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,19 @@ export class DossierService {
 
 
   private fileList: File[] = [];
-
-  public files$: BehaviorSubject<File[]> = new BehaviorSubject(this.fileList);
+  public files$: BehaviorSubject<any[]> = new BehaviorSubject(this.fileList);
 
 
   constructor(private http: HttpClient) {
+  }
+
+  getAllFiles() {
+    this.http.get<any>(this.url, this.httpOptions)
+      .subscribe(files => {
+        this.files$.next(files);
+      }, err => {
+        console.log(err);
+      });
   }
 
   getDossiers() {
@@ -30,6 +39,28 @@ export class DossierService {
       }, err => {
         console.log(err);
       });
+  }
+
+  getAllFilesWithoutObservable() {
+    return this.http.get(this.url, this.httpOptions)
+      .pipe(map(dossier => {
+        return dossier;
+      }));
+  }
+
+
+  getFilesByCountry(country: string) {
+    return this.http.get(this.url + '?country=' + country, this.httpOptions)
+      .pipe(map(dossier => {
+        return dossier;
+      }));
+  }
+
+  getFilesBySchool(school: string) {
+    return this.http.get(this.url + '?schoolName=' + school, this.httpOptions)
+      .pipe(map(dossier => {
+        return dossier;
+      }));
   }
 
   removeDossier(id: number) {
@@ -91,4 +122,5 @@ export class DossierService {
     this.getDossier(actualReportId).then(report => toReturn = report);
     return toReturn;
   }
+
 }

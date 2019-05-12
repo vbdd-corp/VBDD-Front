@@ -8,6 +8,7 @@ import {NewReportComponent} from './reports/new/new.component';
 import {ReportCheckerComponent} from './bri/report-checker/report-checker.component';
 import {ReportsFiltererComponent} from './bri/reports-filterer/reports-filterer.component';
 import {AvailabilityBriComponent} from './bri/availability-bri/availability-bri.component';
+import {PlanningBriComponent} from './bri/planning-bri/planning-bri.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'reportChecker', component: ReportCheckerComponent},
   {path: 'reportsFilterer', component: ReportsFiltererComponent},
   {path: 'availability', component: AvailabilityBriComponent},
+  {path: 'planning', component: PlanningBriComponent},
   {path: 'priseRdvStd', component: PriseRdvComponent},
   {path: 'reports/edit/:id', component: EditComponent},
   {path: 'reports/new/:type/:id', component: NewReportComponent},

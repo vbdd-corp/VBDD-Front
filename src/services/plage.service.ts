@@ -88,4 +88,17 @@ export class PlageService {
     });
   }
 
+  createPlage(plage: Plage) {
+    return new Promise<Plage>(resolve => {
+      this.http.post<Plage>(this.url + '/', plage, this.httpOptions)
+        .subscribe(plage => {
+          this.setSelectedPlage(plage);
+          this.getPlages();
+          resolve(plage);
+        }, err => {
+          console.log(err);
+        })
+    });
+  }
+
 }

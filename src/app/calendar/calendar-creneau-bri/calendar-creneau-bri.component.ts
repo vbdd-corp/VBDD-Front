@@ -1,16 +1,17 @@
-import {Component, ChangeDetectionStrategy, Input, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {CalendarEvent, CalendarDateFormatter, CalendarView, DAYS_OF_WEEK, CalendarEventAction} from 'angular-calendar';
 import { CustomDateFormatter} from '../../../services/custom-date-formatter.service';
-import { PlageService } from '../../../services/plage.service';
+import {Plage} from '../../../models/plage';
 import {Subject, Subscription} from 'rxjs';
 import {Utils} from '../../../models/utils';
-import {Plage} from '../../../models/plage';
+import {PlageService} from '../../../services/plage.service';
+import {Creneau} from '../../../models/creneau';
+import {CreneauService} from '../../../services/creneau.service';
 
 @Component({
-  selector: 'app-calendar-plage',
-  templateUrl: './calendar-plage.component.html',
-  styleUrls: ['./calendar-plage.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-calendar-creneau-bri',
+  templateUrl: '../calendar.component.html',
+  styleUrls: ['../calendar.component.css'],
   providers: [
     {
       provide: CalendarDateFormatter,
@@ -18,9 +19,9 @@ import {Plage} from '../../../models/plage';
     }
   ]
 })
-export class CalendarPlageComponent implements OnInit, OnDestroy{
+export class CalendarCreneauBriComponent implements OnInit {
 
-  events: CalendarEvent<Plage>[] = [];
+  events: CalendarEvent<Creneau>[] = [];
 
   colors: any = {
     red: {
@@ -42,12 +43,7 @@ export class CalendarPlageComponent implements OnInit, OnDestroy{
   };
 
   actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-times pull-right"></i>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.deletePlage(event.meta);
-      }
-    }
+
   ];
 
   viewDate: Date = new Date();
@@ -57,29 +53,29 @@ export class CalendarPlageComponent implements OnInit, OnDestroy{
   weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
 
   sub :Subscription;
-  plages :Plage[];
+  creneaux :Creneau[];
   selectedEvent :CalendarEvent;
 
   refresh: Subject<any> = new Subject();
 
-  plageToCalendarEvent(plage: Plage) :CalendarEvent<Plage>{
+  creneauToCalendarEvent(creneau: Creneau) :CalendarEvent<Creneau>{
     return {
-      start: Utils.getDateFromTime(plage.start),
-      end: Utils.getDateFromTime(plage.end),
+      start: Utils.getDateFromTime(creneau.start),
+      end: Utils.getDateFromTime(creneau.end),
       title: '',
       color: this.colors.blue,
       actions: this.actions,
-      meta: plage
+      meta: creneau
     }
   }
 
-  constructor(private plageService :PlageService) {
-    this.sub = plageService.plages$.subscribe( plages => {
+  constructor(private creneauService :CreneauService) {
+    this.sub = creneauService.creneaux$.subscribe( creneaux => {
       this.events = [];
-      plages.forEach( plage => {
-        const event = this.plageToCalendarEvent(plage);
+      creneaux.forEach( creneau => {
+        const event = this.creneauToCalendarEvent(creneau);
         this.events.push(event);
-        if(this.selectedEvent && (this.selectedEvent.meta.id === plage.id)){
+        if(this.selectedEvent && (this.selectedEvent.meta.id === creneau.id)){
           this.select(event);
         }
       });
@@ -89,19 +85,16 @@ export class CalendarPlageComponent implements OnInit, OnDestroy{
 
   ngOnInit() {
 
-    // const start = Utils.getTimeFromDate(startOfWeek(this.viewDate, {weekStartsOn: DAYS_OF_WEEK.MONDAY}));
-    // const end = Utils.getTimeFromDate(endOfWeek(this.viewDate, { weekStartsOn: DAYS_OF_WEEK.MONDAY}));
-
-    this.plageService.getPlages();
+    this.creneauService.getCreneauxByBri(Utils.getUser().id);
   }
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
 
-  select(event: CalendarEvent<Plage>) {
+  select(event: CalendarEvent<Creneau>) {
 
-    this.plageService.setSelectedPlage(event.meta);
+    this.creneauService.setSelectedCreneau(event.meta);
     event.color = this.colors.green;
 
     //if the event selected is not the former selected event.
@@ -112,7 +105,4 @@ export class CalendarPlageComponent implements OnInit, OnDestroy{
     this.selectedEvent = event;
   }
 
-  private deletePlage(plage: Plage) {
-    this.plageService.removePlage(plage.id);
-  }
 }

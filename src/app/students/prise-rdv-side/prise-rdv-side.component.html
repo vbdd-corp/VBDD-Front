@@ -1,0 +1,43 @@
+<table class="table table-bordered text-center">
+  <tr>
+    <td>
+      <h4>Choix :</h4>
+      <hr>
+      <h5>Type de rendez-vous</h5>
+      <div class="text-center">
+        <div *ngIf="appointmentTypes" class="btn-group" dropdown>
+          <button *ngIf="appointmentTypeSelected" id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+                  aria-controls="dropdown-basic">
+            {{ appointmentTypeSelected.name }} <span class="caret"></span>
+          </button>
+          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+              role="menu" aria-labelledby="button-basic">
+            <li *ngFor="let appointmentType of appointmentTypes" (click)="selectAppointmentType(appointmentType)" class="pointer" role="menuitem"><a class="dropdown-item">{{appointmentType.name}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <h5>Temps moyen :</h5>
+      <p *ngIf="appointmentTypeSelected">{{getAvgTimeString()}}</p>
+    </td>
+  </tr>
+</table>
+<div class="bs-callout bs-callout-info">
+  <h4>Informations</h4> <br>
+  <ol>
+    <li>Choisissez un type de rendez-vous</li>
+    <li>Selectionnez un créneau dans lequel vous êtes disponible</li>
+    <li>Réservez et attendez la confirmation au plus tard 24h avant le jour de la réservation.
+      Lors de la confirmation vous saurez l'heure exacte de votre rendez-vous (située dans le créneau)</li>
+    <li>Rendez vous au bureau !</li>
+  </ol>
+</div>
+<div class="bs-callout bs-callout-info">
+  <h4>Légende</h4> <br>
+  <ul>
+    <li>bleu: disponible</li>
+    <li>gris: occupé / non-libre</li>
+    <li>vert: votre réservation</li>
+    <li>rouge: annulé</li>
+  </ul>
+</div>
