@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModuleService} from '../../../../services/module.service';
 import {SchoolService} from '../../../../services/school.service';
@@ -16,6 +16,13 @@ import {Subscription} from 'rxjs';
 export class VoeuxUniversitesComponent implements OnInit {
   wishesForm: FormGroup;
   @Input() module: Module;
+  @ViewChild('labelPays1')
+  private elLabelPays1: ElementRef;
+  @ViewChild('labelPays2')
+  private elLabelPays2: ElementRef;
+  @ViewChild('labelPays3')
+  private elLabelPays3: ElementRef;
+
   isValidated: boolean = false;
   public schoolList: School[];
   public schoolSelected1: School;
@@ -39,14 +46,15 @@ export class VoeuxUniversitesComponent implements OnInit {
 
     this.sub = this.schoolService.schools$.subscribe(schools => {
       this.schoolList = schools;
-      this.schoolSelected1 = schools.filter( school =>
+      this.schoolSelected1 = schools.filter(school =>
         school.id === this.module.infos.choice1.schoolID)[0];
-      this.schoolSelected2 = schools.filter( school =>
+      this.schoolSelected2 = schools.filter(school =>
         school.id === this.module.infos.choice2.schoolID)[0];
-      this.schoolSelected3 = schools.filter( school =>
+      this.schoolSelected3 = schools.filter(school =>
         school.id === this.module.infos.choice3.schoolID)[0];
     });
     this.schoolService.getSchool();
+
 
     this.wishesForm = this.formBuilder.group({
       semester_choice_1: ['', Validators.required],
@@ -56,28 +64,51 @@ export class VoeuxUniversitesComponent implements OnInit {
 
     if (this.module.infos.choice1.semester != null) {
       this.wishesForm.get('semester_choice_1').setValue(this.module.infos.choice1.semester);
-    } if (this.module.infos.choice2.semester != null)
+    }
+    if (this.module.infos.choice2.semester != null)
       this.wishesForm.get('semester_choice_2').setValue(this.module.infos.choice2.semester);
     if (this.module.infos.choice2.semester != null)
       this.wishesForm.get('semester_choice_3').setValue(this.module.infos.choice3.semester);
 
   }
 
+  setLineToNull(id: number) {
+    //console.log('Inside setLineToNull \nid == ', id);
+    this['elLabelPays' + id].nativeElement.innerText = '';
+    this.wishesForm.get('semester_choice_' + id).setValue(undefined);
+    console.log('BEFORE => ', this.schoolList);
+    if (this.schoolList
+      .filter(school => school .id === this['schoolSelected' + id].id)
+      .length === 0) {
+      this.schoolList.push(this['schoolSelected' + id]);
+      this.schoolList.sort((a, b) => a.id - b.id);
+    }
+    console.log('AFTER => ', this.schoolList);
+    this['schoolSelected' + id] = undefined;
+  }
+
   selectSchool(school: School, id: number) {
+    this.wishesForm.get('semester_choice_' + id).setValue('fall');
+    console.log('BEFORE => ', this.schoolList);
+    this.schoolList = this.schoolList
+      .filter(sch => sch.id !== school.id)
+      .sort((a, b) => a.id - b.id);
+    console.log('AFTER => ', this.schoolList);
     let str = 'schoolSelected' + id.toString();
-    this[str]= school;
+    this[str] = school;
 
     /* unselect the module */
     const tdOfSelectedModule = document.querySelectorAll('.selected');
     tdOfSelectedModule.forEach(td => td.classList.remove('selected'));
     //TODO: select the new module in the list
-    document.getElementById("label_select_" + id).innerText = school.country;
+    //document.getElementById("label_select_" + id).innerText = school.country;
+    this['elLabelPays' + id].nativeElement.innerText = school.country;
   }
 
   onSubmit() {
     let infos = {};
 
-    function semesterProcess (elt, index, wishesFormControls) {
+    function semesterProcess(elt, index, wishesFormControls) {
       let tempChoice = {};
       tempChoice["schoolID"] = null;
       if (wishesFormControls["semester_choice_" + (index + 1)].value)
@@ -88,9 +119,9 @@ export class VoeuxUniversitesComponent implements OnInit {
     }
 
     ['semester_choice_1', 'semester_choice_2', 'semester_choice_3'].forEach((elt, index) =>
-    semesterProcess(elt, index, this.wishesForm.controls));
+      semesterProcess(elt, index, this.wishesForm.controls));
 
-    for (let i = 1; i <= 3; i++){
+    for (let i = 1; i <= 3; i++) {
       if (this['schoolSelected' + i])
         infos['choice' + i].schoolID = this['schoolSelected' + i].id;
     }
