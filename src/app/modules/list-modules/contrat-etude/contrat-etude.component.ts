@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModuleService} from '../../../../services/module.service';
-
+import {Module} from "../../../../models/module";
 @Component({
   selector: 'app-contrat-etude',
   templateUrl: './contrat-etude.component.html',
@@ -12,20 +12,48 @@ import {ModuleService} from '../../../../services/module.service';
 export class ContratEtudeComponent implements OnInit {
 
   contratForm: FormGroup;
-  @Input() module: any;
+  @Input() module: Module;
+  @Input() file: File;
   isValidated: boolean = false;
+  moduleVoeuxUniversites: Module;
 
-  constructor(private formBuilder: FormBuilder, private moduleService: ModuleService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private moduleService: ModuleService,
+    private schoolService: SchoolService) {
   }
 
   get f() {
     return this.contratForm.controls;
   }
 
-  private static getContratValuesToJson() {
-    return {
+  attachSchool = (file) => {
+    const resFile = Object.assign({}, file, {
+      student: getStudentSafely(file.studentId),
+    });
+    delete resFile.studentId;
+    return resFile;
+  };
 
+  getListVoeux(file: File) {
+    let basicWishes = file.modules.filter(
+      module => module.typeModule.id === 17)[0];
+    //basicWishes.forEach
+    for (let choice in basicWishes) {
+      if (basicWishes[choice].schoolID != null)
+        basicWishes[choice].school = this.schoolService.getSchoolById(basicWishes[choice].schoolID);
+    }
 
+    return basicWishes;
+  }
+
+  ngOnInit() {
+    //faire fonction qui retourne tab vide ou tableau de shool a partir d'un argument de type file
+    this.moduleVoeuxUniversites = this.getListVoeux(this.file);
+
+    console.log('this.moduleVoeuxUniversites == ', this.moduleVoeuxUniversites);
+
+    this.contratForm = this.formBuilder.group({
       codeCours1: ['', Validators.required],
       codeCours2: ['', Validators.required],
       codeCours3: ['', Validators.required],
@@ -62,27 +90,11 @@ export class ContratEtudeComponent implements OnInit {
       nombreCredits10: ['', Validators.required],
       nombreCredits11: ['', Validators.required],
       nombreCredits12: ['', Validators.required],
-
-    }
-      ;
-  }
-
-  ngOnInit() {
-    this.contratForm = this.formBuilder.group(ContratEtudeComponent.getContratValuesToJson());
-  }
-
-
-  onSubmit() {
-
-    this.moduleService.updateModule(this.module.id, this.getContratValues());
-
-    this.isValidated = true;
+    });
   }
 
   private getContratValues() {
     return {
-
-
       codeCours1: this.f.codeCours1.value,
       codeCours2: this.f.codeCours2.value,
       codeCours3: this.f.codeCours3.value,
@@ -119,10 +131,19 @@ export class ContratEtudeComponent implements OnInit {
       nombreCredits10: this.f.nombreCredits10.value,
       nombreCredits11: this.f.nombreCredits11.value,
       nombreCredits12: this.f.nombreCredits12.value,
-
-
     };
+  }
+
+  onSubmit() {
+    console.log('this.module.id == ', this.module.id);
+    console.log('infos == ', this.getContratValues());
+    // this.moduleService.updateModule(this.module.id, this.getContratValues());
+
+    this.isValidated = true;
   }
 
 
 }
+
+import {File} from "../../../../models/file";
+import {SchoolService} from "../../../../services/school.service";

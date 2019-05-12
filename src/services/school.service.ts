@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import { Student } from '../models/student';
 import {BehaviorSubject} from "rxjs";
 import {School} from "../models/school";
+import {Module} from "../models/module";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,12 @@ export class SchoolService {
   public schools$: BehaviorSubject<School[]> = new BehaviorSubject(this.schoolList);
 
   constructor(private http: HttpClient) {
+  }
+
+  getSchoolById(id: number) {
+    const urlWithId = this.url + 'school/' + id;
+    this.http.get<School>(urlWithId)
+      .subscribe((school: School) => {});
   }
 
   getSchool() {
