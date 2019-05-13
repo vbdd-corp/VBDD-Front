@@ -23,6 +23,9 @@ export class AppointmentService {
   private appointmentList: Appointment[];
   public appointments$: BehaviorSubject<Appointment[]> = new BehaviorSubject(this.appointmentList);
 
+  private appointmentsBriList: Appointment[];
+  public appointmentsBri$: BehaviorSubject<Appointment[]> = new BehaviorSubject(this.appointmentsBriList);
+
   constructor(private http: HttpClient) {
 
   }
@@ -35,8 +38,24 @@ export class AppointmentService {
       });
   }
 
-  getAppointmentsOfActualUser() {
+  getAppointmentsOfActualStudentUser() {
     this.http.get<Appointment[]>(this.url+/by-student/+Utils.getUser().id, this.httpOptions)
+      .subscribe( appointments => {
+        this.appointmentList = appointments;
+        this.appointments$.next(appointments);
+      });
+  }
+
+  getAppointmentsOfActualBriUser() {
+    this.http.get<Appointment[]>(this.url+/by-bri/+Utils.getUser().id, this.httpOptions)
+      .subscribe( appointments => {
+        this.appointmentsBriList = appointments;
+        this.appointmentsBri$.next(appointments);
+      });
+  }
+
+  getAppointmentsInCreneau(creneauId :number) {
+    this.http.get<Appointment[]>(this.url+/by-creneau/+creneauId, this.httpOptions)
       .subscribe( appointments => {
         this.appointmentList = appointments;
         this.appointments$.next(appointments);
@@ -47,7 +66,7 @@ export class AppointmentService {
     return new Promise<Appointment>(resolve => {
       this.http.post<Appointment>(this.url+'/', appointment, this.httpOptions)
         .subscribe(appointment => {
-          this.getAppointmentsOfActualUser();
+          this.getAppointmentsOfActualStudentUser();
           resolve(appointment);
         }, err => {
           console.log(err);
@@ -55,4 +74,15 @@ export class AppointmentService {
     });
   }
 
+  cancelAppointment(appointmentId: number) {
+    return new Promise<Appointment>(resolve => {
+      this.http.put<Appointment>(this.url+'/'+ appointmentId, { appointmentStatusId: 2},this.httpOptions)
+        .subscribe(appointment => {
+          this.getAppointmentsOfActualBriUser();
+          resolve(appointment);
+        }, err => {
+          console.log(err);
+        });
+    });
+  }
 }

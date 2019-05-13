@@ -79,7 +79,7 @@ export class CalendarCreneauStudentComponent implements OnInit, OnDestroy {
         const event = this.creneauToCalendarEvent(creneau);
         this.events.push(event);
       });
-      appointmentService.getAppointmentsOfActualUser();
+      appointmentService.getAppointmentsOfActualStudentUser();
       this.refresh.next();
     });
 

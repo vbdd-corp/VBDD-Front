@@ -5,6 +5,8 @@ import {Plage} from '../../../models/plage';
 import {Subscription} from 'rxjs';
 import {Creneau} from '../../../models/creneau';
 import {CreneauService} from '../../../services/creneau.service';
+import {AppointmentService} from '../../../services/appointment.service';
+import {Appointment} from '../../../models/appointment';
 const frLocale = require('date-fns/locale/fr');
 
 @Component({
@@ -16,10 +18,21 @@ export class CreneauSelectionComponent implements OnInit, OnDestroy {
 
   selectedCreneau :Creneau;
   subCreneauService :Subscription;
+  subAppointmentService :Subscription;
+  appointments :Appointment[];
 
-  constructor(private creneauService :CreneauService) {
+  constructor(private creneauService :CreneauService, private appointmentService :AppointmentService) {
     this.subCreneauService = this.creneauService.getSelectedCreneau().subscribe( creneau => {
       this.selectedCreneau = creneau;
+      this.appointmentService.getAppointmentsInCreneau(this.selectedCreneau.id);
+    });
+
+    this.subAppointmentService = this.appointmentService.appointments$.subscribe( appointments => {
+      if(!appointments)
+        return;
+      this.appointments = appointments.filter( appointment => {
+        return appointment.appointmentStatus.id != 2;
+      });
     })
   }
 
@@ -28,6 +41,7 @@ export class CreneauSelectionComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subCreneauService.unsubscribe();
+    this.subAppointmentService.unsubscribe();
   }
 
 
@@ -52,6 +66,14 @@ export class CreneauSelectionComponent implements OnInit, OnDestroy {
         'HH[h]mm',
         {locale: frLocale}
       )
+  }
+
+  cancelAppointment(appointment :Appointment){
+    // TODO: replace confirm by a beautiful modal
+    if (confirm(`Annuler ce rendez-vous :\n ${ appointment.student.lastName.toUpperCase() } ${ appointment.student.firstName } - ${appointment.appointmentType.name} ?`)){
+      this.appointmentService.cancelAppointment(appointment.id);
+      this.appointmentService.getAppointmentsInCreneau(this.selectedCreneau.id);
+    }
   }
 
 }

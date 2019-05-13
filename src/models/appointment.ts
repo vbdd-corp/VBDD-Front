@@ -2,6 +2,7 @@ import {Time} from './time';
 import {AppointmentType} from './appointment-type';
 import {AppointmentStatus} from './appointment-status';
 import {Creneau} from './creneau';
+import {Student} from './student';
 
 export interface Appointment {
   id?: number,
@@ -14,6 +15,6 @@ export interface Appointment {
   creneauId?: number,
   creneau?: Creneau,
   studentId?: number,
-  student?: number,
+  student?: Student,
   briId?: number,
 }

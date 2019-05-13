@@ -9,5 +9,25 @@
       <h4>{{getTimeString()}}</h4>
     </div>
   </div>
+  <div align="center" >
+    <table *ngIf="selectedCreneau && appointments" class="table table-striped table-hover">
+      <h4 id="pLabel"><i>Liste des rendez-vous</i></h4>
+      <tbody>
+      <tr *ngFor="let appointment of appointments;">
+        <td scope="row">
+          <span class="name"> {{ appointment.student.lastName.toUpperCase() }} {{ appointment.student.firstName }} - {{appointment.appointmentType.name}}</span>
+          <button (click)="cancelAppointment(appointment)" aria-label="Close" class="close" type="button">
+            <span >x</span>
+          </button>
+        </td>
+      </tr>
+      <tr *ngIf="appointments.length == 0">
+        <td scope="row" class="text-center">
+          <span>aucun rendez-vous n'a été pris dans ce créneau</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 
 </div>

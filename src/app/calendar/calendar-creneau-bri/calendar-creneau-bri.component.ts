@@ -7,6 +7,7 @@ import {Utils} from '../../../models/utils';
 import {PlageService} from '../../../services/plage.service';
 import {Creneau} from '../../../models/creneau';
 import {CreneauService} from '../../../services/creneau.service';
+import {AppointmentService} from '../../../services/appointment.service';
 
 @Component({
   selector: 'app-calendar-creneau-bri',
@@ -42,9 +43,10 @@ export class CalendarCreneauBriComponent implements OnInit {
     }
   };
 
-  actions: CalendarEventAction[] = [
-
-  ];
+  actions: CalendarEventAction[] = [];
+  rdvIcon :any = {
+    label: '<i class="fas fa-user"></i>'
+  };
 
   viewDate: Date = new Date();
   view: CalendarView = CalendarView.Week;
@@ -52,7 +54,9 @@ export class CalendarCreneauBriComponent implements OnInit {
   weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
   weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
 
-  sub :Subscription;
+  subCreneauService :Subscription;
+  subAppointmentService :Subscription;
+
   creneaux :Creneau[];
   selectedEvent :CalendarEvent;
 
@@ -69,8 +73,8 @@ export class CalendarCreneauBriComponent implements OnInit {
     }
   }
 
-  constructor(private creneauService :CreneauService) {
-    this.sub = creneauService.creneaux$.subscribe( creneaux => {
+  constructor(private creneauService :CreneauService, private appointmentService :AppointmentService) {
+    this.subCreneauService = creneauService.creneaux$.subscribe( creneaux => {
       this.events = [];
       creneaux.forEach( creneau => {
         const event = this.creneauToCalendarEvent(creneau);
@@ -79,8 +83,23 @@ export class CalendarCreneauBriComponent implements OnInit {
           this.select(event);
         }
       });
+      this.appointmentService.getAppointmentsOfActualBriUser();
       this.refresh.next();
-    })
+    });
+
+    this.subAppointmentService = appointmentService.appointmentsBri$.subscribe( appointments => {
+      if(!appointments) return;
+      this.events.forEach( event => {
+        event.actions = [];
+        appointments
+          .filter( appointment => appointment.appointmentStatus.id !== 2)
+          .forEach( appointment => {
+          if(event.meta.id === appointment.creneau.id){
+            event.actions.push(this.rdvIcon);
+          }
+        })
+      })
+    });
   }
 
   ngOnInit() {
@@ -89,7 +108,8 @@ export class CalendarCreneauBriComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    this.subCreneauService.unsubscribe();
+    this.subAppointmentService.unsubscribe();
   }
 
   select(event: CalendarEvent<Creneau>) {
