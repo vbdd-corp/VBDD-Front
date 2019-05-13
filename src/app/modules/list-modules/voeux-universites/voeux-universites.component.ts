@@ -13,7 +13,6 @@ import {el} from "@angular/platform-browser/testing/src/browser_util";
   styleUrls: ['./voeux-universites.component.css']
 })
 
-
 export class VoeuxUniversitesComponent implements OnInit {
   wishesForm: FormGroup;
   @Input() module: Module;
@@ -29,36 +28,24 @@ export class VoeuxUniversitesComponent implements OnInit {
   public schoolSelected1: School;
   public schoolSelected2: School;
   public schoolSelected3: School;
-  private firstLaunch;
 
   sub: Subscription;
-
-
 
   constructor(
     private formBuilder: FormBuilder,
     private moduleService: ModuleService,
     public schoolService: SchoolService) {
 
-    this.firstLaunch = 0;
     this.schoolService.getSchool();
     console.log('this.module == ', this.module);
-
   }
 
   get f() {
     return this.wishesForm.controls;
   }
 
-
   ngOnInit() {
-
-
-
-
     //console.log('module=> ', this.module);
-
-
     this.sub = this.schoolService.schools$.subscribe(schools => {
       this.schoolList = schools;
       this.schoolSelected1 = schools.filter(school =>
@@ -74,13 +61,7 @@ export class VoeuxUniversitesComponent implements OnInit {
         this.schoolList = this.schoolList.filter(school => school.id !== this.schoolSelected2.id);
       if (this.schoolSelected3)
         this.schoolList = this.schoolList.filter(school => school.id !== this.schoolSelected3.id);
-
     });
-
-
-
-
-
 
     this.wishesForm = this.formBuilder.group({
       semester_choice_1: ['', Validators.required],

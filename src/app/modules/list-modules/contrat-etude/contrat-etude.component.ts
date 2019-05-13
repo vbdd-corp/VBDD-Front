@@ -1,9 +1,20 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+  AfterViewChecked,
+  TemplateRef, Renderer2, QueryList
+} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModuleService} from '../../../../services/module.service';
 import {SchoolService} from "../../../../services/school.service";
 import {File} from "../../../../models/file";
 import {Module} from "../../../../models/module";
+import {School} from "../../../../models/school";
+import {ArrayType} from "@angular/compiler";
 
 @Component({
   selector: 'app-contrat-etude',
@@ -11,17 +22,15 @@ import {Module} from "../../../../models/module";
   styleUrls: ['./contrat-etude.component.css']
 })
 
-export class ContratEtudeComponent implements OnInit {
+export class ContratEtudeComponent implements OnInit, AfterViewInit {
 
   contratForm: FormGroup;
   @Input() module: Module;
   @Input() file: File;
-  @ViewChild('togglePrintemps')
-  private elTogglePrintemps: ElementRef;
-  @ViewChild('toggleAutomne')
-  private elToggleAutomne: ElementRef;
+  @ViewChild('togglePrintemps') private elTogglePrintemps;
+  @ViewChild('toggleAutomne') private elToggleAutomne;
   isValidated: boolean = false;
-  moduleVoeuxUniversites: Module;
+  public schoolSelected: School;
 
   private basicWishes = undefined;
   private basicWishesArray = [];
@@ -30,32 +39,28 @@ export class ContratEtudeComponent implements OnInit {
   private choice2 = {};
   private choice3 = {};
   private activeTab = 'search';
+  private sub;
+  private sub1;
+  private sub2;
+  private sub3;
 
   get f() {
     return this.contratForm.controls;
   }
 
-  search(activeTab){
+  search(activeTab) {
     this.activeTab = activeTab;
   }
 
-  result(activeTab){
+  result(activeTab) {
     this.activeTab = activeTab;
   }
 
-  selectWish(choice) {
-    let index = this.basicWishesArray.indexOf(choice);
-    console.log('index in basicArray => ', index);
-    if (choice.semester === 'fall') {
-      this.elToggleAutomne.nativeElement.classList.remove('disabled');
-      this.elTogglePrintemps.nativeElement.classList.add('disabled');
-    } else if (choice.semester === 'spring') {
-      this.elToggleAutomne.nativeElement.classList.add('disabled');
-      this.elTogglePrintemps.nativeElement.classList.remove('disabled');
-    } else if (choice.semester === 'full') {
-      this.elToggleAutomne.nativeElement.classList.remove('disabled');
-      this.elTogglePrintemps.nativeElement.classList.remove('disabled');
-    }
+  setSchoolSelectedToNull() {
+    this.schoolSelected = null;
+    this.elTogglePrintemps.nativeElement.style.display = 'none';
+    this.elToggleAutomne.nativeElement.style.display = 'none';
+    this.schoolService.setSpecificSchool(null);
   }
 
   constructor(
@@ -63,7 +68,7 @@ export class ContratEtudeComponent implements OnInit {
     private moduleService: ModuleService,
     private schoolService: SchoolService) {
 
-    this.schoolService.school1$.subscribe(school => {
+    this.sub1 = this.schoolService.school1$.subscribe(school => {
       if (Object.keys(this.choice1).length > 0) {
         this.choice1 = Object.assign({}, this.choice1, {
           school: school
@@ -71,11 +76,11 @@ export class ContratEtudeComponent implements OnInit {
         if (school != null) {
           this.basicWishesArray.push(this.choice1);
           this.basicWishesArray.sort((a, b) => a.schoolID - b.schoolID);
+          console.log(JSON.stringify(this.basicWishesArray));
         }
       }
     });
-
-    this.schoolService.school2$.subscribe(school => {
+    this.sub2 = this.schoolService.school2$.subscribe(school => {
       if (Object.keys(this.choice2).length > 0) {
         this.choice2 = Object.assign({}, this.choice2, {
           school: school
@@ -86,8 +91,7 @@ export class ContratEtudeComponent implements OnInit {
         }
       }
     });
-
-    this.schoolService.school3$.subscribe(school => {
+    this.sub3 = this.schoolService.school3$.subscribe(school => {
       if (Object.keys(this.choice3).length > 0) {
         this.choice3 = Object.assign({}, this.choice3, {
           school: school
@@ -98,7 +102,33 @@ export class ContratEtudeComponent implements OnInit {
         }
       }
     });
+    this.sub = this.schoolService.tempSchool$
+      .subscribe(school => this.schoolSelected = school);
   }
+
+  selectWish(choice) {
+    this.elTogglePrintemps.nativeElement.style.display = 'block';
+    this.elToggleAutomne.nativeElement.style.display = 'block';
+    let index = this.basicWishesArray.indexOf(choice);
+    console.log('index in basicArray => ', index);
+
+    if (choice.semester === 'fall') {
+      this.elToggleAutomne.nativeElement.classList.remove('disabled');
+      this.elTogglePrintemps.nativeElement.classList.add('disabled');
+    } else if (choice.semester === 'spring') {
+      this.elToggleAutomne.nativeElement.classList.add('disabled');
+      this.elTogglePrintemps.nativeElement.classList.remove('disabled');
+    } else if (choice.semester === 'full') {
+      this.elToggleAutomne.nativeElement.classList.remove('disabled');
+      this.elTogglePrintemps.nativeElement.classList.remove('disabled');
+    }
+    if (typeof choice.schoolID === 'number') {
+      this.schoolService.getSpecificSchoolById(choice.schoolID);
+    }
+    const tdOfSelectedModule = document.querySelectorAll('.selected');
+    tdOfSelectedModule.forEach(td => td.classList.remove('selected'));
+  }
+
 
   getListVoeux(file: File) {
     this.basicWishes = file.modules.filter(
@@ -122,8 +152,16 @@ export class ContratEtudeComponent implements OnInit {
     //faire fonction qui retourne tab vide ou tableau de shool a
     // partir d'un argument de type file
     this.getListVoeux(this.file);
-
-    console.log('basicWishesArray => ', this.basicWishesArray);
+    this.elTogglePrintemps.nativeElement.style.display = 'none';
+    this.elToggleAutomne.nativeElement.style.display = 'none';
+    /*if (this.schoolSelected) {
+      this.elTogglePrintemps.nativeElement.style.display = 'block';
+      this.elToggleAutomne.nativeElement.style.display = 'block';
+    }*/
+    console.log('------');
+    console.log('basicWishesArray => ', JSON.stringify(this.basicWishesArray));
+    console.log('==> ', this.basicWishesArray[0]);
+    console.log('nativeElt => ', this.elToggleAutomne.nativeElement);
 
 
     this.contratForm = this.formBuilder.group({
@@ -164,6 +202,19 @@ export class ContratEtudeComponent implements OnInit {
       nombreCredits11: ['', Validators.required],
       nombreCredits12: ['', Validators.required],
     });
+  }
+
+  ngAfterViewInit() {
+    /*console.log('this.elToggleAutomne == ', this.elToggleAutomne);
+    console.log('this.basicWishesArray.len ', this.basicWishesArray);
+    console.log('this.basicWishesArray.len ', this.basicWishesArray.length);*/
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+    this.sub1.unsubscribe();
+    this.sub2.unsubscribe();
+    this.sub3.unsubscribe();
   }
 
   private getContratValues() {
