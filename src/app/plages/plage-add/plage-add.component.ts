@@ -1,4 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PlageService} from '../../../services/plage.service';
 import {Plage} from '../../../models/plage';
 import {Subscription} from 'rxjs';
@@ -23,6 +24,7 @@ export function getTimepickerConfig(): TimepickerConfig {
 export class PlageAddComponent implements OnInit, OnDestroy {
 
   subAppointmentService :Subscription;
+  plagesAddForm: FormGroup;
 
   startTime: Date;
   endTime: Date;
@@ -32,7 +34,9 @@ export class PlageAddComponent implements OnInit, OnDestroy {
   appointmentTypes :AppointmentType[] = [];
   appointmentTypeSelected: AppointmentType;
 
-  constructor(private plageService: PlageService,private appointmentService: AppointmentService) {
+  constructor(private plageService: PlageService,
+              private appointmentService: AppointmentService,
+              private formBuilder: FormBuilder) {
     this.subAppointmentService = appointmentService.appointmentTypes$.subscribe( appointmentTypes => {
       this.appointmentTypes = appointmentTypes;
       if(appointmentTypes){
@@ -53,7 +57,11 @@ export class PlageAddComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+    this.plagesAddForm = this.formBuilder.group({
+      day: ['', Validators.required],
+      semester_choice_2: ['', Validators.required],
+      semester_choice_3: ['', Validators.required],
+    });
   }
 
   ngOnDestroy(): void {
@@ -62,6 +70,17 @@ export class PlageAddComponent implements OnInit, OnDestroy {
 
   selectAppointmentType(appointmentType: AppointmentType) {
     this.appointmentTypeSelected = appointmentType;
+  }
+
+
+  onSubmit() {
+    console.log('appointmentType => ', this.appointmentTypeSelected);
+    let plageToSend= {
+      start: null,
+      end: null,
+      briId: null,
+      appointmentTypeId: this.appointmentTypeSelected.id
+    }
   }
 
 }
