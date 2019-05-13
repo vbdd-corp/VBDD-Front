@@ -15,23 +15,18 @@ export class DownloadService {
 
   public downloadFile(link) {
     this.downloadReport(link).subscribe(
-      data => {
-        saveAs(data, link);
-      },
-      err => {
-        console.error(err);
-      }
+      data => saveAs(data, link),
+      err => console.error(err)
     );
   }
 
   private downloadReport(link): Observable<any> {
-
-    var body = {filePath: link};
-
-    return this.http.post(serverUrl + '/api/module/download', body, {
-      responseType: 'blob',
-      headers: new HttpHeaders().append('Content-Type', 'application/json')
-    });
-
+    return this.http.post(
+      serverUrl + '/api/module/download',
+      {filePath: link}, {
+        responseType: 'blob',
+        headers: new HttpHeaders().append(
+          'Content-Type', 'application/json')
+      });
   }
 }

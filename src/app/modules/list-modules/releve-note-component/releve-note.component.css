@@ -9,9 +9,13 @@ button {
 #submit {
   margin-top: 25px;
   width: 300px;
-  margin-left: 50px;
+  margin-left: 15px;
 
   align-content: center;
   align-self: center;
   alignment: center;
+}
+
+#delete {
+  margin-right: 35px;
 }

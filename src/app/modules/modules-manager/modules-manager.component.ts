@@ -1,9 +1,7 @@
 import {Component, Input, OnDestroy, OnInit, TemplateRef} from '@angular/core';
-import {first} from 'rxjs/operators';
 import {ModuleService} from '../../../services/module.service';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { File } from '../../../models/file';
+import {File} from '../../../models/file';
 import {ModuleType} from '../../../models/moduleType';
 import {Module} from '../../../models/module';
 import {Subscription} from 'rxjs';
@@ -58,7 +56,6 @@ export class ModulesManagerComponent implements OnInit, OnDestroy {
   }
 
   deleteModule(moduleId: number) {
-    // TODO: replace confirm by a beautiful modal
     if (confirm("Supprimer le module ?")){
       this.moduleService.deleteModule(moduleId);
       this.modules = this.modules.filter( module => module.id != moduleId);
@@ -85,9 +82,7 @@ export class ModulesManagerComponent implements OnInit, OnDestroy {
 
   selectModuleType(moduleType: ModuleType) {
     this.moduleTypeSelected = moduleType;
-    //unselect the module
     const tdOfSelectedModule = document.querySelectorAll('.selected');
     tdOfSelectedModule.forEach( td => td.classList.remove('selected'));
-    //TODO: select the new module in the list
   }
 }

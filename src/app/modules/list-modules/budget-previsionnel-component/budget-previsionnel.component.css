@@ -10,7 +10,8 @@ input {
 }
 
 td input {
-  width: 250px;
+  width: 300px;
+  text-align: center;
 }
 
 tr th {
@@ -33,6 +34,23 @@ tr th {
 
 .form-control:focus + .form-control-placeholder,
 .form-control:valid + .form-control-placeholder {
+  font-size: 75%;
+  transform: translate3d(0, -100%, 0);
+  opacity: 1;
+}
+
+.form-control-placeholder2 {
+  position: absolute;
+  top: 0;
+  left: 25%;
+  padding: 7px 0 0 13px;
+  transition: all 200ms;
+  opacity: 0.5;
+  font-size: 85%;
+}
+
+.form-control:focus + .form-control-placeholder2,
+.form-control:valid + .form-control-placeholder2 {
   font-size: 75%;
   transform: translate3d(0, -100%, 0);
   opacity: 1;

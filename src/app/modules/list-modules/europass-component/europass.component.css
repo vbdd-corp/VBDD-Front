@@ -16,7 +16,9 @@ input {
   text-align: center;
 }
 
-
+#delete {
+  margin-left: 15px;
+}
 .importdelete {
   margin-left: 50px;
 }
@@ -24,7 +26,7 @@ input {
 #submit {
   margin-top: 25px;
   width: 300px;
-  margin-left: 50px;
+  margin-left: 15px;
 
   align-content: center;
   align-self: center;

@@ -15,3 +15,38 @@
 timepicker {
   display: inline;
 }
+td{
+  text-align: center;
+}
+th{
+  text-align: center;
+}
+
+#button-basic{
+  width: 90px;
+  padding-left: 4px;
+  padding-right: 4px;
+  width: 100px;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.form-control-placeholder2 {
+  position: absolute;
+  top: 0;
+  left: 25%;
+  padding: 7px 0 0 13px;
+  transition: all 200ms;
+  opacity: 0.5;
+  font-size: 85%;
+}
+
+.form-control:focus + .form-control-placeholder2,
+.form-control:valid + .form-control-placeholder2 {
+  font-size: 75%;
+  transform: translate3d(0, -100%, 0);
+  opacity: 1;
+}

@@ -33,7 +33,6 @@ export class LettreMotivationComponent implements OnInit {
 
   ngOnInit() {
     const completeURL = URL + Utils.getUser().id + '/' + this.report.id + '/' + this.module.id;
-
     this.uploader = new FileUploader({
       url:
       completeURL,
@@ -48,10 +47,8 @@ export class LettreMotivationComponent implements OnInit {
   }
 
   public onSubmit() {
-
     this.uploader.uploadAll();
     this.isFileUploaded = true;
-
   }
 
   deleteFile() {
