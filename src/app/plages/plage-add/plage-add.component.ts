@@ -5,7 +5,7 @@ import {Plage} from '../../../models/plage';
 import {Subscription} from 'rxjs';
 import {AppointmentType} from '../../../models/appointment-type';
 import {AppointmentService} from '../../../services/appointment.service';
-import {TimepickerConfig} from 'ngx-bootstrap';
+import {BsLocaleService, TimepickerConfig} from 'ngx-bootstrap';
 
 export function getTimepickerConfig(): TimepickerConfig {
   return Object.assign(new TimepickerConfig(), {
@@ -30,13 +30,15 @@ export class PlageAddComponent implements OnInit, OnDestroy {
   endTime: Date;
   minTime: Date;
   maxTime: Date;
+  locale = 'fr';
 
   appointmentTypes :AppointmentType[] = [];
   appointmentTypeSelected: AppointmentType;
 
   constructor(private plageService: PlageService,
               private appointmentService: AppointmentService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private localeService: BsLocaleService) {
     this.subAppointmentService = appointmentService.appointmentTypes$.subscribe( appointmentTypes => {
       this.appointmentTypes = appointmentTypes;
       if(appointmentTypes){
@@ -57,11 +59,17 @@ export class PlageAddComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.localeService.use(this.locale);
+
     this.plagesAddForm = this.formBuilder.group({
       day: ['', Validators.required],
-      semester_choice_2: ['', Validators.required],
-      semester_choice_3: ['', Validators.required],
+      startTime: ['', Validators.required],
+      endTime: ['', Validators.required],
     });
+
+    this.plagesAddForm.get('startTime').setValue(this.startTime);
+    this.plagesAddForm.get('endTime').setValue(this.endTime);
+    this.plagesAddForm.get('day').setValue(new Date());
   }
 
   ngOnDestroy(): void {
@@ -74,13 +82,21 @@ export class PlageAddComponent implements OnInit, OnDestroy {
 
 
   onSubmit() {
+
+    //HERE YOUR NEEDED VALUES:
+    console.log('day => ', this.plagesAddForm.controls.day.value); //!\ prendre que jour mois année
+    console.log('start => ', this.plagesAddForm.controls.startTime.value); //!\ prendre que heures et minutes
+    console.log('end => ',this.plagesAddForm.controls.endTime.value); //!\ prendre que heures et minutes
     console.log('appointmentType => ', this.appointmentTypeSelected);
+
     let plageToSend= {
       start: null,
       end: null,
       briId: null,
       appointmentTypeId: this.appointmentTypeSelected.id
-    }
+    };
+    //console.log('plageToSend => ', plageToSend);
+
   }
 
 }

@@ -25,14 +25,14 @@
             <td>
             <span>
                Début :
-                    <timepicker [(ngModel)]="startTime"
+                    <timepicker formControlName="startTime"
                                 [min]="minTime"
                                 [max]="maxTime">
                    </timepicker>
             </span>
               <span>
                Fin :
-                    <timepicker [(ngModel)]="endTime"
+                    <timepicker formControlName="endTime"
                                 [min]="minTime"
                                 [max]="maxTime">
                     </timepicker>

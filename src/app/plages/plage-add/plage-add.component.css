@@ -24,6 +24,9 @@ th{
 
 #button-basic{
   width: 90px;
+  padding-left: 4px;
+  padding-right: 4px;
+  width: 100px;
 }
 
 .form-group {
