@@ -84,10 +84,19 @@ export class PlageAddComponent implements OnInit, OnDestroy {
   onSubmit() {
 
     //HERE YOUR NEEDED VALUES:
-    console.log('day => ', this.plagesAddForm.controls.day.value); //!\ prendre que jour mois année
-    console.log('start => ', this.plagesAddForm.controls.startTime.value); //!\ prendre que heures et minutes
-    console.log('end => ',this.plagesAddForm.controls.endTime.value); //!\ prendre que heures et minutes
-    console.log('appointmentType => ', this.appointmentTypeSelected);
+    const dayGot = this.plagesAddForm.controls.day.value;
+    console.log('day => ', ); //!\ prendre que jour mois année
+    let startGot = this.plagesAddForm.controls.startTime.value;
+    let start = new Date(
+      dayGot.getFullYear(), dayGot.getMonth(),
+      dayGot.getDate(), startGot.getHours(), startGot.getMinutes());
+    console.log('start => ', start); //!\ prendre que heures et minutes
+    //console.log('end => ',); //!\ prendre que heures et minutes
+    let endGot = this.plagesAddForm.controls.endTime.value;
+    let end = new Date(
+      dayGot.getFullYear(), dayGot.getMonth(),
+      dayGot.getDate(), endGot.getHours(), endGot.getMinutes());
+    console.log('appointmentType => ', end);
 
     let plageToSend= {
       start: null,
