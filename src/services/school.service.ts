@@ -55,7 +55,7 @@ export class SchoolService {
       .subscribe((schools: School[]) => {
         this.schools$.next(schools);
         this.schoolList = schools;
-        console.log('schoolList == ', this.schoolList);
+
       });
   }
 }

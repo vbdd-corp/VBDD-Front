@@ -31,6 +31,10 @@ export class ContratEtudeComponent implements OnInit {
   private choice3 = {};
   private activeTab = 'search';
 
+  get f() {
+    return this.contratForm.controls;
+  }
+
   search(activeTab){
     this.activeTab = activeTab;
   }
@@ -94,10 +98,6 @@ export class ContratEtudeComponent implements OnInit {
         }
       }
     });
-  }
-
-  get f() {
-    return this.contratForm.controls;
   }
 
   getListVoeux(file: File) {

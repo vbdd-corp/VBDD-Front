@@ -5,6 +5,7 @@ import {SchoolService} from '../../../../services/school.service';
 import {School} from '../../../../models/school';
 import {Module} from '../../../../models/module';
 import {Subscription} from 'rxjs';
+import {el} from "@angular/platform-browser/testing/src/browser_util";
 
 @Component({
   selector: 'app-voeux-universites',
@@ -28,21 +29,35 @@ export class VoeuxUniversitesComponent implements OnInit {
   public schoolSelected1: School;
   public schoolSelected2: School;
   public schoolSelected3: School;
+  private firstLaunch;
 
   sub: Subscription;
+
+
 
   constructor(
     private formBuilder: FormBuilder,
     private moduleService: ModuleService,
     public schoolService: SchoolService) {
+
+    this.firstLaunch = 0;
+    this.schoolService.getSchool();
+    console.log('this.module == ', this.module);
+
   }
 
   get f() {
     return this.wishesForm.controls;
   }
 
+
   ngOnInit() {
-    console.log('module=> ', this.module);
+
+
+
+
+    //console.log('module=> ', this.module);
+
 
     this.sub = this.schoolService.schools$.subscribe(schools => {
       this.schoolList = schools;
@@ -52,8 +67,19 @@ export class VoeuxUniversitesComponent implements OnInit {
         school.id === this.module.infos.choice2.schoolID)[0];
       this.schoolSelected3 = schools.filter(school =>
         school.id === this.module.infos.choice3.schoolID)[0];
+
+      if (this.schoolSelected1)
+        this.schoolList = this.schoolList.filter(school => school.id !== this.schoolSelected1.id);
+      if (this.schoolSelected2)
+        this.schoolList = this.schoolList.filter(school => school.id !== this.schoolSelected2.id);
+      if (this.schoolSelected3)
+        this.schoolList = this.schoolList.filter(school => school.id !== this.schoolSelected3.id);
+
     });
-    this.schoolService.getSchool();
+
+
+
+
 
 
     this.wishesForm = this.formBuilder.group({
@@ -62,14 +88,16 @@ export class VoeuxUniversitesComponent implements OnInit {
       semester_choice_3: ['', Validators.required],
     });
 
-    if (this.module.infos.choice1.semester != null) {
+    if (this.module.infos.choice1.semester != null)
       this.wishesForm.get('semester_choice_1').setValue(this.module.infos.choice1.semester);
-    }
     if (this.module.infos.choice2.semester != null)
       this.wishesForm.get('semester_choice_2').setValue(this.module.infos.choice2.semester);
     if (this.module.infos.choice2.semester != null)
       this.wishesForm.get('semester_choice_3').setValue(this.module.infos.choice3.semester);
+  }
 
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   setLineToNull(id: number) {
