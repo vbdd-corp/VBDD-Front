@@ -85,7 +85,9 @@ export class DossierService {
 
   create(fileTypeId: number, name: string) {
     return new Promise<File>(resolve => {
-      this.http.post<File>(this.url, {studentId: Utils.getUser().id, fileTypeId: fileTypeId, name: name}, this.httpOptions)
+      this.http.post<File>(this.url,
+        {studentId: Utils.getUser().id, fileTypeId: fileTypeId, name: name}
+        , this.httpOptions)
         .subscribe(file => {
           this.getDossiers();
           resolve(file);

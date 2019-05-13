@@ -9,7 +9,8 @@
          style="width: 300px"
          type="file"/>
 
-  <button (click)="deleteFile()" [disabled]=" this.selectedPicture.nativeElement.value == ''" class="btn btn-info">
+  <button (click)="deleteFile()" [disabled]=" this.selectedPicture.nativeElement.value == ''" class="btn btn-info"
+          id="delete">
     Supprimer
     <span class="glyphicon glyphicon-remove-sign"></span>
   </button>
