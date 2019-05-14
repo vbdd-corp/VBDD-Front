@@ -6,6 +6,7 @@ import {Subscription} from 'rxjs';
 import {AppointmentType} from '../../../models/appointment-type';
 import {AppointmentService} from '../../../services/appointment.service';
 import {BsLocaleService, TimepickerConfig} from 'ngx-bootstrap';
+import {Utils} from '../../../models/utils';
 
 export function getTimepickerConfig(): TimepickerConfig {
   return Object.assign(new TimepickerConfig(), {
@@ -83,29 +84,25 @@ export class PlageAddComponent implements OnInit, OnDestroy {
 
   onSubmit() {
 
-    //HERE YOUR NEEDED VALUES:
-    const dayGot = this.plagesAddForm.controls.day.value;
-    console.log('day => ', ); //!\ prendre que jour mois année
-    let startGot = this.plagesAddForm.controls.startTime.value;
+    const day = this.plagesAddForm.controls.day.value;
+
+    let timePickerStart = this.plagesAddForm.controls.startTime.value;
     let start = new Date(
-      dayGot.getFullYear(), dayGot.getMonth(),
-      dayGot.getDate(), startGot.getHours(), startGot.getMinutes());
-    console.log('start => ', start); //!\ prendre que heures et minutes
-    //console.log('end => ',); //!\ prendre que heures et minutes
-    let endGot = this.plagesAddForm.controls.endTime.value;
+      day.getFullYear(), day.getMonth(),
+      day.getDate(), timePickerStart.getHours(), timePickerStart.getMinutes());
+
+    let timePickerEnd = this.plagesAddForm.controls.endTime.value;
     let end = new Date(
-      dayGot.getFullYear(), dayGot.getMonth(),
-      dayGot.getDate(), endGot.getHours(), endGot.getMinutes());
-    console.log('appointmentType => ', end);
+      day.getFullYear(), day.getMonth(),
+      day.getDate(), timePickerEnd.getHours(), timePickerEnd.getMinutes());
 
     let plageToSend= {
-      start: null,
-      end: null,
-      briId: null,
+      start: Utils.getTimeFromDate(start),
+      end: Utils.getTimeFromDate(end),
+      briId: Utils.getUser().id,
       appointmentTypeId: this.appointmentTypeSelected.id
     };
-    //console.log('plageToSend => ', plageToSend);
-
+    this.plageService.createPlage(plageToSend);
   }
 
 }
