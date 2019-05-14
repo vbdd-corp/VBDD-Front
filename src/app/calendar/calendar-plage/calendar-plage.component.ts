@@ -45,7 +45,9 @@ export class CalendarPlageComponent implements OnInit, OnDestroy{
     {
       label: '<i class="fas fa-times pull-right"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.deletePlage(event.meta);
+        if (confirm("Supprimer cette plage ?")){
+          this.deletePlage(event.meta);
+        }
       }
     }
   ];

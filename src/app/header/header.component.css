@@ -5,3 +5,7 @@
 #menuItems li {
   margin-left: 15px;
 }
+
+.pointer{
+  cursor: pointer;
+}
