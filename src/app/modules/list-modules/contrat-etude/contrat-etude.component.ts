@@ -38,7 +38,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
   private choice1 = {};
   private choice2 = {};
   private choice3 = {};
-  private activeTab = 'search';
+  private activeTab;
   private sub;
   private sub1;
   private sub2;
@@ -48,12 +48,14 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
     return this.contratForm.controls;
   }
 
-  search(activeTab) {
-    this.activeTab = activeTab;
-  }
-
-  result(activeTab) {
-    this.activeTab = activeTab;
+  setS(activeTab) {
+    if (activeTab === 's1' &&
+      !this.elToggleAutomne.nativeElement.classList.contains('disabled')) {
+      this.activeTab = activeTab;
+    } else if (activeTab === 's2' &&
+      !this.elTogglePrintemps.nativeElement.classList.contains('disabled')) {
+      this.activeTab = activeTab;
+    }
   }
 
   setSchoolSelectedToNull() {
@@ -113,12 +115,15 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
     console.log('index in basicArray => ', index);
 
     if (choice.semester === 'fall') {
+      this.activeTab = 's1';
       this.elToggleAutomne.nativeElement.classList.remove('disabled');
       this.elTogglePrintemps.nativeElement.classList.add('disabled');
     } else if (choice.semester === 'spring') {
+      this.activeTab = 's2';
       this.elToggleAutomne.nativeElement.classList.add('disabled');
       this.elTogglePrintemps.nativeElement.classList.remove('disabled');
     } else if (choice.semester === 'full') {
+      this.activeTab = 's1';
       this.elToggleAutomne.nativeElement.classList.remove('disabled');
       this.elTogglePrintemps.nativeElement.classList.remove('disabled');
     }
@@ -154,6 +159,31 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
     this.getListVoeux(this.file);
     this.elTogglePrintemps.nativeElement.style.display = 'none';
     this.elToggleAutomne.nativeElement.style.display = 'none';
+
+    function callBackFn (key, val, elThis){
+      console.log('key == ', key, ' val == ', val);
+      if (val.schoolID === elThis.schoolSelected.id) {
+        elThis.selectWish(val);
+      }
+    }
+
+    let choiceSelected;
+    console.log('--->');
+    if (this.schoolSelected) {
+      console.log('schoolSelected !');
+      /*for (let choice in Object.values(this.basicWishes.infos)) {
+        console.log(`in ${choice}: `);
+      }*/
+      Object.entries(this.basicWishes.infos).forEach(([key, val]) =>
+        callBackFn(key, val, this));
+
+
+
+      /*for (let obj in Object.entries(this.basicWishes.infos)) {
+        console.log('key == ', obj, ' val == ', obj);
+      }*/
+    }
+
     /*if (this.schoolSelected) {
       this.elTogglePrintemps.nativeElement.style.display = 'block';
       this.elToggleAutomne.nativeElement.style.display = 'block';

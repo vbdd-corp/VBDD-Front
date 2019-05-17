@@ -47,28 +47,28 @@
     <br>
     <ul class="nav nav-tabs">
       <li class="toggleName" id="firstToggle" #toggleAutomne>
-        <a (click)="search('search')"
-           [ngClass]="{ 'active':activeTab==='search'}"
+        <a (click)="setS('s1')"
+           [ngClass]="{ 'active':activeTab==='s1'}"
            data-toggle="tab"
            id="afall">
           Semestre Automne</a>
       </li>
       <li class="toggleName" id="secondToggle" #togglePrintemps>
-        <a [ngClass]="{ 'active':activeTab==='result'}"
+        <a [ngClass]="{ 'active':activeTab==='s2'}"
            data-toggle="tab"
-           (click)="result('result')"
+           (click)="setS('s2')"
            id="aspring">
           Semestre Printemps</a>
       </li>
     </ul>
-    <h4 *ngIf="this.basicWishesArray.length > 0">Veuillez remplir le tableau ci-dessous (laisser blanc si
+    <h4 *ngIf="this.basicWishesArray.length > 0 && this.schoolSelected">Veuillez remplir le tableau ci-dessous (laisser blanc si
       nécéssaire)</h4>
     <br>
 
-    <div class="tab-content">
-      <div id="search" class="tab-pane active" [ngClass]="{ 'active':activeTab==='search'}">
-        <h3 *ngIf="this.basicWishesArray.length > 0">Semestre 1</h3>
-        <table class="table" *ngIf="this.basicWishesArray.length > 0">
+    <div *ngIf="this.basicWishesArray.length > 0 && this.schoolSelected" class="tab-content">
+      <div id="search" class="tab-pane active" [ngClass]="{ 'active':activeTab==='s1'}">
+        <h3>Semestre 1</h3>
+        <table class="table">
           <thead>
           <tr>
             <th scope="col">Code du cours</th>
@@ -326,7 +326,7 @@
         </table>
       </div>
 
-      <div id="result" class="tab-pane" [ngClass]="{ 'active':activeTab==='result'}">
+      <div id="result" class="tab-pane" [ngClass]="{ 'active':activeTab==='s2'}">
         <h3>Semestre 2</h3>
       </div>
     </div>

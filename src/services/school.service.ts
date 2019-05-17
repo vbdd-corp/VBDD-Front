@@ -35,6 +35,10 @@ export class SchoolService {
     this.tempSchool = obj;
   }
 
+  getSelectedTempSchool() {
+    return this.tempSchool$.asObservable();
+  }
+
   getSpecificSchoolById(id: number){
       const urlWithId = this.url + 'school/' + id;
       this.http.get(urlWithId)
