@@ -22,7 +22,7 @@ import {ArrayType} from "@angular/compiler";
   styleUrls: ['./contrat-etude.component.css']
 })
 
-export class ContratEtudeComponent implements OnInit, AfterViewInit {
+export class ContratEtudeComponent implements OnInit {
 
   contratForm: FormGroup;
   @Input() module: Module;
@@ -34,6 +34,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
 
   private basicWishes = undefined;
   private basicWishesArray = [];
+  private selectedWish;
   private infos;
   private choice1 = {};
   private choice2 = {};
@@ -60,6 +61,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
 
   setSchoolSelectedToNull() {
     this.schoolSelected = null;
+    this.selectedWish = null;
     this.elTogglePrintemps.nativeElement.style.display = 'none';
     this.elToggleAutomne.nativeElement.style.display = 'none';
     this.schoolService.setSpecificSchool(null);
@@ -109,6 +111,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
   }
 
   selectWish(choice) {
+    this.selectedWish = choice;
     this.elTogglePrintemps.nativeElement.style.display = 'block';
     this.elToggleAutomne.nativeElement.style.display = 'block';
     let index = this.basicWishesArray.indexOf(choice);
@@ -154,45 +157,27 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    console.log('moduleID ==> ', this.module.id);
+    console.log('this.module == ', this.module);
+
+    this.elTogglePrintemps.nativeElement.style.display = 'none';
+    this.elToggleAutomne.nativeElement.style.display = 'none';
+    if (this.module.infos.choice.schoolID)
+      this.selectWish(this.module.infos.choice);
     //faire fonction qui retourne tab vide ou tableau de shool a
     // partir d'un argument de type file
     this.getListVoeux(this.file);
-    this.elTogglePrintemps.nativeElement.style.display = 'none';
-    this.elToggleAutomne.nativeElement.style.display = 'none';
 
     function callBackFn (key, val, elThis){
       console.log('key == ', key, ' val == ', val);
-      if (val.schoolID === elThis.schoolSelected.id) {
+      if (val.schoolID === elThis.schoolSelected.id)
         elThis.selectWish(val);
-      }
     }
+    if (this.schoolSelected)
+      Object.entries(this.basicWishes.infos).forEach(
+        ([key, val]) => callBackFn(key, val, this));
 
-    let choiceSelected;
-    console.log('--->');
-    if (this.schoolSelected) {
-      console.log('schoolSelected !');
-      /*for (let choice in Object.values(this.basicWishes.infos)) {
-        console.log(`in ${choice}: `);
-      }*/
-      Object.entries(this.basicWishes.infos).forEach(([key, val]) =>
-        callBackFn(key, val, this));
-
-
-
-      /*for (let obj in Object.entries(this.basicWishes.infos)) {
-        console.log('key == ', obj, ' val == ', obj);
-      }*/
-    }
-
-    /*if (this.schoolSelected) {
-      this.elTogglePrintemps.nativeElement.style.display = 'block';
-      this.elToggleAutomne.nativeElement.style.display = 'block';
-    }*/
-    console.log('------');
     console.log('basicWishesArray => ', JSON.stringify(this.basicWishesArray));
-    console.log('==> ', this.basicWishesArray[0]);
-    console.log('nativeElt => ', this.elToggleAutomne.nativeElement);
-
 
     this.contratForm = this.formBuilder.group({
       s1codeCours1: ['', Validators.required],
@@ -269,12 +254,20 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
       s2nombreCredits11: ['', Validators.required],
       s2nombreCredits12: ['', Validators.required],
     });
-  }
 
-  ngAfterViewInit() {
-    /*console.log('this.elToggleAutomne == ', this.elToggleAutomne);
-    console.log('this.basicWishesArray.len ', this.basicWishesArray);
-    console.log('this.basicWishesArray.len ', this.basicWishesArray.length);*/
+    for (let i = 1; i <= 12; i++){
+      console.log('codeCours ', i, ' == ', this.module.infos.s1['codeCours' +i]);
+      this.contratForm.get('s1codeCours' + i).setValue(this.module.infos.s1['codeCours' + i]);
+      this.contratForm.get('s2codeCours' + i).setValue(this.module.infos.s2['codeCours' + i]);
+    }
+    for (let i = 1; i <= 12; i++){
+      this.contratForm.controls['s1titreCours' + i].setValue(this.module.infos.s1['titreCours' + i]);
+      this.contratForm.controls['s2titreCours' + i].setValue(this.module.infos.s2['titreCours' + i]);
+    }
+    for (let i = 1; i <= 12; i++) {
+      this.contratForm.controls['s1nombreCredits' + i].setValue(this.module.infos.s1['nombreCredits' + i]);
+      this.contratForm.controls['s2nombreCredits' + i].setValue(this.module.infos.s2['nombreCredits' + i]);
+    }
   }
 
   ngOnDestroy() {
@@ -284,51 +277,118 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
     this.sub3.unsubscribe();
   }
 
-  private getContratValues() {
+  private getContratValuesS1() {
     return {
-      codeCours1: this.f.codeCours1.value,
-      codeCours2: this.f.codeCours2.value,
-      codeCours3: this.f.codeCours3.value,
-      codeCours4: this.f.codeCours4.value,
-      codeCours5: this.f.codeCours5.value,
-      codeCours6: this.f.codeCours6.value,
-      codeCours7: this.f.codeCours7.value,
-      codeCours8: this.f.codeCours8.value,
-      codeCours9: this.f.codeCours9.value,
-      codeCours10: this.f.codeCours10.value,
-      codeCours11: this.f.codeCours11.value,
-      codeCours12: this.f.codeCours12.value,
-      titreCours1: this.f.titreCours1.value,
-      titreCours2: this.f.titreCours2.value,
-      titreCours3: this.f.titreCours3.value,
-      titreCours4: this.f.titreCours4.value,
-      titreCours5: this.f.titreCours5.value,
-      titreCours6: this.f.titreCours6.value,
-      titreCours7: this.f.titreCours7.value,
-      titreCours8: this.f.titreCours8.value,
-      titreCours9: this.f.titreCours9.value,
-      titreCours10: this.f.titreCours10.value,
-      titreCours11: this.f.titreCours11.value,
-      titreCours12: this.f.titreCours12.value,
-      nombreCredits1: this.f.nombreCredits1.value,
-      nombreCredits2: this.f.nombreCredits2.value,
-      nombreCredits3: this.f.nombreCredits3.value,
-      nombreCredits4: this.f.nombreCredits4.value,
-      nombreCredits5: this.f.nombreCredits5.value,
-      nombreCredits6: this.f.nombreCredits6.value,
-      nombreCredits7: this.f.nombreCredits7.value,
-      nombreCredits8: this.f.nombreCredits8.value,
-      nombreCredits9: this.f.nombreCredits9.value,
-      nombreCredits10: this.f.nombreCredits10.value,
-      nombreCredits11: this.f.nombreCredits11.value,
-      nombreCredits12: this.f.nombreCredits12.value,
+      codeCours1: this.f.s1codeCours1.value,
+      codeCours2: this.f.s1codeCours2.value,
+      codeCours3: this.f.s1codeCours3.value,
+      codeCours4: this.f.s1codeCours4.value,
+      codeCours5: this.f.s1codeCours5.value,
+      codeCours6: this.f.s1codeCours6.value,
+      codeCours7: this.f.s1codeCours7.value,
+      codeCours8: this.f.s1codeCours8.value,
+      codeCours9: this.f.s1codeCours9.value,
+      codeCours10: this.f.s1codeCours10.value,
+      codeCours11: this.f.s1codeCours11.value,
+      codeCours12: this.f.s1codeCours12.value,
+      titreCours1: this.f.s1titreCours1.value,
+      titreCours2: this.f.s1titreCours2.value,
+      titreCours3: this.f.s1titreCours3.value,
+      titreCours4: this.f.s1titreCours4.value,
+      titreCours5: this.f.s1titreCours5.value,
+      titreCours6: this.f.s1titreCours6.value,
+      titreCours7: this.f.s1titreCours7.value,
+      titreCours8: this.f.s1titreCours8.value,
+      titreCours9: this.f.s1titreCours9.value,
+      titreCours10: this.f.s1titreCours10.value,
+      titreCours11: this.f.s1titreCours11.value,
+      titreCours12: this.f.s1titreCours12.value,
+      nombreCredits1: this.f.s1nombreCredits1.value,
+      nombreCredits2: this.f.s1nombreCredits2.value,
+      nombreCredits3: this.f.s1nombreCredits3.value,
+      nombreCredits4: this.f.s1nombreCredits4.value,
+      nombreCredits5: this.f.s1nombreCredits5.value,
+      nombreCredits6: this.f.s1nombreCredits6.value,
+      nombreCredits7: this.f.s1nombreCredits7.value,
+      nombreCredits8: this.f.s1nombreCredits8.value,
+      nombreCredits9: this.f.s1nombreCredits9.value,
+      nombreCredits10: this.f.s1nombreCredits10.value,
+      nombreCredits11: this.f.s1nombreCredits11.value,
+      nombreCredits12: this.f.s1nombreCredits12.value,
+    };
+  }
+
+  private getContratValuesS2() {
+    return {
+      codeCours1: this.f.s2codeCours1.value,
+      codeCours2: this.f.s2codeCours2.value,
+      codeCours3: this.f.s2codeCours3.value,
+      codeCours4: this.f.s2codeCours4.value,
+      codeCours5: this.f.s2codeCours5.value,
+      codeCours6: this.f.s2codeCours6.value,
+      codeCours7: this.f.s2codeCours7.value,
+      codeCours8: this.f.s2codeCours8.value,
+      codeCours9: this.f.s2codeCours9.value,
+      codeCours10: this.f.s2codeCours10.value,
+      codeCours11: this.f.s2codeCours11.value,
+      codeCours12: this.f.s2codeCours12.value,
+      titreCours1: this.f.s2titreCours1.value,
+      titreCours2: this.f.s2titreCours2.value,
+      titreCours3: this.f.s2titreCours3.value,
+      titreCours4: this.f.s2titreCours4.value,
+      titreCours5: this.f.s2titreCours5.value,
+      titreCours6: this.f.s2titreCours6.value,
+      titreCours7: this.f.s2titreCours7.value,
+      titreCours8: this.f.s2titreCours8.value,
+      titreCours9: this.f.s2titreCours9.value,
+      titreCours10: this.f.s2titreCours10.value,
+      titreCours11: this.f.s2titreCours11.value,
+      titreCours12: this.f.s2titreCours12.value,
+      nombreCredits1: this.f.s2nombreCredits1.value,
+      nombreCredits2: this.f.s2nombreCredits2.value,
+      nombreCredits3: this.f.s2nombreCredits3.value,
+      nombreCredits4: this.f.s2nombreCredits4.value,
+      nombreCredits5: this.f.s2nombreCredits5.value,
+      nombreCredits6: this.f.s2nombreCredits6.value,
+      nombreCredits7: this.f.s2nombreCredits7.value,
+      nombreCredits8: this.f.s2nombreCredits8.value,
+      nombreCredits9: this.f.s2nombreCredits9.value,
+      nombreCredits10: this.f.s2nombreCredits10.value,
+      nombreCredits11: this.f.s2nombreCredits11.value,
+      nombreCredits12: this.f.s2nombreCredits12.value,
     };
   }
 
   onSubmit() {
     console.log('this.module.id == ', this.module.id);
-    console.log('infos == ', this.getContratValues());
-    // this.moduleService.updateModule(this.module.id, this.getContratValues());
+    console.log('---------TO SEND------');
+    /*console.log('Contrat S1 == ', this.getContratValuesS1());
+    console.log('Contrat S2 == ', this.getContratValuesS2());
+    console.log('choice == ', this.selectedWish);*/
+
+    /*
+
+    */
+
+    const arrayList = ['BCICode', 'BCIProgramName'];
+
+    let cloneCopy = Object.assign({}, this.selectedWish);
+    delete cloneCopy.school;
+
+    const infos = {
+      BCICode: null,
+      BCIProgramName: null,
+      choice: cloneCopy,
+      s1: this.getContratValuesS1(),
+      s2: this.getContratValuesS2()
+    };
+    console.log('infos to Send => ', infos);
+    this.moduleService.updateModule(this.module.id, infos).then(
+      updatedModule => {
+        this.module = updatedModule;
+        console.log('updated module => ', updatedModule);
+      }
+    );
 
     this.isValidated = true;
   }
