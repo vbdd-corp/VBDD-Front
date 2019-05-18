@@ -169,15 +169,12 @@ export class ContratEtudeComponent implements OnInit {
     this.getListVoeux(this.file);
 
     function callBackFn (key, val, elThis){
-      console.log('key == ', key, ' val == ', val);
       if (val.schoolID === elThis.schoolSelected.id)
         elThis.selectWish(val);
     }
     if (this.schoolSelected)
       Object.entries(this.basicWishes.infos).forEach(
         ([key, val]) => callBackFn(key, val, this));
-
-    console.log('basicWishesArray => ', JSON.stringify(this.basicWishesArray));
 
     this.contratForm = this.formBuilder.group({
       s1codeCours1: ['', Validators.required],
@@ -256,7 +253,7 @@ export class ContratEtudeComponent implements OnInit {
     });
 
     for (let i = 1; i <= 12; i++){
-      console.log('codeCours ', i, ' == ', this.module.infos.s1['codeCours' +i]);
+      //console.log('codeCours ', i, ' == ', this.module.infos.s1['codeCours' +i]);
       this.contratForm.get('s1codeCours' + i).setValue(this.module.infos.s1['codeCours' + i]);
       this.contratForm.get('s2codeCours' + i).setValue(this.module.infos.s2['codeCours' + i]);
     }
