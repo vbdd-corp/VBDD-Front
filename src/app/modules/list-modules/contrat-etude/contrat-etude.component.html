@@ -37,7 +37,7 @@
           </li>
           <li *ngFor="let choice of this.basicWishesArray"
               class="pointer" role="menuitem">
-            <a class="dropdown-item" *ngIf="choice.school" (click)="selectWish(choice)">
+            <a class="dropdown-item" *ngIf="choice.school" (click)="selectWish(choice, true)">
               {{choice.school.name}}  -  {{choice.school.city}}, {{choice.school.country}}
             </a>
           </li>
@@ -61,11 +61,12 @@
           Semestre Printemps</a>
       </li>
     </ul>
-    <h4 *ngIf="this.basicWishesArray.length > 0 && this.schoolSelected">Veuillez remplir le tableau ci-dessous (laisser blanc si
-      nécéssaire)</h4>
     <br>
 
     <div *ngIf="this.basicWishesArray.length > 0 && this.schoolSelected" class="tab-content">
+      <h4>
+        Veuillez remplir le tableau ci-dessous (laisser blanc si nécéssaire)
+      </h4>
       <div id="search" class="tab-pane active" [ngClass]="{ 'active':activeTab==='s1'}">
         <h3>Semestre 1</h3>
         <table class="table">
