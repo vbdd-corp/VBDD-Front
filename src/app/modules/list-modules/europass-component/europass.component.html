@@ -7,26 +7,40 @@
   Suite à cela, vous obtiendrez un <b>PDF</b>. Mettez-le en ligne :
   <br>
   <br>
+  <table>
+    <tr>
+      <th colspan="2">
+        <input #file [uploader]="uploader" class="input-group-addon alert-info" name="photo" ng2FileSelect
+               style="width: 300px"
+               type="file"/>
+      </th>
+    </tr>
+    <tr>
+      <td class="tdleftcase" align="left">
+        <button (click)="downloadFile()" [disabled]="shouldDisplayDownload" class="btn btn-info" id="download">Télécharger
+          <span
+            class="glyphicon glyphicon-download"></span>
+        </button>
 
-  <input #file [uploader]="uploader" class="input-group-addon alert-info" name="photo" ng2FileSelect
-         style="width: 300px"
-         type="file"/>
+      </td>
+      <td class="tdrightcase" align="right">
+        <button (click)="deleteFile()" [disabled]=" this.selectedPicture.nativeElement.value == ''" class="btn btn-info">
+          Supprimer <span class="glyphicon glyphicon-remove-sign"></span>
+        </button>
 
+      </td>
 
-  <button (click)="downloadFile()" [disabled]="shouldDisplayDownload" class="btn btn-info" id="download">Télécharger
-    <span
-      class="glyphicon glyphicon-download"></span>
-  </button>
+    </tr>
+    <tr>
+      <td colspan="2" class="tdcentercase" align="center">
+        <button (click)="onSubmit()" [ngClass]="{'btn-success': isFileUploaded===true}"
+                class="btn btn-lg btn-default btn-block" id="submit" type="submit">
+          <span [ngClass]="{'glyphicon-check': isFileUploaded===true}" class="glyphicon"></span>
+          Enregister
+        </button>
+      </td>
+    </tr>
+  </table>
 
-  <button (click)="deleteFile()" [disabled]=" this.selectedPicture.nativeElement.value == ''" class="btn btn-info">
-    Supprimer <span class="glyphicon glyphicon-remove-sign"></span>
-  </button>
-
-
-  <button (click)="onSubmit()" [ngClass]="{'btn-success': isFileUploaded===true}"
-          class="btn btn-lg btn-default btn-block" id="submit" type="submit">
-    <span [ngClass]="{'glyphicon-check': isFileUploaded===true}" class="glyphicon"></span>
-    Enregister
-  </button>
 
 </div>
