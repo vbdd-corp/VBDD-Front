@@ -100,17 +100,17 @@ export class ModulesManagerComponent implements OnInit, OnDestroy {
     // @ts-ignore
     window.html2canvas = html2canvas;
 
-    html2canvas(document.getElementById('app-voeux-universite'), {
-      onrendered: function(canvas) {
+    var doc = new jsPDF('l');
 
-        var imgData = canvas.toDataURL('image/png');
-        console.log('Report Image URL: ' + imgData);
-        var doc = new jsPDF('p', 'mm', [297, 210]);
-        doc.addImage(imgData, 'PNG', 10, 10);
-        doc.save('sample.pdf');
-      }
+    //TODO : FOR EACH CLICK SUR LE TR
+
+    html2canvas(document.getElementById('MODULE')).then(canvas => {
+      doc.addImage(canvas.toDataURL('image/jpeg', 5.0), 'JPEG', 10, doc.internal.pageSize.getHeight() / 3.5);
+      doc.addPage();
     });
 
+    doc.deletePage(doc.internal.getNumberOfPages());
+    doc.save('dossier' + Math.floor(Math.random() * Math.floor(999)) + '.pdf');
 
   }
 }
