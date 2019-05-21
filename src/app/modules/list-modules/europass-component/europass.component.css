@@ -3,11 +3,6 @@
   padding-right: 10px;
 }
 
-button {
-  margin-left: 50px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
 
 input {
   width: 400px;
@@ -16,23 +11,37 @@ input {
   text-align: center;
 }
 
-#delete {
-  margin-left: 15px;
-}
+
 .importdelete {
   margin-left: 50px;
 }
 
-#download {
-  margin-left: -10px;
-}
-
 #submit {
-  margin-top: 25px;
   width: 300px;
-  margin-left: 15px;
-
   align-content: center;
   align-self: center;
   alignment: center;
+}
+
+#delete {
+
+}
+
+th{
+  text-align: center;
+}
+.tdcentercase {
+  text-align: center;
+}
+
+.tdleftcase{
+  text-align: left;
+}
+.tdrightcase{
+  text-align: right;
+}
+
+td{
+  padding-top: 15px;
+  padding-bottom: 15px;
 }

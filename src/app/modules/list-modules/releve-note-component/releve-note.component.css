@@ -2,20 +2,33 @@
   margin-left: 50px;
 }
 
-button {
-  margin-top: 20px;
-  margin-left: 50px;
-}
 #submit {
-  margin-top: 25px;
   width: 300px;
-  margin-left: 15px;
-
   align-content: center;
   align-self: center;
   alignment: center;
 }
 
 #delete {
-  margin-right: 35px;
+
 }
+
+th{
+  text-align: center;
+}
+.tdcentercase {
+  text-align: center;
+}
+
+.tdleftcase{
+  text-align: left;
+}
+.tdrightcase{
+  text-align: right;
+}
+
+td{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
