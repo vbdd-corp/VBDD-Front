@@ -7,6 +7,7 @@ import {Module} from '../../../models/module';
 import {Subscription} from 'rxjs';
 import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-modules-manager',
@@ -91,26 +92,36 @@ export class ModulesManagerComponent implements OnInit, OnDestroy {
   }
 
   downloadReport() {
-    // $(this).find('#mainTable > td').each (function( column, td) {
-    //
-    //   alert($(td));
-    // });
-    //
-    //
+
     // @ts-ignore
+
     window.html2canvas = html2canvas;
 
     var doc = new jsPDF('l');
-
-    //TODO : FOR EACH CLICK SUR LE TR
-
-    html2canvas(document.getElementById('MODULE')).then(canvas => {
-      doc.addImage(canvas.toDataURL('image/jpeg', 5.0), 'JPEG', 10, doc.internal.pageSize.getHeight() / 3.5);
-      doc.addPage();
+    this.generatePDF(doc).then(function() {
+      doc.deletePage(doc.internal.getNumberOfPages());
+      doc.save('dossier' + Math.floor(Math.random() * Math.floor(999)) + '.pdf');
     });
 
-    doc.deletePage(doc.internal.getNumberOfPages());
-    doc.save('dossier' + Math.floor(Math.random() * Math.floor(999)) + '.pdf');
+  }
 
+  private generatePDF(doc,) {
+    return new Promise((resolve, reject) => {
+        for (let i = 0; i < $('#tableDossiers tr td').length; i++) {
+          this.click($('#tableDossiers tr td')).then(go => {
+            html2canvas($('#MODULE')[0]).then(canvas => {
+              doc.addImage(canvas.toDataURL('image/jpeg', 5.0), 'JPEG', 10, doc.internal.pageSize.getHeight() / 3.5);
+              doc.addPage();
+            });
+          });
+        }
+      }
+    );
+  }
+
+  private click(doc) {
+    return new Promise((resolve, reject) => {
+      doc.click();
+    });
   }
 }
