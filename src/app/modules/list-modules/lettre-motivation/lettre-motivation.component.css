@@ -10,36 +10,37 @@ input {
   text-align: center;
 }
 
-button {
-  margin-left: 50px;
-  margin-top: 20px;
-}
-
-.btn .btn-info {
-  margin-top: 10px;
-  margin-left: -20px;
-}
-
-
 .importdelete {
   margin-left: 50px;
 }
 
-button {
-  margin-top: 20px;
-  margin-left: 50px;
-}
-#submit {
-  margin-top: 25px;
-  width: 300px;
-  margin-left: 15px;
 
+#submit {
+  width: 300px;
   align-content: center;
   align-self: center;
   alignment: center;
 }
 
-#delete {
-  margin-right: 35px;
+
+th{
+  text-align: center;
 }
+.tdcentercase {
+  text-align: center;
+}
+
+.tdleftcase{
+  text-align: left;
+}
+.tdrightcase{
+   text-align: right;
+ }
+
+td{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+
 
