@@ -15,19 +15,20 @@ button {
   margin-top: 20px;
 }
 
-#delete {
-  margin-right: 35px;
+.btn .btn-info {
+  margin-top: 10px;
+  margin-left: -20px;
 }
 
+
 .importdelete {
-  margin-top: 20px;
   margin-left: 50px;
 }
 
-.btn .btn-info {
-  margin-top: 10px;
+button {
+  margin-top: 20px;
+  margin-left: 50px;
 }
-
 #submit {
   margin-top: 25px;
   width: 300px;
@@ -37,3 +38,8 @@ button {
   align-self: center;
   alignment: center;
 }
+
+#delete {
+  margin-right: 35px;
+}
+

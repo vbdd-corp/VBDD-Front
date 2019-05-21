@@ -19,12 +19,12 @@
                 dropdownToggle type="button"
                 class="btn btn-primary dropdown-toggle text-center"
                 aria-controls="dropdown-basic">
-          Sélectionnez un Voeu
+          Sélectionnez un voeu
           <span class="caret"></span>
         </button>
 
         <h3 *ngIf="this.basicWishesArray.length === 0" class="text-center alert-danger">
-          Veuillez choisir au moins un Voeu dans la section Voeux-Universites
+          Veuillez choisir <i>au moins</i> un voeu dans la section 'Voeux Universites'
         </h3>
         <ul id="dropdown-basic-3" *dropdownMenu
             class="dropdown-menu text-center"
@@ -32,7 +32,7 @@
             aria-labelledby="button-basic">
           <li class="pointer" role="menuitem">
             <a class="dropdown-item" (click)="setSchoolSelectedToNull()">
-              Aucune
+              Aucun
             </a>
           </li>
           <li *ngFor="let choice of this.basicWishesArray"
