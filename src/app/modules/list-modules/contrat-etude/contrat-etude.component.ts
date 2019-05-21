@@ -143,7 +143,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
         if (school != null) {
           this.basicWishesArray.push(this.choice1);
           this.basicWishesArray.sort((a, b) => a.schoolID - b.schoolID);
-          console.log(JSON.stringify(this.basicWishesArray));
+          //console.log(JSON.stringify(this.basicWishesArray));
         }
       }
     });
@@ -195,7 +195,6 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
     console.log('this.module == ', this.module);
     this.elTogglePrintemps.nativeElement.style.display = 'none';
     this.elToggleAutomne.nativeElement.style.display = 'none';
-
 
     //faire fonction qui retourne tab vide ou tableau de school a
     // partir d'un argument de type file

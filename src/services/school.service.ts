@@ -25,6 +25,7 @@ export class SchoolService {
   public school1$: BehaviorSubject<School> = new BehaviorSubject(this.school1);
   public school2$: BehaviorSubject<School> = new BehaviorSubject(this.school2);
   public school3$: BehaviorSubject<School> = new BehaviorSubject(this.school3);
+
   public schools$: BehaviorSubject<School[]> = new BehaviorSubject(this.schoolList);
 
   constructor(private http: HttpClient) {
