@@ -10,8 +10,15 @@
     </td>
   </tr>
   <tr>
-    <td align="center" scope="row">
-      <button (click)="openModal(moduleCreateModal)" class="btn btn-success" type="button">Ajouter</button>
+    <td align="center" scope="row" style="margin-top:10px;">
+      <button (click)="openModal(moduleCreateModal)" class="btn btn-success" type="button"><span
+        class="glyphicon glyphicon-plus"></span> Ajouter un module
+      </button>
+      <br>
+      <button (click)="downloadReport()" class="btn btn-info" style="margin-top: 10px;" type="button"><span
+        class="glyphicon glyphicon-cloud-download"></span>Télécharger le
+        dossier
+      </button>
     </td>
   </tr>
   <tr>
@@ -45,7 +52,9 @@
     </div>
     <br>
     <br>
-    <button (click)="createModule(moduleTypeSelected.id, moduleTypeSelected.typeName); closeModal();" class="btn btn-success" type="button">Ajouter</button>
+    <button (click)="createModule(moduleTypeSelected.id, moduleTypeSelected.typeName); closeModal();"
+            class="btn btn-success" type="button">Ajouter
+    </button>
 
 
   </div>
