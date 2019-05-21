@@ -29,6 +29,8 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
   @Input() file: File;
   @ViewChild('togglePrintemps') private elTogglePrintemps;
   @ViewChild('toggleAutomne') private elToggleAutomne;
+  @ViewChild('totalECTSS2') private elTotalECTSS2;
+  @ViewChild('totalECTSS1') private elTotalECTSS1;
   isValidated: boolean = false;
   public schoolSelected: School;
 
@@ -83,9 +85,9 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  selectWish(choice, setInputToNull) {
-    if (setInputToNull)
-      this.setAllInputToNull();
+  selectWish(choice) {
+    /*if (setInputToNull)
+      this.setAllInputToNull();*/
     this.selectedWish = choice;
     this.elTogglePrintemps.nativeElement.style.display = 'block';
     this.elToggleAutomne.nativeElement.style.display = 'block';
@@ -112,11 +114,26 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
     tdOfSelectedModule.forEach(td => td.classList.remove('selected'));
   }
 
+  updateTotalECTS(semester) {
+    let sum = 0;
+    let val;
+    for (let i = 1; i <= 12; i++) {
+      val = parseInt(
+        this.f[semester + 'nombreCredits' + i].value,
+        10);
+      if (!isNaN(val))
+        sum += val;
+    }
+    if (semester === 's1')
+      this.elTotalECTSS1.nativeElement.textContent = 'Total ECTS :   ' + sum;
+    else if (semester === 's2')
+      this.elTotalECTSS2.nativeElement.textContent = 'Total ECTS :   ' + sum;
+  }
+
   constructor(
     private formBuilder: FormBuilder,
     private moduleService: ModuleService,
-    private schoolService: SchoolService,
-    private changeDetector: ChangeDetectorRef) {
+    private schoolService: SchoolService) {
 
     this.sub1 = this.schoolService.school1$.subscribe(school => {
       if (Object.keys(this.choice1).length > 0) {
@@ -276,13 +293,13 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
 
   callBackFn (key, val) {
     if (val.schoolID === this.schoolSelected.id)
-      this.selectWish(val, false);
+      this.selectWish(val);
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
       if (this.module.infos.choice.schoolID)
-        this.selectWish(this.module.infos.choice, false);
+        this.selectWish(this.module.infos.choice);
 
       //function
       if (this.schoolSelected)
