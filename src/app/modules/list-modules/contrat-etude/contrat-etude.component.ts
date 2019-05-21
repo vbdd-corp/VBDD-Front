@@ -83,9 +83,9 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  selectWish(choice, setInputToNull) {
-    if (setInputToNull)
-      this.setAllInputToNull();
+  selectWish(choice) {
+    /*if (setInputToNull)
+      this.setAllInputToNull();*/
     this.selectedWish = choice;
     this.elTogglePrintemps.nativeElement.style.display = 'block';
     this.elToggleAutomne.nativeElement.style.display = 'block';
@@ -276,13 +276,13 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
 
   callBackFn (key, val) {
     if (val.schoolID === this.schoolSelected.id)
-      this.selectWish(val, false);
+      this.selectWish(val);
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
       if (this.module.infos.choice.schoolID)
-        this.selectWish(this.module.infos.choice, false);
+        this.selectWish(this.module.infos.choice);
 
       //function
       if (this.schoolSelected)

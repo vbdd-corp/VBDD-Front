@@ -37,7 +37,7 @@
           </li>
           <li *ngFor="let choice of this.basicWishesArray"
               class="pointer" role="menuitem">
-            <a class="dropdown-item" *ngIf="choice.school" (click)="selectWish(choice, true)">
+            <a class="dropdown-item" *ngIf="choice.school" (click)="selectWish(choice)">
               {{choice.school.name}}  -  {{choice.school.city}}, {{choice.school.country}}
             </a>
           </li>
@@ -526,12 +526,19 @@
 
           </tbody>
         </table>
+        
       </div>
     </div>
   </div>
 
   <!--    FIN DU PROGRAMME D'ETUDE-->
-
+  <button
+    *ngIf="this.basicWishesArray.length > 0"
+    class="btn btn-lg btn-default btn-block"
+    id="clear"
+    (click)="setAllInputToNull()">
+    Effacer tout
+  </button>
   <button
     *ngIf="this.basicWishesArray.length > 0"
     [ngClass]="{'btn-success': isValidated===true}"
