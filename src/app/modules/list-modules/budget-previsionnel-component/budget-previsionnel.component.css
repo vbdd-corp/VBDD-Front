@@ -6,12 +6,17 @@ input {
 }
 
 #mainDiv {
-  width: 600px;
+  /*width: 100%;*/
+  margin-left: 15%;
 }
 
 td input {
   width: 300px;
   text-align: center;
+}
+
+#submit {
+
 }
 
 tr th {
