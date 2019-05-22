@@ -125,4 +125,13 @@ export class DossierService {
     return toReturn;
   }
 
+  getChoices(fileId: number) {
+    return new Promise<any>(resolve => {
+      this.http.get<any>(this.url+fileId+'/choices',this.httpOptions).subscribe(choices => {
+          resolve(choices);
+        }, err => {
+          console.log(err);
+        });
+    });
+  }
 }
