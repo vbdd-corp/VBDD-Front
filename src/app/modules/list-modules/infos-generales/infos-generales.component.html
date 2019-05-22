@@ -1,311 +1,314 @@
-<div class="row col-lg-12" align="center">
-  <h3>Informations sur l'etudiant</h3>
+<div id="MODULE">
+
+  <div class="row col-lg-12" align="center">
+    <h3>Informations sur l'etudiant</h3>
 </div>
 
-<div class="row col-lg-12">
-  <form
-    [formGroup]="generalInformationsForm">
-    <div class="col-lg-4 info-container">
-      <table *ngIf="isStudent" class="table table-bordered" id="tableInformation1">
-        <tbody>
-        <tr>
-          <th>Prenom</th>
-          <td id="firstName">
-            <input
-              type="text" aria-describedby="basic-addon1"
-              class="form-control"
-              formControlName="firstName"
-              name="firstName"
-            >
-          </td>
-        </tr>
-        <tr>
-          <th>Nom</th>
-          <td id="lastName">
-            <input
-              type="text" aria-describedby="basic-addon1"
-              class="form-control"
-              formControlName="lastName"
-              name="lastName">
-          </td>
-        </tr>
-        <tr>
-          <th>N°Étudiant</th>
-          <td id="studentNumber">
-            <input
-              type="text" aria-describedby="basic-addon1"
-              class="form-control"
-              formControlName="studentNumber">
-          </td>
-        </tr>
-        <tr>
-          <th>N°INE</th>
-          <td id="INE">
-            <input
-              type="text" aria-describedby="basic-addon1"
-              class="form-control"
-              formControlName="INE">
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="col-lg-4 info-container">
-      <table *ngIf="isStudent" class="table table-bordered" id="tableInformation3">
-        <tr>
-          <th>Nationalité</th>
-          <td id="nationality">
-            <input (input)="onNationalityChange($event)"
-              type="text" aria-describedby="basic-addon1"
-              class="form-control"
-              formControlName="nationality">
-          </td>
-        </tr>
-        <tr>
-          <th>Spécialité</th>
-          <td id="major">
-            <input type="text" aria-describedby="basic-addon1"
-                   class="form-control"
-                   formControlName="major">
-          </td>
-        </tr>
-        <tr>
-          <th>Sexe</th>
-          <td id="gender">
-            <input type="text" aria-describedby="basic-addon1"
-                   class="form-control"
-                   formControlName="gender">
-          </td>
-        </tr>
-        <tr>
-          <th>Date de Naissance</th>
-          <td id="birthDate">
-            <input type="text" aria-describedby="basic-addon1"
-                   class="form-control"
-                   formControlName="birthDate">
-          </td>
-        </tr>
-      </table>
-    </div>
-
-    <div class="col-lg-4 info-container">
-      <table *ngIf="isStudent" class="table table-bordered" id="tableInformation2">
-        <tr>
-          <th>Téléphone Fixe</th>
-          <td id="phoneNumber">
-            <input
-              type="text" aria-describedby="basic-addon1"
-              class="form-control"
-              formControlName="phoneNumber">
-          </td>
-        </tr>
-        <tr>
-          <th>Mobile</th>
-          <td id="mobilePhoneNumber">
-            <input
-              type="text" aria-describedby="basic-addon1"
-              class="form-control"
-              formControlName="mobilePhoneNumber">
-          </td>
-        </tr>
-      </table>
-    </div>
-
-
-    <div class="col-lg-12 info-container">
-      <table *ngIf="isStudent" class="table table-bordered" id="tableInformation4">
-        <tr>
-          <th class="col-lg-4">Mail</th>
-          <td id="mail" class="col-lg-8">
-            <input
-              class="long form-control" aria-describedby="basic-addon1"
-              type="text" formControlName="mail">
-          </td>
-        </tr>
-        <tr>
-          <th class="col-lg-4">Adresse</th>
-          <td id="address" class="col-lg-8">
-            <input
-              class="long form-control" aria-describedby="basic-addon1"
-              type="text" formControlName="address">
-          </td>
-        </tr>
-      </table>
-
-      <div class="row">
-        <div class="col-lg-6" id="container5">
-          <table *ngIf="isStudent" class="table table-bordered" id="tableInformation5">
-            <tr>
-              <th id="headpostalCode">Code Postal</th>
-              <td id="postalCode">
-                <input
-                  type="text" aria-describedby="basic-addon1"
-                  class="form-control"
-                  formControlName="postalCode">
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div *ngIf="isStudent" class="col-lg-6" id="container6">
-          <table class="table table-bordered" id="tableInformation6">
-            <tr>
-              <th>Ville</th>
-              <td id="city">
-                <input
-                  type="text" aria-describedby="basic-addon1"
-                  class="form-control long"
-                  formControlName="city">
-              </td>
-            </tr>
-          </table>
-        </div>
+  <div class="row col-lg-12">
+    <form
+      [formGroup]="generalInformationsForm">
+      <div class="col-lg-4 info-container">
+        <table *ngIf="isStudent" class="table table-bordered" id="tableInformation1">
+          <tbody>
+          <tr>
+            <th>Prenom</th>
+            <td id="firstName">
+              <input
+                type="text" aria-describedby="basic-addon1"
+                class="form-control"
+                formControlName="firstName"
+                name="firstName"
+              >
+            </td>
+          </tr>
+          <tr>
+            <th>Nom</th>
+            <td id="lastName">
+              <input
+                type="text" aria-describedby="basic-addon1"
+                class="form-control"
+                formControlName="lastName"
+                name="lastName">
+            </td>
+          </tr>
+          <tr>
+            <th>N°Étudiant</th>
+            <td id="studentNumber">
+              <input
+                type="text" aria-describedby="basic-addon1"
+                class="form-control"
+                formControlName="studentNumber">
+            </td>
+          </tr>
+          <tr>
+            <th>N°INE</th>
+            <td id="INE">
+              <input
+                type="text" aria-describedby="basic-addon1"
+                class="form-control"
+                formControlName="INE">
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
 
-      <div class="row" id="some-padding">
-        <table *ngIf="isStudent" class="table table-bordered col-lg-6" id="tableInformation7">
+      <div class="col-lg-4 info-container">
+        <table *ngIf="isStudent" class="table table-bordered" id="tableInformation3">
           <tr>
-            <th>Diplôme actuellement préparé à l'UNS</th>
-            <td id="currentUNSDiploma">
-              <input
-
-                placeholder="Diplôme d'ingénieur"
-                type="text" aria-describedby="basic-addon1"
-                class="form-control long"
-                formControlName="currentUNSDiploma">
+            <th>Nationalité</th>
+            <td id="nationality">
+              <input (input)="onNationalityChange($event)"
+                     type="text" aria-describedby="basic-addon1"
+                     class="form-control"
+                     formControlName="nationality">
+            </td>
+          </tr>
+          <tr>
+            <th>Spécialité</th>
+            <td id="major">
+              <input type="text" aria-describedby="basic-addon1"
+                     class="form-control"
+                     formControlName="major">
+            </td>
+          </tr>
+          <tr>
+            <th>Sexe</th>
+            <td id="gender">
+              <input type="text" aria-describedby="basic-addon1"
+                     class="form-control"
+                     formControlName="gender">
+            </td>
+          </tr>
+          <tr>
+            <th>Date de Naissance</th>
+            <td id="birthDate">
+              <input type="text" aria-describedby="basic-addon1"
+                     class="form-control"
+                     formControlName="birthDate">
             </td>
           </tr>
         </table>
-        <table *ngIf="isStudent" class="table table-bordered col-lg-6" id="tableInformation8">
+      </div>
+
+      <div class="col-lg-4 info-container">
+        <table *ngIf="isStudent" class="table table-bordered" id="tableInformation2">
           <tr>
-            <th>Diplôme prévu pour l'année d'Échange</th>
-            <td id="nextYearExchangeDiploma">
+            <th>Téléphone Fixe</th>
+            <td id="phoneNumber">
               <input
-                placeholder="Diplôme d'ingénieur"
                 type="text" aria-describedby="basic-addon1"
-                class="form-control long"
-                formControlName="nextYearExchangeDiploma">
+                class="form-control"
+                formControlName="phoneNumber">
+            </td>
+          </tr>
+          <tr>
+            <th>Mobile</th>
+            <td id="mobilePhoneNumber">
+              <input
+                type="text" aria-describedby="basic-addon1"
+                class="form-control"
+                formControlName="mobilePhoneNumber">
+            </td>
+          </tr>
+        </table>
+      </div>
+
+
+      <div class="col-lg-12 info-container">
+        <table *ngIf="isStudent" class="table table-bordered" id="tableInformation4">
+          <tr>
+            <th class="col-lg-4">Mail</th>
+            <td id="mail" class="col-lg-8">
+              <input
+                class="long form-control" aria-describedby="basic-addon1"
+                type="text" formControlName="mail">
+            </td>
+          </tr>
+          <tr>
+            <th class="col-lg-4">Adresse</th>
+            <td id="address" class="col-lg-8">
+              <input
+                class="long form-control" aria-describedby="basic-addon1"
+                type="text" formControlName="address">
             </td>
           </tr>
         </table>
 
-        <table class="table table-bordered col-lg-6" id="tableInformation9" #myDatePicker>
+        <div class="row">
+          <div class="col-lg-6" id="container5">
+            <table *ngIf="isStudent" class="table table-bordered" id="tableInformation5">
+              <tr>
+                <th id="headpostalCode">Code Postal</th>
+                <td id="postalCode">
+                  <input
+                    type="text" aria-describedby="basic-addon1"
+                    class="form-control"
+                    formControlName="postalCode">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div *ngIf="isStudent" class="col-lg-6" id="container6">
+            <table class="table table-bordered" id="tableInformation6">
+              <tr>
+                <th>Ville</th>
+                <td id="city">
+                  <input
+                    type="text" aria-describedby="basic-addon1"
+                    class="form-control long"
+                    formControlName="city">
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="row" id="some-padding">
+          <table *ngIf="isStudent" class="table table-bordered col-lg-6" id="tableInformation7">
+            <tr>
+              <th>Diplôme actuellement préparé à l'UNS</th>
+              <td id="currentUNSDiploma">
+                <input
+
+                  placeholder="Diplôme d'ingénieur"
+                  type="text" aria-describedby="basic-addon1"
+                  class="form-control long"
+                  formControlName="currentUNSDiploma">
+              </td>
+            </tr>
+          </table>
+          <table *ngIf="isStudent" class="table table-bordered col-lg-6" id="tableInformation8">
+            <tr>
+              <th>Diplôme prévu pour l'année d'Échange</th>
+              <td id="nextYearExchangeDiploma">
+                <input
+                  placeholder="Diplôme d'ingénieur"
+                  type="text" aria-describedby="basic-addon1"
+                  class="form-control long"
+                  formControlName="nextYearExchangeDiploma">
+              </td>
+            </tr>
+          </table>
+
+          <table class="table table-bordered col-lg-6" id="tableInformation9" #myDatePicker>
+            <tr>
+              <th>Fin de validité de la carte de séjour
+              </th>
+              <td id="stayCardEndValidityTd">
+                <input bsDatepicker class="form-control"
+                       formControlName="stayCardEndValidity"
+                       id="stayCardEndValidity"
+                       type="text">
+              </td>
+            </tr>
+          </table>
+
+        </div>
+
+        <table class="table">
+          <thead>
           <tr>
-            <th>Fin de validité de la carte de séjour
-            </th>
-            <td id="stayCardEndValidityTd">
-              <input bsDatepicker class="form-control"
-                     formControlName="stayCardEndValidity"
-                     id="stayCardEndValidity"
+            <th scope="col">Année</th>
+            <th scope="col">Niveau d'étude</th>
+            <th scope="col">Etablissement</th>
+            <th scope="col">Moyenne</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="datediploma1"
+                     placeholder="2016"
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="diploma1"
+                     placeholder="DUT (Bac+1)"
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="school1"
+                     placeholder="IUT d'Aix-en-Provence"
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="note1"
+                     placeholder="14/20"
                      type="text">
             </td>
           </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="datediploma2"
+                     placeholder="2017"
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="diploma2"
+                     placeholder="DUT (Bac+2)"
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="school2"
+                     placeholder="IUT d'Aix-en-Provence"
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="note2"
+                     placeholder="11/20"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="datediploma3"
+                     placeholder="2018"
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="diploma3"
+                     placeholder="DUT (Bac+2)"
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="school3"
+                     placeholder="IUT d'Aix-en-Provence"
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="note3"
+                     placeholder="15/20"
+                     type="text">
+            </td>
+          </tr>
+          </tbody>
         </table>
 
-      </div>
 
-      <table class="table">
-        <thead>
-        <tr>
-          <th scope="col">Année</th>
-          <th scope="col">Niveau d'étude</th>
-          <th scope="col">Etablissement</th>
-          <th scope="col">Moyenne</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="datediploma1"
-                   placeholder="2016"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="diploma1"
-                   placeholder="DUT (Bac+1)"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="school1"
-                   placeholder="IUT d'Aix-en-Provence"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="note1"
-                   placeholder="14/20"
-                   type="text">
-          </td>
-        </tr>
-
-        <tr>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="datediploma2"
-                   placeholder="2017"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="diploma2"
-                   placeholder="DUT (Bac+2)"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="school2"
-                   placeholder="IUT d'Aix-en-Provence"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="note2"
-                   placeholder="11/20"
-                   type="text">
-          </td>
-        </tr>
-
-        <tr>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="datediploma3"
-                   placeholder="2018"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="diploma3"
-                   placeholder="DUT (Bac+2)"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="school3"
-                   placeholder="IUT d'Aix-en-Provence"
-                   type="text">
-          </td>
-          <td>
-            <input aria-describedby="basic-addon1" class="form-control" formControlName="note3"
-                   placeholder="15/20"
-                   type="text">
-          </td>
-        </tr>
-        </tbody>
-      </table>
-
-
-      <div class="form-check row">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-1">
-          <input checked class="form-check-input"
-                 formControlName="shareMyDetails"
-                 id="shareMyDetails"
-                 type="checkbox" #shareMyDetails>
+        <div class="form-check row">
+          <div class="col-lg-1"></div>
+          <div class="col-lg-1">
+            <input checked class="form-check-input"
+                   formControlName="shareMyDetails"
+                   id="shareMyDetails"
+                   type="checkbox" #shareMyDetails>
+          </div>
+          <label class="form-check-label col-lg-10" for="shareMyDetails" style="display: inline-block">
+            J’accepte que mes coordonnées soient transmises à d’autres
+            personnes ou organismes pour toute question en lien avec mon
+            séjour d’études à l’étranger.
+          </label>
         </div>
-        <label class="form-check-label col-lg-10" for="shareMyDetails" style="display: inline-block">
-          J’accepte que mes coordonnées soient transmises à d’autres
-          personnes ou organismes pour toute question en lien avec mon
-          séjour d’études à l’étranger.
-        </label>
+        <!--(ngSubmit)="onSubmit()"-->
+        <button (click)="onSubmit()"
+                [ngClass]="{'btn-success': isValidated===true}"
+                class="btn btn-lg btn-default btn-block" id="submit" type="submit">
+          Enregister
+        </button>
       </div>
-      <!--(ngSubmit)="onSubmit()"-->
-      <button (click)="onSubmit()"
-              [ngClass]="{'btn-success': isValidated===true}"
-              class="btn btn-lg btn-default btn-block" id="submit" type="submit">
-        Enregister
-      </button>
-    </div>
-  </form>
+    </form>
+</div>
 </div>
