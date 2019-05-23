@@ -88,28 +88,37 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
   selectWish(choice) {
     /*if (setInputToNull)
       this.setAllInputToNull();*/
-    this.selectedWish = choice;
-    this.elTogglePrintemps.nativeElement.style.display = 'block';
-    this.elToggleAutomne.nativeElement.style.display = 'block';
-    let index = this.basicWishesArray.indexOf(choice);
-    console.log('index in basicArray => ', index);
-
-    if (choice.semester === 'fall') {
-      this.activeTab = 's1';
-      this.elToggleAutomne.nativeElement.classList.remove('disabled');
-      this.elTogglePrintemps.nativeElement.classList.add('disabled');
-    } else if (choice.semester === 'spring') {
-      this.activeTab = 's2';
-      this.elToggleAutomne.nativeElement.classList.add('disabled');
-      this.elTogglePrintemps.nativeElement.classList.remove('disabled');
-    } else if (choice.semester === 'full') {
-      this.activeTab = 's1';
-      this.elToggleAutomne.nativeElement.classList.remove('disabled');
-      this.elTogglePrintemps.nativeElement.classList.remove('disabled');
-    }
     if (typeof choice.schoolID === 'number') {
       this.schoolService.getSpecificSchoolById(choice.schoolID);
     }
+    if (choice.semester === 'fall') {
+      this.activeTab = 's1';
+    } else if (choice.semester === 'spring') {
+      this.activeTab = 's2';
+    } else if (choice.semester === 'full') {
+      this.activeTab = 's1';
+    }
+
+    this.selectedWish = choice;
+    let index = this.basicWishesArray.indexOf(choice);
+    console.log('index in basicArray => ', index);
+
+    if (this.elToggleAutomne && this.elTogglePrintemps) {
+      this.elTogglePrintemps.nativeElement.style.display = 'block';
+      this.elToggleAutomne.nativeElement.style.display = 'block';
+
+      if (choice.semester === 'fall') {
+        this.elToggleAutomne.nativeElement.classList.remove('disabled');
+        this.elTogglePrintemps.nativeElement.classList.add('disabled');
+      } else if (choice.semester === 'spring') {
+        this.elToggleAutomne.nativeElement.classList.add('disabled');
+        this.elTogglePrintemps.nativeElement.classList.remove('disabled');
+      } else if (choice.semester === 'full') {
+        this.elToggleAutomne.nativeElement.classList.remove('disabled');
+        this.elTogglePrintemps.nativeElement.classList.remove('disabled');
+      }
+    }
+
     const tdOfSelectedModule = document.querySelectorAll('.selected');
     tdOfSelectedModule.forEach(td => td.classList.remove('selected'));
   }
@@ -176,7 +185,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
   getListVoeux(file: File) {
     this.basicWishes = file.modules.filter(
       module => module.typeModule.id === 17)[0];
-    console.log('basicWishes.infos == ', this.basicWishes.infos);
+    //console.log('basicWishes.infos == ', this.basicWishes.infos);
     this.infos = this.basicWishes.infos;
 
     for (let choice in this.infos) {
@@ -191,14 +200,23 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
     }
   }
 
+  detectSchoolAlreadyUsed(file: File){
+    let contratEtudeList = file.modules.filter(
+      module => module.typeModule.id === 8);
+    console.log(contratEtudeList);
+  }
+
   ngOnInit() {
     console.log('this.module == ', this.module);
-    this.elTogglePrintemps.nativeElement.style.display = 'none';
-    this.elToggleAutomne.nativeElement.style.display = 'none';
+    if (this.elTogglePrintemps)
+      this.elTogglePrintemps.nativeElement.style.display = 'none';
+    if (this.elToggleAutomne)
+      this.elToggleAutomne.nativeElement.style.display = 'none';
 
     //faire fonction qui retourne tab vide ou tableau de school a
     // partir d'un argument de type file
     this.getListVoeux(this.file);
+    this.detectSchoolAlreadyUsed(this.file);
 
     this.contratForm = this.formBuilder.group({
       s1codeCours1: ['', Validators.required],

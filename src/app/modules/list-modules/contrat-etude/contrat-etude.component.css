@@ -23,6 +23,14 @@ td input {
   left: 20%;
 }
 
+#download-button {
+  margin-right: 110px;
+}
+
+#upload-button {
+  margin-left: 108px;
+}
+
 #secondToggle{
   font-size: 20px;
   position: relative;

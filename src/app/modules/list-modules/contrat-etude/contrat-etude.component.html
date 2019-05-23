@@ -23,7 +23,7 @@
           <span class="caret"></span>
         </button>
 
-        <h3 *ngIf="this.basicWishesArray.length === 0" class="text-center alert-danger">
+        <h3 *ngIf="this.basicWishesArray.length === 0 && (!this.schoolSelected)" class="text-center alert-danger">
           Veuillez choisir <i>au moins</i> un voeu dans la section 'Voeux Universites'
         </h3>
         <ul id="dropdown-basic-3" *dropdownMenu
@@ -45,7 +45,13 @@
       </div>
     </div>
     <br>
-    <ul class="nav nav-tabs">
+    <div class="text-center" *ngIf="this.basicWishesArray.length > 0 && this.schoolSelected">
+      <!-- 108 a gauche, 110 a droite-->
+      <button class="btn" id="download-button">Download</button>
+      <button class="btn" id="upload-button">Upload</button>
+    </div>
+    <br>
+    <ul class="nav nav-tabs" *ngIf="this.basicWishesArray.length > 0 && this.schoolSelected">
       <li class="toggleName" id="firstToggle" #toggleAutomne>
         <a (click)="setS('s1')"
            [ngClass]="{ 'active':activeTab==='s1'}"
@@ -560,20 +566,21 @@
         </table>
       </div>
     </div>
-  </div>
 
-  <!--    FIN DU PROGRAMME D'ETUDE-->
-  <button
-    *ngIf="this.basicWishesArray.length > 0"
-    class="btn btn-lg btn-default btn-block"
-    id="clear"
-    (click)="setAllInputToNull()">
-    Effacer tout
-  </button>
-  <button
-    *ngIf="this.basicWishesArray.length > 0"
-    [ngClass]="{'btn-success': isValidated===true}"
-    class="btn btn-lg btn-default btn-block" id="submit" type="submit">
-    Enregister
-  </button>
+    <!--    FIN DU PROGRAMME D'ETUDE-->
+    <button
+      *ngIf="this.basicWishesArray.length > 0"
+      [ngClass]="{'btn-success': isValidated===true}"
+      class="btn btn-lg btn-default btn-block" id="submit" type="submit">
+      Enregister
+    </button>
+    <br>
+    <button
+      *ngIf="this.basicWishesArray.length > 0"
+      class="btn btn-danger pull-right"
+      id="clear"
+      (click)="setAllInputToNull()">
+      Effacer tout
+    </button>
+  </div>
 </form>
