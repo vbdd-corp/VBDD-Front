@@ -14,7 +14,7 @@
           {{ selectedChoice.school.name }} -  {{selectedChoice.school.city}}, {{selectedChoice.school.country}}
           <span class="caret" ></span>
         </button>
-        <button *ngIf="!selectedChoice && this.choices.length > 0"
+        <button *ngIf="!this.selectedChoice && this.choices.length > 0"
                 id="button-basic-3-empty"
                 dropdownToggle type="button"
                 class="btn btn-primary dropdown-toggle text-center"
@@ -45,13 +45,17 @@
       </div>
     </div>
     <br>
-    <div class="text-center" *ngIf="this.choices.length > 0">
+    <p *ngIf="this.choiceAlreadyInAnotherContrat" class="text-danger">
+      Attention, vous avez déjà sélectionné ce voeu dans un autre Contrat d'études
+    </p>
+    <br>
+    <div class="text-center" *ngIf="this.choices.length > 0 && this.selectedChoice">
       <!-- 108 a gauche, 110 a droite-->
-      <button class="btn" id="download-button">Download</button>
-      <button class="btn" id="upload-button">Upload</button>
+      <button class="btn" type="button" id="download-button">Download</button>
+      <button class="btn" type="button" id="upload-button">Upload</button>
     </div>
     <br>
-    <ul class="nav nav-tabs" *ngIf="this.choices.length > 0">
+    <ul class="nav nav-tabs" *ngIf="this.choices.length > 0 && this.selectedChoice">
       <li class="toggleName" id="firstToggle" #toggleAutomne>
         <a (click)="setS('s1')"
            [ngClass]="{ 'active':activeTab==='s1'}"
@@ -570,16 +574,17 @@
 
   <!--    FIN DU PROGRAMME D'ETUDE-->
   <button
-    *ngIf="this.choices.length > 0"
-    class="btn btn-lg btn-default btn-block"
-    id="clear"
-    (click)="setAllInputToNull()">
-    Effacer tout
-  </button>
-  <button
-    *ngIf="this.choices.length > 0"
+    *ngIf="this.choices.length > 0 && this.selectedChoice"
     [ngClass]="{'btn-success': isValidated===true}"
     class="btn btn-lg btn-default btn-block" id="submit" type="submit">
     Enregister
+  </button>
+  <button
+    *ngIf="this.choices.length > 0 && this.selectedChoice"
+    class="btn btn-danger pull-right"
+    id="clear"
+    type="button"
+    (click)="setAllInputToNull()">
+    Effacer tout
   </button>
 </form>

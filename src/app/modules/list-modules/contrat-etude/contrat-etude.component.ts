@@ -1,20 +1,15 @@
 import {
   Component,
-  ElementRef,
   Input,
   OnInit,
   ViewChild,
-  AfterViewInit,
-  AfterViewChecked,
-  TemplateRef, Renderer2, QueryList, ChangeDetectorRef
+  AfterViewInit, ChangeDetectorRef,
 } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModuleService} from '../../../../services/module.service';
 import {SchoolService} from "../../../../services/school.service";
 import {File} from "../../../../models/file";
 import {Module} from "../../../../models/module";
-import {School} from "../../../../models/school";
-import {ArrayType} from "@angular/compiler";
 import {DossierService} from '../../../../services/dossier.service';
 import {Choice} from '../../../../models/choice';
 
@@ -37,8 +32,8 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
 
   private choices :Choice[];
   private selectedChoice :Choice;
-  private infos;
   private activeTab;
+  private choiceAlreadyInAnotherContrat;
 
   get f() {
     return this.contratForm.controls;
@@ -76,26 +71,49 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  selectWish(choice :Choice) {
-    /*if (setInputToNull)
-      this.setAllInputToNull();*/
-    this.selectedChoice = choice;
-    this.elTogglePrintemps.nativeElement.style.display = 'block';
-    this.elToggleAutomne.nativeElement.style.display = 'block';
+  enableorDisableToggleElements(){
+    let choice = this.selectedChoice;
+    console.log('this.elToggleAutomne == ', this.elToggleAutomne);
+    console.log('this.elTogglePrintemps == ', this.elTogglePrintemps);
 
-    if (choice.semester === 'fall') {
-      this.activeTab = 's1';
-      this.elToggleAutomne.nativeElement.classList.remove('disabled');
-      this.elTogglePrintemps.nativeElement.classList.add('disabled');
-    } else if (choice.semester === 'spring') {
-      this.activeTab = 's2';
-      this.elToggleAutomne.nativeElement.classList.add('disabled');
-      this.elTogglePrintemps.nativeElement.classList.remove('disabled');
-    } else if (choice.semester === 'full') {
-      this.activeTab = 's1';
-      this.elToggleAutomne.nativeElement.classList.remove('disabled');
-      this.elTogglePrintemps.nativeElement.classList.remove('disabled');
+    if (this.elTogglePrintemps)
+      this.elTogglePrintemps.nativeElement.style.display = 'block';
+    if (this.elToggleAutomne)
+      this.elToggleAutomne.nativeElement.style.display = 'block';
+
+    if (this.elToggleAutomne && this.elTogglePrintemps) {
+      if (choice.semester === 'fall') {
+        console.log('HERE DEBUG 1');
+        this.elToggleAutomne.nativeElement.classList.remove('disabled');
+        this.elTogglePrintemps.nativeElement.classList.add('disabled');
+      } else if (choice.semester === 'spring') {
+        this.elToggleAutomne.nativeElement.classList.add('disabled');
+        this.elTogglePrintemps.nativeElement.classList.remove('disabled');
+      } else if (choice.semester === 'full') {
+        this.elToggleAutomne.nativeElement.classList.remove('disabled');
+        this.elTogglePrintemps.nativeElement.classList.remove('disabled');
+      }
     }
+  }
+
+  selectWish(choice :Choice) {
+    this.selectedChoice = choice;
+    //this.cdr.markForCheck();
+    //console.log('typeof ', this.selectedChoice.schoolID, ' == ', typeof this.selectedChoice.schoolID);
+    //console.log('this.selectedChoice.semester == ', this.selectedChoice.semester);
+    //console.log('choice.semester == ', choice.semester);
+    console.log('this.selectedChoice == ', this.selectedChoice);
+    console.log('this.choices.length == ', this.choices.length);
+    this.fillInputs();
+    this.enableorDisableToggleElements();
+
+    if (choice.semester === 'fall')
+      this.activeTab = 's1';
+    else if (choice.semester === 'spring')
+      this.activeTab = 's2';
+    else if (choice.semester === 'full')
+      this.activeTab = 's1';
+
     if (typeof choice.schoolID === 'number') { //TODO: check if this condition is possible
       this.schoolService.getSchoolById(choice.schoolID).then( school => {
         this.selectedChoice.school = school;
@@ -103,6 +121,9 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
     }
     const tdOfSelectedModule = document.querySelectorAll('.selected');
     tdOfSelectedModule.forEach(td => td.classList.remove('selected'));
+
+    this.choiceAlreadyInAnotherContrat = this.detectChoiceAlreadyUsed(this.file, choice);
+    console.log('this.detectChoiceAlreadyUsed', this.choiceAlreadyInAnotherContrat);
   }
 
   updateTotalECTS(semester) {
@@ -125,7 +146,8 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
     private moduleService: ModuleService,
     private schoolService: SchoolService,
-    private fileService: DossierService) {
+    private fileService: DossierService,
+    private cdr: ChangeDetectorRef) {
     this.choices = [];
   }
 
@@ -138,20 +160,40 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
       this.choices.push(choices.choice3);
   }
 
-  detectSchoolAlreadyUsed(file: File){
+  detectChoiceAlreadyUsed(file: File, choice: Choice){
     let contratEtudeList = file.modules.filter(
       module => module.typeModule.id === 8);
     console.log(contratEtudeList);
+    console.log(choice);
+
+    let choiceSchoolId = choice.school ? choice.school.id : choice.schoolID;
+    for (let i = 0; i < contratEtudeList.length; i++){
+      if (choiceSchoolId === contratEtudeList[i].infos.choice.schoolID
+      && choice.semester === contratEtudeList[i].infos.choice.semester
+      && contratEtudeList[i].id !== this.module.id) {
+        return true;
+      }
+    }
+    return false;
   }
 
   ngOnInit() {
     this.fileService.getChoices(this.file.id).then( choices => {
-      if(choices)
+      if(choices) {
         this.loadListChoices(choices);
+        //this.cdr.markForCheck();
+      }
+      console.log('this.module == ', this.module);
+      //console.log('this.choices.length == ', this.choices.length);
+      //console.log('this.module.infos.choice == ', this.module.infos.choice);
+      //console.log('typeof == ', typeof this.module.infos.choice.schoolID);
+      if (this.module.infos && typeof this.module.infos.choice.schoolID === 'number')
+        this.selectWish(this.module.infos.choice);
     });
-
-    this.elTogglePrintemps.nativeElement.style.display = 'none';
-    this.elToggleAutomne.nativeElement.style.display = 'none';
+    if (this.elTogglePrintemps)
+      this.elTogglePrintemps.nativeElement.style.display = 'none';
+    if (this.elToggleAutomne)
+      this.elToggleAutomne.nativeElement.style.display = 'none';
 
     this.contratForm = this.formBuilder.group({
       s1codeCours1: ['', Validators.required],
@@ -228,29 +270,33 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
       s2nombreCredits11: ['', Validators.required],
       s2nombreCredits12: ['', Validators.required],
     });
-
-    for (let i = 1; i <= 12; i++) {
-      this.contratForm.get('s1codeCours' + i).setValue(this.module.infos.s1['codeCours' + i]);
-      this.contratForm.get('s2codeCours' + i).setValue(this.module.infos.s2['codeCours' + i]);
-    }
-    for (let i = 1; i <= 12; i++) {
-      this.contratForm.controls['s1titreCours' + i].setValue(this.module.infos.s1['titreCours' + i]);
-      this.contratForm.controls['s2titreCours' + i].setValue(this.module.infos.s2['titreCours' + i]);
-    }
-    for (let i = 1; i <= 12; i++) {
-      this.contratForm.controls['s1nombreCredits' + i].setValue(this.module.infos.s1['nombreCredits' + i]);
-      this.contratForm.controls['s2nombreCredits' + i].setValue(this.module.infos.s2['nombreCredits' + i]);
-    }
+    this.fillInputs();
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      if (this.module.infos.choice.schoolID){}
-        this.selectWish(this.module.infos.choice);
+      this.enableorDisableToggleElements();
     });
   }
 
   ngOnDestroy() {
+  }
+
+  fillInputs() {
+    if (this.module.infos) {
+      for (let i = 1; i <= 12; i++) {
+        this.contratForm.get('s1codeCours' + i).setValue(this.module.infos.s1['codeCours' + i]);
+        this.contratForm.get('s2codeCours' + i).setValue(this.module.infos.s2['codeCours' + i]);
+      }
+      for (let i = 1; i <= 12; i++) {
+        this.contratForm.controls['s1titreCours' + i].setValue(this.module.infos.s1['titreCours' + i]);
+        this.contratForm.controls['s2titreCours' + i].setValue(this.module.infos.s2['titreCours' + i]);
+      }
+      for (let i = 1; i <= 12; i++) {
+        this.contratForm.controls['s1nombreCredits' + i].setValue(this.module.infos.s1['nombreCredits' + i]);
+        this.contratForm.controls['s2nombreCredits' + i].setValue(this.module.infos.s2['nombreCredits' + i]);
+      }
+    }
   }
 
   private getContratValuesS1() {

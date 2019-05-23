@@ -36,3 +36,7 @@ td input {
   position: relative;
   left: 35%;
 }
+
+#clear {
+  margin-top: 10px;
+}
