@@ -1,20 +1,20 @@
 <form (ngSubmit)="onSubmit()"
       [formGroup]="contratForm">
 
-  <div align="center" id="MODULE" id="mainDiv">
+  <div align="center">
 
-    <h3>Programme d'études pendant le séjour à l'étranger</h3>
+    <h3>Programme d'études</h3>
     <br>
     <div class="text-center">
       <div class="btn-group text-center" dropdown>
-        <button *ngIf="schoolSelected"
+        <button *ngIf="selectedChoice && selectedChoice.school"
                 id="button-basic-1" dropdownToggle type="button"
                 class="btn btn-primary dropdown-toggle"
                 aria-controls="dropdown-basic">
-          {{ schoolSelected.name }} -  {{schoolSelected.city}}, {{schoolSelected.country}}
+          {{ selectedChoice.school.name }} -  {{selectedChoice.school.city}}, {{selectedChoice.school.country}}
           <span class="caret" ></span>
         </button>
-        <button *ngIf="!schoolSelected && this.basicWishesArray.length > 0"
+        <button *ngIf="!selectedChoice && this.choices.length > 0"
                 id="button-basic-3-empty"
                 dropdownToggle type="button"
                 class="btn btn-primary dropdown-toggle text-center"
@@ -23,7 +23,7 @@
           <span class="caret"></span>
         </button>
 
-        <h3 *ngIf="this.basicWishesArray.length === 0 && (!this.schoolSelected)" class="text-center alert-danger">
+        <h3 *ngIf="this.choices.length === 0" class="text-center alert-danger">
           Veuillez choisir <i>au moins</i> un voeu dans la section 'Voeux Universites'
         </h3>
         <ul id="dropdown-basic-3" *dropdownMenu
@@ -35,7 +35,7 @@
               Aucun
             </a>
           </li>
-          <li *ngFor="let choice of this.basicWishesArray"
+          <li *ngFor="let choice of this.choices"
               class="pointer" role="menuitem">
             <a class="dropdown-item" *ngIf="choice.school" (click)="selectWish(choice)">
               {{choice.school.name}}  -  {{choice.school.city}}, {{choice.school.country}}
@@ -45,13 +45,13 @@
       </div>
     </div>
     <br>
-    <div class="text-center" *ngIf="this.basicWishesArray.length > 0 && this.schoolSelected">
+    <div class="text-center" *ngIf="this.choices.length > 0">
       <!-- 108 a gauche, 110 a droite-->
       <button class="btn" id="download-button">Download</button>
       <button class="btn" id="upload-button">Upload</button>
     </div>
     <br>
-    <ul class="nav nav-tabs" *ngIf="this.basicWishesArray.length > 0 && this.schoolSelected">
+    <ul class="nav nav-tabs" *ngIf="this.choices.length > 0">
       <li class="toggleName" id="firstToggle" #toggleAutomne>
         <a (click)="setS('s1')"
            [ngClass]="{ 'active':activeTab==='s1'}"
@@ -69,7 +69,7 @@
     </ul>
     <br>
 
-    <div *ngIf="this.basicWishesArray.length > 0 && this.schoolSelected" class="tab-content">
+    <div *ngIf="this.choices.length > 0 && this.selectedChoice" class="tab-content">
       <h4>
         Veuillez remplir le tableau ci-dessous (laisser blanc si nécéssaire)
       </h4>
@@ -566,21 +566,20 @@
         </table>
       </div>
     </div>
-
-    <!--    FIN DU PROGRAMME D'ETUDE-->
-    <button
-      *ngIf="this.basicWishesArray.length > 0"
-      [ngClass]="{'btn-success': isValidated===true}"
-      class="btn btn-lg btn-default btn-block" id="submit" type="submit">
-      Enregister
-    </button>
-    <br>
-    <button
-      *ngIf="this.basicWishesArray.length > 0"
-      class="btn btn-danger pull-right"
-      id="clear"
-      (click)="setAllInputToNull()">
-      Effacer tout
-    </button>
   </div>
+
+  <!--    FIN DU PROGRAMME D'ETUDE-->
+  <button
+    *ngIf="this.choices.length > 0"
+    class="btn btn-lg btn-default btn-block"
+    id="clear"
+    (click)="setAllInputToNull()">
+    Effacer tout
+  </button>
+  <button
+    *ngIf="this.choices.length > 0"
+    [ngClass]="{'btn-success': isValidated===true}"
+    class="btn btn-lg btn-default btn-block" id="submit" type="submit">
+    Enregister
+  </button>
 </form>

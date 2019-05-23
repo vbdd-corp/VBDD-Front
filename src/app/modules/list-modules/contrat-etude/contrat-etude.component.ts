@@ -15,6 +15,8 @@ import {File} from "../../../../models/file";
 import {Module} from "../../../../models/module";
 import {School} from "../../../../models/school";
 import {ArrayType} from "@angular/compiler";
+import {DossierService} from '../../../../services/dossier.service';
+import {Choice} from '../../../../models/choice';
 
 @Component({
   selector: 'app-contrat-etude',
@@ -32,20 +34,11 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
   @ViewChild('totalECTSS2') private elTotalECTSS2;
   @ViewChild('totalECTSS1') private elTotalECTSS1;
   isValidated: boolean = false;
-  public schoolSelected: School;
 
-  private basicWishes = undefined;
-  private basicWishesArray = [];
-  private selectedWish;
+  private choices :Choice[];
+  private selectedChoice :Choice;
   private infos;
-  private choice1 = {};
-  private choice2 = {};
-  private choice3 = {};
   private activeTab;
-  private sub;
-  private sub1;
-  private sub2;
-  private sub3;
 
   get f() {
     return this.contratForm.controls;
@@ -63,11 +56,9 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
 
   setSchoolSelectedToNull() {
     this.setAllInputToNull();
-    this.schoolSelected = null;
-    this.selectedWish = null;
+    this.selectedChoice = null;
     this.elTogglePrintemps.nativeElement.style.display = 'none';
     this.elToggleAutomne.nativeElement.style.display = 'none';
-    this.schoolService.setSpecificSchool(null);
   }
 
   setAllInputToNull() {
@@ -85,40 +76,31 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  selectWish(choice) {
+  selectWish(choice :Choice) {
     /*if (setInputToNull)
       this.setAllInputToNull();*/
-    if (typeof choice.schoolID === 'number') {
-      this.schoolService.getSpecificSchoolById(choice.schoolID);
-    }
+    this.selectedChoice = choice;
+    this.elTogglePrintemps.nativeElement.style.display = 'block';
+    this.elToggleAutomne.nativeElement.style.display = 'block';
+
     if (choice.semester === 'fall') {
       this.activeTab = 's1';
+      this.elToggleAutomne.nativeElement.classList.remove('disabled');
+      this.elTogglePrintemps.nativeElement.classList.add('disabled');
     } else if (choice.semester === 'spring') {
       this.activeTab = 's2';
+      this.elToggleAutomne.nativeElement.classList.add('disabled');
+      this.elTogglePrintemps.nativeElement.classList.remove('disabled');
     } else if (choice.semester === 'full') {
       this.activeTab = 's1';
+      this.elToggleAutomne.nativeElement.classList.remove('disabled');
+      this.elTogglePrintemps.nativeElement.classList.remove('disabled');
     }
-
-    this.selectedWish = choice;
-    let index = this.basicWishesArray.indexOf(choice);
-    console.log('index in basicArray => ', index);
-
-    if (this.elToggleAutomne && this.elTogglePrintemps) {
-      this.elTogglePrintemps.nativeElement.style.display = 'block';
-      this.elToggleAutomne.nativeElement.style.display = 'block';
-
-      if (choice.semester === 'fall') {
-        this.elToggleAutomne.nativeElement.classList.remove('disabled');
-        this.elTogglePrintemps.nativeElement.classList.add('disabled');
-      } else if (choice.semester === 'spring') {
-        this.elToggleAutomne.nativeElement.classList.add('disabled');
-        this.elTogglePrintemps.nativeElement.classList.remove('disabled');
-      } else if (choice.semester === 'full') {
-        this.elToggleAutomne.nativeElement.classList.remove('disabled');
-        this.elTogglePrintemps.nativeElement.classList.remove('disabled');
-      }
+    if (typeof choice.schoolID === 'number') { //TODO: check if this condition is possible
+      this.schoolService.getSchoolById(choice.schoolID).then( school => {
+        this.selectedChoice.school = school;
+      });
     }
-
     const tdOfSelectedModule = document.querySelectorAll('.selected');
     tdOfSelectedModule.forEach(td => td.classList.remove('selected'));
   }
@@ -142,62 +124,18 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
   constructor(
     private formBuilder: FormBuilder,
     private moduleService: ModuleService,
-    private schoolService: SchoolService) {
-
-    this.sub1 = this.schoolService.school1$.subscribe(school => {
-      if (Object.keys(this.choice1).length > 0) {
-        this.choice1 = Object.assign({}, this.choice1, {
-          school: school
-        });
-        if (school != null) {
-          this.basicWishesArray.push(this.choice1);
-          this.basicWishesArray.sort((a, b) => a.schoolID - b.schoolID);
-          //console.log(JSON.stringify(this.basicWishesArray));
-        }
-      }
-    });
-    this.sub2 = this.schoolService.school2$.subscribe(school => {
-      if (Object.keys(this.choice2).length > 0) {
-        this.choice2 = Object.assign({}, this.choice2, {
-          school: school
-        });
-        if (school != null) {
-          this.basicWishesArray.push(this.choice2);
-          this.basicWishesArray.sort((a, b) => a.schoolID - b.schoolID);
-        }
-      }
-    });
-    this.sub3 = this.schoolService.school3$.subscribe(school => {
-      if (Object.keys(this.choice3).length > 0) {
-        this.choice3 = Object.assign({}, this.choice3, {
-          school: school
-        });
-        if (school != null) {
-          this.basicWishesArray.push(this.choice3);
-          this.basicWishesArray.sort((a, b) => a.schoolID - b.schoolID);
-        }
-      }
-    });
-    this.sub = this.schoolService.tempSchool$
-      .subscribe(school => this.schoolSelected = school);
+    private schoolService: SchoolService,
+    private fileService: DossierService) {
+    this.choices = [];
   }
 
-  getListVoeux(file: File) {
-    this.basicWishes = file.modules.filter(
-      module => module.typeModule.id === 17)[0];
-    //console.log('basicWishes.infos == ', this.basicWishes.infos);
-    this.infos = this.basicWishes.infos;
-
-    for (let choice in this.infos) {
-      if (typeof this.infos[choice].schoolID === 'number') {
-        this[choice] = this.infos[choice];
-        //console.log('BEFORE CALL schoolID == ', this.infos[choice].schoolID);
-        this.schoolService.getSchoolById(
-          this.infos[choice].schoolID,
-          parseInt(choice.split('choice')[1], 10)
-        );
-      }
-    }
+  loadListChoices(choices :any) {
+    if(choices.choice1 !== null)
+      this.choices.push(choices.choice1);
+    if(choices.choice2 !== null)
+      this.choices.push(choices.choice2);
+    if(choices.choice3 !== null)
+      this.choices.push(choices.choice3);
   }
 
   detectSchoolAlreadyUsed(file: File){
@@ -207,16 +145,13 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    console.log('this.module == ', this.module);
-    if (this.elTogglePrintemps)
-      this.elTogglePrintemps.nativeElement.style.display = 'none';
-    if (this.elToggleAutomne)
-      this.elToggleAutomne.nativeElement.style.display = 'none';
+    this.fileService.getChoices(this.file.id).then( choices => {
+      if(choices)
+        this.loadListChoices(choices);
+    });
 
-    //faire fonction qui retourne tab vide ou tableau de school a
-    // partir d'un argument de type file
-    this.getListVoeux(this.file);
-    this.detectSchoolAlreadyUsed(this.file);
+    this.elTogglePrintemps.nativeElement.style.display = 'none';
+    this.elToggleAutomne.nativeElement.style.display = 'none';
 
     this.contratForm = this.formBuilder.group({
       s1codeCours1: ['', Validators.required],
@@ -308,28 +243,14 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  callBackFn (key, val) {
-    if (val.schoolID === this.schoolSelected.id)
-      this.selectWish(val);
-  }
-
   ngAfterViewInit(): void {
     setTimeout(() => {
-      if (this.module.infos.choice.schoolID)
+      if (this.module.infos.choice.schoolID){}
         this.selectWish(this.module.infos.choice);
-
-      //function
-      if (this.schoolSelected)
-        Object.entries(this.basicWishes.infos).forEach(
-          ([key, val]) => this.callBackFn(key, val));
     });
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
-    this.sub1.unsubscribe();
-    this.sub2.unsubscribe();
-    this.sub3.unsubscribe();
   }
 
   private getContratValuesS1() {
@@ -423,21 +344,20 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
 
     const arrayList = ['BCICode', 'BCIProgramName'];
 
-    let cloneCopy = Object.assign({}, this.selectedWish);
-    delete cloneCopy.school;
+    let selectedChoiceCopy = Object.assign({}, this.selectedChoice);
+    selectedChoiceCopy.schoolID = selectedChoiceCopy.school.id;
+    delete selectedChoiceCopy.school;
 
     const infos = {
       BCICode: null,
       BCIProgramName: null,
-      choice: cloneCopy,
+      choice: selectedChoiceCopy,
       s1: this.getContratValuesS1(),
       s2: this.getContratValuesS2()
     };
-    console.log('infos to Send => ', infos);
     this.moduleService.updateModule(this.module.id, infos).then(
       updatedModule => {
         this.module = updatedModule;
-        console.log('updated module => ', updatedModule);
       }
     );
 
