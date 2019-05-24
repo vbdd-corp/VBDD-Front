@@ -60,7 +60,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
       this.activeTab = activeTab;
     } else if (activeTab === 's2' &&
       this.elTogglePrintemps.nativeElement.classList.contains('disabled')) {
-      console.log('hello DB2');
+      //console.log('hello DB2');
       setTimeout(
         () => this.elTogglePrintemps.nativeElement.classList.remove('active'),
         50);
@@ -94,10 +94,6 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
 
   enableorDisableToggleElements(){
     let choice = this.selectedChoice;
-    console.log('this.elToggleAutomne == ', this.elToggleAutomne);
-    console.log('this.elTogglePrintemps == ', this.elTogglePrintemps);
-    console.log('zzzz eltotatECTS1 == ', this.elTotalECTSS1);
-    console.log('zzzz eltotatECTS2 == ', this.elTotalECTSS2);
 
     if (this.elBigContainer) {
       if (this.display)
@@ -105,7 +101,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
       else
         this.elBigContainer.nativeElement.style.display = 'none';
     }
-    console.log('enableToggle function => this.activeTab == ', this.activeTab);
+    //console.log('enableToggle function => this.activeTab == ', this.activeTab);
     if (this.activeTab === 's1' && this.elTotalECTSS1)
       this.elTotalECTSS1.nativeElement.textContent = 'Total ECTS :   ' + this.sumECTS;
     else if (this.activeTab === 's2' && this.elTotalECTSS2)
@@ -119,7 +115,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
 
     if (this.elToggleAutomne && this.elTogglePrintemps) {
       if (choice.semester === 'fall') {
-        console.log('HERE DEBUG 1');
+        //console.log('HERE DEBUG 1');
         this.elToggleAutomne.nativeElement.classList.remove('disabled');
         this.elTogglePrintemps.nativeElement.classList.add('disabled');
         this.elTogglePrintemps.nativeElement.classList.add('unselectable');
@@ -156,7 +152,6 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
 
 
 
-    console.log('this.activeTab == ', this.activeTab);
 
     if (typeof choice.schoolID === 'number') { //TODO: check if this condition is possible
       this.schoolService.getSchoolById(choice.schoolID).then( school => {
@@ -167,7 +162,6 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
     tdOfSelectedModule.forEach(td => td.classList.remove('selected'));
 
     this.choiceAlreadyInAnotherContrat = this.detectChoiceAlreadyUsed(this.file, choice);
-    console.log('this.detectChoiceAlreadyUsed', this.choiceAlreadyInAnotherContrat);
   }
 
   updateTotalECTS(semester) {
@@ -183,7 +177,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
       if (!isNaN(val))
         this.sumECTS += val;
     }
-    this.enableorDisableToggleElements(); 
+    this.enableorDisableToggleElements();
   }
 
   loadListChoices(choices :any) {
@@ -198,8 +192,6 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
   detectChoiceAlreadyUsed(file: File, choice: Choice){
     let contratEtudeList = file.modules.filter(
       module => module.typeModule.id === 8);
-    console.log(contratEtudeList);
-    console.log(choice);
 
     let choiceSchoolId = choice.school ? choice.school.id : choice.schoolID;
     for (let i = 0; i < contratEtudeList.length; i++){
@@ -312,9 +304,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
         this.loadListChoices(choices);
       }
       console.log('this.module == ', this.module);
-      //console.log('this.choices.length == ', this.choices.length);
-      //console.log('this.module.infos.choice == ', this.module.infos.choice);
-      console.log('typeof == ', typeof this.module.infos.choice.schoolID);
+      //console.log('typeof == ', typeof this.module.infos.choice.schoolID);
       if (this.module.infos && typeof this.module.infos.choice.schoolID === 'number'){
         this.selectWish(this.module.infos.choice);
       } else if (this.choices.length === 0 || (!this.selectedChoice)) {
