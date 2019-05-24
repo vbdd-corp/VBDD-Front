@@ -55,7 +55,7 @@
       <button class="btn" type="button" id="upload-button">Upload</button>
     </div>
     <br>
-    <ul class="nav nav-tabs" *ngIf="this.choices.length > 0 && this.selectedChoice">
+    <ul class="nav nav-tabs">
       <li class="toggleName" id="firstToggle" #toggleAutomne>
         <a (click)="setS('s1')"
            [ngClass]="{ 'active':activeTab==='s1'}"
@@ -73,7 +73,7 @@
     </ul>
     <br>
 
-    <div *ngIf="this.choices.length > 0 && this.selectedChoice" class="tab-content">
+    <div  class="tab-content" #bigContainer>
       <h4>
         Veuillez remplir le tableau ci-dessous (laisser blanc si nécéssaire)
       </h4>
