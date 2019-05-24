@@ -124,4 +124,15 @@ export class ModulesManagerComponent implements OnInit, OnDestroy {
       doc.click();
     });
   }
+
+  moduleAdditionalName(module: Module) {
+    let name = "";
+    if(module.typeModule.id === 8){ //if contrat d'étude
+      if(module.infos.choice.school != null)
+        name = "- "+module.infos.choice.school.name;
+    }
+    return name;
+  }
+  //TODO: la selection des voeux deja enregistré dans contrat d'étude ne fonctionne pas
+  //TODO: lorsqu'on enregistre un nouveau voeux dans le contrat -> ne met pas a jour son nom
 }
