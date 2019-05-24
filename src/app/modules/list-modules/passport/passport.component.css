@@ -18,10 +18,19 @@ img{
   margin-top: 10px;
 }
 
-button {
-  margin-left: 50px;
-}
-
 #cn1 {
   margin-right: 20px;
+}
+#divPassport{
+  text-align: center;
+}
+
+#leftButton{
+  position: relative;
+  right: 15px;
+}
+
+#rightButton{
+  position: relative;
+  left: 15px;
 }
