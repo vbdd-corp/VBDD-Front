@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Module} from "../../../../models/module";
+import {ModuleService} from "../../../../services/module.service";
 
 @Component({
   selector: 'app-liste-cours',
@@ -19,7 +20,8 @@ export class ListeCoursComponent implements OnInit {
   isValidated: boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private moduleService: ModuleService
   ) { }
 
   get f() {
@@ -109,20 +111,20 @@ export class ListeCoursComponent implements OnInit {
       this.elTogglePrintemps.nativeElement.style.display = 'block';
     if (this.elToggleAutomne)
       this.elToggleAutomne.nativeElement.style.display = 'block';
+    this.updateTotalECTS(this.activeTab);
+    this.elToggleAutomne.nativeElement.classList.add('active');
+    this.elTogglePrintemps.nativeElement.classList.remove('active');
   }
 
   setAllInputToNull() {
     for (let i = 1; i <= 12; i++) {
-      this.listeCoursForm.get('s1codeCours' + i).setValue('');
-      this.listeCoursForm.get('s2codeCours' + i).setValue('');
+      this.listeCoursForm.get(this.activeTab + 'codeCours' + i).setValue('');
     }
     for (let i = 1; i <= 12; i++) {
-      this.listeCoursForm.controls['s1titreCours' + i].setValue('');
-      this.listeCoursForm.controls['s2titreCours' + i].setValue('');
+      this.listeCoursForm.controls[this.activeTab + 'titreCours' + i].setValue('');
     }
     for (let i = 1; i <= 12; i++) {
-      this.listeCoursForm.controls['s1nombreCredits' + i].setValue('');
-      this.listeCoursForm.controls['s2nombreCredits' + i].setValue('');
+      this.listeCoursForm.controls[this.activeTab + 'nombreCredits' + i].setValue('');
     }
   }
 
@@ -150,6 +152,7 @@ export class ListeCoursComponent implements OnInit {
         },
         50);
     }
+    this.updateTotalECTS(this.activeTab);
   }
 
   updateTotalECTS(semester) {
@@ -209,7 +212,96 @@ export class ListeCoursComponent implements OnInit {
     }
   }
 
+  private getContratValuesS1() {
+    return {
+      codeCours1: this.f.s1codeCours1.value,
+      codeCours2: this.f.s1codeCours2.value,
+      codeCours3: this.f.s1codeCours3.value,
+      codeCours4: this.f.s1codeCours4.value,
+      codeCours5: this.f.s1codeCours5.value,
+      codeCours6: this.f.s1codeCours6.value,
+      codeCours7: this.f.s1codeCours7.value,
+      codeCours8: this.f.s1codeCours8.value,
+      codeCours9: this.f.s1codeCours9.value,
+      codeCours10: this.f.s1codeCours10.value,
+      codeCours11: this.f.s1codeCours11.value,
+      codeCours12: this.f.s1codeCours12.value,
+      titreCours1: this.f.s1titreCours1.value,
+      titreCours2: this.f.s1titreCours2.value,
+      titreCours3: this.f.s1titreCours3.value,
+      titreCours4: this.f.s1titreCours4.value,
+      titreCours5: this.f.s1titreCours5.value,
+      titreCours6: this.f.s1titreCours6.value,
+      titreCours7: this.f.s1titreCours7.value,
+      titreCours8: this.f.s1titreCours8.value,
+      titreCours9: this.f.s1titreCours9.value,
+      titreCours10: this.f.s1titreCours10.value,
+      titreCours11: this.f.s1titreCours11.value,
+      titreCours12: this.f.s1titreCours12.value,
+      nombreCredits1: this.f.s1nombreCredits1.value,
+      nombreCredits2: this.f.s1nombreCredits2.value,
+      nombreCredits3: this.f.s1nombreCredits3.value,
+      nombreCredits4: this.f.s1nombreCredits4.value,
+      nombreCredits5: this.f.s1nombreCredits5.value,
+      nombreCredits6: this.f.s1nombreCredits6.value,
+      nombreCredits7: this.f.s1nombreCredits7.value,
+      nombreCredits8: this.f.s1nombreCredits8.value,
+      nombreCredits9: this.f.s1nombreCredits9.value,
+      nombreCredits10: this.f.s1nombreCredits10.value,
+      nombreCredits11: this.f.s1nombreCredits11.value,
+      nombreCredits12: this.f.s1nombreCredits12.value,
+    };
+  }
+
+  private getContratValuesS2() {
+    return {
+      codeCours1: this.f.s2codeCours1.value,
+      codeCours2: this.f.s2codeCours2.value,
+      codeCours3: this.f.s2codeCours3.value,
+      codeCours4: this.f.s2codeCours4.value,
+      codeCours5: this.f.s2codeCours5.value,
+      codeCours6: this.f.s2codeCours6.value,
+      codeCours7: this.f.s2codeCours7.value,
+      codeCours8: this.f.s2codeCours8.value,
+      codeCours9: this.f.s2codeCours9.value,
+      codeCours10: this.f.s2codeCours10.value,
+      codeCours11: this.f.s2codeCours11.value,
+      codeCours12: this.f.s2codeCours12.value,
+      titreCours1: this.f.s2titreCours1.value,
+      titreCours2: this.f.s2titreCours2.value,
+      titreCours3: this.f.s2titreCours3.value,
+      titreCours4: this.f.s2titreCours4.value,
+      titreCours5: this.f.s2titreCours5.value,
+      titreCours6: this.f.s2titreCours6.value,
+      titreCours7: this.f.s2titreCours7.value,
+      titreCours8: this.f.s2titreCours8.value,
+      titreCours9: this.f.s2titreCours9.value,
+      titreCours10: this.f.s2titreCours10.value,
+      titreCours11: this.f.s2titreCours11.value,
+      titreCours12: this.f.s2titreCours12.value,
+      nombreCredits1: this.f.s2nombreCredits1.value,
+      nombreCredits2: this.f.s2nombreCredits2.value,
+      nombreCredits3: this.f.s2nombreCredits3.value,
+      nombreCredits4: this.f.s2nombreCredits4.value,
+      nombreCredits5: this.f.s2nombreCredits5.value,
+      nombreCredits6: this.f.s2nombreCredits6.value,
+      nombreCredits7: this.f.s2nombreCredits7.value,
+      nombreCredits8: this.f.s2nombreCredits8.value,
+      nombreCredits9: this.f.s2nombreCredits9.value,
+      nombreCredits10: this.f.s2nombreCredits10.value,
+      nombreCredits11: this.f.s2nombreCredits11.value,
+      nombreCredits12: this.f.s2nombreCredits12.value,
+    };
+  }
+
   onSubmit(){
+    const infos = {
+      s1: this.getContratValuesS1(),
+      s2: this.getContratValuesS2()
+    };
+    console.log('onSubmit() => ', infos);
+    this.moduleService.updateModule(this.module.id, infos)
+      .then(updatedModule => this.module = updatedModule);
   }
 
 }

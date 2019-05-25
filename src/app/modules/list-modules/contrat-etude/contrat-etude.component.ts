@@ -42,8 +42,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
     private moduleService: ModuleService,
     private schoolService: SchoolService,
-    private fileService: DossierService,
-    private cdr: ChangeDetectorRef) {
+    private fileService: DossierService) {
     this.choices = [];
   }
 
@@ -414,9 +413,6 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
   onSubmit() {
     console.log('this.module.id == ', this.module.id);
     console.log('---------TO SEND------');
-    /*console.log('Contrat S1 == ', this.getContratValuesS1());
-    console.log('Contrat S2 == ', this.getContratValuesS2());
-    console.log('choice == ', this.selectedWish);*/
 
     const arrayList = ['BCICode', 'BCIProgramName'];
 
