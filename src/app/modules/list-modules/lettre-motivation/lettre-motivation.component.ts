@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {FileUploader} from 'ng2-file-upload';
 import {Utils} from '../../../../models/utils';
 import {DownloadService} from '../../../../services/download.service';
@@ -10,8 +10,8 @@ const URL = 'http://localhost:9428/api/module/upload/';
   templateUrl: './lettre-motivation.component.html',
   styleUrls: ['./lettre-motivation.component.css']
 })
-export class LettreMotivationComponent implements OnInit {
-  @Input() report: any;
+export class LettreMotivationComponent implements OnInit, OnChanges {
+  @Input() file: any;
   @Input() module: any;
   isFileUploaded: boolean = false;
 
@@ -31,8 +31,14 @@ export class LettreMotivationComponent implements OnInit {
     this.downloadService.downloadFile(this.getLink());
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes.modules)
+      this.module = changes.module.currentValue;
+    this.ngOnInit();
+  }
+
   ngOnInit() {
-    const completeURL = URL + Utils.getUser().id + '/' + this.report.id + '/' + this.module.id;
+    const completeURL = URL + Utils.getUser().id + '/' + this.file.id + '/' + this.module.id;
     this.uploader = new FileUploader({
       url:
       completeURL,

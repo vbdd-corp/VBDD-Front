@@ -22,19 +22,19 @@
 
   <div *ngIf="module.typeModule.id === 4">
     <hr>
-    <app-europass-component [report]="this.file" [module]="this.module"></app-europass-component>
+    <app-europass-component [file]="this.file" [module]="this.module"></app-europass-component>
     <hr>
   </div>
 
   <div *ngIf="module.typeModule.id === 5">
     <hr>
-    <app-releve-note-component [report]="this.file" [module]="this.module"></app-releve-note-component>
+    <app-releve-note-component [file]="this.file" [module]="this.module"></app-releve-note-component>
     <hr>
   </div>
 
   <div *ngIf="module.typeModule.id === 6">
     <hr>
-    <app-lettre-motivation [report]="this.file" [module]="this.module"></app-lettre-motivation>
+    <app-lettre-motivation [file]="this.file" [module]="this.module"></app-lettre-motivation>
     <hr>
   </div>
 

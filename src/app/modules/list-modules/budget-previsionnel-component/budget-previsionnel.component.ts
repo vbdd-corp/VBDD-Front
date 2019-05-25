@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModuleService} from '../../../../services/module.service';
 
@@ -8,7 +8,7 @@ import {ModuleService} from '../../../../services/module.service';
   templateUrl: './budget-previsionnel.component.html',
   styleUrls: ['./budget-previsionnel.component.css']
 })
-export class BudgetPrevisionnelComponent implements OnInit {
+export class BudgetPrevisionnelComponent implements OnInit, OnChanges {
 
   budgetForm: FormGroup;
   @Input() module: any;
@@ -19,6 +19,12 @@ export class BudgetPrevisionnelComponent implements OnInit {
 
   get f() {
     return this.budgetForm.controls;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes.modules)
+      this.module = changes.module.currentValue;
+    this.ngOnInit();
   }
 
   ngOnInit() {

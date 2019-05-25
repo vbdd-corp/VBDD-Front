@@ -13,4 +13,5 @@ export class CniComponent implements OnInit {
   ngOnInit() {
   }
 
+  // TODO: create the logic of upload and download (done in another module already)
 }

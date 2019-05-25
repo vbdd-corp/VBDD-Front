@@ -24,7 +24,6 @@ export class ReportEditorComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.file = changes.file.currentValue;
-    this.onConstruction();
   }
 
   ngOnDestroy() {

@@ -3,7 +3,7 @@ import {
   Input,
   OnInit,
   ViewChild,
-  AfterViewInit, ChangeDetectorRef, ViewChildren,
+  AfterViewInit, SimpleChanges, OnChanges,
 } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModuleService} from '../../../../services/module.service';
@@ -19,7 +19,7 @@ import {Choice} from '../../../../models/choice';
   styleUrls: ['./contrat-etude.component.css']
 })
 
-export class ContratEtudeComponent implements OnInit, AfterViewInit {
+export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
 
   contratForm: FormGroup;
   @Input() module: Module;
@@ -42,8 +42,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
     private moduleService: ModuleService,
     private schoolService: SchoolService,
-    private fileService: DossierService,
-    private cdr: ChangeDetectorRef) {
+    private fileService: DossierService) {
     this.choices = [];
   }
 
@@ -228,6 +227,14 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
         this.contratForm.controls['s2nombreCredits' + i].setValue(this.module.infos.s2['nombreCredits' + i]);
       }
     }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes.modules)
+      this.module = changes.module.currentValue;
+    if(changes.file)
+      this.file = changes.file.currentValue;
+    this.ngOnInit();
   }
 
   ngOnInit() {

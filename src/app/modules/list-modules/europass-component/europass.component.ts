@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {FileUploader} from 'ng2-file-upload';
 import {Utils} from '../../../../models/utils';
 import {httpOptionsBase} from '../../../../config/server.config';
@@ -13,12 +13,12 @@ const URL = 'http://localhost:9428/api/module/upload/';
   styleUrls: ['./europass.component.css']
 })
 
-export class EuropassComponent implements OnInit {
+export class EuropassComponent implements OnInit, OnChanges {
 
   @Input()
   module: any;
   @Input()
-  report: any;
+  file: any;
   public completeURL: string;
 
   isFileUploaded: boolean = false;
@@ -26,14 +26,19 @@ export class EuropassComponent implements OnInit {
   public uploader: FileUploader;
   @ViewChild('file') selectedPicture: any;
   shouldDisplayDownload: boolean = false;
-  private httpOptions = httpOptionsBase;
 
   constructor(private downloadService: DownloadService) {
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes.modules)
+      this.module = changes.module.currentValue;
+    this.ngOnInit();
+  }
+
   ngOnInit() {
 
-    this.completeURL = URL + Utils.getUser().id + '/' + this.report.id + '/' + this.module.id;
+    this.completeURL = URL + Utils.getUser().id + '/' + this.file.id + '/' + this.module.id;
     this.uploader = new FileUploader({
       url:
       this.completeURL,
