@@ -3,7 +3,7 @@ import {
   Input,
   OnInit,
   ViewChild,
-  AfterViewInit, ChangeDetectorRef, ViewChildren,
+  AfterViewInit, ChangeDetectorRef
 } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModuleService} from '../../../../services/module.service';
@@ -153,14 +153,11 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
       this.activeTab = 's2';
     else if (choice.semester === 'full')
       this.activeTab = 's1';
-    //this.cdr.markForCheck();
+
     this.fillInputs();
     setTimeout(() => this.updateTotalECTS(this.activeTab), 50);
     this.display = true;
     this.updateTotalECTS(this.activeTab);
-
-
-
 
     if (typeof choice.schoolID === 'number') { //TODO: check if this condition is possible
       this.schoolService.getSchoolById(choice.schoolID).then( school => {
@@ -324,13 +321,9 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
       this.elTogglePrintemps.nativeElement.style.display = 'none';
     if (this.elToggleAutomne)
       this.elToggleAutomne.nativeElement.style.display = 'none';
-
-
   }
 
   ngAfterViewInit(): void {
-    //setTimeout(() =>
-
   }
 
   ngOnDestroy() {
