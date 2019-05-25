@@ -55,16 +55,25 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
     if (activeTab === 's1' &&
       !this.elToggleAutomne.nativeElement.classList.contains('disabled')) {
       this.activeTab = activeTab;
+    } else if (activeTab === 's1' &&
+      this.elToggleAutomne.nativeElement.classList.contains('disabled')) {
+      setTimeout(
+        () => {
+          this.elToggleAutomne.nativeElement.classList.remove('active');
+          this.elTogglePrintemps.nativeElement.classList.add('active');
+          },
+        50);
     } else if (activeTab === 's2' &&
       !this.elTogglePrintemps.nativeElement.classList.contains('disabled')) {
       this.activeTab = activeTab;
     } else if (activeTab === 's2' &&
       this.elTogglePrintemps.nativeElement.classList.contains('disabled')) {
-      //console.log('hello DB2');
       setTimeout(
-        () => this.elTogglePrintemps.nativeElement.classList.remove('active'),
+        () => {
+          this.elTogglePrintemps.nativeElement.classList.remove('active');
+          this.elToggleAutomne.nativeElement.classList.add('active');
+        },
         50);
-      //this.elTogglePrintemps.nativeElement.classList.add('disabled');
     }
   }
 

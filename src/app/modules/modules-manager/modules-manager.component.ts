@@ -128,7 +128,7 @@ export class ModulesManagerComponent implements OnInit, OnDestroy {
   moduleAdditionalName(module: Module) {
     let name = "";
     if(module.typeModule.id === 8){ //if contrat d'étude
-      if(module.infos.choice.school != null)
+      if(module.infos && module.infos.choice && module.infos.choice.school != null)
         name = "- "+module.infos.choice.school.name;
     }
     return name;
