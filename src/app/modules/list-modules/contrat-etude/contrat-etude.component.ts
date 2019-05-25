@@ -3,7 +3,7 @@ import {
   Input,
   OnInit,
   ViewChild,
-  AfterViewInit, SimpleChanges, OnChanges,
+  AfterViewInit, SimpleChanges, OnChanges
 } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModuleService} from '../../../../services/module.service';
@@ -50,6 +50,10 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
     return this.contratForm.controls;
   }
 
+  onlyNumberKey(event) {
+    return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+  }
+
   setS(activeTab) {
     if (activeTab === 's1' &&
       !this.elToggleAutomne.nativeElement.classList.contains('disabled')) {
@@ -87,16 +91,13 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
 
   setAllInputToNull() {
     for (let i = 1; i <= 12; i++) {
-      this.contratForm.get('s1codeCours' + i).setValue('');
-      this.contratForm.get('s2codeCours' + i).setValue('');
+      this.contratForm.get(this.activeTab + 'codeCours' + i).setValue('');
     }
     for (let i = 1; i <= 12; i++) {
-      this.contratForm.controls['s1titreCours' + i].setValue('');
-      this.contratForm.controls['s2titreCours' + i].setValue('');
+      this.contratForm.controls[this.activeTab + 'titreCours' + i].setValue('');
     }
     for (let i = 1; i <= 12; i++) {
-      this.contratForm.controls['s1nombreCredits' + i].setValue('');
-      this.contratForm.controls['s2nombreCredits' + i].setValue('');
+      this.contratForm.controls[this.activeTab + 'nombreCredits' + i].setValue('');
     }
   }
 
@@ -152,14 +153,11 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
       this.activeTab = 's2';
     else if (choice.semester === 'full')
       this.activeTab = 's1';
-    //this.cdr.markForCheck();
+
     this.fillInputs();
     setTimeout(() => this.updateTotalECTS(this.activeTab), 50);
     this.display = true;
     this.updateTotalECTS(this.activeTab);
-
-
-
 
     if (typeof choice.schoolID === 'number') { //TODO: check if this condition is possible
       this.schoolService.getSchoolById(choice.schoolID).then( school => {
@@ -331,13 +329,9 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
       this.elTogglePrintemps.nativeElement.style.display = 'none';
     if (this.elToggleAutomne)
       this.elToggleAutomne.nativeElement.style.display = 'none';
-
-
   }
 
   ngAfterViewInit(): void {
-    //setTimeout(() =>
-
   }
 
   ngOnDestroy() {
@@ -428,9 +422,6 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
   onSubmit() {
     console.log('this.module.id == ', this.module.id);
     console.log('---------TO SEND------');
-    /*console.log('Contrat S1 == ', this.getContratValuesS1());
-    console.log('Contrat S2 == ', this.getContratValuesS2());
-    console.log('choice == ', this.selectedWish);*/
 
     const arrayList = ['BCICode', 'BCIProgramName'];
 

@@ -1,59 +1,7 @@
 <form (ngSubmit)="onSubmit()"
-      [formGroup]="contratForm">
-
+      [formGroup]="listeCoursForm">
   <div align="center">
-
-    <h3>Programme d'études</h3>
-    <br>
-    <div class="text-center">
-      <div class="btn-group text-center" dropdown>
-        <button *ngIf="selectedChoice && selectedChoice.school"
-                id="button-basic-1" dropdownToggle type="button"
-                class="btn btn-primary dropdown-toggle"
-                aria-controls="dropdown-basic">
-          {{ selectedChoice.school.name }} -  {{selectedChoice.school.city}}, {{selectedChoice.school.country}}
-          <span class="caret" ></span>
-        </button>
-        <button *ngIf="!this.selectedChoice && this.choices.length > 0"
-                id="button-basic-3-empty"
-                dropdownToggle type="button"
-                class="btn btn-primary dropdown-toggle text-center"
-                aria-controls="dropdown-basic">
-          Sélectionnez un voeu
-          <span class="caret"></span>
-        </button>
-
-        <h3 *ngIf="this.choices.length === 0" class="text-center alert-danger">
-          Veuillez choisir <i>au moins</i> un voeu dans la section 'Voeux Universites'
-        </h3>
-        <ul id="dropdown-basic-3" *dropdownMenu
-            class="dropdown-menu text-center"
-            role="menu"
-            aria-labelledby="button-basic">
-          <li class="pointer" role="menuitem">
-            <a class="dropdown-item" (click)="setSchoolSelectedToNull()">
-              Aucun
-            </a>
-          </li>
-          <li *ngFor="let choice of this.choices"
-              class="pointer" role="menuitem">
-            <a class="dropdown-item" *ngIf="choice.school" (click)="selectWish(choice)">
-              {{choice.school.name}}  -  {{choice.school.city}}, {{choice.school.country}}
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <br>
-    <p *ngIf="this.choiceAlreadyInAnotherContrat" class="text-danger">
-      Attention, vous avez déjà sélectionné ce voeu dans un autre Contrat d'études
-    </p>
-    <br>
-    <div class="text-center" *ngIf="this.choices.length > 0 && this.selectedChoice">
-      <!-- 108 a gauche, 110 a droite-->
-      <button class="btn" type="button" id="download-button">Download</button>
-      <button class="btn" type="button" id="upload-button">Upload</button>
-    </div>
+    <h3>Liste des Cours de l'année en cours</h3>
     <br>
     <ul class="nav nav-tabs">
       <li class="toggleName" id="firstToggle" #toggleAutomne>
@@ -73,7 +21,7 @@
     </ul>
     <br>
 
-    <div  class="tab-content" #bigContainer>
+    <div class="tab-content" #bigContainer text-align="center">
       <h4>
         Veuillez remplir le tableau ci-dessous (laisser blanc si nécéssaire)
       </h4>
@@ -489,7 +437,8 @@
 
           <tr>
             <td>
-              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2codeCours8" placeholder="..."
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2codeCours8"
+                     placeholder="..."
                      type="text">
             </td>
             <td>
@@ -561,9 +510,8 @@
               <input aria-describedby="basic-addon1" class="form-control" formControlName="s2nombreCredits11"
                      placeholder="..."
                      type="text"
-                     (input)="updateTotalECTS('s2')"
-                     (keypress)="onlyNumberKey($event)">
-
+                     (keypress)="onlyNumberKey($event)"
+                     (input)="updateTotalECTS('s2')">
             </td>
           </tr>
 
@@ -583,7 +531,7 @@
                      placeholder="..."
                      type="text"
                      (keypress)="onlyNumberKey($event)"
-                      (input)="updateTotalECTS('s2')">
+                     (input)="updateTotalECTS('s2')">
             </td>
           </tr>
           <tr>
@@ -596,16 +544,12 @@
       </div>
     </div>
   </div>
-
-  <!--    FIN DU PROGRAMME D'ETUDE-->
   <button
-    *ngIf="this.choices.length > 0 && this.selectedChoice"
     [ngClass]="{'btn-success': isValidated===true}"
     class="btn btn-lg btn-default btn-block" id="submit" type="submit">
     Enregister
   </button>
   <button
-    *ngIf="this.choices.length > 0 && this.selectedChoice"
     class="btn btn-danger pull-right"
     id="clear"
     type="button"
