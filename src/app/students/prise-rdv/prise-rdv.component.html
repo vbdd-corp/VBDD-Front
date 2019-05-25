@@ -1,7 +1,7 @@
 <app-calendar-creneau-student class="col-lg-9"></app-calendar-creneau-student>
 <app-prise-rdv-side (appointmentTypeSelect)="selectAppointmentType($event)" class="col-lg-3"></app-prise-rdv-side>
 
-<ng-template #reservation>
+<ng-template #reserving>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Réservation</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
@@ -10,12 +10,37 @@
   </div>
   <div class="modal-body text-center">
 
-    <h3 class="date">{{getDayString()}}</h3>
-    <h4>{{getTimeString()}}</h4>
+    <h3 class="date">{{getDayString(this.creneauSelected.start)}}</h3>
+    <h4>{{getPeriodString(this.creneauSelected.start, this.creneauSelected.end)}}</h4>
 
     <p>Pour :</p>
     <p *ngIf="appointmentTypeSelected">{{appointmentTypeSelected.name}}</p>
 
     <button class="btn btn-lg btn-success" type="button" (click)="reserve()">Réserver</button>
+  </div>
+</ng-template>
+
+<ng-template #reservation>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Votre Réservation</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <p *ngIf="appointmentSelected">
+      <span *ngIf="appointmentSelected.appointmentStatus.id === 1 || appointmentSelected.appointmentStatus.id === 2">
+        Votre réservation du {{getDayString(this.appointmentSelected.creneau.start)}}
+         entre {{getPeriodString(this.appointmentSelected.creneau.start, this.appointmentSelected.creneau.end)}}
+      </span>
+      <span *ngIf="appointmentSelected.appointmentStatus.id === 0">
+        Votre réservation du {{getDayString(this.appointmentSelected.start)}}
+         à {{getPeriodString(this.appointmentSelected.start, this.appointmentSelected.end)}}
+      </span>
+      pour {{appointmentSelected.appointmentType.name}}
+      est {{appointmentSelected.appointmentStatus.name}} .
+    </p>
+    <button *ngIf="appointmentSelected.appointmentStatus.id === 1 || appointmentSelected.appointmentStatus.id === 0"
+            class="btn btn-lg btn-warning" type="button" (click)="cancel(appointmentSelected)">Annuler</button>
   </div>
 </ng-template>

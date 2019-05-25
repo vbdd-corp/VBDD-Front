@@ -15,7 +15,7 @@ let API = '/api/';
 })
 export class CreneauService {
 
-  private selectedCreneau$ = new Subject<Plage>();
+  private selectedCreneau$ = new Subject<Creneau>();
   private selectedCreneau;
 
 

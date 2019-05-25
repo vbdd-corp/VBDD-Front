@@ -59,6 +59,8 @@ export class CalendarCreneauStudentComponent implements OnInit, OnDestroy {
   selectedEvent :CalendarEvent;
   selectedEventPreviousColor :any;
 
+  appointments :Appointment[];
+
   refresh: Subject<any> = new Subject();
 
   creneauToCalendarEvent(creneau: Creneau) :CalendarEvent<Creneau>{
@@ -79,16 +81,22 @@ export class CalendarCreneauStudentComponent implements OnInit, OnDestroy {
         const event = this.creneauToCalendarEvent(creneau);
         this.events.push(event);
       });
-      appointmentService.getAppointmentsOfActualStudentUser();
+      appointmentService.getAppointmentsOfActualUser();
       this.refresh.next();
     });
 
     this.subAppointmentService = this.appointmentService.appointments$.subscribe( appointments => {
+      this.appointments = appointments;
       this.events.forEach( event => {
         let hasBeenMarqued = false;
         appointments.forEach( appointment => {
           if(appointment.creneau.id === event.meta.id){
-            event.color = this.colors.yellow;
+            if(appointment.appointmentStatus.id === 0)
+              event.color = this.colors.green;
+            else if(appointment.appointmentStatus.id === 1)
+              event.color = this.colors.yellow;
+            else if(appointment.appointmentStatus.id === 2)
+              event.color = this.colors.red;
             hasBeenMarqued = true;
           }
           else if(!hasBeenMarqued){
@@ -111,7 +119,13 @@ export class CalendarCreneauStudentComponent implements OnInit, OnDestroy {
 
   select(event: CalendarEvent<Creneau>) {
 
-    this.creneauService.setSelectedCreneau(event.meta);
+    const appointmentsOfSelection = this.appointments.filter( appointment => appointment.creneau.id === event.meta.id);
+    if(appointmentsOfSelection.length === 0){
+      this.creneauService.setSelectedCreneau(event.meta);
+    }
+    else {
+      this.appointmentService.setSelectedAppointment(appointmentsOfSelection[0]);
+    }
 
 
     /*this.selectedEventPreviousColor = event.color;

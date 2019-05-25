@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import {httpOptionsBase, serverUrl} from '../config/server.config';
 import {HttpClient} from '@angular/common/http';
 import {AppointmentType} from '../models/appointment-type';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {ModuleType} from '../models/moduleType';
 import {Appointment} from '../models/appointment';
 import {Utils} from '../models/utils';
 import {File} from '../models/file';
+import {Creneau} from '../models/creneau';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class AppointmentService {
   private url = serverUrl + "/api/" + 'appointment';
   private httpOptions = httpOptionsBase;
 
+  private appointmentSelected$ = new Subject<Appointment>();
 
   private appointmentTypeList: AppointmentType[];
   public appointmentTypes$: BehaviorSubject<AppointmentType[]> = new BehaviorSubject(this.appointmentTypeList);
@@ -30,6 +32,14 @@ export class AppointmentService {
 
   }
 
+  setSelectedAppointment(appointment: Appointment) {
+    this.appointmentSelected$.next(appointment);
+  }
+
+  getSelectedAppointment() {
+    return this.appointmentSelected$.asObservable();
+  }
+
   getAppointmentTypes() {
     this.http.get<AppointmentType[]>(serverUrl + "/api/" + 'appointmentTypes/', this.httpOptions)
       .subscribe((moduleTypes: AppointmentType[]) => {
@@ -38,20 +48,21 @@ export class AppointmentService {
       });
   }
 
-  getAppointmentsOfActualStudentUser() {
-    this.http.get<Appointment[]>(this.url+/by-student/+Utils.getUser().id, this.httpOptions)
-      .subscribe( appointments => {
-        this.appointmentList = appointments;
-        this.appointments$.next(appointments);
-      });
-  }
-
-  getAppointmentsOfActualBriUser() {
-    this.http.get<Appointment[]>(this.url+/by-bri/+Utils.getUser().id, this.httpOptions)
-      .subscribe( appointments => {
-        this.appointmentsBriList = appointments;
-        this.appointmentsBri$.next(appointments);
-      });
+  getAppointmentsOfActualUser() {
+    if(Utils.isStudent()){
+      this.http.get<Appointment[]>(this.url+/by-student/+Utils.getUser().id, this.httpOptions)
+        .subscribe( appointments => {
+          this.appointmentList = appointments;
+          this.appointments$.next(appointments);
+        });
+    }
+    else { // if BRI user
+      this.http.get<Appointment[]>(this.url+/by-bri/+Utils.getUser().id, this.httpOptions)
+        .subscribe( appointments => {
+          this.appointmentsBriList = appointments;
+          this.appointmentsBri$.next(appointments);
+        });
+    }
   }
 
   getAppointmentsInCreneau(creneauId :number) {
@@ -66,7 +77,7 @@ export class AppointmentService {
     return new Promise<Appointment>(resolve => {
       this.http.post<Appointment>(this.url+'/', appointment, this.httpOptions)
         .subscribe(appointment => {
-          this.getAppointmentsOfActualStudentUser();
+          this.getAppointmentsOfActualUser();
           resolve(appointment);
         }, err => {
           console.log(err);
@@ -78,7 +89,7 @@ export class AppointmentService {
     return new Promise<Appointment>(resolve => {
       this.http.put<Appointment>(this.url+'/'+ appointmentId, { appointmentStatusId: 2},this.httpOptions)
         .subscribe(appointment => {
-          this.getAppointmentsOfActualBriUser();
+          this.getAppointmentsOfActualUser();
           resolve(appointment);
         }, err => {
           console.log(err);

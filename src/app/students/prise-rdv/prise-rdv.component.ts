@@ -10,6 +10,7 @@ import {Utils} from '../../../models/utils';
 import { EventEmitter } from '@angular/core';
 import {AppointmentService} from '../../../services/appointment.service';
 import {Appointment} from '../../../models/appointment';
+import {Time} from '../../../models/time';
 
 
 @Component({
@@ -25,12 +26,22 @@ export class PriseRdvComponent implements OnInit, OnDestroy {
   creneauSelected: Creneau;
   creneauServiceSub: Subscription;
 
+  appointmentSelected: Appointment;
+  appointmentServiceSub: Subscription;
+
   @ViewChild('reservation') reservation: TemplateRef<any>;
+  @ViewChild('reserving') reserving: TemplateRef<any>;
 
   constructor(private creneauService: CreneauService,private appointmentService: AppointmentService,private modalService: BsModalService) {
     this.creneauServiceSub = creneauService.getSelectedCreneau().subscribe( creneau => {
       if( creneau ) {
         this.creneauSelected = creneau;
+        this.openModal(this.reserving);
+      }
+    });
+    this.appointmentServiceSub = appointmentService.getSelectedAppointment().subscribe( appointment => {
+      if( appointment ) {
+        this.appointmentSelected = appointment;
         this.openModal(this.reservation);
       }
     });
@@ -60,24 +71,24 @@ export class PriseRdvComponent implements OnInit, OnDestroy {
     this.modalRef.hide();
   }
 
-  getDayString(){
+  getDayString(time :Time){
     return format(
-      Utils.getDateFromTime(this.creneauSelected.start),
+      Utils.getDateFromTime(time),
       'dddd D MMMM',
       {locale: frLocale}
     );
 
   }
 
-  getTimeString(){
+  getPeriodString(start :Time, end :Time){
     return format(
-      Utils.getDateFromTime(this.creneauSelected.start),
+      Utils.getDateFromTime(start),
       'HH[h]mm',
       {locale: frLocale}
       )
       + "-" +
       format(
-        Utils.getDateFromTime(this.creneauSelected.end),
+        Utils.getDateFromTime(end),
         'HH[h]mm',
         {locale: frLocale}
       )
@@ -93,6 +104,12 @@ export class PriseRdvComponent implements OnInit, OnDestroy {
     };
     this.appointmentService.createAppointment(appointment);
     alert("vous avez réservé !");
+    this.closeModal();
+  }
+
+  cancel(appointment: Appointment) {
+    this.appointmentService.cancelAppointment(appointment.id);
+    alert("Réservation annulée !");
     this.closeModal();
   }
 }

@@ -83,7 +83,7 @@ export class CalendarCreneauBriComponent implements OnInit {
           this.select(event);
         }
       });
-      this.appointmentService.getAppointmentsOfActualBriUser();
+      this.appointmentService.getAppointmentsOfActualUser();
       this.refresh.next();
     });
 
