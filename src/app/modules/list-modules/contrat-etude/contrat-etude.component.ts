@@ -50,6 +50,10 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
     return this.contratForm.controls;
   }
 
+  onlyNumberKey(event) {
+    return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+  }
+
   setS(activeTab) {
     if (activeTab === 's1' &&
       !this.elToggleAutomne.nativeElement.classList.contains('disabled')) {
@@ -87,16 +91,13 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit {
 
   setAllInputToNull() {
     for (let i = 1; i <= 12; i++) {
-      this.contratForm.get('s1codeCours' + i).setValue('');
-      this.contratForm.get('s2codeCours' + i).setValue('');
+      this.contratForm.get(this.activeTab + 'codeCours' + i).setValue('');
     }
     for (let i = 1; i <= 12; i++) {
-      this.contratForm.controls['s1titreCours' + i].setValue('');
-      this.contratForm.controls['s2titreCours' + i].setValue('');
+      this.contratForm.controls[this.activeTab + 'titreCours' + i].setValue('');
     }
     for (let i = 1; i <= 12; i++) {
-      this.contratForm.controls['s1nombreCredits' + i].setValue('');
-      this.contratForm.controls['s2nombreCredits' + i].setValue('');
+      this.contratForm.controls[this.activeTab + 'nombreCredits' + i].setValue('');
     }
   }
 
