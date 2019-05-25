@@ -28,6 +28,10 @@ export class ListeCoursComponent implements OnInit {
     return this.listeCoursForm.controls;
   }
 
+  onlyNumberKey(event) {
+    return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+  }
+
   ngOnInit() {
     this.listeCoursForm = this.formBuilder.group({
       s1codeCours1: ['', Validators.required],
