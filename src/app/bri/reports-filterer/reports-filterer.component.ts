@@ -94,7 +94,7 @@ export class ReportsFiltererComponent implements OnInit {
 
     var doc = new jsPDF();
     doc.autoTable({html: '#mainTable'});
-    ModulesManagerComponent.save('dossiers' + Math.floor(Math.random() * Math.floor(999)) + '.pdf');
+    doc.save('dossiers' + Math.floor(Math.random() * Math.floor(999)) + '.pdf');
   }
 
   filter() {

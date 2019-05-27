@@ -92,6 +92,7 @@ export class ModulesManagerComponent implements OnInit, OnDestroy {
     tdOfSelectedModule.forEach(td => td.classList.remove('selected'));
   }
 
+
   private static canDownloadModuleAsPDF() {
     return !document.getElementById('appReportEditor').innerHTML.includes('Télécharger') &&
       !document.getElementById('appReportEditor').innerHTML.includes('Supprimer') &&
@@ -120,7 +121,7 @@ export class ModulesManagerComponent implements OnInit, OnDestroy {
       let canvas = await html2canvas(document.getElementById('appReportEditor'));
 
       if (ModulesManagerComponent.canDownloadModuleAsPDF()) {
-        canvas = await html2canvas(document.getElementById('appReportEditor'));
+        let canvas = await html2canvas(document.getElementById('appReportEditor'));
 
         doc.addImage(canvas, 'JPEG', 0, 0);
         doc.addPage();
