@@ -30,7 +30,7 @@ export class ReportsFiltererComponent implements OnInit {
     this.sub = this.schoolService.schools$.subscribe(schools => this.schoolList = schools);
   }
 
-  static export_table_to_csv(html, filename) {
+  static tableToCSV(html, filename) {
     var csv = [];
     var rows = document.querySelectorAll('table tr');
 
@@ -42,10 +42,10 @@ export class ReportsFiltererComponent implements OnInit {
       }
       csv.push(row.join(','));
     }
-    ReportsFiltererComponent.download_csv(csv.join('\n'), filename);
+    ReportsFiltererComponent.downloadAsCSV(csv.join('\n'), filename);
   }
 
-  static download_csv(csv, filename) {
+  static downloadAsCSV(csv, filename) {
     var csvFile;
     var downloadLink;
 
@@ -94,7 +94,7 @@ export class ReportsFiltererComponent implements OnInit {
 
     var doc = new jsPDF();
     doc.autoTable({html: '#mainTable'});
-    doc.save('dossiers' + Math.floor(Math.random() * Math.floor(999)) + '.pdf');
+    ModulesManagerComponent.save('dossiers' + Math.floor(Math.random() * Math.floor(999)) + '.pdf');
   }
 
   filter() {
@@ -196,7 +196,7 @@ export class ReportsFiltererComponent implements OnInit {
   }
 
   downloadAsCSV() {
-    ReportsFiltererComponent.export_table_to_csv(document.querySelector('table').outerHTML, 'dossier' + Math.floor(Math.random() * Math.floor(999)) + '.csv');
+    ReportsFiltererComponent.tableToCSV(document.querySelector('table').outerHTML, 'dossier' + Math.floor(Math.random() * Math.floor(999)) + '.csv');
   }
 
   private filterTable(filter: string, value: string) {

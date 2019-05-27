@@ -1,84 +1,87 @@
-<div class="row col-lg-12">
-  <div class="col-lg-9">
-    <p class="h2">Informations sur l'etudiant</p>
+<div id="MODULE">
+  <div class="row col-lg-12">
+    <div class="col-lg-9">
+      <p class="h2">Informations sur l'etudiant</p>
+    </div>
+    <div class="col-lg-3" id="div_modify_or_save">
+      <button (click)="toggle()" *ngIf="!this.onEditedMode" class="btn btn-info" id="modify">Modifier</button>
+      <button (click)="saveModifications()" *ngIf="this.onEditedMode" class="btn btn-info" id="save">Enregistrer
+      </button>
+    </div>
   </div>
-  <div class="col-lg-3" id="div_modify_or_save">
-    <button (click)="toggle()" *ngIf="!this.onEditedMode" class="btn btn-info" id="modify">Modifier</button>
-    <button (click)="saveModifications()" *ngIf="this.onEditedMode" class="btn btn-info" id="save">Enregistrer</button>
+  <div class="col-lg-4 info-container">
+    <table *ngIf="isStudent" class="table table-bordered" id="tableInformation1">
+      <tr>
+        <th>Prenom</th>
+        <td contenteditable="false" id="firstName"> {{student.firstName }}</td>
+      </tr>
+      <tr>
+        <th>Nom</th>
+        <td contenteditable="false" id="lastName"> {{student.lastName  }} </td>
+      </tr>
+      <tr>
+        <th>N°Étudiant</th>
+        <td contenteditable="false" id="studentNumber"> {{student.studentNumber  }}</td>
+      </tr>
+      <tr>
+        <th>N°INE</th>
+        <td contenteditable="false" id="INE"> {{student.INE   }}</td>
+      </tr>
+    </table>
   </div>
-</div>
-<div class="col-lg-4 info-container">
-  <table *ngIf="isStudent" class="table table-bordered" id="tableInformation1">
-    <tr>
-      <th>Prenom</th>
-      <td id="firstName" contenteditable="false"> {{student.firstName }}</td>
-    </tr>
-    <tr>
-      <th>Nom</th>
-      <td id="lastName" contenteditable="false"> {{student.lastName  }} </td>
-    </tr>
-    <tr>
-      <th>N°Étudiant</th>
-      <td id="studentNumber" contenteditable="false"> {{student.studentNumber  }}</td>
-    </tr>
-    <tr>
-      <th>N°INE</th>
-      <td id="INE" contenteditable="false"> {{student.INE   }}</td>
-    </tr>
-  </table>
-</div>
 
-<div class="col-lg-4 info-container">
-  <table *ngIf="isStudent" class="table table-bordered" id="tableInformation2">
-    <tr>
-      <th>Téléphone Fixe</th>
-      <td id="phoneNumber" contenteditable="false"> {{student.phoneNumber  }}</td>
-    </tr>
-    <tr>
-      <th>Mobile</th>
-      <td id="mobilePhoneNumber" contenteditable="false"> {{student.mobilePhoneNumber  }}</td>
-    </tr>
-    <tr>
-      <th>Code Postal</th>
-      <td id="postalCode" contenteditable="false"> {{student.postalCode  }}</td>
-    </tr>
-    <tr>
-      <th>Ville</th>
-      <td id="city" contenteditable="false"> {{student.city  }}</td>
-    </tr>
-  </table>
-</div>
+  <div class="col-lg-4 info-container">
+    <table *ngIf="isStudent" class="table table-bordered" id="tableInformation2">
+      <tr>
+        <th>Téléphone Fixe</th>
+        <td contenteditable="false" id="phoneNumber"> {{student.phoneNumber  }}</td>
+      </tr>
+      <tr>
+        <th>Mobile</th>
+        <td contenteditable="false" id="mobilePhoneNumber"> {{student.mobilePhoneNumber  }}</td>
+      </tr>
+      <tr>
+        <th>Code Postal</th>
+        <td contenteditable="false" id="postalCode"> {{student.postalCode  }}</td>
+      </tr>
+      <tr>
+        <th>Ville</th>
+        <td contenteditable="false" id="city"> {{student.city  }}</td>
+      </tr>
+    </table>
+  </div>
 
-<div class="col-lg-4 info-container">
-  <table *ngIf="isStudent" class="table table-bordered" id="tableInformation3">
-    <tr>
-      <th>Nationalité</th>
-      <td id="nationality" contenteditable="false"> {{student.nationality  }}</td>
-    </tr>
-    <tr>
-      <th>Spécialité</th>
-      <td id="major" contenteditable="false"> {{student.major  }}</td>
-    </tr>
-    <tr>
-      <th>Sexe</th>
-      <td id="gender" contenteditable="false"> {{student.gender  }}</td>
-    </tr>
-    <tr>
-      <th>Date de Naissance</th>
-      <td id="birthDate" contenteditable="false"> {{student.birthDate  }}</td>
-    </tr>
-  </table>
-</div>
+  <div class="col-lg-4 info-container">
+    <table *ngIf="isStudent" class="table table-bordered" id="tableInformation3">
+      <tr>
+        <th>Nationalité</th>
+        <td contenteditable="false" id="nationality"> {{student.nationality  }}</td>
+      </tr>
+      <tr>
+        <th>Spécialité</th>
+        <td contenteditable="false" id="major"> {{student.major  }}</td>
+      </tr>
+      <tr>
+        <th>Sexe</th>
+        <td contenteditable="false" id="gender"> {{student.gender  }}</td>
+      </tr>
+      <tr>
+        <th>Date de Naissance</th>
+        <td contenteditable="false" id="birthDate"> {{student.birthDate  }}</td>
+      </tr>
+    </table>
+  </div>
 
-<div class="col-lg-12 info-container">
-  <table *ngIf="isStudent" class="table table-bordered" id="tableInformation4">
-    <tr>
-      <th>Mail</th>
-      <td id="mail" contenteditable="false"> {{student.mail  }}</td>
-    </tr>
-    <tr>
-      <th>Adresse</th>
-      <td id="address" contenteditable="false"> {{student.address  }}</td>
-    </tr>
-  </table>
+  <div class="col-lg-12 info-container">
+    <table *ngIf="isStudent" class="table table-bordered" id="tableInformation4">
+      <tr>
+        <th>Mail</th>
+        <td contenteditable="false" id="mail"> {{student.mail  }}</td>
+      </tr>
+      <tr>
+        <th>Adresse</th>
+        <td contenteditable="false" id="address"> {{student.address  }}</td>
+      </tr>
+    </table>
+  </div>
 </div>

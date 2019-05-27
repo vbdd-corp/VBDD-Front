@@ -1,10 +1,10 @@
 <table *ngIf="modules" class="table table-striped" id="tableDossiers">
   <h4 id="pLabel"><i>Ajoutez</i>/<i>modifiez</i> vos modules</h4>
   <tbody>
-  <tr *ngFor="let module of modules;">
-    <td scope="row" (click)="selectModule($event,module)" class="module pointer">
+  <tr *ngFor="let module of modules; let rowIndex=index">
+    <td (click)="selectModule($event,module)" class="module pointer" id="module{{ rowIndex }}" scope="row">
       <span class="module-name">
-        {{ module.typeModule.typeName }} {{moduleAdditionalName(module)}}
+                {{ module.typeModule.typeName }} {{moduleAdditionalName(module)}}
       </span>
       <button (click)="deleteModule(module.id)" aria-label="Close" class="close" type="button">
         <span aria-hidden="true">&times;</span>
@@ -20,6 +20,7 @@
       <button (click)="downloadReport()" class="btn btn-info" style="margin-top: 10px;" type="button"><span
         class="glyphicon glyphicon-cloud-download"></span>Télécharger le
         dossier
+        <span class="badge mat-badge-warn">BETA</span>
       </button>
     </td>
   </tr>
