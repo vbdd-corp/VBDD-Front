@@ -1,3 +1,559 @@
-<p>
-  liste-cours-polytech-sejour works!
-</p>
+<form (ngSubmit)="onSubmit()"
+      [formGroup]="listeCoursPolytechForm">
+  <div align="center">
+    <h3>Liste des Cours donnés à Polytech Nice lors de votre séjour à l'étranger:</h3>
+    <br>
+    <ul class="nav nav-tabs">
+      <li class="toggleName" id="firstToggle" #toggleAutomne>
+        <a (click)="setS('s1')"
+           [ngClass]="{ 'active':activeTab==='s1'}"
+           data-toggle="tab"
+           id="afall">
+          Semestre Automne</a>
+      </li>
+      <li class="toggleName" id="secondToggle" #togglePrintemps>
+        <a [ngClass]="{ 'active':activeTab==='s2'}"
+           data-toggle="tab"
+           (click)="setS('s2')"
+           id="aspring">
+          Semestre Printemps</a>
+      </li>
+    </ul>
+    <br>
+
+    <div class="tab-content" #bigContainer text-align="center">
+      <h4>
+        Veuillez remplir le tableau ci-dessous (laisser blanc si nécéssaire)
+      </h4>
+      <div id="search" class="tab-pane active" [ngClass]="{ 'active':activeTab==='s1'}">
+        <h3>Semestre 1</h3>
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">Code du cours</th>
+            <th scope="col">Titre du cours</th>
+            <th scope="col">Nombre de crédits</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1codeCours1"
+                     placeholder="21343D"
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1titreCours1"
+                     placeholder="Machine learning"
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1nombreCredits1"
+                     placeholder="3"
+                     (input)="updateTotalECTS('s1')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1codeCours2"
+                     placeholder="432455"
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1titreCours2"
+                     placeholder="Data Science"
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1nombreCredits2"
+                     placeholder="2"
+                     (input)="updateTotalECTS('s1')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1codeCours3"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1titreCours3"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1nombreCredits3"
+                     placeholder="..."
+                     (input)="updateTotalECTS('s1')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1codeCours4"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1titreCours4"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1nombreCredits4"
+                     placeholder="..."
+                     (input)="updateTotalECTS('s1')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1codeCours5"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1titreCours5"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1nombreCredits5"
+                     placeholder="..."
+                     (input)="updateTotalECTS('s1')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1codeCours6"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1titreCours6"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1nombreCredits6"
+                     placeholder="..."
+                     (input)="updateTotalECTS('s1')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1codeCours7"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1titreCours7"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1nombreCredits7"
+                     placeholder="..."
+                     (input)="updateTotalECTS('s1')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1codeCours8"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1titreCours8"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1nombreCredits8"
+                     placeholder="..."
+                     (input)="updateTotalECTS('s1')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1codeCours9"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1titreCours9"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1nombreCredits9"
+                     placeholder="..."
+                     (input)="updateTotalECTS('s1')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1codeCours10"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1titreCours10"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1nombreCredits10"
+                     placeholder="..."
+                     (input)="updateTotalECTS('s1')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1codeCours11"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1titreCours11"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1nombreCredits11"
+                     placeholder="..."
+                     (input)="updateTotalECTS('s1')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1codeCours12"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1titreCours12"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s1nombreCredits12"
+                     placeholder="..."
+                     (input)="updateTotalECTS('s1')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <th><p id="totalECTS-s1" #totalECTSS1>Total ECTS : </p></th>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="result" class="tab-pane" [ngClass]="{ 'active':activeTab==='s2'}">
+        <h3>Semestre 2</h3>
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">Code du cours</th>
+            <th scope="col">Titre du cours</th>
+            <th scope="col">Nombre de crédits</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2codeCours1"
+                     placeholder="21343D"
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2titreCours1"
+                     placeholder="Machine learning"
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2nombreCredits1"
+                     placeholder="3"
+                     (input)="updateTotalECTS('s2')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2codeCours2"
+                     placeholder="432455"
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2titreCours2"
+                     placeholder="Data Science"
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2nombreCredits2"
+                     placeholder="2"
+                     (input)="updateTotalECTS('s2')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2codeCours3"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2titreCours3"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2nombreCredits3"
+                     placeholder="..."
+                     (input)="updateTotalECTS('s2')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2codeCours4"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2titreCours4"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2nombreCredits4"
+                     placeholder="..."
+                     (input)="updateTotalECTS('s2')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2codeCours5"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2titreCours5"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2nombreCredits5"
+                     placeholder="..."
+                     (input)="updateTotalECTS('s2')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2codeCours6"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2titreCours6"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2nombreCredits6"
+                     placeholder="..."
+                     (input)="updateTotalECTS('s2')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2codeCours7"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2titreCours7"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2nombreCredits7"
+                     placeholder="..."
+                     (input)="updateTotalECTS('s2')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2codeCours8"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2titreCours8"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2nombreCredits8"
+                     placeholder="..."
+                     (input)="updateTotalECTS('s2')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2codeCours9"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2titreCours9"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2nombreCredits9"
+                     placeholder="..."
+                     (input)="updateTotalECTS('s2')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2codeCours10"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2titreCours10"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2nombreCredits10"
+                     placeholder="..."
+                     (input)="updateTotalECTS('s2')"
+                     (keypress)="onlyNumberKey($event)"
+                     type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2codeCours11"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2titreCours11"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2nombreCredits11"
+                     placeholder="..."
+                     type="text"
+                     (keypress)="onlyNumberKey($event)"
+                     (input)="updateTotalECTS('s2')">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2codeCours12"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2titreCours12"
+                     placeholder="..."
+                     type="text">
+            </td>
+            <td>
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2nombreCredits12"
+                     placeholder="..."
+                     type="text"
+                     (keypress)="onlyNumberKey($event)"
+                     (input)="updateTotalECTS('s2')">
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <th><p id="totalECTS-s2" #totalECTSS2>Total ECTS : </p></th>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <button
+    [ngClass]="{'btn-success': isValidated===true}"
+    class="btn btn-lg btn-default btn-block" id="submit" type="submit">
+    Enregister
+  </button>
+  <button
+    class="btn btn-danger pull-right"
+    id="clear"
+    type="button"
+    (click)="setAllInputToNull()">
+    Effacer tout
+  </button>
+</form>
