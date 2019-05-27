@@ -26,6 +26,7 @@ export class ModulesManagerComponent implements OnInit, OnDestroy {
 
   moduleTypes: ModuleType[] = [];
   moduleTypeSelected: ModuleType;
+  i: any;
 
   constructor(private moduleService: ModuleService, private modalService: BsModalService) {
     this.sub1 = this.moduleService.getSelectedModule().subscribe(selectedModule => {
@@ -91,48 +92,45 @@ export class ModulesManagerComponent implements OnInit, OnDestroy {
     tdOfSelectedModule.forEach(td => td.classList.remove('selected'));
   }
 
-  downloadReport() {
-
-    // @ts-ignore
-
-    window.html2canvas = html2canvas;
-
-    var doc = new jsPDF('l');
-    this.generatePDF(doc).then(function() {
-      doc.deletePage(doc.internal.getNumberOfPages());
-      doc.save('dossier' + Math.floor(Math.random() * Math.floor(999)) + '.pdf');
-    });
-
-  }
-
-  private generatePDF(doc,) {
-    return new Promise((resolve, reject) => {
-        for (let i = 0; i < $('#tableDossiers tr td').length; i++) {
-          this.click($('#tableDossiers tr td')).then(go => {
-            html2canvas($('#MODULE')[0]).then(canvas => {
-              doc.addImage(canvas.toDataURL('image/jpeg', 5.0), 'JPEG', 10, doc.internal.pageSize.getHeight() / 3.5);
-              doc.addPage();
-            });
-          });
-        }
-      }
-    );
-  }
-
-  private click(doc) {
-    return new Promise((resolve, reject) => {
-      doc.click();
-    });
+  private static canDownloadModuleAsPDF() {
+    return !document.getElementById('appReportEditor').innerHTML.includes('Télécharger') &&
+      !document.getElementById('appReportEditor').innerHTML.includes('Supprimer') &&
+      !document.getElementById('appReportEditor').innerHTML.includes('Programme d\'études');
   }
 
   moduleAdditionalName(module: Module) {
-    let name = "";
-    if(module.typeModule.id === 8){ //if contrat d'étude
-      if(module.infos && module.infos.choice && module.infos.choice.school != null)
-        name = "- "+module.infos.choice.school.name;
+    let name = '';
+    if (module.typeModule.id === 8) { //if contrat d'étude
+      if (module.infos && module.infos.choice && module.infos.choice.school != null) {
+        name = '- ' + module.infos.choice.school.name;
+      }
     }
     return name;
   }
+
+  private async downloadReport() {
+
+    // @ts-ignore
+    window.html2canvas = html2canvas;
+    var doc = new jsPDF('p');
+    const earchTrTd = $('#tableDossiers tr td');
+    for (let i = 0; i < earchTrTd.length; i++) {
+      earchTrTd[i].click();
+
+      let canvas = await html2canvas(document.getElementById('appReportEditor'));
+
+      if (ModulesManagerComponent.canDownloadModuleAsPDF()) {
+        canvas = await html2canvas(document.getElementById('appReportEditor'));
+
+        doc.addImage(canvas, 'JPEG', 0, 0);
+        doc.addPage();
+      }
+    }
+
+    doc.deletePage(doc.internal.getNumberOfPages());
+    doc.save('dossier' + Math.floor(Math.random() * Math.floor(999)) + '.pdf');
+  }
+
   //TODO: la selection des voeux deja enregistré dans contrat d'étude ne fonctionne pas
   //TODO: lorsqu'on enregistre un nouveau voeux dans le contrat -> ne met pas a jour son nom
 }
