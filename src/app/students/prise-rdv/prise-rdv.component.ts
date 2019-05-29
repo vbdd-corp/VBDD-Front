@@ -36,12 +36,14 @@ export class PriseRdvComponent implements OnInit, OnDestroy {
     this.creneauServiceSub = creneauService.getSelectedCreneau().subscribe( creneau => {
       if( creneau ) {
         this.creneauSelected = creneau;
+        this.appointmentSelected = undefined;
         this.openModal(this.reserving);
       }
     });
     this.appointmentServiceSub = appointmentService.getSelectedAppointment().subscribe( appointment => {
       if( appointment ) {
         this.appointmentSelected = appointment;
+        this.creneauSelected = appointment.creneau;
         this.openModal(this.reservation);
       }
     });
@@ -53,6 +55,7 @@ export class PriseRdvComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.creneauServiceSub.unsubscribe();
+    this.appointmentServiceSub.unsubscribe();
   }
 
   selectAppointmentType(appointmentTypeSelected: AppointmentType) {
@@ -103,6 +106,20 @@ export class PriseRdvComponent implements OnInit, OnDestroy {
       briId: this.creneauSelected.briId
     };
     this.appointmentService.createAppointment(appointment);
+    alert("vous avez réservé !");
+    this.closeModal();
+  }
+
+  reserveAgain(appointment : Appointment) {
+    const appointmentUpdated :Appointment = {
+      appointmentTypeId: this.appointmentTypeSelected.id,
+      appointmentStatusId: 1,
+      creneauId: appointment.creneau.id,
+      studentId: Utils.getUser().id,
+      briId: appointment.briId,
+      id: appointment.id
+    };
+    this.appointmentService.updateAppointment(appointmentUpdated);
     alert("vous avez réservé !");
     this.closeModal();
   }

@@ -47,7 +47,7 @@
     </div>
     <hr>
     <div class="text-center">
-      <button class=" btn btn-primary" type="button">
+      <button (click)="openModal(appointmentList)" class=" btn btn-primary" type="button">
         Voir la liste des rendez-vous
       </button>
     </div>
@@ -61,3 +61,29 @@
   </div>
 
 </div>
+
+<ng-template #appointmentList>
+  <div class="modal-header">
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <table *ngIf="selectedPlage && appointments" class="table table-striped table-hover">
+      <h4 id="pLabel"><i>Liste des rendez-vous</i></h4>
+      <tbody>
+      <tr *ngFor="let appointment of appointments;">
+        <td scope="row">
+          <span class="name"> {{ appointment.student.lastName.toUpperCase() }} {{ appointment.student.firstName }} - {{appointment.appointmentType.name}}</span>
+        </td>
+      </tr>
+      <tr *ngIf="appointments.length == 0">
+        <td scope="row" class="text-center">
+          <span>aucun rendez-vous n'a été pris dans cette plage</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>

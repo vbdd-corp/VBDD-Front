@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {PlageService} from '../../../services/plage.service';
 import {Plage} from '../../../models/plage';
 import {Subscription} from 'rxjs';
@@ -7,8 +7,9 @@ import {format} from 'date-fns';
 const frLocale = require('date-fns/locale/fr');
 import { TimepickerConfig } from 'ngx-bootstrap/timepicker';
 import {AppointmentType} from '../../../models/appointment-type';
-import {ModuleType} from '../../../models/moduleType';
 import {AppointmentService} from '../../../services/appointment.service';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {Appointment} from '../../../models/appointment';
 
 export function getTimepickerConfig(): TimepickerConfig {
   return Object.assign(new TimepickerConfig(), {
@@ -30,6 +31,8 @@ export class PlageEditComponent implements OnInit, OnDestroy {
   subPlageService :Subscription;
   subAppointmentService :Subscription;
 
+  appointments : Appointment[];
+
   startTime: Date;
   endTime: Date;
   minTime: Date;
@@ -38,8 +41,9 @@ export class PlageEditComponent implements OnInit, OnDestroy {
   appointmentTypes :AppointmentType[] = [];
   appointmentTypeSelected: AppointmentType;
 
+  modalRef: BsModalRef;
 
-  constructor(private plageService: PlageService,private appointmentService: AppointmentService) {
+  constructor(private plageService: PlageService,private appointmentService: AppointmentService, private modalService: BsModalService) {
     this.subPlageService = plageService.getSelectedPlage().subscribe( plage => {
       this.selectedPlage = plage;
       this.startTime = Utils.getDateFromTime(this.selectedPlage.start);
@@ -55,11 +59,16 @@ export class PlageEditComponent implements OnInit, OnDestroy {
       this.maxTime.setMinutes(0);
 
       this.appointmentTypeSelected = plage.appointmentType;
+
+      this.appointmentService.getAppointmentsInPlage(plage.id).then( appointments => {
+        this.appointments = appointments;
+      });
     });
 
     this.subAppointmentService = appointmentService.appointmentTypes$.subscribe( appointmentTypes => {
       this.appointmentTypes = appointmentTypes;
     });
+
     appointmentService.getAppointmentTypes();
   }
 
@@ -104,5 +113,15 @@ export class PlageEditComponent implements OnInit, OnDestroy {
       end: Utils.getTimeFromDate(this.endTime),
       appointmentTypeId: this.appointmentTypeSelected.id
     });
+  }
+  openModal(template: TemplateRef<any>) {
+    if (this.modalRef) {
+      this.closeModal();
+    }
+    this.modalRef = this.modalService.show(template);
+  }
+
+  closeModal() {
+    this.modalRef.hide();
   }
 }

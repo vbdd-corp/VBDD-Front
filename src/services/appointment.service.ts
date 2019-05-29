@@ -8,6 +8,7 @@ import {Appointment} from '../models/appointment';
 import {Utils} from '../models/utils';
 import {File} from '../models/file';
 import {Creneau} from '../models/creneau';
+import {Plage} from '../models/plage';
 
 @Injectable({
   providedIn: 'root'
@@ -91,6 +92,29 @@ export class AppointmentService {
         .subscribe(appointment => {
           this.getAppointmentsOfActualUser();
           resolve(appointment);
+        }, err => {
+          console.log(err);
+        });
+    });
+  }
+
+  updateAppointment(appointment :Appointment) {
+    return new Promise<Appointment>(resolve => {
+      this.http.put<Appointment>(this.url+'/'+ appointment.id, appointment,this.httpOptions)
+        .subscribe(appointment => {
+          this.getAppointmentsOfActualUser();
+          resolve(appointment);
+        }, err => {
+          console.log(err);
+        });
+    });
+  }
+
+  getAppointmentsInPlage(plageId: number) {
+    return new Promise<Appointment[]>(resolve => {
+      this.http.get<Appointment[]>(this.url+'/by-plage/'+ plageId,this.httpOptions)
+        .subscribe(appointments => {
+          resolve(appointments);
         }, err => {
           console.log(err);
         });

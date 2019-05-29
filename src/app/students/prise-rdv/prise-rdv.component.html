@@ -42,5 +42,11 @@
     </p>
     <button *ngIf="appointmentSelected.appointmentStatus.id === 1 || appointmentSelected.appointmentStatus.id === 0"
             class="btn btn-lg btn-warning" type="button" (click)="cancel(appointmentSelected)">Annuler</button>
+
+    <div *ngIf="appointmentSelected.appointmentStatus.id === 2">
+      <button class="btn btn-lg btn-success" type="button" (click)="reserveAgain(appointmentSelected)">Réserver à nouveau</button>
+      <p *ngIf="appointmentTypeSelected">pour : {{appointmentTypeSelected.name}}</p>
+    </div>
+
   </div>
 </ng-template>

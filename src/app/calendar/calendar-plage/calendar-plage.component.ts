@@ -5,6 +5,8 @@ import { PlageService } from '../../../services/plage.service';
 import {Subject, Subscription} from 'rxjs';
 import {Utils} from '../../../models/utils';
 import {Plage} from '../../../models/plage';
+import {AppointmentService} from '../../../services/appointment.service';
+import {Appointment} from '../../../models/appointment';
 
 @Component({
   selector: 'app-calendar-plage',
@@ -45,12 +47,15 @@ export class CalendarPlageComponent implements OnInit, OnDestroy{
     {
       label: '<i class="fas fa-times pull-right"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        if (confirm("Supprimer cette plage ?")){
+        if (confirm("Supprimer cette plage ?\nCette action annulera automatiquement tout les rendez-vous situés dans cette plage.")){
           this.deletePlage(event.meta);
         }
       }
     }
   ];
+  rdvIcon :any = {
+    label: '<i class="fas fa-user"></i>'
+  };
 
   viewDate: Date = new Date();
   view: CalendarView = CalendarView.Week;
@@ -59,6 +64,10 @@ export class CalendarPlageComponent implements OnInit, OnDestroy{
   weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
 
   sub :Subscription;
+  subAppointmentService :Subscription;
+
+  appointments : Appointment[];
+
   plages :Plage[];
   selectedEvent :CalendarEvent;
 
@@ -75,7 +84,7 @@ export class CalendarPlageComponent implements OnInit, OnDestroy{
     }
   }
 
-  constructor(private plageService :PlageService) {
+  constructor(private plageService :PlageService, private appointmentService: AppointmentService) {
     this.sub = plageService.plages$.subscribe( plages => {
       this.events = [];
       plages.forEach( plage => {
@@ -84,9 +93,26 @@ export class CalendarPlageComponent implements OnInit, OnDestroy{
         if(this.selectedEvent && (this.selectedEvent.meta.id === plage.id)){
           this.select(event);
         }
+        appointmentService.getAppointmentsOfActualUser();
       });
       this.refresh.next();
-    })
+    });
+
+    this.subAppointmentService = appointmentService.appointmentsBri$.subscribe( appointments => {
+      if(!appointments) return;
+      this.appointments = appointments;
+      this.events.forEach( event => {
+        event.actions = [... this.actions];
+        appointments
+          .filter( appointment => appointment.appointmentStatus.id !== 2)
+          .forEach( appointment => {
+            if(CalendarPlageComponent.appointmentIsInPlage(appointment,event.meta)){
+              event.actions.push(this.rdvIcon);
+            }
+          });
+      });
+    });
+    this.refresh.next();
   }
 
   ngOnInit() {
@@ -99,6 +125,7 @@ export class CalendarPlageComponent implements OnInit, OnDestroy{
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+    this.subAppointmentService.unsubscribe();
   }
 
   select(event: CalendarEvent<Plage>) {
@@ -116,5 +143,10 @@ export class CalendarPlageComponent implements OnInit, OnDestroy{
 
   private deletePlage(plage: Plage) {
     this.plageService.removePlage(plage.id);
+  }
+
+  private static appointmentIsInPlage(appointment: Appointment, plage: Plage) {
+    return Utils.getDateFromTime(appointment.creneau.start).getTime() >= Utils.getDateFromTime(plage.start).getTime()
+      && Utils.getDateFromTime(appointment.creneau.end).getTime() <= Utils.getDateFromTime(plage.end).getTime();
   }
 }
