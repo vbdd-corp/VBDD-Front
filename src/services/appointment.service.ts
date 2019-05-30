@@ -95,6 +95,22 @@ export class AppointmentService {
         }, err => {
           console.log(err);
         });
+      if(!Utils.isStudent()){
+        this.notifyAppointmentCancellation(appointmentId).then( () => {
+          console.log("email sent to student for appointment cancellation !");
+        });
+      }
+    });
+  }
+
+  notifyAppointmentCancellation(appointmentId: number) {
+    return new Promise<Appointment>(resolve => {
+      this.http.post<Appointment>(this.url+'/'+ appointmentId+'/notify-cancellation', {},this.httpOptions)
+        .subscribe(appointment => {
+          resolve(appointment);
+        }, err => {
+          console.log(err);
+        });
     });
   }
 
