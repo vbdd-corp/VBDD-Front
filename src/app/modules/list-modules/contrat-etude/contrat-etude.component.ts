@@ -377,8 +377,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
 
     this.completeURL = _URL_ + Utils.getUser().id + '/' + this.file.id + '/' + this.module.id;
     this.uploader = new FileUploader({
-      url:
-      this.completeURL,
+      url: this.completeURL,
       itemAlias: 'foo'
     });
     this.uploader.onAfterAddingFile = (file) => {

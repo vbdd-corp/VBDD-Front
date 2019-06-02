@@ -79,6 +79,21 @@ export class ModuleService {
     });
   }
 
+  /*
+  uploadFile() {
+    //'/upload/:studentID/:fileID/:moduleID'
+    //
+    return new Promise<Module>(resolve => {
+      this.http.post<File>(this.url + '/'+fileId,
+        {typeModuleId: typeModuleId}, this.httpOptions)
+        .subscribe(module => {
+          resolve(module);
+        }, err => {
+          console.log(err);
+        })
+    });
+  }*/
+
   downloadModule(moduleId: number) {
     this.http.post(this.url + '/' + moduleId, this.httpOptions)
       .subscribe(() => {
