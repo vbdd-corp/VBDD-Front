@@ -32,7 +32,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
   isValidated: boolean = false;
 
   isFileUploaded: boolean = false;
-  shouldDisplayUploader: boolean = false;
+  shouldDisplayUploader: boolean = true;
   private activeTab;
   private choiceAlreadyInAnotherContrat;
   private sumECTS;
