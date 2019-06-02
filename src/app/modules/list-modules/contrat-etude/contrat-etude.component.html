@@ -12,7 +12,7 @@
                 class="btn btn-primary dropdown-toggle"
                 aria-controls="dropdown-basic">
           {{ selectedChoice.school.name }} -  {{selectedChoice.school.city}}, {{selectedChoice.school.country}}
-          <span class="caret" ></span>
+          <span class="caret"></span>
         </button>
         <button *ngIf="!this.selectedChoice && this.choices.length > 0"
                 id="button-basic-3-empty"
@@ -49,10 +49,31 @@
       Attention, vous avez déjà sélectionné ce voeu dans un autre Contrat d'études
     </p>
     <br>
-    <div class="text-center" *ngIf="this.choices.length > 0 && this.selectedChoice">
+    <div *ngIf="this.choices.length > 0 && this.selectedChoice" class="text-center" style="align-items: center;">
       <!-- 108 a gauche, 110 a droite-->
-      <button class="btn" type="button" id="download-button">Download</button>
-      <button class="btn" type="button" id="upload-button">Upload</button>
+
+
+      <p>Au lieu de remplir le contrat informatiquement, vous pouvez <b>importer un contrat déjà existant</b></p>
+      <br>
+      <input #file *ngIf="shouldDisplayUploader" [uploader]="uploader"
+             class="input-group-addon alert-info"
+             name="photo"
+             ng2FileSelect style="width: 300px; margin-left: 30%;" type="file"/>
+      <br>
+      <button (click)="upload()" class="btn btn-primary"
+              style="margin-top: 10px;"
+              type="button"><span [ngClass]="{'glyphicon-check': isFileUploaded===true}"
+                                  class="glyphicon glyphicon-import"></span>Importer le contrat
+      </button>
+
+
+      <button (click)="downloadFile()" class="btn btn-info" style="margin-top: 10px; margin-left: 10px;"
+              type="button"><span
+        class="glyphicon glyphicon-cloud-download"></span>Télécharger le contrat d'étude
+      </button>
+      <br>
+
+
     </div>
     <br>
     <ul class="nav nav-tabs">
@@ -73,7 +94,7 @@
     </ul>
     <br>
 
-    <div  class="tab-content" #bigContainer>
+    <div #bigContainer class="tab-content">
       <h4>
         Veuillez remplir le tableau ci-dessous (laisser blanc si nécéssaire)
       </h4>
@@ -489,7 +510,8 @@
 
           <tr>
             <td>
-              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2codeCours8" placeholder="..."
+              <input aria-describedby="basic-addon1" class="form-control" formControlName="s2codeCours8"
+                     placeholder="..."
                      type="text">
             </td>
             <td>
@@ -583,7 +605,7 @@
                      placeholder="..."
                      type="text"
                      (keypress)="onlyNumberKey($event)"
-                      (input)="updateTotalECTS('s2')">
+                     (input)="updateTotalECTS('s2')">
             </td>
           </tr>
           <tr>

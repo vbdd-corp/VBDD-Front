@@ -1,17 +1,17 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  ViewChild,
-  AfterViewInit, SimpleChanges, OnChanges
-} from '@angular/core';
+import {AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModuleService} from '../../../../services/module.service';
-import {SchoolService} from "../../../../services/school.service";
-import {File} from "../../../../models/file";
-import {Module} from "../../../../models/module";
+import {SchoolService} from '../../../../services/school.service';
+import {File} from '../../../../models/file';
+import {Module} from '../../../../models/module';
 import {DossierService} from '../../../../services/dossier.service';
 import {Choice} from '../../../../models/choice';
+import {FileUploader} from 'ng2-file-upload';
+import {DownloadService} from '../../../../services/download.service';
+import {Utils} from '../../../../models/utils';
+
+const _URL_ = 'http://localhost:9428/api/module/upload/';
+
 
 @Component({
   selector: 'app-contrat-etude',
@@ -31,23 +31,45 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('bigContainer') private elBigContainer;
   isValidated: boolean = false;
 
-  private choices :Choice[];
-  private selectedChoice :Choice;
+  isFileUploaded: boolean = false;
+  shouldDisplayUploader: boolean = false;
   private activeTab;
   private choiceAlreadyInAnotherContrat;
   private sumECTS;
+  public uploader: FileUploader;
+
   private display;
+  public completeURL: string;
+  private choices: Choice[];
+  private selectedChoice: Choice;
 
   constructor(
     private formBuilder: FormBuilder,
     private moduleService: ModuleService,
     private schoolService: SchoolService,
-    private fileService: DossierService) {
+    private fileService: DossierService,
+    private downloadService: DownloadService) {
     this.choices = [];
   }
 
   get f() {
     return this.contratForm.controls;
+  }
+
+  public upload() {
+
+    this.uploader.uploadAll();
+    this.isFileUploaded = true;
+
+  }
+
+  public getLink() {
+    // @ts-ignore
+    return this.module.infos.filePath;
+  }
+
+  downloadFile() {
+    this.downloadService.downloadFile(this.getLink());
   }
 
   onlyNumberKey(event) {
@@ -64,7 +86,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
         () => {
           this.elToggleAutomne.nativeElement.classList.remove('active');
           this.elTogglePrintemps.nativeElement.classList.add('active');
-          },
+        },
         50);
     } else if (activeTab === 's2' &&
       !this.elTogglePrintemps.nativeElement.classList.contains('disabled')) {
@@ -89,7 +111,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
     this.elBigContainer.nativeElement.style.display = 'none';
   }
 
-  initialize(){
+  initialize() {
     this.selectedChoice = null;
     this.elTogglePrintemps.nativeElement.style.display = 'none';
     this.elToggleAutomne.nativeElement.style.display = 'none';
@@ -109,26 +131,30 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  enableorDisableToggleElements(){
+  enableorDisableToggleElements() {
     let choice = this.selectedChoice;
 
     if (this.elBigContainer) {
-      if (this.display)
+      if (this.display) {
         this.elBigContainer.nativeElement.style.display = 'block';
-      else
+      } else {
         this.elBigContainer.nativeElement.style.display = 'none';
+      }
     }
     //console.log('enableToggle function => this.activeTab == ', this.activeTab);
-    if (this.activeTab === 's1' && this.elTotalECTSS1)
+    if (this.activeTab === 's1' && this.elTotalECTSS1) {
       this.elTotalECTSS1.nativeElement.textContent = 'Total ECTS :   ' + this.sumECTS;
-    else if (this.activeTab === 's2' && this.elTotalECTSS2)
+    } else if (this.activeTab === 's2' && this.elTotalECTSS2) {
       this.elTotalECTSS2.nativeElement.textContent = 'Total ECTS :   ' + this.sumECTS;
+    }
 
 
-    if (this.elTogglePrintemps)
+    if (this.elTogglePrintemps) {
       this.elTogglePrintemps.nativeElement.style.display = 'block';
-    if (this.elToggleAutomne)
+    }
+    if (this.elToggleAutomne) {
       this.elToggleAutomne.nativeElement.style.display = 'block';
+    }
 
     if (this.elToggleAutomne && this.elTogglePrintemps) {
       if (choice.semester === 'fall') {
@@ -153,14 +179,15 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  selectWish(choice :Choice) {
+  selectWish(choice: Choice) {
     this.selectedChoice = choice;
-    if (choice.semester === 'fall')
+    if (choice.semester === 'fall') {
       this.activeTab = 's1';
-    else if (choice.semester === 'spring')
+    } else if (choice.semester === 'spring') {
       this.activeTab = 's2';
-    else if (choice.semester === 'full')
+    } else if (choice.semester === 'full') {
       this.activeTab = 's1';
+    }
 
     this.fillInputs();
     setTimeout(() => this.updateTotalECTS(this.activeTab), 50);
@@ -168,7 +195,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
     this.updateTotalECTS(this.activeTab);
 
     if (typeof choice.schoolID === 'number') { //TODO: check if this condition is possible
-      this.schoolService.getSchoolById(choice.schoolID).then( school => {
+      this.schoolService.getSchoolById(choice.schoolID).then(school => {
         this.selectedChoice.school = school;
       });
     }
@@ -188,31 +215,35 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
       val = parseInt(
         this.f[semester + 'nombreCredits' + i].value,
         10);
-      if (!isNaN(val))
+      if (!isNaN(val)) {
         this.sumECTS += val;
+      }
     }
     this.enableorDisableToggleElements();
   }
 
-  loadListChoices(choices :any) {
+  loadListChoices(choices: any) {
     this.choices = [];
-    if(choices.choice1 !== null)
+    if (choices.choice1 !== null) {
       this.choices.push(choices.choice1);
-    if(choices.choice2 !== null)
+    }
+    if (choices.choice2 !== null) {
       this.choices.push(choices.choice2);
-    if(choices.choice3 !== null)
+    }
+    if (choices.choice3 !== null) {
       this.choices.push(choices.choice3);
+    }
   }
 
-  detectChoiceAlreadyUsed(file: File, choice: Choice){
+  detectChoiceAlreadyUsed(file: File, choice: Choice) {
     let contratEtudeList = file.modules.filter(
       module => module.typeModule.id === 8);
     //console.log('contratEtudeList == ', contratEtudeList);
     let choiceSchoolId = choice.school ? choice.school.id : choice.schoolID;
-    for (let i = 0; i < contratEtudeList.length; i++){
-      if ( contratEtudeList[i].infos && choiceSchoolId === contratEtudeList[i].infos.choice.schoolID
-      && choice.semester === contratEtudeList[i].infos.choice.semester
-      && contratEtudeList[i].id !== this.module.id) {
+    for (let i = 0; i < contratEtudeList.length; i++) {
+      if (contratEtudeList[i].infos && choiceSchoolId === contratEtudeList[i].infos.choice.schoolID
+        && choice.semester === contratEtudeList[i].infos.choice.semester
+        && contratEtudeList[i].id !== this.module.id) {
         return true;
       }
     }
@@ -237,10 +268,12 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.modules)
+    if (changes.modules) {
       this.module = changes.module.currentValue;
-    if(changes.file)
+    }
+    if (changes.file) {
       this.file = changes.file.currentValue;
+    }
     this.ngOnInit();
   }
 
@@ -323,22 +356,38 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
     this.initialize();
     this.fillInputs();
 
-    this.fileService.getChoices(this.file.id).then( choices => {
-      if(choices) {
+    this.fileService.getChoices(this.file.id).then(choices => {
+      if (choices) {
         this.loadListChoices(choices);
       }
       console.log('this.module == ', this.module);
       //console.log('typeof == ', typeof this.module.infos.choice.schoolID);
-      if (this.module.infos && typeof this.module.infos.choice.schoolID === 'number'){
+      if (this.module.infos && typeof this.module.infos.choice.schoolID === 'number') {
         this.selectWish(this.module.infos.choice);
       } else if (this.choices.length === 0 || (!this.selectedChoice)) {
         this.display = false;
       }
     });
-    if (this.elTogglePrintemps)
+    if (this.elTogglePrintemps) {
       this.elTogglePrintemps.nativeElement.style.display = 'none';
-    if (this.elToggleAutomne)
+    }
+    if (this.elToggleAutomne) {
       this.elToggleAutomne.nativeElement.style.display = 'none';
+    }
+
+    this.completeURL = _URL_ + Utils.getUser().id + '/' + this.file.id + '/' + this.module.id;
+    this.uploader = new FileUploader({
+      url:
+      this.completeURL,
+      itemAlias: 'foo'
+    });
+    this.uploader.onAfterAddingFile = (file) => {
+      file.withCredentials = false;
+    };
+
+    if (this.getLink() == null) {
+      this.shouldDisplayUploader = true;
+    }
   }
 
   ngAfterViewInit(): void {

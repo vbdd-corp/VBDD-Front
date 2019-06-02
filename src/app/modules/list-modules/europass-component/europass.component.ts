@@ -1,7 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {FileUploader} from 'ng2-file-upload';
 import {Utils} from '../../../../models/utils';
-import {httpOptionsBase} from '../../../../config/server.config';
 import {DownloadService} from '../../../../services/download.service';
 
 
@@ -54,10 +53,8 @@ export class EuropassComponent implements OnInit, OnChanges {
   }
 
   public onSubmit() {
-
     this.uploader.uploadAll();
     this.isFileUploaded = true;
-
   }
 
 
