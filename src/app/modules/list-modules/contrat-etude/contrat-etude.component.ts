@@ -9,6 +9,7 @@ import {Choice} from '../../../../models/choice';
 import {FileUploader} from 'ng2-file-upload';
 import {DownloadService} from '../../../../services/download.service';
 import {Utils} from '../../../../models/utils';
+import {Subscription} from "rxjs";
 
 const _URL_ = 'http://localhost:9428/api/module/upload/';
 
@@ -42,6 +43,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
   public completeURL: string;
   private choices: Choice[];
   private selectedChoice: Choice;
+  subscription: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -69,6 +71,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   downloadFile() {
+    console.log('link => ', this.getLink());
     this.downloadService.downloadFile(this.getLink());
   }
 
@@ -393,6 +396,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   private getContratValuesS1() {
@@ -486,6 +490,9 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
     let selectedChoiceCopy = Object.assign({}, this.selectedChoice);
     selectedChoiceCopy.schoolID = selectedChoiceCopy.school.id;
     delete selectedChoiceCopy.school;
+
+    this.upload();
+    this.subscription = this.moduleService.getSelectedModule().subscribe(module => this.module = module);
 
     const infos = {
       filePath: this.module.infos.filePath,
