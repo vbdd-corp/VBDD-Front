@@ -89,6 +89,14 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
     this.elBigContainer.nativeElement.style.display = 'none';
   }
 
+  initialize(){
+    this.selectedChoice = null;
+    this.elTogglePrintemps.nativeElement.style.display = 'none';
+    this.elToggleAutomne.nativeElement.style.display = 'none';
+    this.display = false;
+    this.elBigContainer.nativeElement.style.display = 'none';
+  }
+
   setAllInputToNull() {
     for (let i = 1; i <= 12; i++) {
       this.contratForm.get(this.activeTab + 'codeCours' + i).setValue('');
@@ -187,6 +195,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   loadListChoices(choices :any) {
+    this.choices = [];
     if(choices.choice1 !== null)
       this.choices.push(choices.choice1);
     if(choices.choice2 !== null)
@@ -198,10 +207,10 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
   detectChoiceAlreadyUsed(file: File, choice: Choice){
     let contratEtudeList = file.modules.filter(
       module => module.typeModule.id === 8);
-
+    //console.log('contratEtudeList == ', contratEtudeList);
     let choiceSchoolId = choice.school ? choice.school.id : choice.schoolID;
     for (let i = 0; i < contratEtudeList.length; i++){
-      if (choiceSchoolId === contratEtudeList[i].infos.choice.schoolID
+      if ( contratEtudeList[i].infos && choiceSchoolId === contratEtudeList[i].infos.choice.schoolID
       && choice.semester === contratEtudeList[i].infos.choice.semester
       && contratEtudeList[i].id !== this.module.id) {
         return true;
@@ -311,6 +320,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
       s2nombreCredits11: ['', Validators.required],
       s2nombreCredits12: ['', Validators.required],
     });
+    this.initialize();
     this.fillInputs();
 
     this.fileService.getChoices(this.file.id).then( choices => {
@@ -430,6 +440,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
     delete selectedChoiceCopy.school;
 
     const infos = {
+      filePath: this.module.infos.filePath,
       BCICode: null,
       BCIProgramName: null,
       choice: selectedChoiceCopy,
