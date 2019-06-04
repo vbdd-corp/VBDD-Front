@@ -34,15 +34,15 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
 
   isFileUploaded: boolean = false;
   shouldDisplayUploader: boolean = true;
-  private activeTab;
-  private choiceAlreadyInAnotherContrat;
-  private sumECTS;
+  public activeTab;
+  public choiceAlreadyInAnotherContrat;
+  public sumECTS;
   public uploader: FileUploader;
 
-  private display;
+  public display;
   public completeURL: string;
-  private choices: Choice[];
-  private selectedChoice: Choice;
+  public choices: Choice[];
+  public selectedChoice: Choice;
   subscription: Subscription;
 
   constructor(

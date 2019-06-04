@@ -40,3 +40,12 @@ td input {
 #clear {
   margin-top: 10px;
 }
+#importerContrat{
+   margin-top: 10px;
+}
+
+#importerContrat:focus {
+  background-color: limegreen;
+}
+
+
