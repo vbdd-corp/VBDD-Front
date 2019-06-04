@@ -9,7 +9,7 @@ import {Choice} from '../../../../models/choice';
 import {FileUploader} from 'ng2-file-upload';
 import {DownloadService} from '../../../../services/download.service';
 import {Utils} from '../../../../models/utils';
-import {Subscription} from "rxjs";
+import {Subscription} from 'rxjs';
 
 const _URL_ = 'http://localhost:9428/api/module/upload/';
 
@@ -62,11 +62,13 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
 
     this.uploader.uploadAll();
     this.isFileUploaded = true;
-
+    if (confirm('Voulez-vous raffraichir la page ? Cela vous permettra de télécharger votre fichier mis en ligne. Cliquez sur Annuler pour rester sur la page.')) {
+      window.location.reload();
+    }
   }
 
   public getLink() {
-    // @ts-ignore
+
     return this.module.infos.filePath;
   }
 
@@ -396,7 +398,7 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
 
   private getContratValuesS1() {
@@ -483,15 +485,12 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
 
   onSubmit() {
     console.log('this.module.id == ', this.module.id);
-    console.log('---------TO SEND------');
 
-    const arrayList = ['BCICode', 'BCIProgramName'];
 
     let selectedChoiceCopy = Object.assign({}, this.selectedChoice);
     selectedChoiceCopy.schoolID = selectedChoiceCopy.school.id;
     delete selectedChoiceCopy.school;
 
-    this.upload();
     this.subscription = this.moduleService.getSelectedModule().subscribe(module => this.module = module);
 
     const infos = {
@@ -510,6 +509,4 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
 
     this.isValidated = true;
   }
-
-
 }

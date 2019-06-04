@@ -19,7 +19,7 @@
                 id="button-basic-3-empty"
                 dropdownToggle type="button"
                 class="btn btn-primary dropdown-toggle text-center"
-                aria-controls="dropdown-basic">
+                aria-controls="dropdown-basic">Importe
           Sélectionnez un voeu
           <span class="caret"></span>
         </button>
@@ -61,9 +61,11 @@
              name="photo"
              ng2FileSelect style="width: 300px; margin-left: 30%;" type="file"/>
       <br>
-      <button (click)="upload()" class="btn btn-primary" id="importerContrat"
-              type="button"><span [ngClass]="{'glyphicon-check': isFileUploaded===true}"
-                                  class="glyphicon glyphicon-import"></span>Importer le contrat
+      <button (click)="upload()" [ngClass]="{'btn-success': isFileUploaded===true}" class="btn btn-primary"
+              id="importerContrat"
+              type="button"><span
+        [ngClass]="{'glyphicon-check': isFileUploaded===true}" class="glyphicon glyphicon-import"></span>Importer le
+        contrat
       </button>
 
 
