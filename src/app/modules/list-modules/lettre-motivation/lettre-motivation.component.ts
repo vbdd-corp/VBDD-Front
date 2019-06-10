@@ -27,6 +27,11 @@ export class LettreMotivationComponent implements OnInit, OnChanges {
     return this.module.infos.filePath;
   }
 
+  getNameFileUploaded() {
+    const link = this.getLink().split('\\');
+    return link[link.length-1];
+  }
+
   downloadFile() {
     this.downloadService.downloadFile(this.getLink());
   }

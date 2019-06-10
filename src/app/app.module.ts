@@ -55,6 +55,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CreneauSelectionComponent } from './bri/creneau-selection/creneau-selection.component';
 import { ListeCoursComponent } from './modules/list-modules/liste-cours/liste-cours.component';
 import { ListeCoursPolytechSejourComponent } from './modules/list-modules/liste-cours-polytech-sejour/liste-cours-polytech-sejour.component';
+import { ModuleDefaultUploadComponent } from './modules/list-modules/module-default-upload/module-default-upload.component';
 
 registerLocaleData(localeFr);
 
@@ -100,7 +101,8 @@ defineLocale('fr', frLocale);
     PriseRdvSideComponent,
     CreneauSelectionComponent,
     ListeCoursComponent,
-    ListeCoursPolytechSejourComponent
+    ListeCoursPolytechSejourComponent,
+    ModuleDefaultUploadComponent
 
   ],
   imports: [

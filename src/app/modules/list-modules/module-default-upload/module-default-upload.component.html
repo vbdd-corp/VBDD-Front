@@ -1,11 +1,5 @@
 <div align="center">
-
-  <h3>Europass</h3>
-  <br>
-  <h5>Vous devez créer un CV européen en allant sur le site<br><br>
-    <a href="https://europass.cedefop.europa.eu/fr">https://europass.cedefop.europa.eu/fr</a></h5>
-  Suite à cela, vous obtiendrez un <b>PDF</b>. Mettez-le en ligne :
-  <br>
+  <h3 *ngIf="module">{{this.module.typeModule.typeName}}</h3>
   <br>
 
   <div *ngIf="getLink()">
@@ -23,15 +17,13 @@
     </tr>
     <tr>
       <td class="tdleftcase" align="left">
-        <button (click)="downloadFile()" [disabled]="shouldDisplayDownload" class="btn btn-info" id="download">Télécharger
-          <span
-            class="glyphicon glyphicon-download"></span>
+        <button (click)="downloadFile()" [disabled]="shouldDisplayDownload" class="btn btn-info">Télécharger <span
+          class="glyphicon glyphicon-download"></span>
         </button>
-
       </td>
       <td class="tdrightcase" align="right">
-        <button (click)="deleteFile()" [disabled]=" this.selectedPicture.nativeElement.value == ''" class="btn btn-info">
-          Supprimer <span class="glyphicon glyphicon-remove-sign"></span>
+        <button (click)="deleteFile()" [disabled]=" this.selectedPicture.nativeElement.value == ''" class="btn btn-info"
+                id="delete">Supprimer<span class="glyphicon glyphicon-remove-sign"></span>
         </button>
 
       </td>
@@ -42,11 +34,13 @@
         <button (click)="onSubmit()" [ngClass]="{'btn-success': isFileUploaded===true}"
                 class="btn btn-lg btn-default btn-block" id="submit" type="submit">
           <span [ngClass]="{'glyphicon-check': isFileUploaded===true}" class="glyphicon"></span>
-          Enregister
+          Enregistrer
         </button>
       </td>
     </tr>
   </table>
+
+
 
 
 </div>

@@ -1,0 +1,46 @@
+.td-motiv {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+input {
+  width: 400px;
+  align-content: center;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.importdelete {
+  margin-left: 50px;
+}
+
+
+#submit {
+  width: 300px;
+  align-content: center;
+  align-self: center;
+  alignment: center;
+}
+
+
+th{
+  text-align: center;
+}
+.tdcentercase {
+  text-align: center;
+}
+
+.tdleftcase{
+  text-align: left;
+}
+.tdrightcase{
+  text-align: right;
+}
+
+td{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+
+

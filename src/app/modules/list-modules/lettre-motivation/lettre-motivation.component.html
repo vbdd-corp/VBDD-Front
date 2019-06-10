@@ -5,6 +5,11 @@
     l'étranger, et enregistrez-le en <b>PDF</b></h5>
   <br>
 
+  <div *ngIf="getLink()">
+    <h5>Actuellement en ligne :</h5>
+    <i>{{getNameFileUploaded()}}</i>
+  </div>
+
   <table>
     <tr>
       <th colspan="2">

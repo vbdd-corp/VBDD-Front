@@ -54,7 +54,14 @@
       <!-- 108 a gauche, 110 a droite-->
 
 
-      <p>Au lieu de remplir le contrat informatiquement, vous pouvez <b>importer un contrat déjà existant</b></p>
+      <p>Vous devez imprimer, présenter et faire signer les contrats d'étude par votre responsable RI !</p>
+      <b>Vous devez téléverser le contrat d'étude signé</b>
+
+      <div *ngIf="getLink()">
+        <h5>Actuellement en ligne :</h5>
+        <i>{{getNameFileUploaded()}}</i>
+      </div>
+
       <br>
       <input #file *ngIf="shouldDisplayUploader" [uploader]="uploader"
              class="input-group-addon alert-info"

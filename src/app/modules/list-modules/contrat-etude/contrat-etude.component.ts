@@ -72,6 +72,11 @@ export class ContratEtudeComponent implements OnInit, AfterViewInit, OnChanges {
     return this.module.infos.filePath;
   }
 
+  getNameFileUploaded() {
+    const link = this.getLink().split('\\');
+    return link[link.length-1];
+  }
+
   downloadFile() {
     console.log('link => ', this.getLink());
     this.downloadService.downloadFile(this.getLink());

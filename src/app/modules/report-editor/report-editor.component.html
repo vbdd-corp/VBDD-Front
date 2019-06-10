@@ -1,6 +1,6 @@
-<div *ngIf="module">
+<div *ngIf="module" [ngSwitch]="module.typeModule.id">
 
-  <div *ngIf="module.typeModule.id === 0">
+  <div *ngSwitchCase="0">
     <hr>
     <div>
       <app-infos-generales [module]="this.module"></app-infos-generales>
@@ -8,43 +8,43 @@
     <hr>
   </div>
 
-  <div *ngIf="module.typeModule.id === 1">
+  <div *ngSwitchCase="1">
     <hr>
     <app-cni [module]="this.module"></app-cni>
     <hr>
   </div>
 
-  <div *ngIf="module.typeModule.id === 2">
+  <div *ngSwitchCase="2">
     <hr>
     <app-passport [module]="this.module"></app-passport>
     <hr>
   </div>
 
-  <div *ngIf="module.typeModule.id === 4">
+  <div *ngSwitchCase="4">
     <hr>
     <app-europass-component [file]="this.file" [module]="this.module"></app-europass-component>
     <hr>
   </div>
 
-  <div *ngIf="module.typeModule.id === 5">
+  <div *ngSwitchCase="5">
     <hr>
     <app-releve-note-component [file]="this.file" [module]="this.module"></app-releve-note-component>
     <hr>
   </div>
 
-  <div *ngIf="module.typeModule.id === 6">
+  <div *ngSwitchCase="6">
     <hr>
     <app-lettre-motivation [file]="this.file" [module]="this.module"></app-lettre-motivation>
     <hr>
   </div>
 
-  <div *ngIf="module.typeModule.id === 7">
+  <div *ngSwitchCase="7">
     <hr>
     <app-budget-previsionnel-component [module]="this.module"></app-budget-previsionnel-component>
     <hr>
   </div>
 
-  <div *ngIf="module.typeModule.id === 8">
+  <div *ngSwitchCase="8">
     <hr>
     <app-contrat-etude [file]="this.file" [module]="this.module"></app-contrat-etude>
     <br>
@@ -52,7 +52,7 @@
     <hr>
   </div>
 
-  <div *ngIf="module.typeModule.id === 14">
+  <div *ngSwitchCase="14">
     <hr>
     <app-liste-cours [module]="this.module"></app-liste-cours>
     <br>
@@ -60,15 +60,21 @@
     <hr>
   </div>
 
-  <div *ngIf="module.typeModule.id === 17">
+  <div *ngSwitchCase="17">
     <hr>
     <app-voeux-universites [module]="this.module"></app-voeux-universites>
     <hr>
   </div>
 
-  <div *ngIf="module.typeModule.id === 18">
+  <div *ngSwitchCase="18">
     <hr>
     <app-liste-cours-polytech-sejour [module]="this.module"></app-liste-cours-polytech-sejour>
+    <hr>
+  </div>
+
+  <div *ngSwitchDefault>
+    <hr>
+    <app-module-default-upload [module]="this.module" [file]="this.file"></app-module-default-upload>
     <hr>
   </div>
 
